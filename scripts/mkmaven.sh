@@ -16,7 +16,7 @@ SRC_DIR=$PROJ_PATH$PROJ_NAME"/src/main/java/"$PROJ_NAME
 
 init_project(){
     cp -r scripts/maven_template/ "$NEW_PROJ_PATH/$PROJ_NAME"
-    (sed "s/maven_template/maven_template_$PROJ_NAME/g" "scripts/maven_template/pom.xml") \
+    (sed "s/maven_template/$PROJ_NAME/g" "scripts/maven_template/pom.xml") \
         > "$NEW_PROJ_PATH/$PROJ_NAME/pom.xml"
 }
 
@@ -25,15 +25,6 @@ copy_sources(){
         | ./scripts/copy_sources_to.py $NEW_PROJ_PATH/$PROJ_NAME/src/main/java/
     return 0;
 }
-
-#setup_main(){
-#    pushd $NEW_PROJ_PATH/$PROJ_NAME/src/main/java/app/ > /dev/null
-#    for f in $(ls); do
-#        grep "static.*main" $f > /dev/null \
-#        && echo $f
-#    done
-#    popd > /dev/null
-#}
 
 init_project &&
 

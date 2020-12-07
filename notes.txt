@@ -1,0 +1,23 @@
+
+* Running
+** Create all projects into /tmp/ :
+# parse error on project 27 put \n at the beginning of files to fix
+
+for n in {0..98}; do \
+./scripts/mkmaven.sh projectsPOO_1920/$n/ /tmp/ "ats_$(printf "%.2d" $n)";\
+done
+
+** Collect metrics from projects
+python scripts/collect_metrics.py --metrics;\
+for n in {0..98}; do \
+    python scripts/collect_metrics.py "ats_$(printf "%.2d" $n)";\
+done
+
+
+* Sonarqube-7.9.4 API 
+** docs http://localhost:9000/web_api
+** project list http://localhost:9000/api/components/search?qualifiers=TRK&q=ats_00
+** measures http://localhost:9000/web_api/api/measures
+** metrics keys http://localhost:9000/api/metrics/search
+** metrics 
+*** ncloc bugs vulnerabilities security_hotspots sqale_index code_smells duplicated_lines_density duplicated_blocks

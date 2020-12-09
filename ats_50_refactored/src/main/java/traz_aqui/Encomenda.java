@@ -1,8 +1,11 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Encomenda implements Serializable {
-    private final ArrayList<LinhaEncomenda> lin;
+    private final List<LinhaEncomenda> lin;
     private String cod;
     private String user;
     private String loja;
@@ -65,8 +68,8 @@ public class Encomenda implements Serializable {
         this.lin.add(a);
     }
 
-    public ArrayList<LinhaEncomenda> getLin() {
-        ArrayList<LinhaEncomenda> a = new ArrayList<>();
+    public List<LinhaEncomenda> getLin() {
+        List<LinhaEncomenda> a = new ArrayList<>();
         for (LinhaEncomenda b : this.lin) {
             a.add(b.clone());
         }
@@ -90,7 +93,7 @@ public class Encomenda implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Encomenda: ").append(this.cod).append(", ")
+        sb.append("TrazAqui.traz_aqui.Encomenda: ").append(this.cod).append(", ")
                 .append(this.user).append(", ")
                 .append(this.loja).append(", ")
                 .append(this.peso).append(", ")

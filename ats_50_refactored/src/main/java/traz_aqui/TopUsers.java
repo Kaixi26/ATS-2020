@@ -1,11 +1,13 @@
+package traz_aqui;
+
 /**
- * Classe auxiliar para determinar os topUsers e topTransp do sistema
+ * Classe auxiliar para determinar os TrazAqui.topUsers e topTransp do sistema
  */
-public class topUsers {
+public class TopUsers {
     private double qnt;
     private String cod;
 
-    public topUsers(String cod) {
+    public TopUsers(String cod) {
         this.qnt = 0;
         this.cod = cod;
     }

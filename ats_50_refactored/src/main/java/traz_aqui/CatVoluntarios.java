@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -33,10 +35,10 @@ public class CatVoluntarios implements Serializable {
     }
 
     /**
-     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux respectiva aos voluntários com melhores condições para a encomenda
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de TrazAqui.traz_aqui.StringDistAux respectiva aos voluntários com melhores condições para a encomenda
      *
-     * @param cl  Coordenadas
-     * @param cu  Coordenadas
+     * @param cl  TrazAqui.traz_aqui.Coordenadas
+     * @param cu  TrazAqui.traz_aqui.Coordenadas
      * @param pri prioridade
      */
     public List<StringDistAux> melhorTransporteV(Coordenadas cl, Coordenadas cu, boolean pri) {
@@ -48,8 +50,8 @@ public class CatVoluntarios implements Serializable {
     /**
      * Método que retorna o tempo de transporte de um determinado voluntário
      *
-     * @param l      Coordenadas loja
-     * @param u      Coordenadas utilizador
+     * @param l      TrazAqui.traz_aqui.Coordenadas loja
+     * @param u      TrazAqui.traz_aqui.Coordenadas utilizador
      * @param cl     Distância
      * @param driver Código condutor
      */
@@ -98,7 +100,7 @@ public class CatVoluntarios implements Serializable {
      * @param cod   Código voluntário
      * @param nome  Nome voluntário
      * @param range Range
-     * @param cord  Coordenadas
+     * @param cord  TrazAqui.traz_aqui.Coordenadas
      * @param clas  Classificação
      * @param med   Boolean Medicamentos
      * @param vkm   Velocidade
@@ -130,7 +132,7 @@ public class CatVoluntarios implements Serializable {
     }
 
     /**
-     * Método que retorna as Coordenadas de um determinado Voluntário
+     * Método que retorna as TrazAqui.traz_aqui.Coordenadas de um determinado Voluntário
      *
      * @param user Código condutor
      */
@@ -139,10 +141,10 @@ public class CatVoluntarios implements Serializable {
     }
 
     /**
-     * Método que altera as Coordenadas de um determinado Voluntário
+     * Método que altera as TrazAqui.traz_aqui.Coordenadas de um determinado Voluntário
      *
      * @param driver Código condutor
-     * @param a      Coordenadas
+     * @param a      TrazAqui.traz_aqui.Coordenadas
      */
     public void setCoords(String driver, Coordenadas a) {
         this.volunt.get(driver).setCord(a);

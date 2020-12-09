@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 public class Voluntario implements Serializable {
@@ -125,7 +127,7 @@ public class Voluntario implements Serializable {
     /**
      * Método que verifica se um voluntário esta no range
      *
-     * @param a     Coordenadas
+     * @param a     TrazAqui.traz_aqui.Coordenadas
      * @param range Range
      */
     public boolean isRangeV(Coordenadas a, Double range) {
@@ -135,7 +137,7 @@ public class Voluntario implements Serializable {
     /**
      * Método que calcula a distância voluntário
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      */
     public double distanceV(Coordenadas a) {
         return this.cord.distancia(a);
@@ -144,8 +146,8 @@ public class Voluntario implements Serializable {
     /**
      * Método que cálcula o tempo de entrega
      *
-     * @param l  Coordenadas loja
-     * @param u  Coordenadas utilizador
+     * @param l  TrazAqui.traz_aqui.Coordenadas loja
+     * @param u  TrazAqui.traz_aqui.Coordenadas utilizador
      * @param cl Tempo
      */
     public double calcTemp(Coordenadas l, Coordenadas u, Double cl) {

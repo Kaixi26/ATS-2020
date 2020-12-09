@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.util.List;
 
 import static java.lang.System.out;

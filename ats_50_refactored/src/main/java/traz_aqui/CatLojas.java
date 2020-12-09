@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +28,7 @@ public class CatLojas implements Serializable {
     /**
      * Método que adiciona uma nova loja ao catálogo de lojas
      *
-     * @param a Loja
+     * @param a TrazAqui.traz_aqui.Loja
      */
     public void adicionaLoja(Loja a) {
         this.lojas.put(a.getCod(), a.clone());
@@ -35,11 +37,11 @@ public class CatLojas implements Serializable {
     /**
      * Método que retorna uma lista das lojas que estão num determinado range
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      * @param b Distância
      */
-    public List<Loja> LojasinRange(Coordenadas a, double b) {
-        return this.lojas.values().stream().filter(x -> x.rangeLoja(a, b)).map(x -> x.clone()).collect(Collectors.toList());
+    public List<Loja> lojasinRange(Coordenadas a, double b) {
+        return this.lojas.values().stream().filter(x -> x.rangeLoja(a, b)).map(Loja::clone).collect(Collectors.toList());
     }
 
     /**
@@ -77,11 +79,11 @@ public class CatLojas implements Serializable {
      * Método que regista uma nova loja no sistema (sign up)
      *
      * @param cod   Código loja
-     * @param nome  Nome Loja
-     * @param cord  Coordenadas Loja
-     * @param fila  Fila Loja
-     * @param email Email Loja
-     * @param pass  Password Loja
+     * @param nome  Nome TrazAqui.traz_aqui.Loja
+     * @param cord  TrazAqui.traz_aqui.Coordenadas TrazAqui.traz_aqui.Loja
+     * @param fila  Fila TrazAqui.traz_aqui.Loja
+     * @param email Email TrazAqui.traz_aqui.Loja
+     * @param pass  Password TrazAqui.traz_aqui.Loja
      */
     public void signupL(String cod, String nome, Coordenadas cord, int fila, String email, String pass) {
         this.lojas.put(cod, new Loja(cod, nome, cord, fila, email, pass));

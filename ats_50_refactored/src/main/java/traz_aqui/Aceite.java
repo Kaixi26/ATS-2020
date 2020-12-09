@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +12,14 @@ public class Aceite implements Serializable {
         this.aceites = new ArrayList<>();
     }
 
-    public ArrayList<String> getAceites() {
-        ArrayList<String> a = new ArrayList<>();
-        for (String b : this.aceites) {
-            a.add(b);
-        }
-        return a;
+    public List<String> getAceites() {
+        return new ArrayList<>(this.aceites);
     }
 
     /**
      * Método que adiciona um código válido a lista de aceites
      *
-     * @param a Código Encomenda
+     * @param a Código TrazAqui.traz_aqui.Encomenda
      */
     public void adicionaAceite(String a) {
         this.aceites.add(a);

@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -5,6 +7,11 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class Input {
+
+    private Input(){
+    }
+
+    private static final String TEXT_NEWVALUE = "Novo valor: ";
 
     /**
      * Método que obtêm o valor de uma string do user com safeguard
@@ -19,11 +26,10 @@ public class Input {
                 ok = true;
             } catch (InputMismatchException e) {
                 out.println("Texto Invalido");
-                out.print("Novo valor: ");
+                out.print(TEXT_NEWVALUE);
                 input.nextLine();
             }
         }
-        //input.close();
         return txt;
     }
 
@@ -40,11 +46,10 @@ public class Input {
                 ok = true;
             } catch (InputMismatchException e) {
                 out.println("Inteiro Invalido");
-                out.print("Novo valor: ");
+                out.print(TEXT_NEWVALUE);
                 input.nextLine();
             }
         }
-        //input.close();
         return i;
     }
 
@@ -61,11 +66,10 @@ public class Input {
                 ok = true;
             } catch (InputMismatchException e) {
                 out.println("Valor real Invalido");
-                out.print("Novo valor: ");
+                out.print(TEXT_NEWVALUE);
                 input.nextLine();
             }
         }
-        //input.close();
         return d;
     }
 }

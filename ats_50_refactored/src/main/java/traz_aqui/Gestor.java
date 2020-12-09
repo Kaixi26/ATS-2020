@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -37,7 +39,7 @@ public class Gestor implements Serializable {
      *
      * @param cod  Código user
      * @param nome Nome user
-     * @param cord Coordenadas
+     * @param cord TrazAqui.traz_aqui.Coordenadas
      * @param pass Password
      * @param mail Email
      */
@@ -50,7 +52,7 @@ public class Gestor implements Serializable {
      *
      * @param cod   Código Transportadora
      * @param nome  Nome Transportadora
-     * @param cord  Coordenadas
+     * @param cord  TrazAqui.traz_aqui.Coordenadas
      * @param range Range
      * @param prkm  Preço
      * @param nif   NIF
@@ -72,7 +74,7 @@ public class Gestor implements Serializable {
      * @param cod   Código voluntário
      * @param nome  Nome voluntário
      * @param range Range
-     * @param cord  Coordenadas
+     * @param cord  TrazAqui.traz_aqui.Coordenadas
      * @param clas  Classificação
      * @param med   Medicamentos
      * @param vkm   Velocidade
@@ -85,11 +87,11 @@ public class Gestor implements Serializable {
     }
 
     /**
-     * Método que regista uma Loja no seu catálogo
+     * Método que regista uma TrazAqui.traz_aqui.Loja no seu catálogo
      *
      * @param cod   Código loja
      * @param nome  Nome loja
-     * @param cord  Coordenadas
+     * @param cord  TrazAqui.traz_aqui.Coordenadas
      * @param fila  Fila
      * @param email Email
      * @param pass  Password
@@ -101,7 +103,7 @@ public class Gestor implements Serializable {
     /**
      * Método que regista uma encomenda no seu catálogo
      *
-     * @param a Encomenda
+     * @param a TrazAqui.traz_aqui.Encomenda
      */
     public void registarEnc(Encomenda a) {
         this.ce.adicionaEnc(a);
@@ -150,11 +152,11 @@ public class Gestor implements Serializable {
     /**
      * Método que retorna uma lista de lojas num determinado range
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      * @param b Distância
      */
     public List<Loja> getLojasinRange(Coordenadas a, double b) {
-        return this.cl.LojasinRange(a, b);
+        return this.cl.lojasinRange(a, b);
     }
 
     /**
@@ -167,10 +169,10 @@ public class Gestor implements Serializable {
     }
 
     /**
-     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux ordenada por distâncias  respectiva às Lojas com melhores condições
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de TrazAqui.traz_aqui.StringDistAux ordenada por distâncias  respectiva às Lojas com melhores condições
      *
-     * @param cu  Coordenadas utilizador
-     * @param cl  Coordenadas loja
+     * @param cu  TrazAqui.traz_aqui.Coordenadas utilizador
+     * @param cl  TrazAqui.traz_aqui.Coordenadas loja
      * @param pri prioridade
      */
     public List<StringDistAux> getBestLoja(Coordenadas cu, Coordenadas cl, boolean pri) {
@@ -203,7 +205,7 @@ public class Gestor implements Serializable {
     }
 
     /**
-     * Método que retorna uma lista de Registos de utilizador,empresa,voluntário ou loja no modo que for desejado
+     * Método que retorna uma lista de TrazAqui.traz_aqui.Registos de utilizador,empresa,voluntário ou loja no modo que for desejado
      *
      * @param cod  Código
      * @param modo Modo
@@ -234,18 +236,18 @@ public class Gestor implements Serializable {
     }
 
     /**
-     * Método que retorna a Lista de topUsers
+     * Método que retorna a Lista de TrazAqui.topUsers
      */
-    public List<topUsers> topUsers() {
+    public List<TopUsers> topUsers() {
         return this.h.topUser();
     }
 
     /**
-     * Método que adiciona um novo registo à fila de terminated se a List<StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+     * Método que adiciona um novo registo à fila de terminated se a List<TrazAqui.traz_aqui.StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
      *
-     * @param enc Encomenda
+     * @param enc TrazAqui.traz_aqui.Encomenda
      * @param cod Código
-     * @param a   List StringDistAux
+     * @param a   List TrazAqui.traz_aqui.StringDistAux
      */
     public int gestaoEncomenda(Encomenda enc, String cod, List<StringDistAux> a) {
         return this.h.gestaoEncomenda(enc, cod, a);
@@ -263,9 +265,9 @@ public class Gestor implements Serializable {
     /**
      * Método que finaliza a confirmação de encomenda caso seja completamente aceite, adicionando o registo a fila de delivered
      *
-     * @param enc    Código Encomenda
-     * @param loja   Código Loja
-     * @param user   Código Utilizador
+     * @param enc    Código TrazAqui.traz_aqui.Encomenda
+     * @param loja   Código TrazAqui.traz_aqui.Loja
+     * @param user   Código TrazAqui.traz_aqui.Utilizador
      * @param driver Código Driver
      * @param tmp    Tempo
      */
@@ -316,16 +318,14 @@ public class Gestor implements Serializable {
      * @param cod Código Driver
      */
     public double getClas(String cod) {
-        double a;
-        if (cod.charAt(0) == 'v') a = this.cv.getClas(cod);
-        else a = this.ct.getClas(cod);
-        return a;
+        if (cod.charAt(0) == 'v') return this.cv.getClas(cod);
+        else return this.ct.getClas(cod);
     }
 
     /**
      * Método que retorna uma seed random
      *
-     * @param a    Coordenadas
+     * @param a    TrazAqui.traz_aqui.Coordenadas
      * @param modo Modo
      */
     public double getRando(Coordenadas a, int modo) {
@@ -339,13 +339,12 @@ public class Gestor implements Serializable {
      * @param cod Código
      */
     public Coordenadas getCoord(String cod) {
-        Coordenadas a;
         if (cod.charAt(0) == 'v')
-            a = this.cv.getCord(cod);
+            return this.cv.getCord(cod);
         else if (cod.charAt(0) == 't')
-            a = this.ct.getCord(cod);
-        else a = this.cl.getCord(cod);
-        return a;
+            return this.ct.getCord(cod);
+        else
+            return this.cl.getCord(cod);
     }
 
     /**
@@ -356,17 +355,17 @@ public class Gestor implements Serializable {
     }
 
     /**
-     * Método que retorna uma lista dos topUsers (as dez transportadoras que mais usaram o sistema)
+     * Método que retorna uma lista dos TrazAqui.topUsers (as dez transportadoras que mais usaram o sistema)
      */
-    public List<topUsers> topTransp() {
-        Map<String, topUsers> a = new HashMap();
+    public List<TopUsers> topTransp() {
+        Map<String, TopUsers> ret = new HashMap();
 
         for (Registos reg : this.h.finList()) {
-            a.putIfAbsent(reg.getDriver(), new topUsers(reg.getDriver()));
-            a.get(reg.getDriver()).addKm(this.ct.getKmp(reg.getDriver()));
+            ret.putIfAbsent(reg.getDriver(), new TopUsers(reg.getDriver()));
+            ret.get(reg.getDriver()).addKm(this.ct.getKmp(reg.getDriver()));
         }
 
-        return a.values().stream().sorted(Comparator.comparing(topUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());
+        return ret.values().stream().sorted(Comparator.comparing(TopUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());
     }
 
     /**

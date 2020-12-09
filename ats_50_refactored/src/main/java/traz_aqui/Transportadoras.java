@@ -1,16 +1,18 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 public class Transportadoras implements Serializable {
 
     private String cod;
     private String nome;
+    private String email;
+    private double nif;
     private Coordenadas cord;
     private double range;
     private boolean med;
     private double prkm;
-    private double nif;
     private double clas;
-    private String email;
     private String pass;
     private double vkm;
     private double kmp;
@@ -177,8 +179,8 @@ public class Transportadoras implements Serializable {
     /**
      * Método que cálcula o tempo de entrega
      *
-     * @param l  Coordenadas loja
-     * @param u  Coordenadas utilizador
+     * @param l  TrazAqui.traz_aqui.Coordenadas loja
+     * @param u  TrazAqui.traz_aqui.Coordenadas utilizador
      * @param cl Tempo
      */
     public double calcTemp(Coordenadas l, Coordenadas u, Double cl) {
@@ -188,9 +190,9 @@ public class Transportadoras implements Serializable {
     /**
      * Método que cálcula o custo de entrega
      *
-     * @param l    Coordenadas loja
+     * @param l    TrazAqui.traz_aqui.Coordenadas loja
      * @param peso Peso
-     * @param u    Coordenadas utilizador
+     * @param u    TrazAqui.traz_aqui.Coordenadas utilizador
      */
     public double calcCost(Coordenadas l, double peso, Coordenadas u) {
         return (this.cord.distancia(l) + u.distancia(l)) / this.prkm + peso * 0.5;

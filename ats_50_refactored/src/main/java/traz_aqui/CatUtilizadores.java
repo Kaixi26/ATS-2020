@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,16 +16,16 @@ public class CatUtilizadores implements Serializable {
     }
 
     /**
-     * Método que adiciona um novo Utilizador ao catálogo de users
+     * Método que adiciona um novo TrazAqui.traz_aqui.Utilizador ao catálogo de users
      *
-     * @param a Utilizador
+     * @param a TrazAqui.traz_aqui.Utilizador
      */
     public void adicionaUser(Utilizador a) {
         this.users.put(a.getCod(), a.clone());
     }
 
     /**
-     * Método que retorna o codigo de um Utilizador caso o username e password derem match com um dos utilizadores registados
+     * Método que retorna o codigo de um TrazAqui.traz_aqui.Utilizador caso o username e password derem match com um dos utilizadores registados
      *
      * @param e Email
      * @param p Password
@@ -36,11 +38,11 @@ public class CatUtilizadores implements Serializable {
     }
 
     /**
-     * Método que regista um novo Utilizador no sistema (sign up)
+     * Método que regista um novo TrazAqui.traz_aqui.Utilizador no sistema (sign up)
      *
-     * @param cod   Código Utilizador
-     * @param nome  Nome Utilizador
-     * @param cord  Coordenadas
+     * @param cod   Código TrazAqui.traz_aqui.Utilizador
+     * @param nome  Nome TrazAqui.traz_aqui.Utilizador
+     * @param cord  TrazAqui.traz_aqui.Coordenadas
      * @param pass  Password
      * @param email Email
      */
@@ -49,7 +51,7 @@ public class CatUtilizadores implements Serializable {
     }
 
     /**
-     * Método que gera um código único de Utilizador
+     * Método que gera um código único de TrazAqui.traz_aqui.Utilizador
      */
     public String codUnicoU() {
         String a = null;
@@ -62,25 +64,25 @@ public class CatUtilizadores implements Serializable {
     }
 
     /**
-     * Método que retorna um Utilizador do catálogo procurando pelo seu código
+     * Método que retorna um TrazAqui.traz_aqui.Utilizador do catálogo procurando pelo seu código
      *
-     * @param codigo Código Utilizador
+     * @param codigo Código TrazAqui.traz_aqui.Utilizador
      */
     public Utilizador procUser(String codigo) {
         return this.users.get(codigo).clone();
     }
 
     /**
-     * Método que retorna as Coordenadas de um determinado Utilizador
+     * Método que retorna as TrazAqui.traz_aqui.Coordenadas de um determinado TrazAqui.traz_aqui.Utilizador
      *
-     * @param user Código Utilizador
+     * @param user Código TrazAqui.traz_aqui.Utilizador
      */
     public Coordenadas getCord(String user) {
         return this.users.get(user).getCord().clone();
     }
 
     /**
-     * Método que retorna true se o email do Utilizador estiver registado no catálogo
+     * Método que retorna true se o email do TrazAqui.traz_aqui.Utilizador estiver registado no catálogo
      *
      * @param email Email
      */

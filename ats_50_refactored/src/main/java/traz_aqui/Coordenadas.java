@@ -1,9 +1,11 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Coordenadas implements Serializable {
+public class Coordenadas implements Serializable, Cloneable {
     private double x;
     private double y;
 
@@ -40,7 +42,7 @@ public class Coordenadas implements Serializable {
     /**
      * Método que calcula a distância que a coordenada representa
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      */
     public double distancia(Coordenadas a) {
         return sqrt(pow((a.getX() - this.x), 2) + pow((a.getY() - this.y), 2));
@@ -49,7 +51,7 @@ public class Coordenadas implements Serializable {
     /**
      * Método que retorna se está no range
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      * @param b Distância
      */
     public boolean isRange(Coordenadas a, double b) {

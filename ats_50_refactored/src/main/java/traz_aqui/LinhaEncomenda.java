@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 public class LinhaEncomenda implements Serializable {
@@ -58,7 +60,7 @@ public class LinhaEncomenda implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Linha Encomenda: ")
+        sb.append("Linha TrazAqui.traz_aqui.Encomenda: ")
                 .append(this.cproduto).append(", ")
                 .append(this.desc).append(", ")
                 .append(this.preco).append(", ")

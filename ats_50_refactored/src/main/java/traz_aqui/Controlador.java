@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -8,6 +10,22 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Controlador {
 
+    private static final String TEXT_LOGIN = "Login";
+    private static final String TEXT_SIGNUP = "Signup";
+    private static final String TEXT_ASKEMAIL = "\nDigite o seu email: \n";
+    private static final String TEXT_ASKPASS = "\nDigite a sua pass: \n";
+    private static final String TEXT_ASKNAME = "\nDigite o seu nome: \n";
+    private static final String TEXT_ASKCOORDS = "\nDigite as suas coordenadas: \n";
+    private static final String TEXT_YESORNO = " ?(y/n)\n";
+    private static final String TEXT_ASKXCOORD = "\"\\nX: \\n\"";
+    private static final String TEXT_ASKYCOORD = "\"\\nY: \\n\"";
+    private static final String TEXT_EMAILINUSE = "\"Erro email em uso no sistema.\"";
+    private static final String TEXT_INCORRECTVALUE = "Valor Incorreto";
+    private static final String TEXT_INCORRECTCREDENTIALS = "\nPassword ou Mail incorreto.";
+    private static final String TEXT_NONCONFIRMEDDELIVERIES = "Encomendas a confirmar:";
+    private static final String TEXT_SEEREGISTERS = "Ver TrazAqui.traz_aqui.Registos.";
+    private static final String TEXT_SEEAREAEVENTS = "Ver os eventos na sua área.";
+
     private Gestor gestor;
 
     public Controlador() {
@@ -17,10 +35,10 @@ public class Controlador {
     }
 
     /**
-     * Menu principal
+     * TrazAqui.traz_aqui.Menu principal
      */
     public void menu() {
-        List s = new ArrayList<>(Arrays.asList("Modo User.", "Modo Voluntário.", "Modo Transportadora.", "Modo Loja.", "Os dez utilizadores que mais usam o sistema.", "As dez empresas que mais usam o sistema.", "Guardar e Ler estado."));
+        List<String> s = new ArrayList<>(Arrays.asList("Modo User.", "Modo Voluntário.", "Modo Transportadora.", "Modo TrazAqui.traz_aqui.Loja.", "Os dez utilizadores que mais usam o sistema.", "As dez empresas que mais usam o sistema.", "Guardar e Ler estado."));
         Menu m = new Menu(s);
         int op;
         do {
@@ -38,20 +56,20 @@ public class Controlador {
     }
 
     /**
-     * Método que faz print dos topUsers (case 5 do menu principal)
+     * Método que faz print dos TrazAqui.topUsers (case 5 do menu principal)
      */
     public void topUsers() {
-        for (topUsers t : this.gestor.topUsers()) Viewer.prints(t);
+        for (TopUsers t : this.gestor.topUsers()) Viewer.prints(t);
     }
 
     /**
      * Método que faz print dos topTransp (case 6 do menu principal)
      */
     public void topTransp() {
-        List<topUsers> top = this.gestor.topTransp();
+        List<TopUsers> top = this.gestor.topTransp();
         if (top.isEmpty())
             Viewer.prints("Nao há condições para realizar o pedido.");
-        else for (topUsers t : top) Viewer.prints("Driver: " + t.getCod() + " KmsPerc: " + t.getQnt());
+        else for (TopUsers t : top) Viewer.prints("Driver: " + t.getCod() + " KmsPerc: " + t.getQnt());
     }
 
     /**
@@ -64,12 +82,12 @@ public class Controlador {
     }
 
     /**
-     * Menu que nos permite fazer a escolha entre gravar e ler estado
+     * TrazAqui.traz_aqui.Menu que nos permite fazer a escolha entre gravar e ler estado
      *
      * @param str Nome Ficheiro
      */
     public void menuObjStream(String str) {
-        List s = new ArrayList<>(Arrays.asList("Gravar", "Ler"));
+        List<String> s = new ArrayList<>(Arrays.asList("Gravar", "Ler"));
         Menu m = new Menu(s);
         int op;
         do {
@@ -83,16 +101,16 @@ public class Controlador {
                         e.printStackTrace();
                         Viewer.prints("Não foi possível gravar");
                     }
+                    break;
                 case 2:
                     try {
                         this.gestor = loadEstado(str);
                     } catch (IOException e) {
                         Viewer.prints("Não foi possível ler");
-                    } catch (ClassNotFoundException e) {
-                        Viewer.prints("Erro");
-                    } catch (ClassCastException e) {
+                    } catch (ClassNotFoundException | ClassCastException e) {
                         Viewer.prints("Erro");
                     }
+                    break;
                 default:
             }
         } while (op != 0);
@@ -100,10 +118,10 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo utilizador que permite fazer login ou sign up de um utilizador
+     * TrazAqui.traz_aqui.Menu do modo utilizador que permite fazer login ou sign up de um utilizador
      */
     public void modoUser() {
-        List s = new ArrayList<>(Arrays.asList("Login", "Signup"));
+        List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
         Menu m = new Menu(s);
         int op;
         do {
@@ -112,8 +130,10 @@ public class Controlador {
             switch (op) {
                 case 1:
                     loginUser();
+                    break;
                 case 2:
                     signupUser();
+                    break;
                 default:
             }
         } while (op != 0);
@@ -121,10 +141,10 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo empresa que permite fazer login ou sign up de uma Transportadora
+     * TrazAqui.traz_aqui.Menu do modo empresa que permite fazer login ou sign up de uma Transportadora
      */
     public void modoEmpresa() {
-        List s = new ArrayList<>(Arrays.asList("Login", "Signup"));
+        List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
         Menu m = new Menu(s);
         int op;
         do {
@@ -133,8 +153,10 @@ public class Controlador {
             switch (op) {
                 case 1:
                     loginEmpresa();
+                    break;
                 case 2:
                     signupEmpresa();
+                    break;
                 default:
             }
         } while (op != 0);
@@ -142,10 +164,10 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo voluntário que permite fazer login ou sign up de um voluntário
+     * TrazAqui.traz_aqui.Menu do modo voluntário que permite fazer login ou sign up de um voluntário
      */
     public void modoVoluntario() {
-        List s = new ArrayList<>(Arrays.asList("Login", "Signup"));
+        List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
         Menu m = new Menu(s);
         int op;
         do {
@@ -154,8 +176,10 @@ public class Controlador {
             switch (op) {
                 case 1:
                     loginVoluntario();
+                    break;
                 case 2:
                     signupVoluntario();
+                    break;
                 default:
             }
         } while (op != 0);
@@ -163,10 +187,10 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo loja que permite fazer login ou sign up de uma Loja
+     * TrazAqui.traz_aqui.Menu do modo loja que permite fazer login ou sign up de uma TrazAqui.traz_aqui.Loja
      */
     public void modoLoja() {
-        List s = new ArrayList<>(Arrays.asList("Login", "Signup"));
+        List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
         Menu m = new Menu(s);
         int op;
         do {
@@ -175,8 +199,10 @@ public class Controlador {
             switch (op) {
                 case 1:
                     loginLoja();
+                    break;
                 case 2:
                     signupLoja();
+                    break;
                 default:
             }
         } while (op != 0);
@@ -184,107 +210,107 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo login de um utilizador
+     * TrazAqui.traz_aqui.Menu do modo login de um utilizador
      */
     public void loginUser() {
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
         String f = this.gestor.login(1, email, pass);
         if (f != null) alertasU(f);
         else {
-            Viewer.prints("\nPassword ou Mail incorreto.");
+            Viewer.prints(TEXT_INCORRECTCREDENTIALS);
             modoUser();
         }
     }
 
     /**
-     * Menu do modo login de uma transportadora
+     * TrazAqui.traz_aqui.Menu do modo login de uma transportadora
      */
     public void loginEmpresa() {
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
         String f = this.gestor.login(2, email, pass);
         if (f != null) alertasE(f);
         else {
-            Viewer.prints("\nPassword ou Mail incorreto.");
+            Viewer.prints(TEXT_INCORRECTCREDENTIALS);
             modoEmpresa();
         }
     }
 
     /**
-     * Menu do modo login de um voluntário
+     * TrazAqui.traz_aqui.Menu do modo login de um voluntário
      */
     public void loginVoluntario() {
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
         String f = this.gestor.login(3, email, pass);
         if (f != null) alertasV(f);
         else {
-            Viewer.prints("\nPassword ou Mail incorreto.");
+            Viewer.prints(TEXT_INCORRECTCREDENTIALS);
             modoVoluntario();
         }
     }
 
     /**
-     * Menu do modo login de uma loja
+     * TrazAqui.traz_aqui.Menu do modo login de uma loja
      */
     public void loginLoja() {
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
         String f = this.gestor.login(4, email, pass);
         if (f != null) menuLoja(f);
         else {
-            Viewer.prints("\nPassword ou Mail incorreto.");
+            Viewer.prints(TEXT_INCORRECTCREDENTIALS);
             modoLoja();
         }
     }
 
     /**
-     * Menu do modo sign up de um utilizador
+     * TrazAqui.traz_aqui.Menu do modo sign up de um utilizador
      */
     public void signupUser() {
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
-        Viewer.prints("\nDigite o seu nome: \n");
+        Viewer.prints(TEXT_ASKNAME);
         String nome = Input.lerString();
-        Viewer.prints("\nDigite as suas coordenadas: \n");
-        Viewer.prints("\nX: \n");
+        Viewer.prints(TEXT_ASKCOORDS);
+        Viewer.prints(TEXT_ASKXCOORD);
         double x = Input.lerDouble();
-        Viewer.prints("\nY: \n");
+        Viewer.prints(TEXT_ASKYCOORD);
         double y = Input.lerDouble();
         String cod = this.gestor.geraCods(2);
         if (this.gestor.verificaMail(1, email)) {
-            Viewer.prints("Erro email em uso no sistema.");
+            Viewer.prints(TEXT_EMAILINUSE);
             signupUser();
         } else this.gestor.registarUser(cod, nome, new Coordenadas(x, y), pass, email);
         alertasU(cod);
     }
 
     /**
-     * Menu do modo sign up de uma Transportadora
+     * TrazAqui.traz_aqui.Menu do modo sign up de uma Transportadora
      */
     public void signupEmpresa() {
         boolean med = false;
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
-        Viewer.prints("\nDigite o seu nome: \n");
+        Viewer.prints(TEXT_ASKNAME);
         String nome = Input.lerString();
-        Viewer.prints("\nDigite as suas coordenadas: \n");
-        Viewer.prints("\nX: \n");
+        Viewer.prints(TEXT_ASKCOORDS);
+        Viewer.prints(TEXT_ASKXCOORD);
         double x = Input.lerDouble();
-        Viewer.prints("\nY: \n");
+        Viewer.prints(TEXT_ASKYCOORD);
         double y = Input.lerDouble();
         Viewer.prints("\nDigite o seu range:\n");
         double range = Input.lerDouble();
@@ -300,12 +326,12 @@ public class Controlador {
         String pri = Input.lerString();
         if (pri.equals("y") || pri.equals("Y")) med = true;
         else {
-            Viewer.prints("Valor Incorreto");
+            Viewer.prints(TEXT_INCORRECTVALUE);
             signupEmpresa();
         }
         String cod = this.gestor.geraCods(1);
         if (this.gestor.verificaMail(2, email)) {
-            Viewer.prints("Erro email em uso no sistema.");
+            Viewer.prints(TEXT_EMAILINUSE);
             signupEmpresa();
         } else
             this.gestor.registarEmpresa(cod, nome, new Coordenadas(x, y), range, prkm, nif, -1, med, vkm, email, pass, 0, cap);
@@ -313,20 +339,20 @@ public class Controlador {
     }
 
     /**
-     * Menu do modo sign up de um voluntário
+     * TrazAqui.traz_aqui.Menu do modo sign up de um voluntário
      */
     public void signupVoluntario() {
         boolean med = false;
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
-        Viewer.prints("\nDigite o seu nome: \n");
+        Viewer.prints(TEXT_ASKNAME);
         String nome = Input.lerString();
-        Viewer.prints("\nDigite as suas coordenadas: \n");
-        Viewer.prints("\nX: \n");
+        Viewer.prints(TEXT_ASKCOORDS);
+        Viewer.prints(TEXT_ASKXCOORD);
         double x = Input.lerDouble();
-        Viewer.prints("\nY: \n");
+        Viewer.prints(TEXT_ASKYCOORD);
         double y = Input.lerDouble();
         Viewer.prints("\nDigite o seu range:\n");
         double range = Input.lerDouble();
@@ -336,32 +362,32 @@ public class Controlador {
         String pri = Input.lerString();
         if (pri.equals("y") || pri.equals("Y")) med = true;
         else {
-            Viewer.prints("Valor Incorreto");
+            Viewer.prints(TEXT_INCORRECTVALUE);
             signupVoluntario();
         }
         String cod = this.gestor.geraCods(3);
         if (this.gestor.verificaMail(3, email)) {
-            Viewer.prints("Erro email em uso no sistema.");
+            Viewer.prints(TEXT_EMAILINUSE);
             signupVoluntario();
         } else this.gestor.registarVoluntario(cod, nome, range, new Coordenadas(x, y), -1, med, vkm, email, pass, 1);
         alertasV(cod);
     }
 
     /**
-     * Menu do modo sign up de uma Loja
+     * TrazAqui.traz_aqui.Menu do modo sign up de uma TrazAqui.traz_aqui.Loja
      */
     public void signupLoja() {
         int fila = -1;
-        Viewer.prints("\nDigite o seu email: \n");
+        Viewer.prints(TEXT_ASKEMAIL);
         String email = Input.lerString();
-        Viewer.prints("\nDigite a sua pass: \n");
+        Viewer.prints(TEXT_ASKPASS);
         String pass = Input.lerString();
-        Viewer.prints("\nDigite o seu nome: \n");
+        Viewer.prints(TEXT_ASKNAME);
         String nome = Input.lerString();
-        Viewer.prints("\nDigite as suas coordenadas: \n");
-        Viewer.prints("\nX: \n");
+        Viewer.prints(TEXT_ASKCOORDS);
+        Viewer.prints(TEXT_ASKXCOORD);
         double x = Input.lerDouble();
-        Viewer.prints("\nY: \n");
+        Viewer.prints(TEXT_ASKYCOORD);
         double y = Input.lerDouble();
         String cod = this.gestor.geraCods(4);
         Viewer.prints("\nSabe o tamanho médio da sua fila (y/n): \n");
@@ -371,36 +397,36 @@ public class Controlador {
             fila = Input.lerInt();
         } else if (fil.equals("n") || fil.equals("N")) fila = -1;
         else {
-            Viewer.prints("Valor Incorreto");
+            Viewer.prints(TEXT_INCORRECTVALUE);
             signupLoja();
         }
 
         if (this.gestor.verificaMail(4, email)) {
-            Viewer.prints("Erro email em uso no sistema.");
+            Viewer.prints(TEXT_EMAILINUSE);
             signupLoja();
         } else this.gestor.registarLoja(cod, nome, new Coordenadas(x, y), fila, email, pass);
         menuLoja(cod);
     }
 
     /**
-     * Menu de todos os alertas que possam ser feitos ao modo utilizador desde confirmação de encomendas, transporte e classificações
+     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo utilizador desde confirmação de encomendas, transporte e classificações
      *
-     * @param cod Código Utilizador
+     * @param cod Código TrazAqui.traz_aqui.Utilizador
      */
     public void alertasU(String cod) {
         int i = 1;
         List<Registos> a = this.gestor.histReg(cod, 1);
         if (!a.isEmpty()) {
-            Viewer.prints("Encomendas a confirmar:");
+            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);
             for (Registos r : a) {
                 if (r.getDriver().charAt(0) == 't')
                     Viewer.prints((i) + ") " + "Transportadora: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
                 if (r.getDriver().charAt(0) == 'v')
-                    Viewer.prints((i) + ") " + "Voluntario: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
+                    Viewer.prints((i) + ") " + "TrazAqui.traz_aqui.Voluntario: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
                 i++;
             }
             for (i = 0; i < a.size(); i++) {
-                Viewer.prints("Pretende aceitar o transporte " + (i + 1) + " ?(y/n)\n");
+                Viewer.prints("Pretende aceitar o transporte " + (i + 1) + TEXT_YESORNO);
                 String res = Input.lerString();
                 this.gestor.aumCap(a.get(i).getDriver());
                 if (res.equals("y") || res.equals("Y"))
@@ -417,7 +443,7 @@ public class Controlador {
                 if (f.getDriver().charAt(0) == 't')
                     Viewer.prints((i) + ") " + "Transportadora: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
                 if (f.getDriver().charAt(0) == 'v')
-                    Viewer.prints((i) + ") " + "Voluntario: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
+                    Viewer.prints((i) + ") " + "TrazAqui.traz_aqui.Voluntario: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
                 i++;
             }
             for (i = 0; i < g.size(); i++) {
@@ -431,7 +457,7 @@ public class Controlador {
     }
 
     /**
-     * Menu de todos os alertas que possam ser feitos ao modo transportadora como confirmação de encomenda
+     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo transportadora como confirmação de encomenda
      *
      * @param cod Código Transportadora
      */
@@ -439,7 +465,7 @@ public class Controlador {
         int i = 1;
         List<Registos> a = this.gestor.histReg(cod, 4);
         if (!a.isEmpty()) {
-            Viewer.prints("Encomendas a confirmar:");
+            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);
             for (Registos r : a) {
                 Viewer.prints((i) + ") " + "User: " + r.getUser() + " - " + r.getEnc());
                 i++;
@@ -449,7 +475,7 @@ public class Controlador {
                     Viewer.prints((i + 1) + " - Não tem capacidade para realizar a encomenda\n");
                     this.gestor.declinedT(a.get(i));
                 } else {
-                    Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + " ?(y/n)\n");
+                    Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + TEXT_YESORNO);
                     String res = Input.lerString();
                     if (res.equals("y") || res.equals("Y")) {
                         this.gestor.avanca(a.get(i));
@@ -463,7 +489,7 @@ public class Controlador {
     }
 
     /**
-     * Menu de todos os alertas que possam ser feitos ao modo voluntário como confirmação de encomenda
+     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo voluntário como confirmação de encomenda
      *
      * @param cod Código Voluntário
      */
@@ -471,7 +497,7 @@ public class Controlador {
         int i = 1;
         List<Registos> a = this.gestor.histReg(cod, 4);
         if (!a.isEmpty()) {
-            Viewer.prints("Encomendas a confirmar:");
+            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);
             for (Registos r : a) {
                 Viewer.prints((i) + ") " + "User: " + r.getUser() + " - " + r.getEnc());
                 i++;
@@ -481,7 +507,7 @@ public class Controlador {
                     Viewer.prints((i + 1) + " - Não tem capacidade para realizar a encomenda\n");
                     this.gestor.declinedT(a.get(i));
                 } else {
-                    Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + " ?(y/n)\n");
+                    Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + TEXT_YESORNO);
                     String res = Input.lerString();
                     if (res.equals("y") || res.equals("Y")) {
                         this.gestor.avanca(a.get(i));
@@ -495,14 +521,14 @@ public class Controlador {
     }
 
     /**
-     * Menu de Utilizador, são dadas as opcões de fazer uma encomenda, ver os registos e ver eventos
+     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Utilizador, são dadas as opcões de fazer uma encomenda, ver os registos e ver eventos
      *
-     * @param cod Código Utilizador
+     * @param cod Código TrazAqui.traz_aqui.Utilizador
      */
     public void menuUser(String cod) {
-        Viewer.prints("\nUtilizador: " + cod + ".");
+        Viewer.prints("\nTrazAqui.traz_aqui.Utilizador: " + cod + ".");
         Utilizador u = this.gestor.procUtil(cod);
-        List s = new ArrayList<>(Arrays.asList("Fazer Encomenda.", "Ver Registos.", "Ver os eventos na sua área."));
+        List s = new ArrayList<>(Arrays.asList("Fazer TrazAqui.traz_aqui.Encomenda.", TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));
         Menu m = new Menu(s);
         int op;
         do {
@@ -511,11 +537,15 @@ public class Controlador {
             switch (op) {
                 case 1:
                     fazerEncomenda(u.getCord(), u.getNome(), cod);
+                    break;
                 case 2:
                     verRegistos(cod);
+                    break;
                 case 3:
                     verEventos(u.getCord());
+                    break;
                 default:
+                    break;
             }
         } while (op != 0);
         menu();
@@ -524,13 +554,15 @@ public class Controlador {
     /**
      * Método que cria uma nova encomenda se assim for possível
      *
-     * @param a    Coordenadas
-     * @param nome Nome Utilizador
+     * @param a    TrazAqui.traz_aqui.Coordenadas
+     * @param nome Nome TrazAqui.traz_aqui.Utilizador
      * @param cod  Código
      */
     public void fazerEncomenda(Coordenadas a, String nome, String cod) {
-        int i = 0, f = 1;
-        boolean still = true, pr = false;
+        int i = 0;
+        int f = 1;
+        boolean still = true;
+        boolean pr = false;
         Viewer.prints("\nA que distância máxima de uma loja (em km) pretende procurar?\n");
         int dist = Input.lerInt();
         Viewer.prints("\nLojas a " + dist + " km de si:\n");
@@ -574,13 +606,13 @@ public class Controlador {
     }
 
     /**
-     * Menu de Empresa, são dadas as opcões de ver registos, classificações, eventos e total facturado num intervalo
+     * TrazAqui.traz_aqui.Menu de Empresa, são dadas as opcões de ver registos, classificações, eventos e total facturado num intervalo
      *
      * @param cod Código Transportadora
      */
     public void menuEmpresa(String cod) {
         Viewer.prints("\nTransportadora: " + cod + ".");
-        List s = new ArrayList<>(Arrays.asList("Ver Registos.", "Ver Classificação.", "Ver os eventos na sua área.", "Ver total facturado num período de tempo."));
+        List s = new ArrayList<>(Arrays.asList(TEXT_SEEREGISTERS, "Ver Classificação.", TEXT_SEEAREAEVENTS, "Ver total facturado num período de tempo."));
         Menu m = new Menu(s);
         int op;
         do {
@@ -589,26 +621,31 @@ public class Controlador {
             switch (op) {
                 case 1:
                     verRegistos(cod);
+                    break;
                 case 2:
                     verClas(cod);
+                    break;
                 case 3:
                     verEventos(this.gestor.getCoord(cod));
+                    break;
                 case 4:
                     factTempo(cod);
+                    break;
                 default:
+                    break;
             }
         } while (op != 0);
         menu();
     }
 
     /**
-     * Menu de Voluntário, são dadas as opcões ver os registos,eventos e classificação
+     * TrazAqui.traz_aqui.Menu de Voluntário, são dadas as opcões ver os registos,eventos e classificação
      *
      * @param cod Código Voluntário
      */
     public void menuVoluntario(String cod) {
         Viewer.prints("\nVoluntário: " + cod + ".");
-        List s = new ArrayList<>(Arrays.asList("Ver Registos.", "Ver Classificação.", "Ver os eventos na sua área."));
+        List s = new ArrayList<>(Arrays.asList(TEXT_SEEREGISTERS, "Ver Classificação.", TEXT_SEEAREAEVENTS));
         Menu m = new Menu(s);
         int op;
         do {
@@ -617,24 +654,28 @@ public class Controlador {
             switch (op) {
                 case 1:
                     verRegistos(cod);
+                    break;
                 case 2:
                     verClas(cod);
+                    break;
                 case 3:
                     verEventos(this.gestor.getCoord(cod));
+                    break;
                 default:
+                    break;
             }
         } while (op != 0);
         menu();
     }
 
     /**
-     * Menu de Loja, são dadas as opcões ver os registos e eventos
+     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Loja, são dadas as opcões ver os registos e eventos
      *
-     * @param cod Código Loja
+     * @param cod Código TrazAqui.traz_aqui.Loja
      */
     public void menuLoja(String cod) {
-        Viewer.prints("\nLoja: " + cod + ".");
-        List s = new ArrayList<>(Arrays.asList("Ver Registos.", "Ver os eventos na sua área."));
+        Viewer.prints("\nTrazAqui.traz_aqui.Loja: " + cod + ".");
+        List s = new ArrayList<>(Arrays.asList(TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));
         Menu m = new Menu(s);
         int op;
         do {
@@ -643,16 +684,19 @@ public class Controlador {
             switch (op) {
                 case 1:
                     verRegistos(cod);
+                    break;
                 case 2:
                     verEventos(this.gestor.getCoord(cod));
+                    break;
                 default:
+                    break;
             }
         } while (op != 0);
         menu();
     }
 
     /**
-     * Menu de Registos com a possibilidade de se ver as listas dos diferentes estados de Registos
+     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Registos com a possibilidade de se ver as listas dos diferentes estados de TrazAqui.traz_aqui.Registos
      *
      * @param cod Código
      */
@@ -667,14 +711,21 @@ public class Controlador {
             switch (op) {
                 case 1:
                     history(cod, 3);
+                    break;
                 case 2:
                     history(cod, 2);
+                    break;
                 case 3:
                     history(cod, 1);
+                    break;
                 case 4:
                     history(cod, 4);
+                    break;
                 case 5:
                     history(cod, 5);
+                    break;
+                default:
+                    break;
             }
         } while (op != 0);
         menu();
@@ -711,7 +762,7 @@ public class Controlador {
         double i = this.gestor.getClas(cod);
         if (i == -1) Viewer.prints("Não classificado");
         else Viewer.prints("Classificação acumulada: " + i);
-        Viewer.prints("\n0) Voltar ao Menu.");
+        Viewer.prints("\n0) Voltar ao TrazAqui.traz_aqui.Menu.");
         do {
             i = Input.lerInt();
         } while (i != 0);
@@ -721,7 +772,7 @@ public class Controlador {
     /**
      * Método que apresenta todos os eventos que possam afetar o tempo de envio numa área
      *
-     * @param c Coordenadas
+     * @param c TrazAqui.traz_aqui.Coordenadas
      */
     public void verEventos(Coordenadas c) {
         int i;
@@ -805,7 +856,7 @@ public class Controlador {
      * @param name Nome do ficheiro em que foi gravado o estado
      */
     //Load Estado
-    public Gestor loadEstado(String name) throws IOException, ClassNotFoundException, ClassCastException {
+    public Gestor loadEstado(String name) throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));
         Gestor novo = (Gestor) ois.readObject();
         ois.close();

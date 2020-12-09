@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -82,7 +84,7 @@ public class Loja implements Serializable {
     /**
      * Método que indica se uma loja esta no range
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      * @param b Distância
      */
     public boolean rangeLoja(Coordenadas a, double b) {

@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -64,10 +66,10 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que adiciona um par cod , List<StringDistAux> ao map fila
+     * Método que adiciona um par cod , List<TrazAqui.traz_aqui.StringDistAux> ao map fila
      *
      * @param cod Código
-     * @param a   Lista StringDistAux
+     * @param a   Lista TrazAqui.traz_aqui.StringDistAux
      */
     public void adicionaFila(String cod, List<StringDistAux> a) {
         this.fila.replace(cod, a);
@@ -75,7 +77,7 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que remove um par cod , List<StringDistAux> do map fila
+     * Método que remove um par cod , List<TrazAqui.traz_aqui.StringDistAux> do map fila
      *
      * @param cod Código
      */
@@ -92,15 +94,15 @@ public class Historico implements Serializable {
     public List<Registos> volHist(String codVol, int modo) {
         List<Registos> regV;
         if (modo == 1)
-            regV = this.accepted.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(x -> x.clone()).collect(Collectors.toList());
+            regV = this.accepted.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 2)
-            regV = this.terminated.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(x -> x.clone()).collect(Collectors.toList());
+            regV = this.terminated.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 3)
-            regV = this.delivered.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(x -> x.clone()).collect(Collectors.toList());
+            regV = this.delivered.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 4)
-            regV = this.pending.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(x -> x.clone()).collect(Collectors.toList());
+            regV = this.pending.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());
         else
-            regV = this.finalized.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(x -> x.clone()).collect(Collectors.toList());
+            regV = this.finalized.values().stream().filter(x -> (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());
         return regV;
     }
 
@@ -113,15 +115,15 @@ public class Historico implements Serializable {
     public List<Registos> empHist(String codEmp, int modo) {
         List<Registos> regE;
         if (modo == 1)
-            regE = this.accepted.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(x -> x.clone()).collect(Collectors.toList());
+            regE = this.accepted.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 2)
-            regE = this.terminated.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(x -> x.clone()).collect(Collectors.toList());
+            regE = this.terminated.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 3)
-            regE = this.delivered.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(x -> x.clone()).collect(Collectors.toList());
+            regE = this.delivered.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 4)
-            regE = this.pending.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(x -> x.clone()).collect(Collectors.toList());
+            regE = this.pending.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());
         else
-            regE = this.finalized.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(x -> x.clone()).collect(Collectors.toList());
+            regE = this.finalized.values().stream().filter(x -> (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());
         return regE;
     }
 
@@ -134,36 +136,36 @@ public class Historico implements Serializable {
     public List<Registos> userHist(String codUser, int modo) {
         List<Registos> regU;
         if (modo == 1)
-            regU = this.accepted.values().stream().filter(x -> (x.getUser().equals(codUser))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.accepted.values().stream().filter(x -> (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 2)
-            regU = this.terminated.values().stream().filter(x -> (x.getUser().equals(codUser))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.terminated.values().stream().filter(x -> (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 3)
-            regU = this.delivered.values().stream().filter(x -> (x.getUser().equals(codUser))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.delivered.values().stream().filter(x -> (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 4)
-            regU = this.pending.values().stream().filter(x -> (x.getUser().equals(codUser))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.pending.values().stream().filter(x -> (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());
         else
-            regU = this.finalized.values().stream().filter(x -> (x.getUser().equals(codUser))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.finalized.values().stream().filter(x -> (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());
         return regU;
     }
 
     /**
      * Método que retorna uma List<registos> das lojas dependendo do modo de fila desejado
      *
-     * @param codLoja Código Loja
+     * @param codLoja Código TrazAqui.traz_aqui.Loja
      * @param modo    Modo
      */
     public List<Registos> lojaHist(String codLoja, int modo) {
         List<Registos> regU;
         if (modo == 1)
-            regU = this.accepted.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.accepted.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 2)
-            regU = this.terminated.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.terminated.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 3)
-            regU = this.delivered.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.delivered.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());
         else if (modo == 4)
-            regU = this.pending.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.pending.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());
         else
-            regU = this.finalized.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(x -> x.clone()).collect(Collectors.toList());
+            regU = this.finalized.values().stream().filter(x -> (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());
         return regU;
     }
 
@@ -177,11 +179,11 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que adiciona um novo registo à fila de terminated se a List<StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+     * Método que adiciona um novo registo à fila de terminated se a List<TrazAqui.traz_aqui.StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
      *
-     * @param enc Encomenda
+     * @param enc TrazAqui.traz_aqui.Encomenda
      * @param cod Código
-     * @param a   List StringDistAux
+     * @param a   List TrazAqui.traz_aqui.StringDistAux
      */
     public int gestaoEncomenda(Encomenda enc, String cod, List<StringDistAux> a) {
         int res = 1;
@@ -198,7 +200,7 @@ public class Historico implements Serializable {
     /**
      * Método que remove um registo da fila accepted e finaliza o seu tempo retornando o registo
      *
-     * @param enc  Encomenda
+     * @param enc  TrazAqui.traz_aqui.Encomenda
      * @param temp Tempo
      */
     public Registos done(String enc, double temp) {
@@ -208,23 +210,23 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que retorna uma Lista<topUsers> com o top dez de utilizadores que mais usaram o sistema
+     * Método que retorna uma Lista<TrazAqui.topUsers> com o top dez de utilizadores que mais usaram o sistema
      */
-    public List<topUsers> topUser() {
-        Map<String, topUsers> a = new HashMap();
+    public List<TopUsers> topUser() {
+        Map<String, TopUsers> a = new HashMap();
 
         for (Registos reg : this.finalized.values()) {
-            a.putIfAbsent(reg.getUser(), new topUsers(reg.getUser()));
+            a.putIfAbsent(reg.getUser(), new TopUsers(reg.getUser()));
             a.get(reg.getUser()).addQnt();
         }
 
-        return a.values().stream().sorted(Comparator.comparing(topUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());
+        return a.values().stream().sorted(Comparator.comparing(TopUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());
     }
 
     /**
-     * Método que retorna uma List<Registos> respectiva às transportadoras na fila finalized
+     * Método que retorna uma List<TrazAqui.traz_aqui.Registos> respectiva às transportadoras na fila finalized
      */
     public List<Registos> finList() {
-        return this.finalized.values().stream().filter(x -> (x.getDriver().charAt(0) == 't')).map(x -> x.clone()).collect(Collectors.toList());
+        return this.finalized.values().stream().filter(x -> (x.getDriver().charAt(0) == 't')).map(Registos::clone).collect(Collectors.toList());
     }
 }

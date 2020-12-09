@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +19,7 @@ public class RandomEvents implements Serializable {
     /**
      * Método que gera uma seed para o clima
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      */
     public double getSeedC(Coordenadas a) {
         Random generator = new Random((long) (a.getX() * a.getY() * this.clima));
@@ -27,7 +29,7 @@ public class RandomEvents implements Serializable {
     /**
      * Método que gera uma seed para o trânsito
      *
-     * @param a Coordenadas
+     * @param a TrazAqui.traz_aqui.Coordenadas
      */
     public double getSeedT(Coordenadas a) {
         Random generator = new Random((long) (a.getX() * a.getY() * this.transito));

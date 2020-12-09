@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 /**

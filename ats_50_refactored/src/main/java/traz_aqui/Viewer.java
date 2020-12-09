@@ -1,4 +1,10 @@
+package traz_aqui;
+
 public class Viewer {
+
+    private Viewer() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Método que dá print a uma string
@@ -28,11 +34,11 @@ public class Viewer {
     }
 
     /**
-     * Método que dá print a um topUsers
+     * Método que dá print a um TrazAqui.topUsers
      *
-     * @param top topUsers
+     * @param top TrazAqui.topUsers
      */
-    public static void prints(topUsers top) {
+    public static void prints(TopUsers top) {
         System.out.println(top);
     }
 

@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class CatEncomenda implements Serializable {
     /**
      * Método que adiciona uma nova encomenda ao Map de encomendas
      *
-     * @param a Encomenda
+     * @param a TrazAqui.traz_aqui.Encomenda
      */
     public void adicionaEnc(Encomenda a) {
         this.encs.put(a.getCod(), a.clone());

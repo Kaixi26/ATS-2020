@@ -1,3 +1,5 @@
+package traz_aqui;
+
 import java.io.Serializable;
 
 public class Utilizador implements Serializable {
@@ -6,7 +8,6 @@ public class Utilizador implements Serializable {
     private String pass;
     private String email;
     private Coordenadas cord;
-    private double range;
 
     public Utilizador(String cod, String nome, Coordenadas cord, String pass, String email) {
         this.cod = cod;

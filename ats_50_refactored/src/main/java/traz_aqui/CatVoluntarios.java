@@ -176,4 +176,8 @@ public class CatVoluntarios implements Serializable {
     public int getCap(String cod) {
         return this.volunt.get(cod).getCap();
     }
+
+    public int size(){
+        return volunt.size();
+    }
 }

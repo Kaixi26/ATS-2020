@@ -89,4 +89,8 @@ public class CatUtilizadores implements Serializable {
     public boolean verMail(String email) {
         return this.users.values().stream().anyMatch(x -> x.getEmail().equals(email));
     }
+
+    public int size(){
+        return users.size();
+    }
 }

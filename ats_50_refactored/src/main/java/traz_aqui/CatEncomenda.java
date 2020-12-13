@@ -51,4 +51,8 @@ public class CatEncomenda implements Serializable {
         this.encs.values().stream().filter(x -> (a.contains(x.getCod()))).forEach(x -> reg.add(new Registos(x.clone(), LocalDateTime.now(), x.getUser(), "n/a", 0.0, 0.0, 0.0)));
         return reg;
     }
+
+    public int size() {
+        return encs.size();
+    }
 }

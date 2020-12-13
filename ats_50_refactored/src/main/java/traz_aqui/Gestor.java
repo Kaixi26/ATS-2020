@@ -32,6 +32,13 @@ public class Gestor implements Serializable {
      */
     public void loadCat() {
         Parse.parse(this.cu, this.cl, this.cv, this.ct, this.ce, this.a);
+        System.out.println("Loaded:");
+        System.out.println(cu.size() + "\tusers");
+        System.out.println(cl.size() + "\tlojas");
+        System.out.println(cv.size() + "\tvoluntarios");
+        System.out.println(ct.size() + "\ttransportes");
+        System.out.println(ce.size() + "\tencomendas");
+        System.out.println(a.size()  + "\taceites\n");
     }
 
     /**

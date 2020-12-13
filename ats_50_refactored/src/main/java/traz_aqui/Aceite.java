@@ -31,5 +31,9 @@ public class Aceite implements Serializable {
     public List<String> encDef() {
         return this.aceites.stream().collect(Collectors.toList());
     }
+
+    public int size(){
+        return aceites.size();
+    }
 }
 

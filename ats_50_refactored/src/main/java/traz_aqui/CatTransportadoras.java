@@ -201,5 +201,9 @@ public class CatTransportadoras implements Serializable {
     public int getCap(String cod) {
         return this.trans.get(cod).getCap();
     }
+
+    public int size(){
+        return trans.size();
+    }
 }
 

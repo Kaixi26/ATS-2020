@@ -110,4 +110,8 @@ public class CatLojas implements Serializable {
         }
         return a;
     }
+
+    public int size() {
+        return lojas.size();
+    }
 }

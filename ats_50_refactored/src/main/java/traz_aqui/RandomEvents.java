@@ -19,7 +19,7 @@ public class RandomEvents implements Serializable {
     /**
      * Método que gera uma seed para o clima
      *
-     * @param a TrazAqui.traz_aqui.Coordenadas
+     * @param a Coordenadas
      */
     public double getSeedC(Coordenadas a) {
         Random generator = new Random((long) (a.getX() * a.getY() * this.clima));
@@ -29,7 +29,7 @@ public class RandomEvents implements Serializable {
     /**
      * Método que gera uma seed para o trânsito
      *
-     * @param a TrazAqui.traz_aqui.Coordenadas
+     * @param a Coordenadas
      */
     public double getSeedT(Coordenadas a) {
         Random generator = new Random((long) (a.getX() * a.getY() * this.transito));

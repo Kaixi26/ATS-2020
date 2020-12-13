@@ -22,7 +22,7 @@ public class CatEncomenda implements Serializable {
     /**
      * Método que adiciona uma nova encomenda ao Map de encomendas
      *
-     * @param a TrazAqui.traz_aqui.Encomenda
+     * @param a Encomenda
      */
     public void adicionaEnc(Encomenda a) {
         this.encs.put(a.getCod(), a.clone());

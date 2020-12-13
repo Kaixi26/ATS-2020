@@ -1,7 +1,7 @@
 package traz_aqui;
 
 /**
- * Classe auxiliar para determinar os TrazAqui.topUsers e topTransp do sistema
+ * Classe auxiliar para determinar os topUsers e topTransp do sistema
  */
 public class TopUsers {
     private double qnt;

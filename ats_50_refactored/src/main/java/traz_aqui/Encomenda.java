@@ -93,7 +93,7 @@ public class Encomenda implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("TrazAqui.traz_aqui.Encomenda: ").append(this.cod).append(", ")
+        sb.append("Encomenda: ").append(this.cod).append(", ")
                 .append(this.user).append(", ")
                 .append(this.loja).append(", ")
                 .append(this.peso).append(", ")

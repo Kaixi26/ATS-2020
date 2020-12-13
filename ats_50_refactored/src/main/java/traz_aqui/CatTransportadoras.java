@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CatTransportadoras implements Serializable {
     /**
-     * Map que representa o catálogo de transportadoras sendo as keys os seus codigos e os values as respectivas TrazAqui.traz_aqui.Transportadoras
+     * Map que representa o catálogo de transportadoras sendo as keys os seus codigos e os values as respectivas Transportadoras
      */
     private final Map<String, Transportadoras> trans;
 
@@ -25,10 +25,10 @@ public class CatTransportadoras implements Serializable {
     }
 
     /**
-     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de TrazAqui.traz_aqui.StringDistAux respectiva às TrazAqui.traz_aqui.Transportadoras com melhores condições para a encomenda
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux respectiva às Transportadoras com melhores condições para a encomenda
      *
-     * @param cl  TrazAqui.traz_aqui.Coordenadas TrazAqui.traz_aqui.Loja
-     * @param cu  TrazAqui.traz_aqui.Coordenadas TrazAqui.traz_aqui.Utilizador
+     * @param cl  Coordenadas Loja
+     * @param cu  Coordenadas Utilizador
      * @param pri Boolean prioridade
      */
     public List<StringDistAux> melhorTransporteT(Coordenadas cl, Coordenadas cu, boolean pri) {
@@ -68,7 +68,7 @@ public class CatTransportadoras implements Serializable {
      *
      * @param cod   Código
      * @param nome  Nome
-     * @param cord  TrazAqui.traz_aqui.Coordenadas
+     * @param cord  Coordenadas
      * @param range Range
      * @param prkm  Preço kilómetro
      * @param nif   NIF
@@ -87,8 +87,8 @@ public class CatTransportadoras implements Serializable {
     /**
      * Método que retorna o tempo de transporte de uma determinada transportadora
      *
-     * @param l      TrazAqui.traz_aqui.Coordenadas loja
-     * @param u      TrazAqui.traz_aqui.Coordenadas utilizador
+     * @param l      Coordenadas loja
+     * @param u      Coordenadas utilizador
      * @param cl     Distância
      * @param driver Código condutor
      */
@@ -99,8 +99,8 @@ public class CatTransportadoras implements Serializable {
     /**
      * Método que retorna o custo de viajem de uma determinada Transportadora
      *
-     * @param l      TrazAqui.traz_aqui.Coordenadas loja
-     * @param u      TrazAqui.traz_aqui.Coordenadas utilizador
+     * @param l      Coordenadas loja
+     * @param u      Coordenadas utilizador
      * @param peso   Peso
      * @param driver Código condutor
      */
@@ -137,7 +137,7 @@ public class CatTransportadoras implements Serializable {
     }
 
     /**
-     * Método que retorna as TrazAqui.traz_aqui.Coordenadas de uma determinada Transportadora
+     * Método que retorna as Coordenadas de uma determinada Transportadora
      *
      * @param user Código
      */
@@ -146,10 +146,10 @@ public class CatTransportadoras implements Serializable {
     }
 
     /**
-     * Método que altera as TrazAqui.traz_aqui.Coordenadas de uma determinada Transportadora
+     * Método que altera as Coordenadas de uma determinada Transportadora
      *
      * @param driver Código condutor
-     * @param a      TrazAqui.traz_aqui.Coordenadas
+     * @param a      Coordenadas
      */
     public void setCoords(String driver, Coordenadas a) {
         this.trans.get(driver).setCord(a);
@@ -168,8 +168,8 @@ public class CatTransportadoras implements Serializable {
      * Método que faz set dos kilometros percorridos de uma determinada Transportadora dependendo da sua distância à loja e utilizador
      *
      * @param cod Código condutor
-     * @param l   TrazAqui.traz_aqui.Coordenadas
-     * @param u   TrazAqui.traz_aqui.Coordenadas
+     * @param l   Coordenadas
+     * @param u   Coordenadas
      */
     public void addKmps(String cod, Coordenadas l, Coordenadas u) {
         this.trans.get(cod).setKmp(this.trans.get(cod).getCord().distancia(l) + l.distancia(u));

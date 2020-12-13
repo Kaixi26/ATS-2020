@@ -42,7 +42,7 @@ public class Coordenadas implements Serializable, Cloneable {
     /**
      * Método que calcula a distância que a coordenada representa
      *
-     * @param a TrazAqui.traz_aqui.Coordenadas
+     * @param a Coordenadas
      */
     public double distancia(Coordenadas a) {
         return sqrt(pow((a.getX() - this.x), 2) + pow((a.getY() - this.y), 2));
@@ -51,7 +51,7 @@ public class Coordenadas implements Serializable, Cloneable {
     /**
      * Método que retorna se está no range
      *
-     * @param a TrazAqui.traz_aqui.Coordenadas
+     * @param a Coordenadas
      * @param b Distância
      */
     public boolean isRange(Coordenadas a, double b) {

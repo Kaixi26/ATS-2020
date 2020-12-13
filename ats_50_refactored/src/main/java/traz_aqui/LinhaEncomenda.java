@@ -60,7 +60,7 @@ public class LinhaEncomenda implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Linha TrazAqui.traz_aqui.Encomenda: ")
+        sb.append("Linha Encomenda: ")
                 .append(this.cproduto).append(", ")
                 .append(this.desc).append(", ")
                 .append(this.preco).append(", ")

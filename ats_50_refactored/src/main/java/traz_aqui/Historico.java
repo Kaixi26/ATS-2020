@@ -66,10 +66,10 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que adiciona um par cod , List<TrazAqui.traz_aqui.StringDistAux> ao map fila
+     * Método que adiciona um par cod , List<StringDistAux> ao map fila
      *
      * @param cod Código
-     * @param a   Lista TrazAqui.traz_aqui.StringDistAux
+     * @param a   Lista StringDistAux
      */
     public void adicionaFila(String cod, List<StringDistAux> a) {
         this.fila.replace(cod, a);
@@ -77,7 +77,7 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que remove um par cod , List<TrazAqui.traz_aqui.StringDistAux> do map fila
+     * Método que remove um par cod , List<StringDistAux> do map fila
      *
      * @param cod Código
      */
@@ -151,7 +151,7 @@ public class Historico implements Serializable {
     /**
      * Método que retorna uma List<registos> das lojas dependendo do modo de fila desejado
      *
-     * @param codLoja Código TrazAqui.traz_aqui.Loja
+     * @param codLoja Código Loja
      * @param modo    Modo
      */
     public List<Registos> lojaHist(String codLoja, int modo) {
@@ -179,11 +179,11 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que adiciona um novo registo à fila de terminated se a List<TrazAqui.traz_aqui.StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+     * Método que adiciona um novo registo à fila de terminated se a List<StringDistAux> estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
      *
-     * @param enc TrazAqui.traz_aqui.Encomenda
+     * @param enc Encomenda
      * @param cod Código
-     * @param a   List TrazAqui.traz_aqui.StringDistAux
+     * @param a   List StringDistAux
      */
     public int gestaoEncomenda(Encomenda enc, String cod, List<StringDistAux> a) {
         int res = 1;
@@ -200,7 +200,7 @@ public class Historico implements Serializable {
     /**
      * Método que remove um registo da fila accepted e finaliza o seu tempo retornando o registo
      *
-     * @param enc  TrazAqui.traz_aqui.Encomenda
+     * @param enc  Encomenda
      * @param temp Tempo
      */
     public Registos done(String enc, double temp) {
@@ -210,7 +210,7 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que retorna uma Lista<TrazAqui.topUsers> com o top dez de utilizadores que mais usaram o sistema
+     * Método que retorna uma Lista<topUsers> com o top dez de utilizadores que mais usaram o sistema
      */
     public List<TopUsers> topUser() {
         Map<String, TopUsers> a = new HashMap();
@@ -224,7 +224,7 @@ public class Historico implements Serializable {
     }
 
     /**
-     * Método que retorna uma List<TrazAqui.traz_aqui.Registos> respectiva às transportadoras na fila finalized
+     * Método que retorna uma List<Registos> respectiva às transportadoras na fila finalized
      */
     public List<Registos> finList() {
         return this.finalized.values().stream().filter(x -> (x.getDriver().charAt(0) == 't')).map(Registos::clone).collect(Collectors.toList());

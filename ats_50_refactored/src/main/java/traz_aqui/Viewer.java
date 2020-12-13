@@ -34,9 +34,9 @@ public class Viewer {
     }
 
     /**
-     * Método que dá print a um TrazAqui.topUsers
+     * Método que dá print a um topUsers
      *
-     * @param top TrazAqui.topUsers
+     * @param top topUsers
      */
     public static void prints(TopUsers top) {
         System.out.println(top);

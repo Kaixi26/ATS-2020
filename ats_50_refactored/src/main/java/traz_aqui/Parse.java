@@ -26,15 +26,15 @@ public class Parse implements Serializable {
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
             switch (linhaPartida[0]) {
-                case "TrazAqui.traz_aqui.Utilizador":
+                case "Utilizador":
                     Utilizador u = parseUtilizador(linhaPartida[1]);
                     cu.adicionaUser(u);
                     break;
-                case "TrazAqui.traz_aqui.Loja":
+                case "Loja":
                     Loja l = parseLoja(linhaPartida[1]);
                     cl.adicionaLoja(l);
                     break;
-                case "TrazAqui.traz_aqui.Voluntario":
+                case "Voluntario":
                     Voluntario v = parseVolunt(linhaPartida[1]);
                     cv.adicionaVolunt(v);
                     break;
@@ -42,11 +42,11 @@ public class Parse implements Serializable {
                     Transportadoras t = parseTrans(linhaPartida[1]);
                     ct.adicionaTrans(t);
                     break;
-                case "TrazAqui.traz_aqui.Encomenda":
+                case "Encomenda":
                     Encomenda e = parseEnc(linhaPartida[1]);
                     ce.adicionaEnc(e);
                     break;
-                case "TrazAqui.traz_aqui.Aceite":
+                case "Aceite":
                     ca.adicionaAceite(linhaPartida[1]);
                     break;
                 default:
@@ -59,7 +59,7 @@ public class Parse implements Serializable {
     /**
      * Método que divide o input em campos e cria um novo utilizador a partir desses campos retornando o mesmo
      *
-     * @param input TrazAqui.traz_aqui.Input
+     * @param input Input
      */
     public static Utilizador parseUtilizador(String input) {
         String[] campos = input.split(",");
@@ -69,7 +69,7 @@ public class Parse implements Serializable {
     /**
      * Método que divide o input em campos e cria uma nova loja a partir desses campos retornando a mesma
      *
-     * @param input TrazAqui.traz_aqui.Input
+     * @param input Input
      */
     public static Loja parseLoja(String input) {
         String[] campos = input.split(",");
@@ -79,7 +79,7 @@ public class Parse implements Serializable {
     /**
      * Método que divide o input em campos e cria um novo voluntário a partir desses campos retornando o mesmo
      *
-     * @param input TrazAqui.traz_aqui.Input
+     * @param input Input
      */
     public static Voluntario parseVolunt(String input) {
         String[] campos = input.split(",");
@@ -89,7 +89,7 @@ public class Parse implements Serializable {
     /**
      * Método que divide o input em campos e cria uma nova transportadora a partir desses campos retornando a mesma
      *
-     * @param input TrazAqui.traz_aqui.Input
+     * @param input Input
      */
     public static Transportadoras parseTrans(String input) {
         String[] campos = input.split(",");
@@ -99,7 +99,7 @@ public class Parse implements Serializable {
     /**
      * Método que divide o input em campos e cria uma nova encomenda a partir desses campos retornando a mesma
      *
-     * @param input TrazAqui.traz_aqui.Input
+     * @param input Input
      */
     public static Encomenda parseEnc(String input) {
         int i;

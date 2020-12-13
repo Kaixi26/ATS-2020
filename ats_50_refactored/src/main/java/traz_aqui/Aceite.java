@@ -19,7 +19,7 @@ public class Aceite implements Serializable {
     /**
      * Método que adiciona um código válido a lista de aceites
      *
-     * @param a Código TrazAqui.traz_aqui.Encomenda
+     * @param a Código Encomenda
      */
     public void adicionaAceite(String a) {
         this.aceites.add(a);

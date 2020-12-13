@@ -179,8 +179,8 @@ public class Transportadoras implements Serializable {
     /**
      * Método que cálcula o tempo de entrega
      *
-     * @param l  TrazAqui.traz_aqui.Coordenadas loja
-     * @param u  TrazAqui.traz_aqui.Coordenadas utilizador
+     * @param l  Coordenadas loja
+     * @param u  Coordenadas utilizador
      * @param cl Tempo
      */
     public double calcTemp(Coordenadas l, Coordenadas u, Double cl) {
@@ -190,9 +190,9 @@ public class Transportadoras implements Serializable {
     /**
      * Método que cálcula o custo de entrega
      *
-     * @param l    TrazAqui.traz_aqui.Coordenadas loja
+     * @param l    Coordenadas loja
      * @param peso Peso
-     * @param u    TrazAqui.traz_aqui.Coordenadas utilizador
+     * @param u    Coordenadas utilizador
      */
     public double calcCost(Coordenadas l, double peso, Coordenadas u) {
         return (this.cord.distancia(l) + u.distancia(l)) / this.prkm + peso * 0.5;

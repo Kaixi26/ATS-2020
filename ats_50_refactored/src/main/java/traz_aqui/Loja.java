@@ -84,7 +84,7 @@ public class Loja implements Serializable {
     /**
      * Método que indica se uma loja esta no range
      *
-     * @param a TrazAqui.traz_aqui.Coordenadas
+     * @param a Coordenadas
      * @param b Distância
      */
     public boolean rangeLoja(Coordenadas a, double b) {

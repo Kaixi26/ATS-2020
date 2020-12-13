@@ -23,7 +23,7 @@ public class Controlador {
     private static final String TEXT_INCORRECTVALUE = "Valor Incorreto";
     private static final String TEXT_INCORRECTCREDENTIALS = "\nPassword ou Mail incorreto.";
     private static final String TEXT_NONCONFIRMEDDELIVERIES = "Encomendas a confirmar:";
-    private static final String TEXT_SEEREGISTERS = "Ver TrazAqui.traz_aqui.Registos.";
+    private static final String TEXT_SEEREGISTERS = "Ver Registos.";
     private static final String TEXT_SEEAREAEVENTS = "Ver os eventos na sua área.";
 
     private Gestor gestor;
@@ -35,10 +35,10 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu principal
+     * Menu principal
      */
     public void menu() {
-        List<String> s = new ArrayList<>(Arrays.asList("Modo User.", "Modo Voluntário.", "Modo Transportadora.", "Modo TrazAqui.traz_aqui.Loja.", "Os dez utilizadores que mais usam o sistema.", "As dez empresas que mais usam o sistema.", "Guardar e Ler estado."));
+        List<String> s = new ArrayList<>(Arrays.asList("Modo User.", "Modo Voluntário.", "Modo Transportadora.", "Modo Loja.", "Os dez utilizadores que mais usam o sistema.", "As dez empresas que mais usam o sistema.", "Guardar e Ler estado."));
         Menu m = new Menu(s);
         int op;
         do {
@@ -56,7 +56,7 @@ public class Controlador {
     }
 
     /**
-     * Método que faz print dos TrazAqui.topUsers (case 5 do menu principal)
+     * Método que faz print dos topUsers (case 5 do menu principal)
      */
     public void topUsers() {
         for (TopUsers t : this.gestor.topUsers()) Viewer.prints(t);
@@ -82,7 +82,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu que nos permite fazer a escolha entre gravar e ler estado
+     * Menu que nos permite fazer a escolha entre gravar e ler estado
      *
      * @param str Nome Ficheiro
      */
@@ -118,7 +118,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo utilizador que permite fazer login ou sign up de um utilizador
+     * Menu do modo utilizador que permite fazer login ou sign up de um utilizador
      */
     public void modoUser() {
         List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
@@ -141,7 +141,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo empresa que permite fazer login ou sign up de uma Transportadora
+     * Menu do modo empresa que permite fazer login ou sign up de uma Transportadora
      */
     public void modoEmpresa() {
         List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
@@ -164,7 +164,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo voluntário que permite fazer login ou sign up de um voluntário
+     * Menu do modo voluntário que permite fazer login ou sign up de um voluntário
      */
     public void modoVoluntario() {
         List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
@@ -187,7 +187,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo loja que permite fazer login ou sign up de uma TrazAqui.traz_aqui.Loja
+     * Menu do modo loja que permite fazer login ou sign up de uma Loja
      */
     public void modoLoja() {
         List s = new ArrayList<>(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));
@@ -210,7 +210,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo login de um utilizador
+     * Menu do modo login de um utilizador
      */
     public void loginUser() {
         Viewer.prints(TEXT_ASKEMAIL);
@@ -226,7 +226,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo login de uma transportadora
+     * Menu do modo login de uma transportadora
      */
     public void loginEmpresa() {
         Viewer.prints(TEXT_ASKEMAIL);
@@ -242,7 +242,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo login de um voluntário
+     * Menu do modo login de um voluntário
      */
     public void loginVoluntario() {
         Viewer.prints(TEXT_ASKEMAIL);
@@ -258,7 +258,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo login de uma loja
+     * Menu do modo login de uma loja
      */
     public void loginLoja() {
         Viewer.prints(TEXT_ASKEMAIL);
@@ -274,7 +274,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo sign up de um utilizador
+     * Menu do modo sign up de um utilizador
      */
     public void signupUser() {
         Viewer.prints(TEXT_ASKEMAIL);
@@ -297,7 +297,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo sign up de uma Transportadora
+     * Menu do modo sign up de uma Transportadora
      */
     public void signupEmpresa() {
         boolean med = false;
@@ -339,7 +339,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo sign up de um voluntário
+     * Menu do modo sign up de um voluntário
      */
     public void signupVoluntario() {
         boolean med = false;
@@ -374,7 +374,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu do modo sign up de uma TrazAqui.traz_aqui.Loja
+     * Menu do modo sign up de uma Loja
      */
     public void signupLoja() {
         int fila = -1;
@@ -409,9 +409,9 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo utilizador desde confirmação de encomendas, transporte e classificações
+     * Menu de todos os alertas que possam ser feitos ao modo utilizador desde confirmação de encomendas, transporte e classificações
      *
-     * @param cod Código TrazAqui.traz_aqui.Utilizador
+     * @param cod Código Utilizador
      */
     public void alertasU(String cod) {
         int i = 1;
@@ -422,7 +422,7 @@ public class Controlador {
                 if (r.getDriver().charAt(0) == 't')
                     Viewer.prints((i) + ") " + "Transportadora: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
                 if (r.getDriver().charAt(0) == 'v')
-                    Viewer.prints((i) + ") " + "TrazAqui.traz_aqui.Voluntario: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
+                    Viewer.prints((i) + ") " + "Voluntario: " + r.getDriver() + " Custo de Transporte previsto: " + r.getCustoT() + " Tempo de encomenda previsto: " + r.getTmp());
                 i++;
             }
             for (i = 0; i < a.size(); i++) {
@@ -443,7 +443,7 @@ public class Controlador {
                 if (f.getDriver().charAt(0) == 't')
                     Viewer.prints((i) + ") " + "Transportadora: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
                 if (f.getDriver().charAt(0) == 'v')
-                    Viewer.prints((i) + ") " + "TrazAqui.traz_aqui.Voluntario: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
+                    Viewer.prints((i) + ") " + "Voluntario: " + f.getDriver() + " Custo de encomenda: " + (f.getEnc().custo() + f.getCustoT()));
                 i++;
             }
             for (i = 0; i < g.size(); i++) {
@@ -457,7 +457,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo transportadora como confirmação de encomenda
+     * Menu de todos os alertas que possam ser feitos ao modo transportadora como confirmação de encomenda
      *
      * @param cod Código Transportadora
      */
@@ -489,7 +489,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de todos os alertas que possam ser feitos ao modo voluntário como confirmação de encomenda
+     * Menu de todos os alertas que possam ser feitos ao modo voluntário como confirmação de encomenda
      *
      * @param cod Código Voluntário
      */
@@ -521,14 +521,14 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Utilizador, são dadas as opcões de fazer uma encomenda, ver os registos e ver eventos
+     * Menu de Utilizador, são dadas as opcões de fazer uma encomenda, ver os registos e ver eventos
      *
-     * @param cod Código TrazAqui.traz_aqui.Utilizador
+     * @param cod Código Utilizador
      */
     public void menuUser(String cod) {
-        Viewer.prints("\nTrazAqui.traz_aqui.Utilizador: " + cod + ".");
+        Viewer.prints("\nUtilizador: " + cod + ".");
         Utilizador u = this.gestor.procUtil(cod);
-        List s = new ArrayList<>(Arrays.asList("Fazer TrazAqui.traz_aqui.Encomenda.", TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));
+        List s = new ArrayList<>(Arrays.asList("Fazer Encomenda.", TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));
         Menu m = new Menu(s);
         int op;
         do {
@@ -554,8 +554,8 @@ public class Controlador {
     /**
      * Método que cria uma nova encomenda se assim for possível
      *
-     * @param a    TrazAqui.traz_aqui.Coordenadas
-     * @param nome Nome TrazAqui.traz_aqui.Utilizador
+     * @param a    Coordenadas
+     * @param nome Nome Utilizador
      * @param cod  Código
      */
     public void fazerEncomenda(Coordenadas a, String nome, String cod) {
@@ -606,7 +606,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de Empresa, são dadas as opcões de ver registos, classificações, eventos e total facturado num intervalo
+     * Menu de Empresa, são dadas as opcões de ver registos, classificações, eventos e total facturado num intervalo
      *
      * @param cod Código Transportadora
      */
@@ -639,7 +639,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de Voluntário, são dadas as opcões ver os registos,eventos e classificação
+     * Menu de Voluntário, são dadas as opcões ver os registos,eventos e classificação
      *
      * @param cod Código Voluntário
      */
@@ -669,12 +669,12 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Loja, são dadas as opcões ver os registos e eventos
+     * Menu de Loja, são dadas as opcões ver os registos e eventos
      *
-     * @param cod Código TrazAqui.traz_aqui.Loja
+     * @param cod Código Loja
      */
     public void menuLoja(String cod) {
-        Viewer.prints("\nTrazAqui.traz_aqui.Loja: " + cod + ".");
+        Viewer.prints("\nLoja: " + cod + ".");
         List s = new ArrayList<>(Arrays.asList(TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));
         Menu m = new Menu(s);
         int op;
@@ -696,7 +696,7 @@ public class Controlador {
     }
 
     /**
-     * TrazAqui.traz_aqui.Menu de TrazAqui.traz_aqui.Registos com a possibilidade de se ver as listas dos diferentes estados de TrazAqui.traz_aqui.Registos
+     * Menu de Registos com a possibilidade de se ver as listas dos diferentes estados de Registos
      *
      * @param cod Código
      */
@@ -762,7 +762,7 @@ public class Controlador {
         double i = this.gestor.getClas(cod);
         if (i == -1) Viewer.prints("Não classificado");
         else Viewer.prints("Classificação acumulada: " + i);
-        Viewer.prints("\n0) Voltar ao TrazAqui.traz_aqui.Menu.");
+        Viewer.prints("\n0) Voltar ao Menu.");
         do {
             i = Input.lerInt();
         } while (i != 0);
@@ -772,7 +772,7 @@ public class Controlador {
     /**
      * Método que apresenta todos os eventos que possam afetar o tempo de envio numa área
      *
-     * @param c TrazAqui.traz_aqui.Coordenadas
+     * @param c Coordenadas
      */
     public void verEventos(Coordenadas c) {
         int i;

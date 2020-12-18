@@ -96,7 +96,7 @@ main :: IO ()
 main = do
   pname <- getProgName
   args <- getArgs
-  print args
+--  print args
   case parseArgs args of
     Run config -> do
       logLines <- logFromConfig config

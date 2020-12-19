@@ -1,4 +1,5 @@
 # ATS-2020
+
 ## Run Software
 
 ### Create all Projects
@@ -7,16 +8,18 @@
 
 ```for n in {0..98}; do \
 ./scripts/mkmaven.sh projectsPOO_1920/$n/ /tmp/ "ats_$(printf "%.2d" $n)";\
-done```
+done
+```
 
-**NOTE** parse error on project 27 put \n at the beginning of files to fix
+**NOTE:** parse error on project 27 put \n at the beginning of files to fix
 
 #### Collect metrics from projects
 
 ```python scripts/collect_metrics.py --metrics;\
 for n in {0..98}; do \
     python scripts/collect_metrics.py "ats_$(printf "%.2d" $n)";\
-done```
+done
+```
 
 # Sonarqube-7.9.4 API 
 **Documentation:** To access Rest API documentation, go to: http://localhost:9000/web_api

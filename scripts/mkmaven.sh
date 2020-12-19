@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ $# -ne 3 ]]; then 
     echo "usage: $0 <old_project_path> <new_project_path> <project_name>"
@@ -21,7 +21,7 @@ init_project(){
 }
 
 copy_sources(){
-    find $OLD_PROJ_PATH | grep "\.java" \
+    find $OLD_PROJ_PATH | grep --color=never "\.java"\
         | ./scripts/copy_sources_to.py $NEW_PROJ_PATH/$PROJ_NAME/src/main/java/
     return 0;
 }

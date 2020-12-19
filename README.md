@@ -21,10 +21,13 @@ for n in {0..98}; do \
 done
 ```
 
-# Sonarqube-7.9.4 API 
+## Sonarqube-7.9.4 API 
 **Documentation:** To access Rest API documentation, go to: http://localhost:9000/web_api
+
 **Project List:** http://localhost:9000/api/components/search?qualifiers=TRK&q=ats_00
+
 **Measures:** http://localhost:9000/web_api/api/measures
+
 **Metric Keys:** http://localhost:9000/api/metrics/search
 
 ## Author

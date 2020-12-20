@@ -35,7 +35,7 @@ done
 ## Author
 
 -   **Carolina Resende Marques:** [CarolinaRMarques](https://github.com/CarolinaRMarques)
--   **Emely da Mata Mendonça:** [?](?)
+-   **Emely da Mata Mendonça:** [emelydamata](https://github.com/emelydamata)
 -   **Jorge Gabriel Alves Cerqueira,:** [Kaixi26](https://github.com/Kaixi26)
 
 ## License

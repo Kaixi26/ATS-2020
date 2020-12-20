@@ -6,7 +6,8 @@
 
 #### Create into /tmp/
 
-```for n in {0..98}; do \
+```
+for n in {0..98}; do \
 ./scripts/mkmaven.sh projectsPOO_1920/$n/ /tmp/ "ats_$(printf "%.2d" $n)";\
 done
 ```
@@ -15,7 +16,8 @@ done
 
 #### Collect metrics from projects
 
-```python scripts/collect_metrics.py --metrics;\
+```
+python scripts/collect_metrics.py --metrics;\
 for n in {0..98}; do \
     python scripts/collect_metrics.py "ats_$(printf "%.2d" $n)";\
 done

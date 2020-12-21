@@ -28,7 +28,6 @@ public class Buyer extends User {
 
     }
 
-
     public boolean equals(Object o) {
         if (o == this) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
@@ -44,6 +43,7 @@ public class Buyer extends User {
     public String toString() {
         return super.toString();
     }
+
 
     public Buyer clone() {
         return new Buyer(this);

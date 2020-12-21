@@ -56,7 +56,7 @@ public class Voluntario extends User {
     }
 
     public double getavaliacao() {
-        return this.numreviews;
+        return this.avaliacao;
     }
 
     public double getraio() {

@@ -38,7 +38,7 @@ public class Gestor implements Serializable {
         System.out.println(cv.size() + "\tvoluntarios");
         System.out.println(ct.size() + "\ttransportes");
         System.out.println(ce.size() + "\tencomendas");
-        System.out.println(a.size()  + "\taceites\n");
+        System.out.println(a.size() + "\taceites\n");
     }
 
     /**

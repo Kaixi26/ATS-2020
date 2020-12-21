@@ -12,7 +12,7 @@ public class Aceite implements Serializable {
         this.aceites = new ArrayList<>();
     }
 
-    public List<String> getAceites() {
+    public ArrayList<String> getAceites() {
         return new ArrayList<>(this.aceites);
     }
 
@@ -32,7 +32,7 @@ public class Aceite implements Serializable {
         return this.aceites.stream().collect(Collectors.toList());
     }
 
-    public int size(){
+    public int size() {
         return aceites.size();
     }
 }

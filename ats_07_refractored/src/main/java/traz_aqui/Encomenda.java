@@ -1,6 +1,5 @@
 package traz_aqui;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Encomenda {
     private List<LinhaEncomenda> produto;
     private String codbuyer;
     private String codDeliver; //codigo de quem entrega o produto (empresa ou voluntariado)
-    private Duration duracao; //still gotta do 
     private int estado; // 1 entregue
     // 2 em fase de preparação pela loja para voluntario
     // 3 disponivel na loja para voluntario ir buscar

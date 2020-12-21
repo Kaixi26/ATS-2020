@@ -90,7 +90,7 @@ public class CatUtilizadores implements Serializable {
         return this.users.values().stream().anyMatch(x -> x.getEmail().equals(email));
     }
 
-    public int size(){
+    public int size() {
         return users.size();
     }
 }

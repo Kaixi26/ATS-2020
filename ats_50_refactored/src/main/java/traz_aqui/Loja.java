@@ -96,6 +96,6 @@ public class Loja implements Serializable {
      */
     public double calcTmp() {
         if (this.fila == -1) return ThreadLocalRandom.current().nextDouble(1, 120);
-        else return this.fila * 4;
+        else return (double) this.fila * 4;
     }
 }

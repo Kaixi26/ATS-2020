@@ -66,7 +66,7 @@ public class Transportadora extends User {
     }
 
     public double getavaliacao() {
-        return this.numreviews;
+        return this.avaliacao;
     }
 
     public double getcustoKM() {

@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Menu implements Serializable {
     public static final String LOGS_2_TXT = "logs2.txt";
     public static final String INSIRA_EMAIL = "insira email:";
-    public static final String INSIRA_UMA_PASSWORD = "insira uma password: ";
+    public static final String INSIRA_UMA_PASS = "insira uma password: ";
     public static final String INSIRA_AS_SUAS_COORDENADAS = "insira as suas coordenadas:";
     public static final String COORDENADA_X = "Coordenada X";
     public static final String COORDENADA_Y = "Coordenada Y";
@@ -157,7 +157,7 @@ public class Menu implements Serializable {
         String email = e.nextLine();
 
         Scanner p = new Scanner(System.in);
-        System.out.println(INSIRA_UMA_PASSWORD);
+        System.out.println(INSIRA_UMA_PASS);
         String password = p.nextLine();
 
         Scanner n = new Scanner(System.in);
@@ -216,7 +216,7 @@ public class Menu implements Serializable {
         String email = e.nextLine();
 
         Scanner p = new Scanner(System.in);
-        System.out.println(INSIRA_UMA_PASSWORD);
+        System.out.println(INSIRA_UMA_PASS);
         String password = p.nextLine();
 
         Scanner n = new Scanner(System.in);
@@ -267,7 +267,7 @@ public class Menu implements Serializable {
         String email = e.nextLine();
 
         Scanner p = new Scanner(System.in);
-        System.out.println(INSIRA_UMA_PASSWORD);
+        System.out.println(INSIRA_UMA_PASS);
         String password = p.nextLine();
 
         Scanner n = new Scanner(System.in);
@@ -312,7 +312,7 @@ public class Menu implements Serializable {
         String email = e.nextLine();
 
         Scanner p = new Scanner(System.in);
-        System.out.println(INSIRA_UMA_PASSWORD);
+        System.out.println(INSIRA_UMA_PASS);
         String password = p.nextLine();
 
         Scanner n = new Scanner(System.in);
@@ -568,7 +568,6 @@ public class Menu implements Serializable {
                         Scanner qp = new Scanner(System.in);
                         Double quantp = qp.nextDouble();
 
-                        double preco = 3;
                         double preco2 = 3.0 * quantp;
                         peso2 = peso2 + 1 * quantp;
 

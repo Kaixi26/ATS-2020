@@ -11,13 +11,16 @@ import java.util.*;
 
 
 public class main {
+    public static final String DATA_INCORRETA = "data incorreta";
+    public static final String TRAZ_AQUI_VOLUNTARIO = "traz_aqui.Voluntario";
+    public static final String TRAZ_AQUI_TRANSPORTADORA = "traz_aqui.Transportadora";
     //ainda nao criadas.
     private final HashMap<String, User> users; // codigo , user
     private final HashMap<String, Encomenda> Encomendas; // codigoenc , encomenda
 
     public main() {
-        this.users = new HashMap<String, User>(); // codigo , user
-        this.Encomendas = new HashMap<String, Encomenda>();
+        this.users = new HashMap<>(); // codigo , user
+        this.Encomendas = new HashMap<>();
     }
 
     //Utilizador:<CodUtilizador>,<Nome>,<GPS>
@@ -27,8 +30,7 @@ public class main {
         String username = b[1];
         double lx = Double.parseDouble(b[2]);
         double ly = Double.parseDouble(b[3]);
-        Buyer B = new Buyer(username, codigo, codigo, lx, ly, codigo);
-        return B;
+        return new Buyer(username, codigo, codigo, lx, ly, codigo);
     }
 
     //traz_aqui.Loja:<CodLoja>, <NomeLoja>,<GPS>
@@ -39,8 +41,7 @@ public class main {
         double lx = Double.parseDouble(b[2]);
         double ly = Double.parseDouble(b[3]);
         //ArrayList queue = new ArrayList<>();
-        Loja loja = new Loja(username, codigo, codigo, lx, ly, codigo);
-        return loja;
+        return new Loja(username, codigo, codigo, lx, ly, codigo);
     }
 
 
@@ -52,8 +53,7 @@ public class main {
         double lx = Double.parseDouble(b[2]);
         double ly = Double.parseDouble(b[3]);
         double raio = Double.parseDouble(b[4]);
-        Voluntario v = new Voluntario(username, codigo, codigo, lx, ly, codigo, raio, true, 0, 0);
-        return v;
+        return new Voluntario(username, codigo, codigo, lx, ly, codigo, raio, true, 0, 0);
     }
 
     //traz_aqui.Transportadora:<CodEmpresa>,<NomeEmpresa>,<GPS>,<NIF>,<raio>,<preco-por-km>
@@ -66,8 +66,8 @@ public class main {
         int nif = Integer.parseInt(b[4]);
         double raio = Double.parseDouble(b[5]);
         double custokm = Double.parseDouble(b[6]);
-        Transportadora e = new Transportadora(username, codigo, codigo, lx, ly, codigo, custokm, raio, nif, 0, 0);
-        return e;
+        return  new Transportadora(username, codigo, codigo, lx, ly, codigo, custokm, raio, nif, 0, 0);
+
     }
 
     //<CodEncomenda>, <CodUtilizador>, <CodLoja>, <Peso>, <traz_aqui.LinhaEncomenda>+
@@ -96,8 +96,7 @@ public class main {
             i += 4;
 
         }
-        Encomenda e = new Encomenda(codenc, codbuyer, codloja, "", peso, null, 2, produto);
-        return e;
+        return new Encomenda(codenc, codbuyer, codloja, "", peso, null, 2, produto);
     }
 
     public static main parse(String file, int tipo) {
@@ -146,7 +145,7 @@ public class main {
                 }
             }
 
-            if (s[0].equals("traz_aqui.Voluntario")) {
+            if (s[0].equals(TRAZ_AQUI_VOLUNTARIO)) {
                 try {
                     if (tipo == 1) {
                         Voluntario v = readVoluntarioLOG(s[1]);
@@ -161,7 +160,7 @@ public class main {
                 }
             }
 
-            if (s[0].equals("traz_aqui.Transportadora")) {
+            if (s[0].equals(TRAZ_AQUI_TRANSPORTADORA)) {
                 try {
                     if (tipo == 1) {
                         Transportadora t = readTransporteLOG(s[1]);
@@ -215,8 +214,8 @@ public class main {
         double lx = Double.parseDouble(b[3]);
         double ly = Double.parseDouble(b[4]);
         String email = b[5];
-        Buyer B = new Buyer(username, codigo, password, lx, ly, email);
-        return B;
+        return new Buyer(username, codigo, password, lx, ly, email);
+
     }
 
     //String username , String codigo , String password , double locationX, double locationY,boolean filadeEspera,ArrayList <traz_aqui.Encomenda> queue
@@ -230,8 +229,7 @@ public class main {
         double ly = Double.parseDouble(b[4]);
         String email = b[5];
         //ArrayList queue = new ArrayList<>();
-        Loja loja = new Loja(username, codigo, password, lx, ly, email);
-        return loja;
+        return new Loja(username, codigo, password, lx, ly, email);
     }
 
     //String username , String codigo , String password , double locationX,
@@ -248,8 +246,7 @@ public class main {
         boolean livre = Boolean.parseBoolean(b[7]);
         double numreviews = Double.parseDouble(b[8]);
         double avaliacao = Double.parseDouble(b[9]);
-        Voluntario v = new Voluntario(username, codigo, password, lx, ly, email, raio, livre, numreviews, avaliacao);
-        return v;
+        return new Voluntario(username, codigo, password, lx, ly, email, raio, livre, numreviews, avaliacao);
     }
 
     //String username , String codigo , String password , double locationX,
@@ -267,8 +264,8 @@ public class main {
         double numrev = Double.parseDouble(b[8]);
         double aval = Double.parseDouble(b[9]);
         int nif = Integer.parseInt(b[10]);
-        Transportadora e = new Transportadora(username, codigo, password, lx, ly, email, custokm, raio, nif, aval, numrev);
-        return e;
+        return new Transportadora(username, codigo, password, lx, ly, email, custokm, raio, nif, aval, numrev);
+
     }
 
     //Cria uma encomenda com os dados do ficheiro
@@ -298,8 +295,7 @@ public class main {
             produto.add(l);
             i += 4;
         }
-        Encomenda e = new Encomenda(codenc, codbuyer, codloja, coddeliever, peso, data, state, produto);
-        return e;
+        return new Encomenda(codenc, codbuyer, codloja, coddeliever, peso, data, state, produto);
     }
 
     //da parse a data de uma encomenda
@@ -312,7 +308,7 @@ public class main {
                 x = LocalDate.parse(s);
             }
         } catch (DateTimeException e) {
-            System.out.println("data incorreta");
+            System.out.println(DATA_INCORRETA);
             return null;
         }
         return x;
@@ -336,7 +332,6 @@ public class main {
     }
 
     public User getUserByEmail(String email) {
-        User x = null;
         for (User a : users.values()) {
             if (a.getEmail().equals(email)) {
                 return a.clone();
@@ -477,7 +472,6 @@ public class main {
             Encomenda e = Encomendas.get(u);
             mudaestadoENC(u, 3);
         }
-        return;
 
     }
 
@@ -532,9 +526,9 @@ public class main {
 
             String a = t.getcodDeliver();
             User u = users.get(a);
-            if (u.getClass().getName().equals("traz_aqui.Transportadora")) {
+            if (u.getClass().getName().equals(TRAZ_AQUI_TRANSPORTADORA)) {
                 return 1;
-            } else if (u.getClass().getName().equals("traz_aqui.Voluntario")) {
+            } else if (u.getClass().getName().equals(TRAZ_AQUI_VOLUNTARIO)) {
                 return 2;
             }
         }
@@ -615,13 +609,13 @@ public class main {
 
     // devolve top 10 empresas com mais km feitos
     public void top10Empresas() {
-        List<Transportadora> top = new ArrayList<Transportadora>();
+        List<Transportadora> top = new ArrayList<>();
         Comparator<Transportadora> bykm = (Transportadora emp1, Transportadora emp2) -> {
             return Double.compare(KmsPercurridos(emp1), KmsPercurridos(emp2));
         };
 
         for (User a : users.values()) {
-            if (a.getClass().getName().equals("traz_aqui.Transportadora")) {
+            if (a.getClass().getName().equals(TRAZ_AQUI_TRANSPORTADORA)) {
                 Transportadora b = (Transportadora) a;
                 top.add(b.clone());
             }
@@ -657,7 +651,7 @@ public class main {
 
     //top 10 users que mais encomendas fizeram
     public void top10Users() {
-        List<Buyer> top = new ArrayList<Buyer>();
+        List<Buyer> top = new ArrayList<>();
         Comparator<Buyer> byEnc = (Buyer emp1, Buyer emp2) -> {
             return Double.compare(getNumencomendas(emp1), getNumencomendas(emp2));
         };
@@ -701,7 +695,7 @@ public class main {
         try {
             d1 = LocalDate.parse(dayI);
         } catch (DateTimeException e) {
-            System.out.println("data incorreta");
+            System.out.println(DATA_INCORRETA);
             return;
         }
         System.out.println("Insira a data de incio, irá ter de insirir da forma ano-mes-dia");
@@ -712,7 +706,7 @@ public class main {
         try {
             d2 = LocalDate.parse(dayF);
         } catch (DateTimeException e) {
-            System.out.println("data incorreta");
+            System.out.println(DATA_INCORRETA);
             return;
         }
 
@@ -808,7 +802,7 @@ public class main {
             if (u instanceof Transportadora) {
                 ReviewTransportadora(cod, review);
                 works = true;
-            } else if (a.getClass().getName().equals("traz_aqui.Voluntario")) {
+            } else if (a.getClass().getName().equals(TRAZ_AQUI_VOLUNTARIO)) {
                 ReviewVoluntario(cod, review);
                 works = true;
             }
@@ -899,7 +893,6 @@ public class main {
                         System.out.println("Invalid Input, answer yes or no : ");
                     }
                 }
-                return;
             }
         }
     }

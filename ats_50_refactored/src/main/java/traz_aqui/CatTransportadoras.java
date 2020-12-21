@@ -202,7 +202,7 @@ public class CatTransportadoras implements Serializable {
         return this.trans.get(cod).getCap();
     }
 
-    public int size(){
+    public int size() {
         return trans.size();
     }
 }

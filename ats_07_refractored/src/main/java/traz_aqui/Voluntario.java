@@ -1,109 +1,105 @@
 package traz_aqui;
 
-public class Voluntario extends User
-{
+public class Voluntario extends User {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private boolean livre;
-    private double raio ;
+    private double raio;
     private double avaliacao;
     private double numreviews;
 
- 
+
     //private ArrayList<traz_aqui.Encomenda> historico;
-    
+
     /**
-    * COnstrutor para objetos da classe traz_aqui.Voluntario
+     * COnstrutor para objetos da classe traz_aqui.Voluntario
      */
-    public Voluntario()
-    {
+    public Voluntario() {
         super();
-        this.livre = true ;
-        this.raio=0;
+        this.livre = true;
+        this.raio = 0;
         this.avaliacao = 0;
         this.numreviews = 0;
- 
+
         //this.historico = new ArrayList<>() ;
     }
-    
-    public Voluntario( String username , String codigo , String password , double locationX, 
-    double locationY, String email,double raio , boolean livre, double numr , double aval){
-            super(username,codigo,password,locationX,locationY,email);
-            this.livre = livre ;
-            this.raio=raio;
-            this.numreviews = numr ;
-            this.avaliacao = aval ; 
+
+    public Voluntario(String username, String codigo, String password, double locationX,
+                      double locationY, String email, double raio, boolean livre, double numr, double aval) {
+        super(username, codigo, password, locationX, locationY, email);
+        this.livre = livre;
+        this.raio = raio;
+        this.numreviews = numr;
+        this.avaliacao = aval;
     }
 
-    public Voluntario(Voluntario p){
-            super(p.getUserName(),p.getPassword(),p.getCodigo(),p.getLocationX(),p.getLocationY(),p.getEmail());
-            this.numreviews= p.getnumreviews();
-            this.avaliacao=p.getavaliacao();
-            this.raio = p.getraio();
-            this.livre = p.getlivre();
-            
-            
-           
+    public Voluntario(Voluntario p) {
+        super(p.getUserName(), p.getPassword(), p.getCodigo(), p.getLocationX(), p.getLocationY(), p.getEmail());
+        this.numreviews = p.getnumreviews();
+        this.avaliacao = p.getavaliacao();
+        this.raio = p.getraio();
+        this.livre = p.getlivre();
+
+
     }
-    
-           
-    public void setnumreviews (double  x){
+
+
+    public void setnumreviews(double x) {
         this.numreviews = x;
     }
-    
-    public double getnumreviews(){
-           return this.numreviews;
-    }
-    
-    public void setavaliacao(double x){
-           this.avaliacao=x;
-    }
-    
-    public double getavaliacao(){
-           return this.numreviews;
+
+    public double getnumreviews() {
+        return this.numreviews;
     }
 
-    public double getraio(){
-           return this.raio;
+    public void setavaliacao(double x) {
+        this.avaliacao = x;
     }
-    
-    public void setraio(double raio){
-           this.raio=raio;
+
+    public double getavaliacao() {
+        return this.numreviews;
     }
-    
-    public boolean getlivre(){
-           return this.livre;
+
+    public double getraio() {
+        return this.raio;
     }
-    
-    public void setlivre(boolean livre){
-           this.livre=livre;
+
+    public void setraio(double raio) {
+        this.raio = raio;
     }
-    
-    public boolean equals(Object o){
-        if(o==this) return true;
-        if(o== null || o.getClass()!=this.getClass()) return false;
-        Voluntario c= (Voluntario) o;
+
+    public boolean getlivre() {
+        return this.livre;
+    }
+
+    public void setlivre(boolean livre) {
+        this.livre = livre;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o == null || o.getClass() != this.getClass()) return false;
+        Voluntario c;
+        c = (Voluntario) o;
         return super.equals(c);
     }
-        
-    public String toString(){
-        StringBuilder res = new StringBuilder();
-        res.append(super.toString());
-        res.append(this.raio);
-        res.append(this.livre);
-        res.append(this.numreviews);
-        res.append(this.avaliacao);
-        return res.toString();
+
+    public String toString() {
+        return super.toString() +
+                this.raio +
+                this.livre +
+                this.numreviews +
+                this.avaliacao;
     }
-    
-    public Voluntario clone(){
+
+    public Voluntario clone() {
         return new Voluntario(this);
     }
-    
-    public void menu(){
+
+    public void menu() {
         System.out.println("Test traz_aqui.Voluntario menu:");
     }
-    
-    
+
+
     //  NOT THE DEFAULT FUNCTIONS
     // Voluntariado escolhe se aceita encomenda ou não
     /*
@@ -131,27 +127,20 @@ public class Voluntario extends User
             System.out.println("traz_aqui.Buyer: " + buyer +",Store: " + store );
         }            
     }*/
-    
 
-    public String stringtoFile(){
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("traz_aqui.Voluntario:"+this.getCodigo());
-        sb.append(","+this.getPassword());
-        sb.append(","+this.getUserName());
-        sb.append(","+this.getLocationX());
-        sb.append(","+this.getLocationY());
-        sb.append(","+this.getEmail());
-        sb.append(","+this.getraio());
-        sb.append(","+this.getlivre());
-        sb.append(","+this.getnumreviews());
-        sb.append(","+this.getavaliacao());
-        
-        
-        return(sb.toString());
+
+    public String stringtoFile() {
+        return ("traz_aqui.Voluntario:" + this.getCodigo() +
+                "," + this.getPassword() +
+                "," + this.getUserName() +
+                "," + this.getLocationX() +
+                "," + this.getLocationY() +
+                "," + this.getEmail() +
+                "," + this.getraio() +
+                "," + this.getlivre() +
+                "," + this.getnumreviews() +
+                "," + this.getavaliacao());
     }
-    
 
-    
-    
+
 }

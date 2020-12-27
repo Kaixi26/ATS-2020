@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Parse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$Aceite_ESTest_and_25_more__1_.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Parse.java</span></div><h1>Parse.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L11">public class Parse implements Serializable {</span>
+
+    /**
+     * Método que lê do ficheiro e atribui a informação das linhas ao catálogo respectivo
+     *
+     * @param cu Catálogo utilizadores
+     * @param cl catálogo loja
+     * @param cv catálogo voluntário
+     * @param ct catálogo transportadora
+     * @param ce catálogo encomenda
+     * @param ca catálogo aceites
+     */
+    public static void parse(CatUtilizadores cu, CatLojas cl, CatVoluntarios cv, CatTransportadoras ct, CatEncomenda ce, Aceite ca) {
+<span class="nc" id="L24">        List&lt;String&gt; linhas = lerFicheiro(&quot;files/Logs.txt&quot;);</span>
+        String[] linhaPartida;
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        for (String linha : linhas) {</span>
+<span class="nc" id="L27">            linhaPartida = linha.split(&quot;:&quot;, 2);</span>
+<span class="nc bnc" id="L28" title="All 7 branches missed.">            switch (linhaPartida[0]) {</span>
+                case &quot;Utilizador&quot;:
+<span class="nc" id="L30">                    Utilizador u = parseUtilizador(linhaPartida[1]);</span>
+<span class="nc" id="L31">                    cu.adicionaUser(u);</span>
+<span class="nc" id="L32">                    break;</span>
+                case &quot;Loja&quot;:
+<span class="nc" id="L34">                    Loja l = parseLoja(linhaPartida[1]);</span>
+<span class="nc" id="L35">                    cl.adicionaLoja(l);</span>
+<span class="nc" id="L36">                    break;</span>
+                case &quot;Voluntario&quot;:
+<span class="nc" id="L38">                    Voluntario v = parseVolunt(linhaPartida[1]);</span>
+<span class="nc" id="L39">                    cv.adicionaVolunt(v);</span>
+<span class="nc" id="L40">                    break;</span>
+                case &quot;Transportadora&quot;:
+<span class="nc" id="L42">                    Transportadoras t = parseTrans(linhaPartida[1]);</span>
+<span class="nc" id="L43">                    ct.adicionaTrans(t);</span>
+<span class="nc" id="L44">                    break;</span>
+                case &quot;Encomenda&quot;:
+<span class="nc" id="L46">                    Encomenda e = parseEnc(linhaPartida[1]);</span>
+<span class="nc" id="L47">                    ce.adicionaEnc(e);</span>
+<span class="nc" id="L48">                    break;</span>
+                case &quot;Aceite&quot;:
+<span class="nc" id="L50">                    ca.adicionaAceite(linhaPartida[1]);</span>
+<span class="nc" id="L51">                    break;</span>
+                default:
+                    break;
+            }
+
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">    }</span>
+
+    /**
+     * Método que divide o input em campos e cria um novo utilizador a partir desses campos retornando o mesmo
+     *
+     * @param input Input
+     */
+    public static Utilizador parseUtilizador(String input) {
+<span class="nc" id="L65">        String[] campos = input.split(&quot;,&quot;);</span>
+<span class="nc" id="L66">        return new Utilizador(campos[0], campos[1], new Coordenadas(Double.parseDouble(campos[2]), Double.parseDouble(campos[3])), &quot;pass&quot;, campos[0]);</span>
+    }
+
+    /**
+     * Método que divide o input em campos e cria uma nova loja a partir desses campos retornando a mesma
+     *
+     * @param input Input
+     */
+    public static Loja parseLoja(String input) {
+<span class="nc" id="L75">        String[] campos = input.split(&quot;,&quot;);</span>
+<span class="nc" id="L76">        return new Loja(campos[0], campos[1], new Coordenadas(Double.parseDouble(campos[2]), Double.parseDouble(campos[3])), -1, campos[0], &quot;pass&quot;);</span>
+    }
+
+    /**
+     * Método que divide o input em campos e cria um novo voluntário a partir desses campos retornando o mesmo
+     *
+     * @param input Input
+     */
+    public static Voluntario parseVolunt(String input) {
+<span class="nc" id="L85">        String[] campos = input.split(&quot;,&quot;);</span>
+<span class="nc" id="L86">        return new Voluntario(campos[0], campos[1], Double.parseDouble(campos[4]), new Coordenadas(Double.parseDouble(campos[2]), Double.parseDouble(campos[3])), -1, false, 60, campos[0], &quot;pass&quot;, 1);</span>
+    }
+
+    /**
+     * Método que divide o input em campos e cria uma nova transportadora a partir desses campos retornando a mesma
+     *
+     * @param input Input
+     */
+    public static Transportadoras parseTrans(String input) {
+<span class="nc" id="L95">        String[] campos = input.split(&quot;,&quot;);</span>
+<span class="nc" id="L96">        return new Transportadoras(campos[0], campos[1], new Coordenadas(Double.parseDouble(campos[2]), Double.parseDouble(campos[3])), Double.parseDouble(campos[5]), Double.parseDouble(campos[6]), Double.parseDouble(campos[3]), -1, false, 100, campos[0], &quot;pass&quot;, 0, 5);</span>
+    }
+
+    /**
+     * Método que divide o input em campos e cria uma nova encomenda a partir desses campos retornando a mesma
+     *
+     * @param input Input
+     */
+    public static Encomenda parseEnc(String input) {
+        int i;
+<span class="nc" id="L106">        String[] campos = input.split(&quot;,&quot;);</span>
+<span class="nc" id="L107">        Encomenda a = new Encomenda(campos[0], campos[1], campos[2], Double.parseDouble(campos[3]));</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        for (i = 4; i &lt; campos.length; i = i + 4) {</span>
+<span class="nc" id="L109">            a.adicionaLEnco(new LinhaEncomenda(campos[i], campos[i + 1], Double.parseDouble(campos[i + 2]), Double.parseDouble(campos[i + 3])));</span>
+        }
+<span class="nc" id="L111">        return a;</span>
+    }
+
+    /**
+     * Método que retorna uma Lista com as linhas do ficheiro
+     *
+     * @param nomeFich Nome Ficheiro
+     */
+    public static List&lt;String&gt; lerFicheiro(String nomeFich) {
+<span class="nc" id="L120">        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L122">            lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8);</span>
+<span class="nc" id="L123">        } catch (IOException exc) {</span>
+<span class="nc" id="L124">            System.out.println(exc.getMessage());</span>
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">        return lines;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

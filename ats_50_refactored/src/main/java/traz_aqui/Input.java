@@ -8,10 +8,10 @@ import static java.lang.System.out;
 
 public class Input {
 
-    private Input(){
-    }
-
     private static final String TEXT_NEWVALUE = "Novo valor: ";
+
+    private Input() {
+    }
 
     /**
      * Método que obtêm o valor de uma string do user com safeguard

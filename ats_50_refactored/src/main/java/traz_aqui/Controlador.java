@@ -470,22 +470,27 @@ public class Controlador {
                 Viewer.prints((i) + ") " + "User: " + r.getUser() + " - " + r.getEnc());
                 i++;
             }
-            for (i = 0; i < a.size(); i++) {
-                if (this.gestor.getCap(cod) == 0) {
-                    Viewer.prints((i + 1) + " - Não tem capacidade para realizar a encomenda\n");
-                    this.gestor.declinedT(a.get(i));
-                } else {
-                    Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + TEXT_YESORNO);
-                    String res = Input.lerString();
-                    if (res.equals("y") || res.equals("Y")) {
-                        this.gestor.avanca(a.get(i));
-                        this.gestor.dimCap(cod);
-                    } else if (res.equals("n") || res.equals("N")) this.gestor.declinedT(a.get(i));
-                    else alertasE(cod);
-                }
-            }
+            gestorViewerE(cod, a);
         }
         menuEmpresa(cod);
+    }
+
+    private void gestorViewerE(String cod, List<Registos> a) {
+        int i;
+        for (i = 0; i < a.size(); i++) {
+            if (this.gestor.getCap(cod) == 0) {
+                Viewer.prints((i + 1) + " - Não tem capacidade para realizar a encomenda\n");
+                this.gestor.declinedT(a.get(i));
+            } else {
+                Viewer.prints("Pretende aceitar a encomenda " + (i + 1) + TEXT_YESORNO);
+                String res = Input.lerString();
+                if (res.equals("y") || res.equals("Y")) {
+                    this.gestor.avanca(a.get(i));
+                    this.gestor.dimCap(cod);
+                } else if (res.equals("n") || res.equals("N")) this.gestor.declinedT(a.get(i));
+                else alertasE(cod);
+            }
+        }
     }
 
     /**
@@ -844,10 +849,10 @@ public class Controlador {
      */
     //Gravar Estado
     public void writeEstado(String name) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
-        oos.writeObject(this.gestor);
-        oos.flush();
-        oos.close();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name))) {
+            oos.writeObject(this.gestor);
+            oos.flush();
+        }
     }
 
     /**
@@ -857,9 +862,10 @@ public class Controlador {
      */
     //Load Estado
     public Gestor loadEstado(String name) throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));
-        Gestor novo = (Gestor) ois.readObject();
-        ois.close();
+        Gestor novo;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name))) {
+            novo = (Gestor) ois.readObject();
+        }
         return novo;
     }
 }

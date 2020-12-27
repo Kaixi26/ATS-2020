@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Transportadora.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Transportadora.java</span></div><h1>Transportadora.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.lang.Object;
+
+public class Transportadora extends User
+{
+    private double custoKM;
+    private double raio ; 
+    private int nif; 
+<span class="nc" id="L10">    private static double taxapeso = 0.5;</span>
+    private double avaliacao;
+    private double numreviews;
+    
+/*
+    private ArrayList&lt;traz_aqui.Encomenda&gt; encomenda;
+    private ArrayList&lt;traz_aqui.Encomenda&gt; historico; */
+    
+    
+    /**
+    * COnstrutor para objetos da classe traz_aqui.Transportadora
+     */
+    public Transportadora()
+    {
+<span class="nc" id="L24">        super();</span>
+<span class="nc" id="L25">        this.custoKM = 0;</span>
+<span class="nc" id="L26">        this.raio=0;</span>
+<span class="nc" id="L27">        this.nif=0;</span>
+<span class="nc" id="L28">        this.avaliacao=0;</span>
+<span class="nc" id="L29">        this.numreviews=0;</span>
+        
+        
+<span class="nc" id="L32">    }</span>
+    
+    public Transportadora( String username , String codigo , String password , double locationX,
+    double locationY,String email, double custoKM, double raio , int nif , double aval , double numrev){
+<span class="nc" id="L36">            super(username,codigo,password,locationX,locationY,email);</span>
+<span class="nc" id="L37">            this.custoKM = custoKM;</span>
+<span class="nc" id="L38">            this.raio=raio;</span>
+<span class="nc" id="L39">            this.nif=nif;</span>
+<span class="nc" id="L40">            this.avaliacao=aval;</span>
+<span class="nc" id="L41">            this.numreviews=numrev;</span>
+<span class="nc" id="L42">    }</span>
+
+    public Transportadora(Transportadora p){
+<span class="nc" id="L45">            super(p.getUserName(),p.getPassword(),p.getCodigo(),p.getLocationX(),p.getLocationY(),p.getEmail());</span>
+<span class="nc" id="L46">            this.custoKM = p.getcustoKM();</span>
+<span class="nc" id="L47">            this.raio=p.getraio();</span>
+<span class="nc" id="L48">            this.nif=p.getnif();</span>
+<span class="nc" id="L49">            this.numreviews = p.getnumreviews();</span>
+<span class="nc" id="L50">            this.avaliacao = p.getavaliacao();</span>
+            
+
+<span class="nc" id="L53">    }</span>
+    
+    public void setnumreviews (double  x){
+<span class="nc" id="L56">        this.numreviews = x;</span>
+<span class="nc" id="L57">    }</span>
+    
+    public double getnumreviews(){
+<span class="nc" id="L60">           return this.numreviews;</span>
+    }
+    
+    public double gettaxapeso(){
+<span class="nc" id="L64">           return this.taxapeso;</span>
+    }
+    
+    
+    public void setavaliacao(double x){
+<span class="nc" id="L69">           this.avaliacao=x;</span>
+<span class="nc" id="L70">    }</span>
+    
+    public double getavaliacao(){
+<span class="nc" id="L73">           return this.numreviews;</span>
+    }
+    
+    public double getcustoKM(){
+<span class="nc" id="L77">           return this.custoKM;</span>
+    }
+    
+    public void setcustoKM(double custoKM){
+<span class="nc" id="L81">           this.custoKM=custoKM;</span>
+<span class="nc" id="L82">    }</span>
+    
+    public double getraio(){
+<span class="nc" id="L85">           return this.raio;</span>
+    }
+    
+    public void setraio(int raio){
+<span class="nc" id="L89">           this.raio=raio;</span>
+<span class="nc" id="L90">    }</span>
+    
+    public int getnif(){
+<span class="nc" id="L93">           return this.nif;</span>
+    }
+    
+    public void setnif(int nif){
+<span class="nc" id="L97">           this.nif=nif;</span>
+<span class="nc" id="L98">    }</span>
+ 
+    public boolean equals(Object o){
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if(o==this) return true;</span>
+<span class="nc bnc" id="L102" title="All 4 branches missed.">        if(o== null || o.getClass()!=this.getClass()) return false;</span>
+<span class="nc" id="L103">        Transportadora c= (Transportadora) o;</span>
+<span class="nc" id="L104">        return super.equals(c);</span>
+    }
+    
+    
+    public String toString(){
+<span class="nc" id="L109">        StringBuilder res = new StringBuilder();</span>
+<span class="nc" id="L110">        res.append(super.toString());</span>
+<span class="nc" id="L111">        res.append(this.custoKM);</span>
+<span class="nc" id="L112">        res.append(this.raio);</span>
+<span class="nc" id="L113">        res.append(this.nif);</span>
+<span class="nc" id="L114">        res.append(this.avaliacao);</span>
+<span class="nc" id="L115">        res.append(this.numreviews);</span>
+<span class="nc" id="L116">        return res.toString();</span>
+    }
+    
+
+    
+    
+    public Transportadora clone(){
+<span class="nc" id="L123">        return new Transportadora(this);</span>
+    }
+    
+    
+    
+    
+    /*
+    public void PrintHist(){         
+        for(traz_aqui.Encomenda a : this.historico){
+            String buyer= a.getBuyer().getUserName();
+            String store=a.getLoja().getUserName();
+            System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer +&quot;,Store: &quot; + store );
+        }            
+    }
+    
+    public double KmsPercurridos(){
+        double totalKms =0;
+        for(traz_aqui.Encomenda a : this.historico){
+            traz_aqui.Buyer b = a.getBuyer();
+            traz_aqui.Loja l = a.getLoja();
+            double transtoloja = Math.sqrt(Math.pow(this.locationX - l.getLocationX(), 2) +
+                     Math.pow(this.locationY - l.getLocationY(), 2));
+            double lojatoBuyer = Math.sqrt(Math.pow(l.getLocationX() - b.getLocationX(), 2) +
+                     Math.pow(l.getLocationY() - b.getLocationY(), 2));
+            totalKms= totalKms + lojatoBuyer+transtoloja;
+        }
+        return totalKms; 
+    }
+    //---------------------------------------------------
+    public double faturacao(LocalDate d1, LocalDate d2){
+        double total=0;
+        for(traz_aqui.Encomenda a : this.historico){
+          if(a.getData().isAfter(d1) &amp;&amp; a.getData().isBefore(d2) ){
+              //total = inserir preço da encomenda aqui ------------------------------
+            }
+        }
+        return total;
+    }*/
+    
+    
+        public String stringtoFile(){
+<span class="nc" id="L164">        StringBuilder sb = new StringBuilder();</span>
+        
+<span class="nc" id="L166">        sb.append(&quot;traz_aqui.Voluntario:&quot;+this.getCodigo());</span>
+<span class="nc" id="L167">        sb.append(&quot;,&quot;+this.getPassword());</span>
+<span class="nc" id="L168">        sb.append(&quot;,&quot;+this.getUserName());</span>
+<span class="nc" id="L169">        sb.append(&quot;,&quot;+this.getLocationX());</span>
+<span class="nc" id="L170">        sb.append(&quot;,&quot;+this.getLocationY());</span>
+<span class="nc" id="L171">        sb.append(&quot;,&quot;+this.getEmail());</span>
+<span class="nc" id="L172">        sb.append(&quot;,&quot;+this.getraio());</span>
+<span class="nc" id="L173">        sb.append(&quot;,&quot;+this.getcustoKM());</span>
+<span class="nc" id="L174">        sb.append(&quot;,&quot;+this.getnumreviews());</span>
+<span class="nc" id="L175">        sb.append(&quot;,&quot;+this.getavaliacao());</span>
+        
+        
+<span class="nc" id="L178">        return(sb.toString());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

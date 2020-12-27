@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CatVoluntarios.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$Aceite_ESTest_and_25_more__1_.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">CatVoluntarios.java</span></div><h1>CatVoluntarios.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+
+public class CatVoluntarios implements Serializable {
+    /**
+     * Map que representa o catálogo de voluntários sendo as keys os seus codigos e os values os respectivos voluntários
+     */
+    private final Map&lt;String, Voluntario&gt; volunt;
+
+<span class="nc" id="L16">    public CatVoluntarios() {</span>
+<span class="nc" id="L17">        this.volunt = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L18">    }</span>
+
+    public Map&lt;String, Voluntario&gt; getVoluntario() {
+<span class="nc" id="L21">        Map&lt;String, Voluntario&gt; a = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (Map.Entry&lt;String, Voluntario&gt; b : this.volunt.entrySet()) {</span>
+<span class="nc" id="L23">            a.put(b.getKey(), b.getValue());</span>
+<span class="nc" id="L24">        }</span>
+<span class="nc" id="L25">        return a;</span>
+    }
+
+    /**
+     * Método que adiciona um novo voluntário ao catálogo de voluntários
+     *
+     * @param a Voluntário
+     */
+    public void adicionaVolunt(Voluntario a) {
+<span class="nc" id="L34">        this.volunt.put(a.getCod(), a.clone());</span>
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux respectiva aos voluntários com melhores condições para a encomenda
+     *
+     * @param cl  Coordenadas
+     * @param cu  Coordenadas
+     * @param pri prioridade
+     */
+    public List&lt;StringDistAux&gt; melhorTransporteV(Coordenadas cl, Coordenadas cu, boolean pri) {
+<span class="nc bnc" id="L45" title="All 4 branches missed.">        return this.volunt.values().stream().filter(x -&gt; x.isRangeV(cl, x.getRange())).filter(x -&gt; !(!x.isMed() &amp;&amp; pri))</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">                .filter(x -&gt; x.isRangeV(cu, x.getRange())).filter(x -&gt; x.getCap() &gt; 0)</span>
+<span class="nc" id="L47">                .map(x -&gt; new StringDistAux(x.distanceV(cl), x.getCod())).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Método que retorna o tempo de transporte de um determinado voluntário
+     *
+     * @param l      Coordenadas loja
+     * @param u      Coordenadas utilizador
+     * @param cl     Distância
+     * @param driver Código condutor
+     */
+    public double calcTmp(Coordenadas l, Coordenadas u, Double cl, String driver) {
+<span class="nc" id="L59">        return this.volunt.get(driver).calcTemp(l, u, cl);</span>
+    }
+
+    /**
+     * Método que retorna o codigo de um voluntário caso o username e password derem match com um dos voluntários registados
+     *
+     * @param e Email
+     * @param p Password
+     */
+    public String loginV(String e, String p) {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        for (Voluntario a : this.volunt.values()) {</span>
+<span class="nc bnc" id="L70" title="All 4 branches missed.">            if (a.getEmail().equals(e) &amp;&amp; a.getPass().equals(p)) return a.getCod();</span>
+<span class="nc" id="L71">        }</span>
+<span class="nc" id="L72">        return null;</span>
+    }
+
+    /**
+     * Método que gera um código único de voluntário
+     */
+    public String codUnicoV() {
+<span class="nc" id="L79">        String a = null;</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">        while (this.volunt.containsKey(a) || a == null) {</span>
+<span class="nc" id="L81">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L82">            sb.append(&quot;v&quot;).append(ThreadLocalRandom.current().nextInt(10, 99));</span>
+<span class="nc" id="L83">            a = sb.toString();</span>
+<span class="nc" id="L84">        }</span>
+<span class="nc" id="L85">        return a;</span>
+    }
+
+    /**
+     * Método que retorna true se o email do Voluntário estiver registado no catálogo
+     *
+     * @param email Email
+     */
+    public boolean verMail(String email) {
+<span class="nc" id="L94">        return this.volunt.values().stream().anyMatch(x -&gt; x.getEmail().equals(email));</span>
+    }
+
+    /**
+     * Método que regista um novo Voluntário no sistema (sign up)
+     *
+     * @param cod   Código voluntário
+     * @param nome  Nome voluntário
+     * @param range Range
+     * @param cord  Coordenadas
+     * @param clas  Classificação
+     * @param med   Boolean Medicamentos
+     * @param vkm   Velocidade
+     * @param email Email
+     * @param pass  Password
+     * @param cap   Capacidade
+     */
+    public void signupV(String cod, String nome, double range, Coordenadas cord, double clas, boolean med, double vkm, String email, String pass, int cap) {
+<span class="nc" id="L112">        this.volunt.put(cod, new Voluntario(cod, nome, range, cord, clas, med, vkm, email, pass, cap));</span>
+<span class="nc" id="L113">    }</span>
+
+    /**
+     * Método que adiciona uma classificação a um determinado Voluntário
+     *
+     * @param driver Código condutor
+     * @param rating Rating
+     */
+    public void adicionaCla(String driver, double rating) {
+<span class="nc" id="L122">        this.volunt.get(driver).changeR(rating);</span>
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * Método que retorna uma classificação de uma determinada Voluntário
+     *
+     * @param driver Código condutor
+     */
+    public double getClas(String driver) {
+<span class="nc" id="L131">        return this.volunt.get(driver).getClas();</span>
+    }
+
+    /**
+     * Método que retorna as Coordenadas de um determinado Voluntário
+     *
+     * @param user Código condutor
+     */
+    public Coordenadas getCord(String user) {
+<span class="nc" id="L140">        return this.volunt.get(user).getCord().clone();</span>
+    }
+
+    /**
+     * Método que altera as Coordenadas de um determinado Voluntário
+     *
+     * @param driver Código condutor
+     * @param a      Coordenadas
+     */
+    public void setCoords(String driver, Coordenadas a) {
+<span class="nc" id="L150">        this.volunt.get(driver).setCord(a);</span>
+<span class="nc" id="L151">    }</span>
+
+    /**
+     * Método que diminui a capacidade de um determinado Voluntário
+     *
+     * @param cod Código condutor
+     */
+    public void dimCap(String cod) {
+<span class="nc" id="L159">        this.volunt.get(cod).dimCap();</span>
+<span class="nc" id="L160">    }</span>
+
+    /**
+     * Método que aumenta a capacidade de um determinado Voluntário
+     *
+     * @param cod Código Condutor
+     */
+    public void aumCap(String cod) {
+<span class="nc" id="L168">        this.volunt.get(cod).aumCap();</span>
+<span class="nc" id="L169">    }</span>
+
+    /**
+     * Método que retorna a capacidade de uma determinada Voluntário
+     *
+     * @param cod Código condutor
+     */
+    public int getCap(String cod) {
+<span class="nc" id="L177">        return this.volunt.get(cod).getCap();</span>
+    }
+
+    public int size(){
+<span class="nc" id="L181">        return volunt.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

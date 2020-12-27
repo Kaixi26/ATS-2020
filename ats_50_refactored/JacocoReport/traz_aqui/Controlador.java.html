@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Controlador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$Aceite_ESTest_and_25_more__1_.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Controlador.java</span></div><h1>Controlador.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.*;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Controlador {
+
+    private static final String TEXT_LOGIN = &quot;Login&quot;;
+    private static final String TEXT_SIGNUP = &quot;Signup&quot;;
+    private static final String TEXT_ASKEMAIL = &quot;\nDigite o seu email: \n&quot;;
+    private static final String TEXT_ASKPASS = &quot;\nDigite a sua pass: \n&quot;;
+    private static final String TEXT_ASKNAME = &quot;\nDigite o seu nome: \n&quot;;
+    private static final String TEXT_ASKCOORDS = &quot;\nDigite as suas coordenadas: \n&quot;;
+    private static final String TEXT_YESORNO = &quot; ?(y/n)\n&quot;;
+    private static final String TEXT_ASKXCOORD = &quot;\&quot;\\nX: \\n\&quot;&quot;;
+    private static final String TEXT_ASKYCOORD = &quot;\&quot;\\nY: \\n\&quot;&quot;;
+    private static final String TEXT_EMAILINUSE = &quot;\&quot;Erro email em uso no sistema.\&quot;&quot;;
+    private static final String TEXT_INCORRECTVALUE = &quot;Valor Incorreto&quot;;
+    private static final String TEXT_INCORRECTCREDENTIALS = &quot;\nPassword ou Mail incorreto.&quot;;
+    private static final String TEXT_NONCONFIRMEDDELIVERIES = &quot;Encomendas a confirmar:&quot;;
+    private static final String TEXT_SEEREGISTERS = &quot;Ver Registos.&quot;;
+    private static final String TEXT_SEEAREAEVENTS = &quot;Ver os eventos na sua área.&quot;;
+
+    private Gestor gestor;
+
+<span class="nc" id="L31">    public Controlador() {</span>
+<span class="nc" id="L32">        this.gestor = new Gestor();</span>
+<span class="nc" id="L33">        this.gestor.loadCat();</span>
+<span class="nc" id="L34">        this.gestor.adicionaDef();</span>
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Menu principal
+     */
+    public void menu() {
+<span class="nc" id="L41">        List&lt;String&gt; s = new ArrayList&lt;&gt;(Arrays.asList(&quot;Modo User.&quot;, &quot;Modo Voluntário.&quot;, &quot;Modo Transportadora.&quot;, &quot;Modo Loja.&quot;, &quot;Os dez utilizadores que mais usam o sistema.&quot;, &quot;As dez empresas que mais usam o sistema.&quot;, &quot;Guardar e Ler estado.&quot;));</span>
+<span class="nc" id="L42">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L45">            m.executa();</span>
+<span class="nc" id="L46">            op = m.opcao();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (op == 1) modoUser();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            else if (op == 2) modoVoluntario();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            else if (op == 3) modoEmpresa();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            else if (op == 4) modoLoja();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            else if (op == 5) topUsers();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            else if (op == 6) topTransp();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            else if (op == 7) lerGuardar();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L55">        Viewer.prints(&quot;Goodbye&quot;);</span>
+<span class="nc" id="L56">    }</span>
+
+    /**
+     * Método que faz print dos topUsers (case 5 do menu principal)
+     */
+    public void topUsers() {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (TopUsers t : this.gestor.topUsers()) Viewer.prints(t);</span>
+<span class="nc" id="L63">    }</span>
+
+    /**
+     * Método que faz print dos topTransp (case 6 do menu principal)
+     */
+    public void topTransp() {
+<span class="nc" id="L69">        List&lt;TopUsers&gt; top = this.gestor.topTransp();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (top.isEmpty())</span>
+<span class="nc" id="L71">            Viewer.prints(&quot;Nao há condições para realizar o pedido.&quot;);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        else for (TopUsers t : top) Viewer.prints(&quot;Driver: &quot; + t.getCod() + &quot; KmsPerc: &quot; + t.getQnt());</span>
+<span class="nc" id="L73">    }</span>
+
+    /**
+     * Método que pede ao utilizador o ficheiro que quer utilizar e chama o menu de guardar e ler objecto (case 7 do menu principal)
+     */
+    public void lerGuardar() {
+<span class="nc" id="L79">        Viewer.prints(&quot;Nome do ficheiro que quer usar:\n&quot;);</span>
+<span class="nc" id="L80">        String fich = Input.lerString();</span>
+<span class="nc" id="L81">        menuObjStream(fich);</span>
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * Menu que nos permite fazer a escolha entre gravar e ler estado
+     *
+     * @param str Nome Ficheiro
+     */
+    public void menuObjStream(String str) {
+<span class="nc" id="L90">        List&lt;String&gt; s = new ArrayList&lt;&gt;(Arrays.asList(&quot;Gravar&quot;, &quot;Ler&quot;));</span>
+<span class="nc" id="L91">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L94">            m.executa();</span>
+<span class="nc" id="L95">            op = m.opcao();</span>
+<span class="nc bnc" id="L96" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+                    try {
+<span class="nc" id="L99">                        writeEstado(str);</span>
+<span class="nc" id="L100">                    } catch (IOException e) {</span>
+<span class="nc" id="L101">                        e.printStackTrace();</span>
+<span class="nc" id="L102">                        Viewer.prints(&quot;Não foi possível gravar&quot;);</span>
+<span class="nc" id="L103">                    }</span>
+<span class="nc" id="L104">                    break;</span>
+                case 2:
+                    try {
+<span class="nc" id="L107">                        this.gestor = loadEstado(str);</span>
+<span class="nc" id="L108">                    } catch (IOException e) {</span>
+<span class="nc" id="L109">                        Viewer.prints(&quot;Não foi possível ler&quot;);</span>
+<span class="nc" id="L110">                    } catch (ClassNotFoundException | ClassCastException e) {</span>
+<span class="nc" id="L111">                        Viewer.prints(&quot;Erro&quot;);</span>
+<span class="nc" id="L112">                    }</span>
+<span class="nc" id="L113">                    break;</span>
+                default:
+            }
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L117">        menu();</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * Menu do modo utilizador que permite fazer login ou sign up de um utilizador
+     */
+    public void modoUser() {
+<span class="nc" id="L124">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));</span>
+<span class="nc" id="L125">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L128">            m.executa();</span>
+<span class="nc" id="L129">            op = m.opcao();</span>
+<span class="nc bnc" id="L130" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L132">                    loginUser();</span>
+<span class="nc" id="L133">                    break;</span>
+                case 2:
+<span class="nc" id="L135">                    signupUser();</span>
+<span class="nc" id="L136">                    break;</span>
+                default:
+            }
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L140">        menu();</span>
+<span class="nc" id="L141">    }</span>
+
+    /**
+     * Menu do modo empresa que permite fazer login ou sign up de uma Transportadora
+     */
+    public void modoEmpresa() {
+<span class="nc" id="L147">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));</span>
+<span class="nc" id="L148">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L151">            m.executa();</span>
+<span class="nc" id="L152">            op = m.opcao();</span>
+<span class="nc bnc" id="L153" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L155">                    loginEmpresa();</span>
+<span class="nc" id="L156">                    break;</span>
+                case 2:
+<span class="nc" id="L158">                    signupEmpresa();</span>
+<span class="nc" id="L159">                    break;</span>
+                default:
+            }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L163">        menu();</span>
+<span class="nc" id="L164">    }</span>
+
+    /**
+     * Menu do modo voluntário que permite fazer login ou sign up de um voluntário
+     */
+    public void modoVoluntario() {
+<span class="nc" id="L170">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));</span>
+<span class="nc" id="L171">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L174">            m.executa();</span>
+<span class="nc" id="L175">            op = m.opcao();</span>
+<span class="nc bnc" id="L176" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L178">                    loginVoluntario();</span>
+<span class="nc" id="L179">                    break;</span>
+                case 2:
+<span class="nc" id="L181">                    signupVoluntario();</span>
+<span class="nc" id="L182">                    break;</span>
+                default:
+            }
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L186">        menu();</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Menu do modo loja que permite fazer login ou sign up de uma Loja
+     */
+    public void modoLoja() {
+<span class="nc" id="L193">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_LOGIN, TEXT_SIGNUP));</span>
+<span class="nc" id="L194">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L197">            m.executa();</span>
+<span class="nc" id="L198">            op = m.opcao();</span>
+<span class="nc bnc" id="L199" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L201">                    loginLoja();</span>
+<span class="nc" id="L202">                    break;</span>
+                case 2:
+<span class="nc" id="L204">                    signupLoja();</span>
+<span class="nc" id="L205">                    break;</span>
+                default:
+            }
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L209">        menu();</span>
+<span class="nc" id="L210">    }</span>
+
+    /**
+     * Menu do modo login de um utilizador
+     */
+    public void loginUser() {
+<span class="nc" id="L216">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L217">        String email = Input.lerString();</span>
+<span class="nc" id="L218">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L219">        String pass = Input.lerString();</span>
+<span class="nc" id="L220">        String f = this.gestor.login(1, email, pass);</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">        if (f != null) alertasU(f);</span>
+        else {
+<span class="nc" id="L223">            Viewer.prints(TEXT_INCORRECTCREDENTIALS);</span>
+<span class="nc" id="L224">            modoUser();</span>
+        }
+<span class="nc" id="L226">    }</span>
+
+    /**
+     * Menu do modo login de uma transportadora
+     */
+    public void loginEmpresa() {
+<span class="nc" id="L232">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L233">        String email = Input.lerString();</span>
+<span class="nc" id="L234">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L235">        String pass = Input.lerString();</span>
+<span class="nc" id="L236">        String f = this.gestor.login(2, email, pass);</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (f != null) alertasE(f);</span>
+        else {
+<span class="nc" id="L239">            Viewer.prints(TEXT_INCORRECTCREDENTIALS);</span>
+<span class="nc" id="L240">            modoEmpresa();</span>
+        }
+<span class="nc" id="L242">    }</span>
+
+    /**
+     * Menu do modo login de um voluntário
+     */
+    public void loginVoluntario() {
+<span class="nc" id="L248">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L249">        String email = Input.lerString();</span>
+<span class="nc" id="L250">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L251">        String pass = Input.lerString();</span>
+<span class="nc" id="L252">        String f = this.gestor.login(3, email, pass);</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (f != null) alertasV(f);</span>
+        else {
+<span class="nc" id="L255">            Viewer.prints(TEXT_INCORRECTCREDENTIALS);</span>
+<span class="nc" id="L256">            modoVoluntario();</span>
+        }
+<span class="nc" id="L258">    }</span>
+
+    /**
+     * Menu do modo login de uma loja
+     */
+    public void loginLoja() {
+<span class="nc" id="L264">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L265">        String email = Input.lerString();</span>
+<span class="nc" id="L266">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L267">        String pass = Input.lerString();</span>
+<span class="nc" id="L268">        String f = this.gestor.login(4, email, pass);</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">        if (f != null) menuLoja(f);</span>
+        else {
+<span class="nc" id="L271">            Viewer.prints(TEXT_INCORRECTCREDENTIALS);</span>
+<span class="nc" id="L272">            modoLoja();</span>
+        }
+<span class="nc" id="L274">    }</span>
+
+    /**
+     * Menu do modo sign up de um utilizador
+     */
+    public void signupUser() {
+<span class="nc" id="L280">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L281">        String email = Input.lerString();</span>
+<span class="nc" id="L282">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L283">        String pass = Input.lerString();</span>
+<span class="nc" id="L284">        Viewer.prints(TEXT_ASKNAME);</span>
+<span class="nc" id="L285">        String nome = Input.lerString();</span>
+<span class="nc" id="L286">        Viewer.prints(TEXT_ASKCOORDS);</span>
+<span class="nc" id="L287">        Viewer.prints(TEXT_ASKXCOORD);</span>
+<span class="nc" id="L288">        double x = Input.lerDouble();</span>
+<span class="nc" id="L289">        Viewer.prints(TEXT_ASKYCOORD);</span>
+<span class="nc" id="L290">        double y = Input.lerDouble();</span>
+<span class="nc" id="L291">        String cod = this.gestor.geraCods(2);</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        if (this.gestor.verificaMail(1, email)) {</span>
+<span class="nc" id="L293">            Viewer.prints(TEXT_EMAILINUSE);</span>
+<span class="nc" id="L294">            signupUser();</span>
+<span class="nc" id="L295">        } else this.gestor.registarUser(cod, nome, new Coordenadas(x, y), pass, email);</span>
+<span class="nc" id="L296">        alertasU(cod);</span>
+<span class="nc" id="L297">    }</span>
+
+    /**
+     * Menu do modo sign up de uma Transportadora
+     */
+    public void signupEmpresa() {
+<span class="nc" id="L303">        boolean med = false;</span>
+<span class="nc" id="L304">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L305">        String email = Input.lerString();</span>
+<span class="nc" id="L306">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L307">        String pass = Input.lerString();</span>
+<span class="nc" id="L308">        Viewer.prints(TEXT_ASKNAME);</span>
+<span class="nc" id="L309">        String nome = Input.lerString();</span>
+<span class="nc" id="L310">        Viewer.prints(TEXT_ASKCOORDS);</span>
+<span class="nc" id="L311">        Viewer.prints(TEXT_ASKXCOORD);</span>
+<span class="nc" id="L312">        double x = Input.lerDouble();</span>
+<span class="nc" id="L313">        Viewer.prints(TEXT_ASKYCOORD);</span>
+<span class="nc" id="L314">        double y = Input.lerDouble();</span>
+<span class="nc" id="L315">        Viewer.prints(&quot;\nDigite o seu range:\n&quot;);</span>
+<span class="nc" id="L316">        double range = Input.lerDouble();</span>
+<span class="nc" id="L317">        Viewer.prints(&quot;\nDigite o seu preço por km:\n&quot;);</span>
+<span class="nc" id="L318">        double prkm = Input.lerDouble();</span>
+<span class="nc" id="L319">        Viewer.prints(&quot;\nDigite o seu NIF:\n&quot;);</span>
+<span class="nc" id="L320">        double nif = Input.lerDouble();</span>
+<span class="nc" id="L321">        Viewer.prints(&quot;\nDigite a sua velocidade:\n&quot;);</span>
+<span class="nc" id="L322">        double vkm = Input.lerDouble();</span>
+<span class="nc" id="L323">        Viewer.prints(&quot;\nDigite a sua capacidade:\n&quot;);</span>
+<span class="nc" id="L324">        int cap = Input.lerInt();</span>
+<span class="nc" id="L325">        Viewer.prints(&quot;\nTem competências de transporte médico?(y/n):\n&quot;);</span>
+<span class="nc" id="L326">        String pri = Input.lerString();</span>
+<span class="nc bnc" id="L327" title="All 4 branches missed.">        if (pri.equals(&quot;y&quot;) || pri.equals(&quot;Y&quot;)) med = true;</span>
+        else {
+<span class="nc" id="L329">            Viewer.prints(TEXT_INCORRECTVALUE);</span>
+<span class="nc" id="L330">            signupEmpresa();</span>
+        }
+<span class="nc" id="L332">        String cod = this.gestor.geraCods(1);</span>
+<span class="nc bnc" id="L333" title="All 2 branches missed.">        if (this.gestor.verificaMail(2, email)) {</span>
+<span class="nc" id="L334">            Viewer.prints(TEXT_EMAILINUSE);</span>
+<span class="nc" id="L335">            signupEmpresa();</span>
+        } else
+<span class="nc" id="L337">            this.gestor.registarEmpresa(cod, nome, new Coordenadas(x, y), range, prkm, nif, -1, med, vkm, email, pass, 0, cap);</span>
+<span class="nc" id="L338">        alertasE(cod);</span>
+<span class="nc" id="L339">    }</span>
+
+    /**
+     * Menu do modo sign up de um voluntário
+     */
+    public void signupVoluntario() {
+<span class="nc" id="L345">        boolean med = false;</span>
+<span class="nc" id="L346">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L347">        String email = Input.lerString();</span>
+<span class="nc" id="L348">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L349">        String pass = Input.lerString();</span>
+<span class="nc" id="L350">        Viewer.prints(TEXT_ASKNAME);</span>
+<span class="nc" id="L351">        String nome = Input.lerString();</span>
+<span class="nc" id="L352">        Viewer.prints(TEXT_ASKCOORDS);</span>
+<span class="nc" id="L353">        Viewer.prints(TEXT_ASKXCOORD);</span>
+<span class="nc" id="L354">        double x = Input.lerDouble();</span>
+<span class="nc" id="L355">        Viewer.prints(TEXT_ASKYCOORD);</span>
+<span class="nc" id="L356">        double y = Input.lerDouble();</span>
+<span class="nc" id="L357">        Viewer.prints(&quot;\nDigite o seu range:\n&quot;);</span>
+<span class="nc" id="L358">        double range = Input.lerDouble();</span>
+<span class="nc" id="L359">        Viewer.prints(&quot;\nDigite a sua velocidade:\n&quot;);</span>
+<span class="nc" id="L360">        double vkm = Input.lerDouble();</span>
+<span class="nc" id="L361">        Viewer.prints(&quot;\nTem compretências de transporte médico?(y/n):\n&quot;);</span>
+<span class="nc" id="L362">        String pri = Input.lerString();</span>
+<span class="nc bnc" id="L363" title="All 4 branches missed.">        if (pri.equals(&quot;y&quot;) || pri.equals(&quot;Y&quot;)) med = true;</span>
+        else {
+<span class="nc" id="L365">            Viewer.prints(TEXT_INCORRECTVALUE);</span>
+<span class="nc" id="L366">            signupVoluntario();</span>
+        }
+<span class="nc" id="L368">        String cod = this.gestor.geraCods(3);</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">        if (this.gestor.verificaMail(3, email)) {</span>
+<span class="nc" id="L370">            Viewer.prints(TEXT_EMAILINUSE);</span>
+<span class="nc" id="L371">            signupVoluntario();</span>
+<span class="nc" id="L372">        } else this.gestor.registarVoluntario(cod, nome, range, new Coordenadas(x, y), -1, med, vkm, email, pass, 1);</span>
+<span class="nc" id="L373">        alertasV(cod);</span>
+<span class="nc" id="L374">    }</span>
+
+    /**
+     * Menu do modo sign up de uma Loja
+     */
+    public void signupLoja() {
+<span class="nc" id="L380">        int fila = -1;</span>
+<span class="nc" id="L381">        Viewer.prints(TEXT_ASKEMAIL);</span>
+<span class="nc" id="L382">        String email = Input.lerString();</span>
+<span class="nc" id="L383">        Viewer.prints(TEXT_ASKPASS);</span>
+<span class="nc" id="L384">        String pass = Input.lerString();</span>
+<span class="nc" id="L385">        Viewer.prints(TEXT_ASKNAME);</span>
+<span class="nc" id="L386">        String nome = Input.lerString();</span>
+<span class="nc" id="L387">        Viewer.prints(TEXT_ASKCOORDS);</span>
+<span class="nc" id="L388">        Viewer.prints(TEXT_ASKXCOORD);</span>
+<span class="nc" id="L389">        double x = Input.lerDouble();</span>
+<span class="nc" id="L390">        Viewer.prints(TEXT_ASKYCOORD);</span>
+<span class="nc" id="L391">        double y = Input.lerDouble();</span>
+<span class="nc" id="L392">        String cod = this.gestor.geraCods(4);</span>
+<span class="nc" id="L393">        Viewer.prints(&quot;\nSabe o tamanho médio da sua fila (y/n): \n&quot;);</span>
+<span class="nc" id="L394">        String fil = Input.lerString();</span>
+<span class="nc bnc" id="L395" title="All 4 branches missed.">        if (fil.equals(&quot;y&quot;) || fil.equals(&quot;Y&quot;)) {</span>
+<span class="nc" id="L396">            Viewer.prints(&quot;\nTamanho da fila: \n&quot;);</span>
+<span class="nc" id="L397">            fila = Input.lerInt();</span>
+<span class="nc bnc" id="L398" title="All 4 branches missed.">        } else if (fil.equals(&quot;n&quot;) || fil.equals(&quot;N&quot;)) fila = -1;</span>
+        else {
+<span class="nc" id="L400">            Viewer.prints(TEXT_INCORRECTVALUE);</span>
+<span class="nc" id="L401">            signupLoja();</span>
+        }
+
+<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (this.gestor.verificaMail(4, email)) {</span>
+<span class="nc" id="L405">            Viewer.prints(TEXT_EMAILINUSE);</span>
+<span class="nc" id="L406">            signupLoja();</span>
+<span class="nc" id="L407">        } else this.gestor.registarLoja(cod, nome, new Coordenadas(x, y), fila, email, pass);</span>
+<span class="nc" id="L408">        menuLoja(cod);</span>
+<span class="nc" id="L409">    }</span>
+
+    /**
+     * Menu de todos os alertas que possam ser feitos ao modo utilizador desde confirmação de encomendas, transporte e classificações
+     *
+     * @param cod Código Utilizador
+     */
+    public void alertasU(String cod) {
+<span class="nc" id="L417">        int i = 1;</span>
+<span class="nc" id="L418">        List&lt;Registos&gt; a = this.gestor.histReg(cod, 1);</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">        if (!a.isEmpty()) {</span>
+<span class="nc" id="L420">            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);</span>
+<span class="nc bnc" id="L421" title="All 2 branches missed.">            for (Registos r : a) {</span>
+<span class="nc bnc" id="L422" title="All 2 branches missed.">                if (r.getDriver().charAt(0) == 't')</span>
+<span class="nc" id="L423">                    Viewer.prints((i) + &quot;) &quot; + &quot;Transportadora: &quot; + r.getDriver() + &quot; Custo de Transporte previsto: &quot; + r.getCustoT() + &quot; Tempo de encomenda previsto: &quot; + r.getTmp());</span>
+<span class="nc bnc" id="L424" title="All 2 branches missed.">                if (r.getDriver().charAt(0) == 'v')</span>
+<span class="nc" id="L425">                    Viewer.prints((i) + &quot;) &quot; + &quot;Voluntario: &quot; + r.getDriver() + &quot; Custo de Transporte previsto: &quot; + r.getCustoT() + &quot; Tempo de encomenda previsto: &quot; + r.getTmp());</span>
+<span class="nc" id="L426">                i++;</span>
+<span class="nc" id="L427">            }</span>
+<span class="nc bnc" id="L428" title="All 2 branches missed.">            for (i = 0; i &lt; a.size(); i++) {</span>
+<span class="nc" id="L429">                Viewer.prints(&quot;Pretende aceitar o transporte &quot; + (i + 1) + TEXT_YESORNO);</span>
+<span class="nc" id="L430">                String res = Input.lerString();</span>
+<span class="nc" id="L431">                this.gestor.aumCap(a.get(i).getDriver());</span>
+<span class="nc bnc" id="L432" title="All 4 branches missed.">                if (res.equals(&quot;y&quot;) || res.equals(&quot;Y&quot;))</span>
+<span class="nc" id="L433">                    this.gestor.getItDone(a.get(i).getEnc().getCod(), a.get(i).getLoja(), a.get(i).getUser(), a.get(i).getDriver(), a.get(i).getTmp());</span>
+<span class="nc bnc" id="L434" title="All 4 branches missed.">                else if (res.equals(&quot;n&quot;) || res.equals(&quot;N&quot;)) this.gestor.declinedT(a.get(0));</span>
+<span class="nc" id="L435">                else alertasU(cod);</span>
+            }
+        }
+<span class="nc" id="L438">        List&lt;Registos&gt; g = this.gestor.histReg(cod, 3);</span>
+<span class="nc" id="L439">        i = 1;</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">        if (!g.isEmpty()) {</span>
+<span class="nc" id="L441">            Viewer.prints(&quot;Entregas a classificar&quot;);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">            for (Registos f : g) {</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">                if (f.getDriver().charAt(0) == 't')</span>
+<span class="nc" id="L444">                    Viewer.prints((i) + &quot;) &quot; + &quot;Transportadora: &quot; + f.getDriver() + &quot; Custo de encomenda: &quot; + (f.getEnc().custo() + f.getCustoT()));</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">                if (f.getDriver().charAt(0) == 'v')</span>
+<span class="nc" id="L446">                    Viewer.prints((i) + &quot;) &quot; + &quot;Voluntario: &quot; + f.getDriver() + &quot; Custo de encomenda: &quot; + (f.getEnc().custo() + f.getCustoT()));</span>
+<span class="nc" id="L447">                i++;</span>
+<span class="nc" id="L448">            }</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">            for (i = 0; i &lt; g.size(); i++) {</span>
+<span class="nc" id="L450">                Viewer.prints(&quot;Como classifica a entrega &quot; + (i + 1) + &quot; de (1 a 10):&quot;);</span>
+<span class="nc" id="L451">                double clas = Input.lerDouble();</span>
+<span class="nc bnc" id="L452" title="All 4 branches missed.">                if (clas &lt; 0 || clas &gt; 10) alertasU(cod);</span>
+<span class="nc" id="L453">                else this.gestor.classifica(g.get(i), clas);</span>
+            }
+        }
+<span class="nc" id="L456">        menuUser(cod);</span>
+<span class="nc" id="L457">    }</span>
+
+    /**
+     * Menu de todos os alertas que possam ser feitos ao modo transportadora como confirmação de encomenda
+     *
+     * @param cod Código Transportadora
+     */
+    public void alertasE(String cod) {
+<span class="nc" id="L465">        int i = 1;</span>
+<span class="nc" id="L466">        List&lt;Registos&gt; a = this.gestor.histReg(cod, 4);</span>
+<span class="nc bnc" id="L467" title="All 2 branches missed.">        if (!a.isEmpty()) {</span>
+<span class="nc" id="L468">            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);</span>
+<span class="nc bnc" id="L469" title="All 2 branches missed.">            for (Registos r : a) {</span>
+<span class="nc" id="L470">                Viewer.prints((i) + &quot;) &quot; + &quot;User: &quot; + r.getUser() + &quot; - &quot; + r.getEnc());</span>
+<span class="nc" id="L471">                i++;</span>
+<span class="nc" id="L472">            }</span>
+<span class="nc bnc" id="L473" title="All 2 branches missed.">            for (i = 0; i &lt; a.size(); i++) {</span>
+<span class="nc bnc" id="L474" title="All 2 branches missed.">                if (this.gestor.getCap(cod) == 0) {</span>
+<span class="nc" id="L475">                    Viewer.prints((i + 1) + &quot; - Não tem capacidade para realizar a encomenda\n&quot;);</span>
+<span class="nc" id="L476">                    this.gestor.declinedT(a.get(i));</span>
+                } else {
+<span class="nc" id="L478">                    Viewer.prints(&quot;Pretende aceitar a encomenda &quot; + (i + 1) + TEXT_YESORNO);</span>
+<span class="nc" id="L479">                    String res = Input.lerString();</span>
+<span class="nc bnc" id="L480" title="All 4 branches missed.">                    if (res.equals(&quot;y&quot;) || res.equals(&quot;Y&quot;)) {</span>
+<span class="nc" id="L481">                        this.gestor.avanca(a.get(i));</span>
+<span class="nc" id="L482">                        this.gestor.dimCap(cod);</span>
+<span class="nc bnc" id="L483" title="All 4 branches missed.">                    } else if (res.equals(&quot;n&quot;) || res.equals(&quot;N&quot;)) this.gestor.declinedT(a.get(i));</span>
+<span class="nc" id="L484">                    else alertasE(cod);</span>
+                }
+            }
+        }
+<span class="nc" id="L488">        menuEmpresa(cod);</span>
+<span class="nc" id="L489">    }</span>
+
+    /**
+     * Menu de todos os alertas que possam ser feitos ao modo voluntário como confirmação de encomenda
+     *
+     * @param cod Código Voluntário
+     */
+    public void alertasV(String cod) {
+<span class="nc" id="L497">        int i = 1;</span>
+<span class="nc" id="L498">        List&lt;Registos&gt; a = this.gestor.histReg(cod, 4);</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">        if (!a.isEmpty()) {</span>
+<span class="nc" id="L500">            Viewer.prints(TEXT_NONCONFIRMEDDELIVERIES);</span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">            for (Registos r : a) {</span>
+<span class="nc" id="L502">                Viewer.prints((i) + &quot;) &quot; + &quot;User: &quot; + r.getUser() + &quot; - &quot; + r.getEnc());</span>
+<span class="nc" id="L503">                i++;</span>
+<span class="nc" id="L504">            }</span>
+<span class="nc bnc" id="L505" title="All 2 branches missed.">            for (i = 0; i &lt; a.size(); i++) {</span>
+<span class="nc bnc" id="L506" title="All 2 branches missed.">                if (this.gestor.getCap(cod) == 0) {</span>
+<span class="nc" id="L507">                    Viewer.prints((i + 1) + &quot; - Não tem capacidade para realizar a encomenda\n&quot;);</span>
+<span class="nc" id="L508">                    this.gestor.declinedT(a.get(i));</span>
+                } else {
+<span class="nc" id="L510">                    Viewer.prints(&quot;Pretende aceitar a encomenda &quot; + (i + 1) + TEXT_YESORNO);</span>
+<span class="nc" id="L511">                    String res = Input.lerString();</span>
+<span class="nc bnc" id="L512" title="All 4 branches missed.">                    if (res.equals(&quot;y&quot;) || res.equals(&quot;Y&quot;)) {</span>
+<span class="nc" id="L513">                        this.gestor.avanca(a.get(i));</span>
+<span class="nc" id="L514">                        this.gestor.dimCap(cod);</span>
+<span class="nc bnc" id="L515" title="All 4 branches missed.">                    } else if (res.equals(&quot;n&quot;) || res.equals(&quot;N&quot;)) this.gestor.declinedT(a.get(i));</span>
+<span class="nc" id="L516">                    else alertasV(cod);</span>
+                }
+            }
+        }
+<span class="nc" id="L520">        menuVoluntario(cod);</span>
+<span class="nc" id="L521">    }</span>
+
+    /**
+     * Menu de Utilizador, são dadas as opcões de fazer uma encomenda, ver os registos e ver eventos
+     *
+     * @param cod Código Utilizador
+     */
+    public void menuUser(String cod) {
+<span class="nc" id="L529">        Viewer.prints(&quot;\nUtilizador: &quot; + cod + &quot;.&quot;);</span>
+<span class="nc" id="L530">        Utilizador u = this.gestor.procUtil(cod);</span>
+<span class="nc" id="L531">        List s = new ArrayList&lt;&gt;(Arrays.asList(&quot;Fazer Encomenda.&quot;, TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));</span>
+<span class="nc" id="L532">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L535">            m.executa();</span>
+<span class="nc" id="L536">            op = m.opcao();</span>
+<span class="nc bnc" id="L537" title="All 4 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L539">                    fazerEncomenda(u.getCord(), u.getNome(), cod);</span>
+<span class="nc" id="L540">                    break;</span>
+                case 2:
+<span class="nc" id="L542">                    verRegistos(cod);</span>
+<span class="nc" id="L543">                    break;</span>
+                case 3:
+<span class="nc" id="L545">                    verEventos(u.getCord());</span>
+<span class="nc" id="L546">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L550" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L551">        menu();</span>
+<span class="nc" id="L552">    }</span>
+
+    /**
+     * Método que cria uma nova encomenda se assim for possível
+     *
+     * @param a    Coordenadas
+     * @param nome Nome Utilizador
+     * @param cod  Código
+     */
+    public void fazerEncomenda(Coordenadas a, String nome, String cod) {
+<span class="nc" id="L562">        int i = 0;</span>
+<span class="nc" id="L563">        int f = 1;</span>
+<span class="nc" id="L564">        boolean still = true;</span>
+<span class="nc" id="L565">        boolean pr = false;</span>
+<span class="nc" id="L566">        Viewer.prints(&quot;\nA que distância máxima de uma loja (em km) pretende procurar?\n&quot;);</span>
+<span class="nc" id="L567">        int dist = Input.lerInt();</span>
+<span class="nc" id="L568">        Viewer.prints(&quot;\nLojas a &quot; + dist + &quot; km de si:\n&quot;);</span>
+<span class="nc" id="L569">        List&lt;Loja&gt; lojas = this.gestor.getLojasinRange(a, dist);</span>
+<span class="nc bnc" id="L570" title="All 2 branches missed.">        if (lojas.isEmpty()) {</span>
+<span class="nc" id="L571">            Viewer.prints(&quot;Nehuma loja encontrada em range.&quot;);</span>
+<span class="nc" id="L572">            menuUser(cod);</span>
+        }
+<span class="nc bnc" id="L574" title="All 2 branches missed.">        for (Loja g : lojas) {</span>
+<span class="nc" id="L575">            Viewer.prints(f + &quot;) &quot; + g.getNome());</span>
+<span class="nc" id="L576">            f++;</span>
+<span class="nc" id="L577">        }</span>
+<span class="nc" id="L578">        Viewer.prints(&quot;\nDe qual loja pretende encomendar (use o index)?\n&quot;);</span>
+<span class="nc" id="L579">        int ind = Input.lerInt();</span>
+<span class="nc" id="L580">        Encomenda enc = new Encomenda(this.gestor.geraCods(0), nome, lojas.get(ind - 1).getCod(), 0);</span>
+<span class="nc bnc" id="L581" title="All 2 branches missed.">        while (still) {</span>
+<span class="nc" id="L582">            Viewer.prints(&quot;\nPretende comprar um produto de prioridade? (y/n)\n&quot;);</span>
+<span class="nc" id="L583">            String pri = Input.lerString();</span>
+<span class="nc bnc" id="L584" title="All 4 branches missed.">            if (pri.equals(&quot;y&quot;) || pri.equals(&quot;Y&quot;)) pr = true;</span>
+<span class="nc bnc" id="L585" title="All 4 branches missed.">            else if (pri.equals(&quot;n&quot;) || pri.equals(&quot;N&quot;)) pr = false;</span>
+<span class="nc" id="L586">            else fazerEncomenda(a, nome, cod);</span>
+<span class="nc" id="L587">            Viewer.prints(&quot;\nQual produto pretende comprar?\n&quot;);</span>
+<span class="nc" id="L588">            String prod = Input.lerString();</span>
+<span class="nc" id="L589">            Viewer.prints(&quot;\nQual quantidade quer comprar?\n&quot;);</span>
+<span class="nc" id="L590">            double qnt = Input.lerDouble();</span>
+<span class="nc" id="L591">            enc.adicionaLEnco(new LinhaEncomenda(Integer.toString(i), prod, qnt, ThreadLocalRandom.current().nextDouble(1, 999)));</span>
+<span class="nc" id="L592">            i++;</span>
+<span class="nc" id="L593">            enc.setPeso(enc.getPeso() + qnt);</span>
+<span class="nc" id="L594">            Viewer.prints(&quot;\nQuer realizar mais compras? (y/n)\n&quot;);</span>
+<span class="nc" id="L595">            String ts = Input.lerString();</span>
+<span class="nc bnc" id="L596" title="All 4 branches missed.">            if (ts.equals(&quot;n&quot;) || ts.equals(&quot;N&quot;)) still = false;</span>
+<span class="nc" id="L597">        }</span>
+<span class="nc" id="L598">        List&lt;StringDistAux&gt; m = this.gestor.getBestLoja(lojas.get(ind - 1).getCord(), a, pr);</span>
+<span class="nc bnc" id="L599" title="All 2 branches missed.">        if (m.isEmpty()) Viewer.prints(&quot;Não é possivel realizar a encomenda (não existe meios de transporte)&quot;);</span>
+        else {
+<span class="nc" id="L601">            this.gestor.gestaoEncomenda(enc, cod, m);</span>
+<span class="nc" id="L602">            this.gestor.registarEnc(enc);</span>
+<span class="nc" id="L603">            Viewer.prints(&quot;Custo de encomenda (antes de transportes): &quot; + enc.custo());</span>
+        }
+<span class="nc" id="L605">        menuUser(cod);</span>
+<span class="nc" id="L606">    }</span>
+
+    /**
+     * Menu de Empresa, são dadas as opcões de ver registos, classificações, eventos e total facturado num intervalo
+     *
+     * @param cod Código Transportadora
+     */
+    public void menuEmpresa(String cod) {
+<span class="nc" id="L614">        Viewer.prints(&quot;\nTransportadora: &quot; + cod + &quot;.&quot;);</span>
+<span class="nc" id="L615">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_SEEREGISTERS, &quot;Ver Classificação.&quot;, TEXT_SEEAREAEVENTS, &quot;Ver total facturado num período de tempo.&quot;));</span>
+<span class="nc" id="L616">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L619">            m.executa();</span>
+<span class="nc" id="L620">            op = m.opcao();</span>
+<span class="nc bnc" id="L621" title="All 5 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L623">                    verRegistos(cod);</span>
+<span class="nc" id="L624">                    break;</span>
+                case 2:
+<span class="nc" id="L626">                    verClas(cod);</span>
+<span class="nc" id="L627">                    break;</span>
+                case 3:
+<span class="nc" id="L629">                    verEventos(this.gestor.getCoord(cod));</span>
+<span class="nc" id="L630">                    break;</span>
+                case 4:
+<span class="nc" id="L632">                    factTempo(cod);</span>
+<span class="nc" id="L633">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L637" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L638">        menu();</span>
+<span class="nc" id="L639">    }</span>
+
+    /**
+     * Menu de Voluntário, são dadas as opcões ver os registos,eventos e classificação
+     *
+     * @param cod Código Voluntário
+     */
+    public void menuVoluntario(String cod) {
+<span class="nc" id="L647">        Viewer.prints(&quot;\nVoluntário: &quot; + cod + &quot;.&quot;);</span>
+<span class="nc" id="L648">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_SEEREGISTERS, &quot;Ver Classificação.&quot;, TEXT_SEEAREAEVENTS));</span>
+<span class="nc" id="L649">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L652">            m.executa();</span>
+<span class="nc" id="L653">            op = m.opcao();</span>
+<span class="nc bnc" id="L654" title="All 4 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L656">                    verRegistos(cod);</span>
+<span class="nc" id="L657">                    break;</span>
+                case 2:
+<span class="nc" id="L659">                    verClas(cod);</span>
+<span class="nc" id="L660">                    break;</span>
+                case 3:
+<span class="nc" id="L662">                    verEventos(this.gestor.getCoord(cod));</span>
+<span class="nc" id="L663">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L667" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L668">        menu();</span>
+<span class="nc" id="L669">    }</span>
+
+    /**
+     * Menu de Loja, são dadas as opcões ver os registos e eventos
+     *
+     * @param cod Código Loja
+     */
+    public void menuLoja(String cod) {
+<span class="nc" id="L677">        Viewer.prints(&quot;\nLoja: &quot; + cod + &quot;.&quot;);</span>
+<span class="nc" id="L678">        List s = new ArrayList&lt;&gt;(Arrays.asList(TEXT_SEEREGISTERS, TEXT_SEEAREAEVENTS));</span>
+<span class="nc" id="L679">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L682">            m.executa();</span>
+<span class="nc" id="L683">            op = m.opcao();</span>
+<span class="nc bnc" id="L684" title="All 3 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L686">                    verRegistos(cod);</span>
+<span class="nc" id="L687">                    break;</span>
+                case 2:
+<span class="nc" id="L689">                    verEventos(this.gestor.getCoord(cod));</span>
+<span class="nc" id="L690">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L694" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L695">        menu();</span>
+<span class="nc" id="L696">    }</span>
+
+    /**
+     * Menu de Registos com a possibilidade de se ver as listas dos diferentes estados de Registos
+     *
+     * @param cod Código
+     */
+    public void verRegistos(String cod) {
+<span class="nc" id="L704">        Viewer.prints(&quot;Qual histórico de encomendas pretende ver?&quot;);</span>
+<span class="nc" id="L705">        List s = new ArrayList&lt;&gt;(Arrays.asList(&quot;Received.&quot;, &quot;Terminated.&quot;, &quot;Accepted.&quot;, &quot;Pending.&quot;, &quot;Finalized&quot;));</span>
+<span class="nc" id="L706">        Menu m = new Menu(s);</span>
+        int op;
+        do {
+<span class="nc" id="L709">            m.executa();</span>
+<span class="nc" id="L710">            op = m.opcao();</span>
+<span class="nc bnc" id="L711" title="All 6 branches missed.">            switch (op) {</span>
+                case 1:
+<span class="nc" id="L713">                    history(cod, 3);</span>
+<span class="nc" id="L714">                    break;</span>
+                case 2:
+<span class="nc" id="L716">                    history(cod, 2);</span>
+<span class="nc" id="L717">                    break;</span>
+                case 3:
+<span class="nc" id="L719">                    history(cod, 1);</span>
+<span class="nc" id="L720">                    break;</span>
+                case 4:
+<span class="nc" id="L722">                    history(cod, 4);</span>
+<span class="nc" id="L723">                    break;</span>
+                case 5:
+<span class="nc" id="L725">                    history(cod, 5);</span>
+<span class="nc" id="L726">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L730" title="All 2 branches missed.">        } while (op != 0);</span>
+<span class="nc" id="L731">        menu();</span>
+<span class="nc" id="L732">    }</span>
+
+    /**
+     * Método que possibilita vermos o histórico de um utilizador, voluntário, empresa, loja no modo que desejarmos
+     *
+     * @param cod  Código
+     * @param modo Modo
+     */
+    public void history(String cod, int modo) {
+        int i;
+<span class="nc" id="L742">        List&lt;Registos&gt; a = this.gestor.histReg(cod, modo);</span>
+<span class="nc bnc" id="L743" title="All 2 branches missed.">        if (a.isEmpty()) Viewer.prints(&quot;Não existem elementos no histórico.&quot;);</span>
+        else {
+<span class="nc bnc" id="L745" title="All 4 branches missed.">            if (modo == 3 || modo == 5)</span>
+<span class="nc" id="L746">                a.forEach(x -&gt; Viewer.prints(x.getData() + &quot; - User: &quot; + x.getUser() + &quot; - Driver: &quot; + x.getDriver() + &quot; - Tempo: &quot; + x.getTmp() + &quot; - Custo: &quot; + (x.getEnc().custo() + x.getCustoT()) + &quot; - Enc: &quot; + x.getEnc() + &quot; - Custo transporte: &quot; + x.getCustoT()));</span>
+<span class="nc" id="L747">            else a.forEach(x -&gt; Viewer.prints(x.getData() + &quot; - User: &quot; + x.getUser() + &quot; - Driver: &quot; + x.getDriver()));</span>
+        }
+<span class="nc" id="L749">        Viewer.prints(&quot;\n0) Voltar aos registos.&quot;);</span>
+        do {
+<span class="nc" id="L751">            i = Input.lerInt();</span>
+<span class="nc bnc" id="L752" title="All 2 branches missed.">        } while (i != 0);</span>
+<span class="nc" id="L753">        verRegistos(cod);</span>
+<span class="nc" id="L754">    }</span>
+
+    /**
+     * Método que apresenta a classificação de uma transportadora ou voluntário dependendo do código dado
+     *
+     * @param cod Código Driver
+     */
+    public void verClas(String cod) {
+<span class="nc" id="L762">        double i = this.gestor.getClas(cod);</span>
+<span class="nc bnc" id="L763" title="All 2 branches missed.">        if (i == -1) Viewer.prints(&quot;Não classificado&quot;);</span>
+<span class="nc" id="L764">        else Viewer.prints(&quot;Classificação acumulada: &quot; + i);</span>
+<span class="nc" id="L765">        Viewer.prints(&quot;\n0) Voltar ao Menu.&quot;);</span>
+        do {
+<span class="nc" id="L767">            i = Input.lerInt();</span>
+<span class="nc bnc" id="L768" title="All 2 branches missed.">        } while (i != 0);</span>
+<span class="nc" id="L769">        menu();</span>
+<span class="nc" id="L770">    }</span>
+
+    /**
+     * Método que apresenta todos os eventos que possam afetar o tempo de envio numa área
+     *
+     * @param c Coordenadas
+     */
+    public void verEventos(Coordenadas c) {
+        int i;
+<span class="nc" id="L779">        Viewer.prints(&quot;Eventos que possam afetar o tempo de envio (1-100)(melhor-pior): &quot;);</span>
+<span class="nc" id="L780">        Viewer.prints(&quot;\nClima na sua área: &quot; + this.gestor.getRando(c, 0));</span>
+<span class="nc" id="L781">        Viewer.prints(&quot;Trânsito na sua área: &quot; + this.gestor.getRando(c, 1));</span>
+<span class="nc" id="L782">        Viewer.prints(&quot;\n0) Voltar ao menu.&quot;);</span>
+        do {
+<span class="nc" id="L784">            i = Input.lerInt();</span>
+<span class="nc bnc" id="L785" title="All 2 branches missed.">        } while (i != 0);</span>
+<span class="nc" id="L786">        menu();</span>
+<span class="nc" id="L787">    }</span>
+
+    /**
+     * Método que mostra a facturação total num intervalo
+     *
+     * @param cod Código Empresa
+     */
+    public void factTempo(String cod) {
+        int i;
+<span class="nc" id="L796">        Viewer.prints(&quot;Insira o periodo de tempo inicial&quot;);</span>
+<span class="nc" id="L797">        Viewer.prints(&quot;Ano:&quot;);</span>
+<span class="nc" id="L798">        int anoI = Input.lerInt();</span>
+<span class="nc" id="L799">        Viewer.prints(&quot;Dia:&quot;);</span>
+<span class="nc" id="L800">        int diaI = Input.lerInt();</span>
+<span class="nc" id="L801">        Viewer.prints(&quot;Mes:&quot;);</span>
+<span class="nc" id="L802">        int mesI = Input.lerInt();</span>
+<span class="nc" id="L803">        Viewer.prints(&quot;Horas:&quot;);</span>
+<span class="nc" id="L804">        int horasI = Input.lerInt();</span>
+<span class="nc" id="L805">        Viewer.prints(&quot;Minuto:&quot;);</span>
+<span class="nc" id="L806">        int minI = Input.lerInt();</span>
+<span class="nc" id="L807">        Viewer.prints(&quot;Insira o periodo de tempo final&quot;);</span>
+<span class="nc" id="L808">        Viewer.prints(&quot;Ano:&quot;);</span>
+<span class="nc" id="L809">        int anoF = Input.lerInt();</span>
+<span class="nc" id="L810">        Viewer.prints(&quot;Dia:&quot;);</span>
+<span class="nc" id="L811">        int diaF = Input.lerInt();</span>
+<span class="nc" id="L812">        Viewer.prints(&quot;Mes:&quot;);</span>
+<span class="nc" id="L813">        int mesF = Input.lerInt();</span>
+<span class="nc" id="L814">        Viewer.prints(&quot;Horas:&quot;);</span>
+<span class="nc" id="L815">        int horasF = Input.lerInt();</span>
+<span class="nc" id="L816">        Viewer.prints(&quot;Minuto:&quot;);</span>
+<span class="nc" id="L817">        int minF = Input.lerInt();</span>
+
+<span class="nc" id="L819">        LocalDateTime di = null;</span>
+<span class="nc" id="L820">        LocalDateTime df = null;</span>
+
+        try {
+<span class="nc" id="L823">            di = LocalDateTime.of(anoI, mesI, diaI, horasI, minI);</span>
+<span class="nc" id="L824">            df = LocalDateTime.of(anoF, mesF, diaF, horasF, minF);</span>
+<span class="nc" id="L825">        } catch (DateTimeException e) {</span>
+<span class="nc" id="L826">            Viewer.prints(&quot;Data: Erro&quot;);</span>
+<span class="nc" id="L827">            factTempo(cod);</span>
+<span class="nc" id="L828">        }</span>
+
+<span class="nc" id="L830">        Viewer.prints(&quot;Faturacao total no periodo entre &quot; + di + &quot; e &quot; + df);</span>
+<span class="nc" id="L831">        Viewer.prints(this.gestor.totalFact(cod, di, df));</span>
+
+<span class="nc" id="L833">        Viewer.prints(&quot;\n0) Voltar ao menu.&quot;);</span>
+        do {
+<span class="nc" id="L835">            i = Input.lerInt();</span>
+<span class="nc bnc" id="L836" title="All 2 branches missed.">        } while (i != 0);</span>
+<span class="nc" id="L837">        menuEmpresa(cod);</span>
+<span class="nc" id="L838">    }</span>
+
+    /**
+     * Método responsável por gravar o estado atual do programa
+     *
+     * @param name Nome do ficheiro onde vamos gravar o estado
+     */
+    //Gravar Estado
+    public void writeEstado(String name) throws IOException {
+<span class="nc" id="L847">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));</span>
+<span class="nc" id="L848">        oos.writeObject(this.gestor);</span>
+<span class="nc" id="L849">        oos.flush();</span>
+<span class="nc" id="L850">        oos.close();</span>
+<span class="nc" id="L851">    }</span>
+
+    /**
+     * Método responsável por dar load do estado gravado
+     *
+     * @param name Nome do ficheiro em que foi gravado o estado
+     */
+    //Load Estado
+    public Gestor loadEstado(String name) throws IOException, ClassNotFoundException {
+<span class="nc" id="L860">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));</span>
+<span class="nc" id="L861">        Gestor novo = (Gestor) ois.readObject();</span>
+<span class="nc" id="L862">        ois.close();</span>
+<span class="nc" id="L863">        return novo;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

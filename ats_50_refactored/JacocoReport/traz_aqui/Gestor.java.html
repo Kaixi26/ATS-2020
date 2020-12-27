@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Gestor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$Aceite_ESTest_and_25_more__1_.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Gestor.java</span></div><h1>Gestor.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Gestor implements Serializable {
+
+    private final CatEncomenda ce;
+    private final CatVoluntarios cv;
+    private final CatTransportadoras ct;
+    private final CatLojas cl;
+    private final CatUtilizadores cu;
+    private final Aceite a;
+    private final Historico h;
+    private final RandomEvents r;
+
+<span class="nc" id="L19">    public Gestor() {</span>
+<span class="nc" id="L20">        this.ce = new CatEncomenda();</span>
+<span class="nc" id="L21">        this.cv = new CatVoluntarios();</span>
+<span class="nc" id="L22">        this.ct = new CatTransportadoras();</span>
+<span class="nc" id="L23">        this.cl = new CatLojas();</span>
+<span class="nc" id="L24">        this.cu = new CatUtilizadores();</span>
+<span class="nc" id="L25">        this.a = new Aceite();</span>
+<span class="nc" id="L26">        this.h = new Historico();</span>
+<span class="nc" id="L27">        this.r = new RandomEvents();</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Método que faz load de todos os catálogos
+     */
+    public void loadCat() {
+<span class="nc" id="L34">        Parse.parse(this.cu, this.cl, this.cv, this.ct, this.ce, this.a);</span>
+<span class="nc" id="L35">        System.out.println(&quot;Loaded:&quot;);</span>
+<span class="nc" id="L36">        System.out.println(cu.size() + &quot;\tusers&quot;);</span>
+<span class="nc" id="L37">        System.out.println(cl.size() + &quot;\tlojas&quot;);</span>
+<span class="nc" id="L38">        System.out.println(cv.size() + &quot;\tvoluntarios&quot;);</span>
+<span class="nc" id="L39">        System.out.println(ct.size() + &quot;\ttransportes&quot;);</span>
+<span class="nc" id="L40">        System.out.println(ce.size() + &quot;\tencomendas&quot;);</span>
+<span class="nc" id="L41">        System.out.println(a.size()  + &quot;\taceites\n&quot;);</span>
+<span class="nc" id="L42">    }</span>
+
+    /**
+     * Método que regista um utilizador no seu catálogo
+     *
+     * @param cod  Código user
+     * @param nome Nome user
+     * @param cord Coordenadas
+     * @param pass Password
+     * @param mail Email
+     */
+    public void registarUser(String cod, String nome, Coordenadas cord, String pass, String mail) {
+<span class="nc" id="L54">        this.cu.signupU(cod, nome, cord, pass, mail);</span>
+<span class="nc" id="L55">    }</span>
+
+    /**
+     * Método que regista uma transportadora no seu catálogo
+     *
+     * @param cod   Código Transportadora
+     * @param nome  Nome Transportadora
+     * @param cord  Coordenadas
+     * @param range Range
+     * @param prkm  Preço
+     * @param nif   NIF
+     * @param clas  Classificação
+     * @param med   Medicamentos
+     * @param vkm   Velocidade
+     * @param email Email
+     * @param pass  Password
+     * @param kmp   Kilómetros percorridos
+     * @param cap   Capacidade
+     */
+    public void registarEmpresa(String cod, String nome, Coordenadas cord, double range, double prkm, double nif, double clas, boolean med, double vkm, String email, String pass, double kmp, int cap) {
+<span class="nc" id="L75">        this.ct.signupT(cod, nome, cord, range, prkm, nif, clas, med, vkm, email, pass, kmp, cap);</span>
+<span class="nc" id="L76">    }</span>
+
+    /**
+     * Método que regista um voluntário no seu catálogo
+     *
+     * @param cod   Código voluntário
+     * @param nome  Nome voluntário
+     * @param range Range
+     * @param cord  Coordenadas
+     * @param clas  Classificação
+     * @param med   Medicamentos
+     * @param vkm   Velocidade
+     * @param email Email
+     * @param pass  Password
+     * @param cap   Capacidade
+     */
+    public void registarVoluntario(String cod, String nome, double range, Coordenadas cord, double clas, boolean med, double vkm, String email, String pass, int cap) {
+<span class="nc" id="L93">        this.cv.signupV(cod, nome, range, cord, clas, med, vkm, email, pass, cap);</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Método que regista uma Loja no seu catálogo
+     *
+     * @param cod   Código loja
+     * @param nome  Nome loja
+     * @param cord  Coordenadas
+     * @param fila  Fila
+     * @param email Email
+     * @param pass  Password
+     */
+    public void registarLoja(String cod, String nome, Coordenadas cord, int fila, String email, String pass) {
+<span class="nc" id="L107">        this.cl.signupL(cod, nome, cord, fila, email, pass);</span>
+<span class="nc" id="L108">    }</span>
+
+    /**
+     * Método que regista uma encomenda no seu catálogo
+     *
+     * @param a Encomenda
+     */
+    public void registarEnc(Encomenda a) {
+<span class="nc" id="L116">        this.ce.adicionaEnc(a);</span>
+<span class="nc" id="L117">    }</span>
+
+    /**
+     * Método que dependendo do modo introduzido faz o login de um utilizador, transportadora, voluntário ou loja
+     *
+     * @param modo Modo
+     * @param e    Email
+     * @param p    Password
+     */
+    public String login(int modo, String e, String p) {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (modo == 1) return this.cu.loginU(e, p);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        else if (modo == 2) return this.ct.loginT(e, p);</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        else if (modo == 3) return this.cv.loginV(e, p);</span>
+<span class="nc" id="L130">        else return this.cl.loginL(e, p);</span>
+    }
+
+    /**
+     * Método que dependendo do modo introduzido faz o sign up de um utilizador, transportadora, voluntário ou loja
+     *
+     * @param modo  Modo
+     * @param email Email
+     */
+    public boolean verificaMail(int modo, String email) {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (modo == 1) return this.cu.verMail(email);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        else if (modo == 2) return this.ct.verMail(email);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        else if (modo == 3) return this.cv.verMail(email);</span>
+<span class="nc" id="L143">        else return this.cl.verMail(email);</span>
+    }
+
+    /**
+     * Método que gera códigos únicos de empresa, tranportadora, utilizador ou voluntário
+     *
+     * @param i indíce catálogo
+     */
+    public String geraCods(int i) {
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (i == 0) return this.ce.codUnicoE();</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        else if (i == 1) return this.ct.codUnicoT();</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        else if (i == 2) return this.cu.codUnicoU();</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        else if (i == 3) return this.cv.codUnicoV();</span>
+<span class="nc" id="L156">        else return this.cl.codUnicoL();</span>
+    }
+
+    /**
+     * Método que retorna uma lista de lojas num determinado range
+     *
+     * @param a Coordenadas
+     * @param b Distância
+     */
+    public List&lt;Loja&gt; getLojasinRange(Coordenadas a, double b) {
+<span class="nc" id="L166">        return this.cl.lojasinRange(a, b);</span>
+    }
+
+    /**
+     * Método que dando um código de utilizador retorna o utilizador com esse código do respectivo catálogo
+     *
+     * @param cod código de utilizador
+     */
+    public Utilizador procUtil(String cod) {
+<span class="nc" id="L175">        return this.cu.procUser(cod);</span>
+    }
+
+    /**
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux ordenada por distâncias  respectiva às Lojas com melhores condições
+     *
+     * @param cu  Coordenadas utilizador
+     * @param cl  Coordenadas loja
+     * @param pri prioridade
+     */
+    public List&lt;StringDistAux&gt; getBestLoja(Coordenadas cu, Coordenadas cl, boolean pri) {
+<span class="nc" id="L186">        List&lt;StringDistAux&gt; s = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L187">        s.addAll(this.ct.melhorTransporteT(cl, cu, pri));</span>
+<span class="nc" id="L188">        s.addAll(this.cv.melhorTransporteV(cl, cu, pri));</span>
+<span class="nc" id="L189">        s.sort(Comparator.comparing(StringDistAux::getDist));</span>
+<span class="nc" id="L190">        return s;</span>
+    }
+
+    /**
+     * Método que remove um registo do modo pending e adiciona o mesmo ao modo accepted
+     *
+     * @param a Registo
+     */
+    public void avanca(Registos a) {
+<span class="nc" id="L199">        double codigoLoja = this.cl.getTmpF(a.getLoja());</span>
+<span class="nc" id="L200">        Coordenadas l = this.cl.getCord(a.getLoja());</span>
+<span class="nc" id="L201">        Coordenadas u = this.cu.getCord(a.getUser());</span>
+<span class="nc" id="L202">        Registos f = this.h.removeReg(3, a);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (a.getDriver().charAt(0) == 'v') {</span>
+<span class="nc" id="L204">            f.setTmp(this.cv.calcTmp(l, u, codigoLoja, a.getDriver()));</span>
+<span class="nc" id="L205">            f.setCustoT(0.0);</span>
+        } else {
+<span class="nc" id="L207">            double custoT = this.ct.calcCost(l, u, a.getPeso(), a.getDriver());</span>
+<span class="nc" id="L208">            f.setTmp(this.ct.calcTmp(l, u, codigoLoja, a.getDriver()));</span>
+<span class="nc" id="L209">            f.setCustoT(custoT);</span>
+        }
+<span class="nc" id="L211">        this.h.adicionaReg(1, f.clone());</span>
+<span class="nc" id="L212">    }</span>
+
+    /**
+     * Método que retorna uma lista de Registos de utilizador,empresa,voluntário ou loja no modo que for desejado
+     *
+     * @param cod  Código
+     * @param modo Modo
+     */
+    public List&lt;Registos&gt; histReg(String cod, int modo) {
+        List&lt;Registos&gt; reg;
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        if (cod.charAt(0) == 'u')</span>
+<span class="nc" id="L223">            reg = this.h.userHist(cod, modo);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        else if (cod.charAt(0) == 'v')</span>
+<span class="nc" id="L225">            reg = this.h.volHist(cod, modo);</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        else if (cod.charAt(0) == 't')</span>
+<span class="nc" id="L227">            reg = this.h.empHist(cod, modo);</span>
+<span class="nc" id="L228">        else reg = this.h.lojaHist(cod, modo);</span>
+
+<span class="nc" id="L230">        reg.sort(new ComparatorData());</span>
+<span class="nc" id="L231">        return reg;</span>
+    }
+
+    /**
+     * Método que retorna o total facturado num periodo de tempo
+     *
+     * @param cod Código transportadora
+     * @param in  Data inicial
+     * @param fin Data final
+     */
+    public double totalFact(String cod, LocalDateTime in, LocalDateTime fin) {
+<span class="nc bnc" id="L242" title="All 4 branches missed.">        return this.h.empHist(cod, 5).stream().filter(x -&gt; x.getData().compareTo(in) &gt;= 0 &amp;&amp; x.getData().compareTo(fin) &lt;= 0).mapToDouble(Registos::getCustoT).sum();</span>
+    }
+
+    /**
+     * Método que retorna a Lista de topUsers
+     */
+    public List&lt;TopUsers&gt; topUsers() {
+<span class="nc" id="L249">        return this.h.topUser();</span>
+    }
+
+    /**
+     * Método que adiciona um novo registo à fila de terminated se a List&lt;StringDistAux&gt; estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+     *
+     * @param enc Encomenda
+     * @param cod Código
+     * @param a   List StringDistAux
+     */
+    public int gestaoEncomenda(Encomenda enc, String cod, List&lt;StringDistAux&gt; a) {
+<span class="nc" id="L260">        return this.h.gestaoEncomenda(enc, cod, a);</span>
+    }
+
+    /**
+     * Método que faz a gestaoEncomenda para os registos declined
+     *
+     * @param a Registo
+     */
+    public void declinedT(Registos a) {
+<span class="nc" id="L269">        this.h.declinedT(a);</span>
+<span class="nc" id="L270">    }</span>
+
+    /**
+     * Método que finaliza a confirmação de encomenda caso seja completamente aceite, adicionando o registo a fila de delivered
+     *
+     * @param enc    Código Encomenda
+     * @param loja   Código Loja
+     * @param user   Código Utilizador
+     * @param driver Código Driver
+     * @param tmp    Tempo
+     */
+    public void getItDone(String enc, String loja, String user, String driver, double tmp) {
+        double b;
+<span class="nc" id="L283">        Coordenadas l = this.cl.getCord(loja);</span>
+<span class="nc" id="L284">        Coordenadas u = this.cu.getCord(user);</span>
+
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        if (driver.charAt(0) == 'v') {</span>
+<span class="nc" id="L287">            Coordenadas v = this.cv.getCord(driver);</span>
+<span class="nc" id="L288">            b = getB(tmp, l, u, v);</span>
+<span class="nc" id="L289">            this.cv.setCoords(driver, u);</span>
+<span class="nc" id="L290">        } else {</span>
+<span class="nc" id="L291">            Coordenadas v = this.ct.getCord(driver);</span>
+<span class="nc" id="L292">            b = getB(tmp, l, u, v);</span>
+<span class="nc" id="L293">            this.ct.addKmps(driver, l, u);</span>
+<span class="nc" id="L294">            this.ct.setCoords(driver, u);</span>
+        }
+<span class="nc" id="L296">        this.h.adicionaReg(5, this.h.done(enc, b));</span>
+<span class="nc" id="L297">        this.h.removeFila(enc);</span>
+<span class="nc" id="L298">    }</span>
+
+    private double getB(double tmp, Coordenadas l, Coordenadas u, Coordenadas v) {
+        double b;
+<span class="nc" id="L302">        b = tmp + 10 / this.r.getSeedT(l) * 5 + 10 / this.r.getSeedC(l) * 5</span>
+<span class="nc" id="L303">                + 10 / this.r.getSeedT(u) * 5 + 10 / this.r.getSeedC(u) * 5</span>
+<span class="nc" id="L304">                + 10 / this.r.getSeedT(v) * 5 + 10 / this.r.getSeedC(v) * 5;</span>
+<span class="nc" id="L305">        return b;</span>
+    }
+
+    /**
+     * Método que classifica uma encomenda e adiciona o registo a fila de finalized
+     *
+     * @param a      Registo
+     * @param rating Rating
+     */
+    public void classifica(Registos a, double rating) {
+<span class="nc" id="L315">        Registos f = this.h.removeReg(5, a);</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">        if (f.getDriver().charAt(0) == 'v') {</span>
+<span class="nc" id="L317">            this.cv.adicionaCla(f.getDriver(), rating);</span>
+<span class="nc" id="L318">        } else this.ct.adicionaCla(f.getDriver(), rating);</span>
+<span class="nc" id="L319">        this.h.adicionaReg(2, f);</span>
+<span class="nc" id="L320">    }</span>
+
+    /**
+     * Método que retorna a classificacao
+     *
+     * @param cod Código Driver
+     */
+    public double getClas(String cod) {
+<span class="nc bnc" id="L328" title="All 2 branches missed.">        if (cod.charAt(0) == 'v') return this.cv.getClas(cod);</span>
+<span class="nc" id="L329">        else return this.ct.getClas(cod);</span>
+    }
+
+    /**
+     * Método que retorna uma seed random
+     *
+     * @param a    Coordenadas
+     * @param modo Modo
+     */
+    public double getRando(Coordenadas a, int modo) {
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (modo == 0) return this.r.getSeedC(a);</span>
+<span class="nc" id="L340">        else return this.r.getSeedT(a);</span>
+    }
+
+    /**
+     * Método que retorna a coordenada de um voluntário ou empresa ou loja
+     *
+     * @param cod Código
+     */
+    public Coordenadas getCoord(String cod) {
+<span class="nc bnc" id="L349" title="All 2 branches missed.">        if (cod.charAt(0) == 'v')</span>
+<span class="nc" id="L350">            return this.cv.getCord(cod);</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">        else if (cod.charAt(0) == 't')</span>
+<span class="nc" id="L352">            return this.ct.getCord(cod);</span>
+        else
+<span class="nc" id="L354">            return this.cl.getCord(cod);</span>
+    }
+
+    /**
+     * Método que adiciona os dados default aos registos
+     */
+    public void adicionaDef() {
+<span class="nc" id="L361">        this.ce.adicionaReg(this.a.encDef()).forEach(x -&gt; this.h.adicionaReg(2, x));</span>
+<span class="nc" id="L362">    }</span>
+
+    /**
+     * Método que retorna uma lista dos topUsers (as dez transportadoras que mais usaram o sistema)
+     */
+    public List&lt;TopUsers&gt; topTransp() {
+<span class="nc" id="L368">        Map&lt;String, TopUsers&gt; ret = new HashMap();</span>
+
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        for (Registos reg : this.h.finList()) {</span>
+<span class="nc" id="L371">            ret.putIfAbsent(reg.getDriver(), new TopUsers(reg.getDriver()));</span>
+<span class="nc" id="L372">            ret.get(reg.getDriver()).addKm(this.ct.getKmp(reg.getDriver()));</span>
+<span class="nc" id="L373">        }</span>
+
+<span class="nc" id="L375">        return ret.values().stream().sorted(Comparator.comparing(TopUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Método que diminui a capacidade de um voluntário ou Empresa
+     *
+     * @param cod Código Driver
+     */
+    public void dimCap(String cod) {
+<span class="nc bnc" id="L384" title="All 2 branches missed.">        if (cod.charAt(0) == 'v')</span>
+<span class="nc" id="L385">            this.cv.dimCap(cod);</span>
+<span class="nc" id="L386">        else this.ct.dimCap(cod);</span>
+<span class="nc" id="L387">    }</span>
+
+    /**
+     * Método que aumenta a capacidade de um voluntário ou Empresa
+     *
+     * @param cod Código Driver
+     */
+    public void aumCap(String cod) {
+<span class="nc bnc" id="L395" title="All 2 branches missed.">        if (cod.charAt(0) == 'v')</span>
+<span class="nc" id="L396">            this.cv.aumCap(cod);</span>
+<span class="nc" id="L397">        else this.ct.aumCap(cod);</span>
+<span class="nc" id="L398">    }</span>
+
+    /**
+     * Método que retorna a capacidade de um voluntário ou Empresa
+     *
+     * @param cod Código Driver
+     */
+    public int getCap(String cod) {
+<span class="nc bnc" id="L406" title="All 2 branches missed.">        if (cod.charAt(0) == 'v')</span>
+<span class="nc" id="L407">            return this.cv.getCap(cod);</span>
+<span class="nc" id="L408">        else return this.ct.getCap(cod);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

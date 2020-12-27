@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Registos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$Aceite_ESTest_and_25_more__1_.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Registos.java</span></div><h1>Registos.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+public class Registos implements Serializable {
+    private Encomenda enc;
+    private LocalDateTime data;
+    private String user;
+    private String driver;
+    private Double tmp;
+    private Double custo;
+    private Double custoT;
+
+<span class="nc" id="L15">    public Registos(Encomenda enc, LocalDateTime data, String user, String driver, Double tmp, Double custo, Double custoT) {</span>
+<span class="nc" id="L16">        this.enc = enc;</span>
+<span class="nc" id="L17">        this.data = data;</span>
+<span class="nc" id="L18">        this.user = user;</span>
+<span class="nc" id="L19">        this.driver = driver;</span>
+<span class="nc" id="L20">        this.tmp = tmp;</span>
+<span class="nc" id="L21">        this.custo = custo;</span>
+<span class="nc" id="L22">        this.custoT = custoT;</span>
+
+<span class="nc" id="L24">    }</span>
+
+<span class="nc" id="L26">    public Registos(Registos b) {</span>
+<span class="nc" id="L27">        this.enc = b.getEnc();</span>
+<span class="nc" id="L28">        this.data = b.getData();</span>
+<span class="nc" id="L29">        this.user = b.getUser();</span>
+<span class="nc" id="L30">        this.driver = b.getDriver();</span>
+<span class="nc" id="L31">        this.tmp = b.getTmp();</span>
+<span class="nc" id="L32">        this.custo = b.getCusto();</span>
+<span class="nc" id="L33">        this.custoT = b.getCustoT();</span>
+<span class="nc" id="L34">    }</span>
+
+    public Encomenda getEnc() {
+<span class="nc" id="L37">        return enc;</span>
+    }
+
+    public void setEnc(Encomenda enc) {
+<span class="nc" id="L41">        this.enc = enc;</span>
+<span class="nc" id="L42">    }</span>
+
+    public LocalDateTime getData() {
+<span class="nc" id="L45">        return this.data;</span>
+    }
+
+    public void setData(LocalDateTime data) {
+<span class="nc" id="L49">        this.data = data;</span>
+<span class="nc" id="L50">    }</span>
+
+    public String getUser() {
+<span class="nc" id="L53">        return user;</span>
+    }
+
+    public void setUser(String user) {
+<span class="nc" id="L57">        this.user = user;</span>
+<span class="nc" id="L58">    }</span>
+
+    public String getDriver() {
+<span class="nc" id="L61">        return driver;</span>
+    }
+
+    public void setDriver(String driver) {
+<span class="nc" id="L65">        this.driver = driver;</span>
+<span class="nc" id="L66">    }</span>
+
+    public Double getTmp() {
+<span class="nc" id="L69">        return tmp;</span>
+    }
+
+    public void setTmp(Double tmp) {
+<span class="nc" id="L73">        this.tmp = tmp;</span>
+<span class="nc" id="L74">    }</span>
+
+    public Double getCusto() {
+<span class="nc" id="L77">        return custo;</span>
+    }
+
+    public void setCusto(Double custo) {
+<span class="nc" id="L81">        this.custo = custo;</span>
+<span class="nc" id="L82">    }</span>
+
+    public Double getCustoT() {
+<span class="nc" id="L85">        return this.custoT;</span>
+    }
+
+    public void setCustoT(Double custoT) {
+<span class="nc" id="L89">        this.custoT = custoT;</span>
+<span class="nc" id="L90">    }</span>
+
+    public Registos clone() {
+<span class="nc" id="L93">        return new Registos(this);</span>
+    }
+
+    /**
+     * Método que retorna o código da loja a partir da encomenda do registo
+     */
+    public String getLoja() {
+<span class="nc" id="L100">        return this.enc.getLoja();</span>
+    }
+
+    /**
+     * Método que retorna o peso da encomenda do registo
+     */
+    public double getPeso() {
+<span class="nc" id="L107">        return this.enc.getPeso();</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L111">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L112">        sb.append(&quot;Registo: &quot;).append(this.enc).append(&quot;, &quot;)</span>
+<span class="nc" id="L113">                .append(this.data).append(&quot;, &quot;)</span>
+<span class="nc" id="L114">                .append(this.user).append(&quot;, &quot;)</span>
+<span class="nc" id="L115">                .append(this.driver).append(&quot;, &quot;)</span>
+<span class="nc" id="L116">                .append(this.tmp).append(&quot;, &quot;)</span>
+<span class="nc" id="L117">                .append(this.custo).append(&quot;, &quot;)</span>
+<span class="nc" id="L118">                .append(this.custoT);</span>
+<span class="nc" id="L119">        return sb.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

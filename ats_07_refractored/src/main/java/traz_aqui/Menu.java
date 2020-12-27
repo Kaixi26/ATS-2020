@@ -35,7 +35,7 @@ public class Menu implements Serializable {
         }
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         new Menu().menuInicial();
     }
 

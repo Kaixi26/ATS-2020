@@ -1,0 +1,6 @@
+Utilizador:u157706,ca,ca,12.0,12.0,ca
+Utilizador:la,l755869,la,12.0,12.0,la
+traz_aqui.Voluntario:xa,v922048,xa,12.0,12.0,xa,1.0,true,0.0,0.0
+Utilizador:ca,l609148,ca,12.0,12.0,ca@ua.pt
+traz_aqui.Encomenda:e771207,u157706,ca@ua.pt,,2.0,null,2,1,,1.0,3.0,1,,1.0,3.0
+traz_aqui.Encomenda:e890461,u157706,ca@ua.pt,,2.0,null,2,12,,1.0,3.0,1,,1.0,3.0

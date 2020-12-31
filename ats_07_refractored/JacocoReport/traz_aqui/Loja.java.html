@@ -1,87 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Loja.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Loja.java</span></div><h1>Loja.java</h1><pre class="source lang-java linenums">package traz_aqui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Loja.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$All_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Loja.java</span></div><h1>Loja.java</h1><pre class="source lang-java linenums">package traz_aqui;
 
 import java.util.ArrayList;
 
-public class Loja extends User
-
-{
+public class Loja extends User {
+    private static final double tempoAtendimento = 5; //em minutos se tiver teempo acabar
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private boolean filadeEspera;
-<span class="nc" id="L10">    private static double tempoAtendimento = 5; //em minutos se tiver teempo acabar </span>
     private ArrayList&lt;Encomenda&gt; queue;
-    
-    
-    
 
-    public Loja()
-    {
-<span class="nc" id="L18">        super();</span>
-       
-        
-<span class="nc" id="L21">    }</span>
-    
-    public Loja( String username , String codigo , String password , double locationX, 
-    double locationY ,String email){
-<span class="nc" id="L25">            super(username,codigo,password,locationX,locationY,email); </span>
-            //this.filadeEspera=filadeEspera;
 
-            //this.queue= new ArrayList&lt;&gt;();
-            
-<span class="nc" id="L30">    }</span>
+    public Loja() {
+<span class="nc" id="L13">        super();</span>
 
-    public Loja(Loja p){
-<span class="nc" id="L33">            super(p.getUserName(),p.getPassword(),p.getCodigo(),p.getLocationX(),p.getLocationY(),p.getEmail());</span>
-            //this.filadeEspera= p.getfiladeEspera();
-            //this.queue = p.getqueue();
-<span class="nc" id="L36">    }</span>
-    
-    public ArrayList&lt;Encomenda&gt; getqueue()
-    {
-<span class="nc" id="L40">        return this.queue;</span>
-    }
-    
-    public void setProdutos(ArrayList&lt;Encomenda&gt; queue){
-<span class="nc" id="L44">           this.queue=queue;</span>
-<span class="nc" id="L45">    }</span>
-        
-    public boolean getfiladeEspera(){
-<span class="nc" id="L48">           return this.filadeEspera;</span>
-    }
-    
-    public void setfiladeEspera(boolean filadeEspera){
-<span class="nc" id="L52">           this.filadeEspera=filadeEspera;</span>
-<span class="nc" id="L53">    }</span>
 
-    public boolean equals(Object o){
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(o==this) return true;</span>
-<span class="nc bnc" id="L57" title="All 4 branches missed.">        if(o== null || o.getClass()!=this.getClass()) return false;</span>
-<span class="nc" id="L58">        Loja c= (Loja) o;</span>
-<span class="nc" id="L59">        return super.equals(c);</span>
+<span class="nc" id="L16">    }</span>
+
+    public Loja(String username, String codigo, String password, double locationX,
+                double locationY, String email) {
+<span class="nc" id="L20">        super(username, codigo, password, locationX, locationY, email);</span>
+        //this.filadeEspera=filadeEspera;
+
+        //this.queue= new ArrayList&lt;&gt;();
+
+<span class="nc" id="L25">    }</span>
+
+    public Loja(Loja p) {
+<span class="nc" id="L28">        super(p.getUserName(), p.getPassword(), p.getCodigo(), p.getLocationX(), p.getLocationY(), p.getEmail());</span>
+        //this.filadeEspera= p.getfiladeEspera();
+        //this.queue = p.getqueue();
+<span class="nc" id="L31">    }</span>
+
+    public ArrayList&lt;Encomenda&gt; getqueue() {
+<span class="nc" id="L34">        return this.queue;</span>
     }
-    
-    public String toString(){
-<span class="nc" id="L63">        StringBuilder res = new StringBuilder();</span>
-<span class="nc" id="L64">        res.append(super.toString());</span>
-<span class="nc" id="L65">        res.append(this.filadeEspera);</span>
-<span class="nc" id="L66">        res.append(this.tempoAtendimento);</span>
-<span class="nc" id="L67">        return res.toString();</span>
+
+    public void setProdutos(ArrayList&lt;Encomenda&gt; queue) {
+<span class="nc" id="L38">        this.queue = queue;</span>
+<span class="nc" id="L39">    }</span>
+
+    public boolean getfiladeEspera() {
+<span class="nc" id="L42">        return this.filadeEspera;</span>
     }
-    
-    public Loja clone(){
-<span class="nc" id="L71">        return new Loja(this);</span>
+
+    public void setfiladeEspera(boolean filadeEspera) {
+<span class="nc" id="L46">        this.filadeEspera = filadeEspera;</span>
+<span class="nc" id="L47">    }</span>
+
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (o == this) return true;</span>
+<span class="nc bnc" id="L51" title="All 4 branches missed.">        if (o == null || o.getClass() != this.getClass()) return false;</span>
+<span class="nc" id="L52">        Loja c = (Loja) o;</span>
+<span class="nc" id="L53">        return super.equals(c);</span>
     }
-    
-    public String stringtoFile(){
-<span class="nc" id="L75">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L76">        sb.append(&quot;Utilizador:&quot;+this.getCodigo());</span>
-<span class="nc" id="L77">        sb.append(&quot;,&quot;+this.getPassword());</span>
-<span class="nc" id="L78">        sb.append(&quot;,&quot;+this.getUserName());</span>
-<span class="nc" id="L79">        sb.append(&quot;,&quot;+this.getLocationX());</span>
-<span class="nc" id="L80">        sb.append(&quot;,&quot;+this.getLocationY());</span>
-<span class="nc" id="L81">        sb.append(&quot;,&quot;+this.getEmail());</span>
-<span class="nc" id="L82">        return(sb.toString());</span>
+
+    public String toString() {
+<span class="nc" id="L57">        return super.toString() +</span>
+                this.filadeEspera +
+                tempoAtendimento;
     }
-    
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L64">        return super.hashCode();</span>
+    }
+
+    public Loja clone() {
+<span class="nc" id="L68">        return new Loja(this);</span>
+    }
+
+    public String stringtoFile() {
+<span class="nc" id="L72">        return (&quot;Utilizador:&quot; + this.getCodigo() +</span>
+<span class="nc" id="L73">                &quot;,&quot; + this.getPassword() +</span>
+<span class="nc" id="L74">                &quot;,&quot; + this.getUserName() +</span>
+<span class="nc" id="L75">                &quot;,&quot; + this.getLocationX() +</span>
+<span class="nc" id="L76">                &quot;,&quot; + this.getLocationY() +</span>
+<span class="nc" id="L77">                &quot;,&quot; + this.getEmail());</span>
+    }
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

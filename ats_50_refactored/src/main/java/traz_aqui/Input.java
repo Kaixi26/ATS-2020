@@ -10,7 +10,7 @@ public class Input {
 
     private static final String TEXT_NEWVALUE = "Novo valor: ";
 
-    static Scanner input = new Scanner(in);
+    public static Scanner input = new Scanner(in);
 
     private Input() {
     }

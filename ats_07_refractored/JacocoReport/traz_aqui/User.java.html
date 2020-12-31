@@ -1,127 +1,125 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package traz_aqui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$All_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package traz_aqui;
 
-import java.lang.StringBuilder;
+public abstract class User {
+    public String username;
+    public String password;
+    public Double locationX;
+    public Double locationY;
+    public String codigo;
+    public String email;
 
-public abstract class User
-{
-    protected String username;
-    protected String password;
-    protected Double locationX;
-    protected Double locationY;
-    protected String codigo;
-    protected String email;
-    
-    
+
     /**
      * COnstrutor para objetos da classe traz_aqui.User
      */
-    
-<span class="nc" id="L19">    public User(){</span>
-<span class="nc" id="L20">            this.username=this.codigo=this.password=this.email=&quot;&quot;;</span>
-<span class="nc" id="L21">            this.locationX=0.0;</span>
-<span class="nc" id="L22">            this.locationY=0.0;</span>
-<span class="nc" id="L23">    }</span>
-    
-<span class="nc" id="L25">    public User( String username , String codigo , String password , double locationX, double locationY,String email){</span>
-<span class="nc" id="L26">            this.username=username; </span>
-<span class="nc" id="L27">            this.password=password;</span>
-<span class="nc" id="L28">            this.codigo=codigo;</span>
-<span class="nc" id="L29">            this.locationX=locationX;</span>
-<span class="nc" id="L30">            this.locationY=locationY;</span>
-<span class="nc" id="L31">            this.email=email;</span>
-<span class="nc" id="L32">    }</span>
-        
-<span class="nc" id="L34">    public User(User p){</span>
-<span class="nc" id="L35">            this.username=p.getUserName();</span>
-<span class="nc" id="L36">            this.password=p.getPassword();</span>
-<span class="nc" id="L37">            this.codigo=p.getCodigo();</span>
-<span class="nc" id="L38">            this.locationX=p.getLocationX();</span>
-<span class="nc" id="L39">            this.locationY=p.getLocationY();</span>
-<span class="nc" id="L40">            this.email=p.getEmail();</span>
-<span class="nc" id="L41">        }</span>
-    
-    public String getEmail(){
-<span class="nc" id="L44">        return this.email;</span>
-        
+
+<span class="nc" id="L16">    public User() {</span>
+<span class="nc" id="L17">        this.username = this.codigo = this.password = this.email = &quot;&quot;;</span>
+<span class="nc" id="L18">        this.locationX = 0.0;</span>
+<span class="nc" id="L19">        this.locationY = 0.0;</span>
+<span class="nc" id="L20">    }</span>
+
+<span class="nc" id="L22">    public User(String username, String codigo, String password, double locationX, double locationY, String email) {</span>
+<span class="nc" id="L23">        this.username = username;</span>
+<span class="nc" id="L24">        this.password = password;</span>
+<span class="nc" id="L25">        this.codigo = codigo;</span>
+<span class="nc" id="L26">        this.locationX = locationX;</span>
+<span class="nc" id="L27">        this.locationY = locationY;</span>
+<span class="nc" id="L28">        this.email = email;</span>
+<span class="nc" id="L29">    }</span>
+
+<span class="nc" id="L31">    public User(User p) {</span>
+<span class="nc" id="L32">        this.username = p.getUserName();</span>
+<span class="nc" id="L33">        this.password = p.getPassword();</span>
+<span class="nc" id="L34">        this.codigo = p.getCodigo();</span>
+<span class="nc" id="L35">        this.locationX = p.getLocationX();</span>
+<span class="nc" id="L36">        this.locationY = p.getLocationY();</span>
+<span class="nc" id="L37">        this.email = p.getEmail();</span>
+<span class="nc" id="L38">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L41">        return this.email;</span>
+
     }
-    
-    public void setEmail(String email){
-<span class="nc" id="L49">        this.email=email;</span>
-<span class="nc" id="L50">    }</span>
-    
-    public String getUserName(){
-<span class="nc" id="L53">            return this.username;</span>
-        }
-    
-    public void setUserName(String username){
-<span class="nc" id="L57">            this.username=username;</span>
-<span class="nc" id="L58">        }</span>
-    
-    public String getPassword(){
-<span class="nc" id="L61">            return this.password;</span>
-        }
-    
-    public void setPassword(String password){
-<span class="nc" id="L65">            this.password=password;</span>
-<span class="nc" id="L66">        }</span>
-    
-    public String getCodigo(){
-<span class="nc" id="L69">            return this.codigo;</span>
-        }
-    
-    public void setCodigo(String codigo){
-<span class="nc" id="L73">            this.codigo=codigo;</span>
-<span class="nc" id="L74">        }    </span>
-    
-    public double getLocationX(){
-<span class="nc" id="L77">           return this.locationX;</span>
-       }
-    
-    public void setLocationX(double location){
-<span class="nc" id="L81">           this.locationX=location;</span>
-<span class="nc" id="L82">    }    </span>
-    
-    public double getLocationY(){
-<span class="nc" id="L85">           return this.locationX;</span>
-       }
-    
-    public void setLocationY(double location){
-<span class="nc" id="L89">           this.locationY=location;</span>
-<span class="nc" id="L90">    }    </span>
-    
-    public boolean equals(Object obj){
-<span class="nc bnc" id="L93" title="All 2 branches missed.">        if(obj==this) return true;</span>
-<span class="nc bnc" id="L94" title="All 4 branches missed.">        if(obj==null || obj.getClass()!=this.getClass()) return false;</span>
-<span class="nc" id="L95">        User v=(User) obj;</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        return this.getUserName()==v.getUserName() &amp;&amp;</span>
-<span class="nc bnc" id="L97" title="All 2 branches missed.">               this.getPassword()==v.getPassword() &amp;&amp;</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">               this.getLocationX()==v.getLocationX() &amp;&amp;</span>
-<span class="nc bnc" id="L99" title="All 2 branches missed.">               this.getLocationY()==v.getLocationY() &amp;&amp;</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">               this.getCodigo()==v.getCodigo() &amp;&amp;</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">               this.getEmail()==v.getEmail();</span>
+
+    public void setEmail(String email) {
+<span class="nc" id="L46">        this.email = email;</span>
+<span class="nc" id="L47">    }</span>
+
+    public String getUserName() {
+<span class="nc" id="L50">        return this.username;</span>
     }
-    
+
+    public void setUserName(String username) {
+<span class="nc" id="L54">        this.username = username;</span>
+<span class="nc" id="L55">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L58">        return this.password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L62">        this.password = password;</span>
+<span class="nc" id="L63">    }</span>
+
+    public String getCodigo() {
+<span class="nc" id="L66">        return this.codigo;</span>
+    }
+
+    public void setCodigo(String codigo) {
+<span class="nc" id="L70">        this.codigo = codigo;</span>
+<span class="nc" id="L71">    }</span>
+
+    public double getLocationX() {
+<span class="nc" id="L74">        return this.locationX;</span>
+    }
+
+    public void setLocationX(double location) {
+<span class="nc" id="L78">        this.locationX = location;</span>
+<span class="nc" id="L79">    }</span>
+
+    public double getLocationY() {
+<span class="nc" id="L82">        return this.locationX;</span>
+    }
+
+    public void setLocationY(double location) {
+<span class="nc" id="L86">        this.locationY = location;</span>
+<span class="nc" id="L87">    }</span>
+
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (obj == this) return true;</span>
+<span class="nc bnc" id="L91" title="All 4 branches missed.">        if (obj == null || obj.getClass() != this.getClass()) return false;</span>
+<span class="nc" id="L92">        User v = (User) obj;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        return this.getUserName().equals(v.getUserName()) &amp;&amp;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                this.getPassword().equals(v.getPassword()) &amp;&amp;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                this.getLocationX() == v.getLocationX() &amp;&amp;</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                this.getLocationY() == v.getLocationY() &amp;&amp;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                this.getCodigo().equals(v.getCodigo()) &amp;&amp;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                this.getEmail().equals(v.getEmail());</span>
+    }
+
     public abstract User clone();
-    
-        
-    public String toString(){
-<span class="nc" id="L108">        StringBuilder res = new StringBuilder();       </span>
-<span class="nc" id="L109">        res.append(this.getUserName());</span>
-<span class="nc" id="L110">        res.append(&quot; &quot;);</span>
-<span class="nc" id="L111">        res.append(this.getPassword());</span>
-<span class="nc" id="L112">        res.append(&quot; &quot;);</span>
-<span class="nc" id="L113">        res.append(this.getLocationX());</span>
-<span class="nc" id="L114">        res.append(&quot; &quot;);</span>
-<span class="nc" id="L115">        res.append(this.getLocationY());</span>
-<span class="nc" id="L116">        res.append(&quot; &quot;);</span>
-<span class="nc" id="L117">        res.append(this.getCodigo());</span>
-<span class="nc" id="L118">        res.append(&quot; &quot;);</span>
-<span class="nc" id="L119">        res.append(this.getEmail());</span>
-<span class="nc" id="L120">        return(res.toString());</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L105">        return super.hashCode();</span>
     }
-    
- 
-    
+
+    public String toString() {
+<span class="nc" id="L109">        return (this.getUserName() +</span>
+                &quot; &quot; +
+<span class="nc" id="L111">                this.getPassword() +</span>
+                &quot; &quot; +
+<span class="nc" id="L113">                this.getLocationX() +</span>
+                &quot; &quot; +
+<span class="nc" id="L115">                this.getLocationY() +</span>
+                &quot; &quot; +
+<span class="nc" id="L117">                this.getCodigo() +</span>
+                &quot; &quot; +
+<span class="nc" id="L119">                this.getEmail());</span>
+    }
+
+
     // FUNCTIONS THAT ARE NOT DEFAULT
     public abstract String stringtoFile();
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EnergyCheckUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">EnergyCheckUtils.java</span></div><h1>EnergyCheckUtils.java</h1><pre class="source lang-java linenums">import traz_aqui.Main;
+
+import java.lang.reflect.Field;
+
+<span class="nc" id="L5">public class EnergyCheckUtils {</span>
+    public native static int ProfileInit();
+    public native static String EnergyStatCheck();
+    public native static void ProfileDealloc();
+
+    static {
+<span class="nc" id="L11">        System.setProperty(&quot;java.library.path&quot;, System.getProperty(&quot;user.dir&quot;));</span>
+        try {
+<span class="nc" id="L13">            Field fieldSysPath = ClassLoader.class.getDeclaredField(&quot;sys_paths&quot;);</span>
+<span class="nc" id="L14">            fieldSysPath.setAccessible(true);</span>
+<span class="nc" id="L15">            fieldSysPath.set(null, null);</span>
+<span class="nc" id="L16">        } catch (Exception e) {</span>
+<span class="nc" id="L17">            e.printStackTrace();</span>
+<span class="nc" id="L18">        }</span>
+<span class="nc" id="L19">        System.loadLibrary(&quot;CPUScaler&quot;);</span>
+<span class="nc" id="L20">    }</span>
+
+    public static double[] getEnergyStats() {
+<span class="nc" id="L23">        String[] energy = EnergyStatCheck().replace(&quot;,&quot;, &quot;.&quot;).split(&quot;#&quot;);</span>
+<span class="nc" id="L24">        double[] stats = new double[3];</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        for(int i=0; i&lt;3; i++)</span>
+<span class="nc" id="L26">            stats[i] = Double.parseDouble(energy[i]);</span>
+<span class="nc" id="L27">        return stats;</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L31">        ProfileInit();</span>
+<span class="nc" id="L32">        double[] before = getEnergyStats();</span>
+<span class="nc" id="L33">        Main.main(args);</span>
+<span class="nc" id="L34">        double[] after = getEnergyStats();</span>
+<span class="nc" id="L35">        System.out.println(&quot;DRAM, CPU, PACKAGE&quot;);</span>
+<span class="nc" id="L36">        System.out.print(((after[0] - before[0]) / 10) + &quot;, &quot;);</span>
+<span class="nc" id="L37">        System.out.print(((after[1] - before[1]) / 10) + &quot;, &quot;);</span>
+<span class="nc" id="L38">        System.out.println(((after[2] - before[2]) / 10));</span>
+<span class="nc" id="L39">        ProfileDealloc();</span>
+<span class="nc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

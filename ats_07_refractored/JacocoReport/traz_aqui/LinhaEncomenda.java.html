@@ -1,105 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinhaEncomenda.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">LinhaEncomenda.java</span></div><h1>LinhaEncomenda.java</h1><pre class="source lang-java linenums">package traz_aqui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinhaEncomenda.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$All_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">LinhaEncomenda.java</span></div><h1>LinhaEncomenda.java</h1><pre class="source lang-java linenums">package traz_aqui;
 
 /**
  * Escreva a descrição da classe traz_aqui.LinhaEncomenda aqui.
- * 
- * @author (seu nome) 
+ *
+ * @author (seu nome)
  * @version (número de versão ou data)
  */
-public class LinhaEncomenda
-{
+public class LinhaEncomenda {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private String codLinha;
     private String descricao;
     private Double preco;
     private Double quantidade;
-    
+
     /**
      * COnstrutor para objetos da classe Produto
      */
-    public LinhaEncomenda()
-<span class="nc" id="L21">    {</span>
-<span class="nc" id="L22">        this.codLinha=&quot;&quot;;</span>
-<span class="nc" id="L23">        this.descricao=&quot;&quot;;</span>
-<span class="nc" id="L24">        this.preco=0.0;</span>
-<span class="nc" id="L25">        this.quantidade=0.0;</span>
-<span class="nc" id="L26">    }</span>
-    
-<span class="nc" id="L28">    public LinhaEncomenda(String codLinha, String descicao, double preco, double quantidade){</span>
-<span class="nc" id="L29">        this.codLinha =codLinha;</span>
-<span class="nc" id="L30">        this.descricao=descicao;</span>
-<span class="nc" id="L31">        this.preco=preco;</span>
-<span class="nc" id="L32">        this.quantidade=quantidade;</span>
-<span class="nc" id="L33">    }</span>
-    
-<span class="nc" id="L35">    public LinhaEncomenda(LinhaEncomenda l){</span>
-<span class="nc" id="L36">        this.codLinha = l.getcodLinha();</span>
-<span class="nc" id="L37">    }</span>
-    
-    public double getQuantidade(){
-<span class="nc" id="L40">           return this.quantidade;</span>
-    }
-    
-    public void setQuantidade(double quantidade){
-<span class="nc" id="L44">           this.quantidade=quantidade;</span>
-<span class="nc" id="L45">    }</span>
-    
-    public double getPreco(){
-<span class="nc" id="L48">           return this.preco;</span>
-    }
-    
-    public void setPreco(double preco){
-<span class="nc" id="L52">           this.preco=preco;</span>
-<span class="nc" id="L53">    }</span>
-    
-    public String getDescricao(){
-<span class="nc" id="L56">           return this.descricao;</span>
-    }
-    
-    public void setDescicao(String descicao){
-<span class="nc" id="L60">           this.codLinha=descicao;</span>
-<span class="nc" id="L61">    }</span>
-    
-    public String getcodLinha(){
-<span class="nc" id="L64">           return this.codLinha;</span>
-    }
-    
-    public void setcodLinha(String codLinha){
-<span class="nc" id="L68">           this.codLinha=codLinha;</span>
-<span class="nc" id="L69">    }</span>
-    
-    public LinhaEncomenda clone(){
-<span class="nc" id="L72">        return new LinhaEncomenda(this);</span>
-    }
-    
-    public boolean equals(Object obj){
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if(obj==this) return true;</span>
-<span class="nc bnc" id="L77" title="All 4 branches missed.">        if(obj==null || obj.getClass()!=this.getClass()) return false;</span>
-<span class="nc" id="L78">        LinhaEncomenda v=(LinhaEncomenda) obj;</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        return this.getcodLinha()==v.getcodLinha();</span>
-    }
-    
-    public String toString(){
-<span class="nc" id="L83">        StringBuilder res = new StringBuilder();       </span>
-<span class="nc" id="L84">        res.append(this.getcodLinha());</span>
-<span class="nc" id="L85">        res.append(this.getDescricao());</span>
-<span class="nc" id="L86">        res.append(this.getPreco());</span>
-<span class="nc" id="L87">        res.append(this.getQuantidade());</span>
-<span class="nc" id="L88">        System.out.println(res.toString());</span>
-<span class="nc" id="L89">        return(res.toString());</span>
-    }
-    
-    public String stringtoFile(){
-<span class="nc" id="L93">        StringBuilder sb = new StringBuilder();</span>
-        
-<span class="nc" id="L95">        sb.append(this.getcodLinha());</span>
-<span class="nc" id="L96">        sb.append(&quot;,&quot;+this.getDescricao());</span>
-<span class="nc" id="L97">        sb.append(&quot;,&quot;+this.getQuantidade());</span>
-<span class="nc" id="L98">        sb.append(&quot;,&quot;+this.getPreco());</span>
-    
-<span class="nc" id="L100">        return sb.toString();</span>
+<span class="nc" id="L19">    public LinhaEncomenda() {</span>
+<span class="nc" id="L20">        this.codLinha = &quot;&quot;;</span>
+<span class="nc" id="L21">        this.descricao = &quot;&quot;;</span>
+<span class="nc" id="L22">        this.preco = 0.0;</span>
+<span class="nc" id="L23">        this.quantidade = 0.0;</span>
+<span class="nc" id="L24">    }</span>
+
+<span class="nc" id="L26">    public LinhaEncomenda(String codLinha, String descicao, double preco, double quantidade) {</span>
+<span class="nc" id="L27">        this.codLinha = codLinha;</span>
+<span class="nc" id="L28">        this.descricao = descicao;</span>
+<span class="nc" id="L29">        this.preco = preco;</span>
+<span class="nc" id="L30">        this.quantidade = quantidade;</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="nc" id="L33">    public LinhaEncomenda(LinhaEncomenda l) {</span>
+<span class="nc" id="L34">        this.codLinha = l.getcodLinha();</span>
+<span class="nc" id="L35">    }</span>
+
+    public double getQuantidade() {
+<span class="nc" id="L38">        return this.quantidade;</span>
     }
 
-    
+    public void setQuantidade(double quantidade) {
+<span class="nc" id="L42">        this.quantidade = quantidade;</span>
+<span class="nc" id="L43">    }</span>
+
+    public double getPreco() {
+<span class="nc" id="L46">        return this.preco;</span>
+    }
+
+    public void setPreco(double preco) {
+<span class="nc" id="L50">        this.preco = preco;</span>
+<span class="nc" id="L51">    }</span>
+
+    public String getDescricao() {
+<span class="nc" id="L54">        return this.descricao;</span>
+    }
+
+    public void setDescicao(String descicao) {
+<span class="nc" id="L58">        this.codLinha = descicao;</span>
+<span class="nc" id="L59">    }</span>
+
+    public String getcodLinha() {
+<span class="nc" id="L62">        return this.codLinha;</span>
+    }
+
+    public void setcodLinha(String codLinha) {
+<span class="nc" id="L66">        this.codLinha = codLinha;</span>
+<span class="nc" id="L67">    }</span>
+
+    public LinhaEncomenda clone() {
+<span class="nc" id="L70">        return new LinhaEncomenda(this);</span>
+    }
+
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (obj == this) return true;</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">        if (obj == null || obj.getClass() != this.getClass()) return false;</span>
+<span class="nc" id="L76">        LinhaEncomenda v = (LinhaEncomenda) obj;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        return this.getcodLinha() == v.getcodLinha();</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L82">        return super.hashCode();</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L86">        StringBuilder res = new StringBuilder();</span>
+<span class="nc" id="L87">        res.append(this.getcodLinha());</span>
+<span class="nc" id="L88">        res.append(this.getDescricao());</span>
+<span class="nc" id="L89">        res.append(this.getPreco());</span>
+<span class="nc" id="L90">        res.append(this.getQuantidade());</span>
+<span class="nc" id="L91">        System.out.println(res.toString());</span>
+<span class="nc" id="L92">        return (res.toString());</span>
+    }
+
+    public String stringtoFile() {
+
+<span class="nc" id="L97">        return this.getcodLinha() +</span>
+<span class="nc" id="L98">                &quot;,&quot; + this.getDescricao() +</span>
+<span class="nc" id="L99">                &quot;,&quot; + this.getQuantidade() +</span>
+<span class="nc" id="L100">                &quot;,&quot; + this.getPreco();</span>
+    }
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

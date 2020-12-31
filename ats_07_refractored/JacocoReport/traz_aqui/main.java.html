@@ -1,893 +1,964 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">main.java</span></div><h1>main.java</h1><pre class="source lang-java linenums">package traz_aqui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$All_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">main.java</span></div><h1>main.java</h1><pre class="source lang-java linenums">package traz_aqui;
 
-import java.util.*;
-import java.time.LocalDate;
-import java.util.Comparator;
-import java.lang.String;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.DateTimeException;
-import java.nio.file.*;
-import java.io.*;
+import java.time.LocalDate;
+import java.util.*;
 
 
-public class main
-{  
+public class main {
+    public static final String DATA_INCORRETA = &quot;data incorreta&quot;;
+    public static final String TRAZ_AQUI_VOLUNTARIO = &quot;traz_aqui.Voluntario&quot;;
+    public static final String TRAZ_AQUI_TRANSPORTADORA = &quot;traz_aqui.Transportadora&quot;;
     //ainda nao criadas.
-    private HashMap&lt;String,User&gt; users; // codigo , user 
-    private HashMap&lt;String,Encomenda&gt; Encomendas; // codigoenc , encomenda 
-    
-<span class="nc" id="L22">    public main (){</span>
-<span class="nc" id="L23">        this.users= new HashMap&lt;String,User&gt;(); // codigo , user </span>
-<span class="nc" id="L24">        this.Encomendas= new HashMap&lt;String,Encomenda&gt; ();</span>
-<span class="nc" id="L25">    }</span>
+    private final HashMap&lt;String, User&gt; users; // codigo , user
+    private final HashMap&lt;String, Encomenda&gt; Encomendas; // codigoenc , encomenda
+
+<span class="nc" id="L21">    public main() {</span>
+<span class="nc" id="L22">        this.users = new HashMap&lt;&gt;(); // codigo , user</span>
+<span class="nc" id="L23">        this.Encomendas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L24">    }</span>
+
     //Utilizador:&lt;CodUtilizador&gt;,&lt;Nome&gt;,&lt;GPS&gt;
-    private static Buyer readBuyerLOG(String read){
+    private static Buyer readBuyerLOG(String read) {
 <span class="nc" id="L28">        String[] b = read.split(&quot;,&quot;);</span>
 <span class="nc" id="L29">        String codigo = b[0];</span>
 <span class="nc" id="L30">        String username = b[1];</span>
 <span class="nc" id="L31">        double lx = Double.parseDouble(b[2]);</span>
 <span class="nc" id="L32">        double ly = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L33">        Buyer B = new Buyer (username,codigo,codigo,lx,ly,codigo);</span>
-<span class="nc" id="L34">        return B;</span>
+<span class="nc" id="L33">        return new Buyer(username, codigo, codigo, lx, ly, codigo);</span>
     }
-        
+
     //traz_aqui.Loja:&lt;CodLoja&gt;, &lt;NomeLoja&gt;,&lt;GPS&gt;
-    private static Loja readLojaLOG(String read){
-<span class="nc" id="L39">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L40">        String codigo = b[0];</span>
-<span class="nc" id="L41">        String username = b[1];</span>
-<span class="nc" id="L42">        double lx = Double.parseDouble(b[2]);</span>
-<span class="nc" id="L43">        double ly = Double.parseDouble(b[3]);</span>
+    private static Loja readLojaLOG(String read) {
+<span class="nc" id="L38">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L39">        String codigo = b[0];</span>
+<span class="nc" id="L40">        String username = b[1];</span>
+<span class="nc" id="L41">        double lx = Double.parseDouble(b[2]);</span>
+<span class="nc" id="L42">        double ly = Double.parseDouble(b[3]);</span>
         //ArrayList queue = new ArrayList&lt;&gt;();
-<span class="nc" id="L45">        Loja loja = new Loja(username,codigo,codigo,lx,ly,codigo);</span>
-<span class="nc" id="L46">        return loja;</span>
+<span class="nc" id="L44">        return new Loja(username, codigo, codigo, lx, ly, codigo);</span>
     }
-        
-   
+
+
     //traz_aqui.Voluntario:&lt;CodVoluntÃ¡rio&gt;, &lt;Nome&gt;,&lt;GPS&gt; ,&lt;Raio&gt;Â
-    private static Voluntario readVoluntarioLOG(String read){
-<span class="nc" id="L52">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L53">        String codigo = b[0];</span>
-<span class="nc" id="L54">        String username = b[1];</span>
-<span class="nc" id="L55">        double lx = Double.parseDouble(b[2]);</span>
-<span class="nc" id="L56">        double ly = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L57">        double raio = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L58">        Voluntario v = new Voluntario(username,codigo,codigo,lx,ly,codigo, raio,true,0,0);</span>
-<span class="nc" id="L59">        return v;</span>
+    private static Voluntario readVoluntarioLOG(String read) {
+<span class="nc" id="L50">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L51">        String codigo = b[0];</span>
+<span class="nc" id="L52">        String username = b[1];</span>
+<span class="nc" id="L53">        double lx = Double.parseDouble(b[2]);</span>
+<span class="nc" id="L54">        double ly = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L55">        double raio = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L56">        return new Voluntario(username, codigo, codigo, lx, ly, codigo, raio, true, 0, 0);</span>
     }
-        
+
     //traz_aqui.Transportadora:&lt;CodEmpresa&gt;,&lt;NomeEmpresa&gt;,&lt;GPS&gt;,&lt;NIF&gt;,&lt;raio&gt;,&lt;preco-por-km&gt;
-    private static Transportadora readTransporteLOG(String read){
-<span class="nc" id="L64">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L65">        String codigo = b[0];</span>
-<span class="nc" id="L66">        String username = b[1];</span>
-<span class="nc" id="L67">        double lx = Double.parseDouble(b[2]);</span>
-<span class="nc" id="L68">        double ly = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L69">        int nif = Integer.parseInt(b[4]);</span>
-<span class="nc" id="L70">        double raio = Double.parseDouble(b[5]);</span>
-<span class="nc" id="L71">        double custokm = Double.parseDouble(b[6]);</span>
-<span class="nc" id="L72">        Transportadora  e = new Transportadora(username,codigo,codigo,lx,ly,codigo, custokm , raio ,nif , 0, 0);</span>
-<span class="nc" id="L73">        return e;</span>
+    private static Transportadora readTransporteLOG(String read) {
+<span class="nc" id="L61">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L62">        String codigo = b[0];</span>
+<span class="nc" id="L63">        String username = b[1];</span>
+<span class="nc" id="L64">        double lx = Double.parseDouble(b[2]);</span>
+<span class="nc" id="L65">        double ly = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L66">        int nif = Integer.parseInt(b[4]);</span>
+<span class="nc" id="L67">        double raio = Double.parseDouble(b[5]);</span>
+<span class="nc" id="L68">        double custokm = Double.parseDouble(b[6]);</span>
+<span class="nc" id="L69">        return  new Transportadora(username, codigo, codigo, lx, ly, codigo, custokm, raio, nif, 0, 0);</span>
+
     }
-        
+
     //&lt;CodEncomenda&gt;, &lt;CodUtilizador&gt;, &lt;CodLoja&gt;, &lt;Peso&gt;, &lt;traz_aqui.LinhaEncomenda&gt;+
-    private static Encomenda readEncomendaLOG(String read){
-<span class="nc" id="L78">        int i=4;</span>
-<span class="nc" id="L79">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L80">        String codenc = b[0];</span>
-<span class="nc" id="L81">        String codbuyer = b[1];</span>
-<span class="nc" id="L82">        String codloja = b[2];</span>
+    private static Encomenda readEncomendaLOG(String read) {
+<span class="nc" id="L75">        int i = 4;</span>
+<span class="nc" id="L76">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L77">        String codenc = b[0];</span>
+<span class="nc" id="L78">        String codbuyer = b[1];</span>
+<span class="nc" id="L79">        String codloja = b[2];</span>
         //String coddeliever = b[3];
-<span class="nc" id="L84">        double peso = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L81">        double peso = Double.parseDouble(b[3]);</span>
         //LocalDate data = LocalDate.parse(b[5]);
         //int state = Integer.parseInt(b[6]);
-<span class="nc" id="L87">        ArrayList&lt;LinhaEncomenda&gt; produto = new ArrayList&lt;&gt;();</span>
-        
-        //&lt;CodProduto&gt;, &lt;DescriÃ§Ã£o&gt;, &lt;Quantidade&gt;, &lt;ValorUnitÃ¡rio&gt;
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        while(i&lt;(b.length)){</span>
-             
-<span class="nc" id="L92">            String codlinha = b[i];</span>
-<span class="nc" id="L93">            String descricao = b[i+1];</span>
-<span class="nc" id="L94">            double preco = Double.parseDouble(b[i+3]);</span>
-<span class="nc" id="L95">            double quantidade = Double.parseDouble(b[i+2]);</span>
-<span class="nc" id="L96">            LinhaEncomenda l = new LinhaEncomenda(codlinha,descricao,preco,quantidade);</span>
-            
-<span class="nc" id="L98">            produto.add(l);</span>
-<span class="nc" id="L99">            i+=4;</span>
-            
-<span class="nc" id="L101">        }</span>
-<span class="nc" id="L102">        Encomenda  e = new Encomenda(codenc,codbuyer,codloja,&quot;&quot;, peso , null , 2 , produto);</span>
-<span class="nc" id="L103">        return e;</span>
-    }
-    
-    public void writeFile2(String nomeFicheiro) throws FileNotFoundException,IOException{
-<span class="nc" id="L107">        PrintWriter pw = new PrintWriter(nomeFicheiro);</span>
-           
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        for(User u : this.users.values()){</span>
-<span class="nc" id="L110">                String s = u.stringtoFile();</span>
-<span class="nc" id="L111">                pw.println(s);</span>
-<span class="nc" id="L112">        }</span>
-        
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        for(Encomenda e : this.Encomendas.values()){</span>
-<span class="nc" id="L115">            String s = e.stringtoFile();</span>
-<span class="nc" id="L116">            pw.println(s);</span>
-<span class="nc" id="L117">        }</span>
-        
-<span class="nc" id="L119">        pw.flush();</span>
-<span class="nc" id="L120">        pw.close();</span>
-<span class="nc" id="L121">    }</span>
-    
-    public User getUserByEmail (String email){
-<span class="nc" id="L124">        User x = null ; </span>
-<span class="nc bnc" id="L125" title="All 2 branches missed.">        for(User a : users.values()){</span>
-<span class="nc bnc" id="L126" title="All 2 branches missed.">            if(a.getEmail().equals(email)){</span>
-<span class="nc" id="L127">                return a.clone();</span>
-            }
-            
-<span class="nc" id="L130">    }</span>
-<span class="nc" id="L131">    return null ; </span>
-    }
-    
-    public ArrayList&lt;Encomenda&gt; getEncomendasbyCodigoUser(String codigo){
-<span class="nc" id="L135">        ArrayList&lt;Encomenda&gt; lista = new ArrayList&lt;&gt;();</span>
-        
-<span class="nc bnc" id="L137" title="All 2 branches missed.">        for(Encomenda e : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">            if(e.getBuyer().equals(codigo)){</span>
-<span class="nc" id="L139">                lista.add(e.clone());</span>
-            }
-<span class="nc" id="L141">        }</span>
-<span class="nc" id="L142">        return lista;</span>
-    }
-    //retorna lista com todas as lojas 
-    public ArrayList&lt;Loja&gt; Tlojas(){
-<span class="nc" id="L146">        ArrayList&lt;Loja&gt; r = new ArrayList&lt;&gt;();</span>
-        
-<span class="nc bnc" id="L148" title="All 2 branches missed.">        for(User u : this.users.values()){</span>
-<span class="nc bnc" id="L149" title="All 2 branches missed.">            if(u.getClass().getName().equals(&quot;traz_aqui.Loja&quot;)){</span>
-<span class="nc" id="L150">                r.add((Loja) u.clone());</span>
-            }
-<span class="nc" id="L152">        }</span>
-<span class="nc" id="L153">        return r;</span>
-    }
-    //retorna lista com todas as Transportadoras 
-    public ArrayList&lt;Transportadora&gt; Ttransportadoras(){
-<span class="nc" id="L157">        ArrayList&lt;Transportadora&gt; r = new ArrayList&lt;&gt;();</span>
-        
-<span class="nc bnc" id="L159" title="All 2 branches missed.">        for(User u : this.users.values()){</span>
-<span class="nc bnc" id="L160" title="All 2 branches missed.">            if(u.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc" id="L161">                r.add((Transportadora) u.clone());</span>
-            }
-<span class="nc" id="L163">        }</span>
-<span class="nc" id="L164">        return r;</span>
-    }
-    //retorna lista com todas os voluntarios 
-    public ArrayList&lt;Voluntario&gt; Tvoluntarios(){
-<span class="nc" id="L168">        ArrayList&lt;Voluntario&gt; r = new ArrayList&lt;&gt;();</span>
-        
-<span class="nc bnc" id="L170" title="All 2 branches missed.">        for(User u : this.users.values()){</span>
-<span class="nc bnc" id="L171" title="All 2 branches missed.">            if(u.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){</span>
-<span class="nc" id="L172">                r.add((Voluntario) u.clone());</span>
-            }
-<span class="nc" id="L174">        }</span>
-<span class="nc" id="L175">        return r;</span>
-    }
-    //vai buscar o user pelo codigo 
-    public User getUserByCodigo (String codigo){
-<span class="nc" id="L179">        User a = null ; </span>
-<span class="nc bnc" id="L180" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L181">              a = users.get(codigo).clone();</span>
-            }
-<span class="nc" id="L183">        return a ;    </span>
-    }
-    
+<span class="nc" id="L84">        ArrayList&lt;LinhaEncomenda&gt; produto = new ArrayList&lt;&gt;();</span>
 
-    public void mudaestadoVoluntario(User a){
-<span class="nc" id="L188">        Voluntario b=(Voluntario) a; </span>
-<span class="nc bnc" id="L189" title="All 2 branches missed.">        if(b.getlivre()){b.setlivre(false);System.out.println(&quot;traz_aqui.Voluntario está agora Ocupado&quot;);}</span>
-<span class="nc" id="L190">        else{b.setlivre(true);System.out.println(&quot;traz_aqui.Voluntario está agora Livre&quot;);}</span>
-    
-    
-<span class="nc" id="L193">    }</span>
-    
-    //verificar se codigo existe 
-    public boolean checkCodigo (String codigo){
-<span class="nc" id="L197">        boolean a = true ; </span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L199">              return false ;</span>
-            }
-<span class="nc" id="L201">        return a ;    </span>
+        //&lt;CodProduto&gt;, &lt;DescriÃ§Ã£o&gt;, &lt;Quantidade&gt;, &lt;ValorUnitÃ¡rio&gt;
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        while (i &lt; (b.length)) {</span>
+
+<span class="nc" id="L89">            String codlinha = b[i];</span>
+<span class="nc" id="L90">            String descricao = b[i + 1];</span>
+<span class="nc" id="L91">            double preco = Double.parseDouble(b[i + 3]);</span>
+<span class="nc" id="L92">            double quantidade = Double.parseDouble(b[i + 2]);</span>
+<span class="nc" id="L93">            LinhaEncomenda l = new LinhaEncomenda(codlinha, descricao, preco, quantidade);</span>
+
+<span class="nc" id="L95">            produto.add(l);</span>
+<span class="nc" id="L96">            i += 4;</span>
+
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">        return new Encomenda(codenc, codbuyer, codloja, &quot;&quot;, peso, null, 2, produto);</span>
     }
-    //adiciona buyer
-    public int addBuy(Buyer u){
-<span class="nc bnc" id="L205" title="All 2 branches missed.">        if(this.users.containsValue(u)) return -1;</span>
-        else{
-<span class="nc" id="L207">            this.users.put(u.getCodigo(),u.clone());</span>
-<span class="nc" id="L208">            return 1;</span>
-        }
-    }
-    //adiciona voluntario 
-    public int addVol(Voluntario u){
-<span class="nc bnc" id="L213" title="All 2 branches missed.">        if(this.users.containsValue(u)) return -1;</span>
-        else{
-<span class="nc" id="L215">            this.users.put(u.getCodigo(),u.clone());</span>
-<span class="nc" id="L216">            return 1;</span>
-        }
-    }
-    
-    public int addLoja (Loja u){
-<span class="nc bnc" id="L221" title="All 2 branches missed.">        if(this.users.containsValue(u)) return -1;</span>
-        else{
-<span class="nc" id="L223">            this.users.put(u.getCodigo(),u.clone());</span>
-<span class="nc" id="L224">            return 1;</span>
-        }
-    }
-    
-    public int addTrans(Transportadora u){
-<span class="nc bnc" id="L229" title="All 2 branches missed.">        if(this.users.containsValue(u)) return -1;</span>
-        else{
-<span class="nc" id="L231">            this.users.put(u.getCodigo(),u.clone());</span>
-<span class="nc" id="L232">            return 1;</span>
-        }
-    }
-    
-    public int addEnc(Encomenda e){
-<span class="nc bnc" id="L237" title="All 2 branches missed.">        if(this.Encomendas.containsValue(e)) return -1;</span>
-        else{
-<span class="nc" id="L239">           Encomenda enc = e.clone();</span>
-<span class="nc" id="L240">           this.Encomendas.put(enc.getcodEncomenda(),enc);</span>
-<span class="nc" id="L241">           return 1;</span>
-        }
-    }
-    
-    public static  main parse (String file, int tipo){
-<span class="nc" id="L246">        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L247">        try { lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8); }</span>
-<span class="nc" id="L248">        catch(IOException exc) { System.out.println(exc.getMessage()); }</span>
-<span class="nc" id="L249">        main b = new main();</span>
+
+    public static main parse(String file, int tipo) {
+<span class="nc" id="L103">        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L105">            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);</span>
+<span class="nc" id="L106">        } catch (IOException exc) {</span>
+<span class="nc" id="L107">            System.out.println(exc.getMessage());</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">        main b = new main();</span>
         String[] s;
         //int i=0;
-<span class="nc bnc" id="L252" title="All 2 branches missed.">        for (String line : lines) {</span>
-<span class="nc" id="L253">             s = line.split(&quot;:&quot;, 2); </span>
-             //System.out.println(i);
-             //i+=1;
-<span class="nc bnc" id="L256" title="All 2 branches missed.">            if(s[0].equals(&quot;Utilizador&quot;)){</span>
-                try{
-<span class="nc bnc" id="L258" title="All 2 branches missed.">                    if(tipo==1){</span>
-<span class="nc" id="L259">                    Buyer u = readBuyerLOG(s[1]);</span>
-                    
-<span class="nc" id="L261">                    b.addBuy(u);}</span>
-                    else{
-<span class="nc" id="L263">                    Buyer u = readBuyer(s[1]);</span>
-<span class="nc" id="L264">                    b.addBuy(u);</span>
-                
-                }
-                    
-                    
-                }
-<span class="nc" id="L270">                catch(NullPointerException e){</span>
-                    
-<span class="nc" id="L272">                }</span>
-            }
-            
-<span class="nc bnc" id="L275" title="All 2 branches missed.">            if(s[0].equals(&quot;traz_aqui.Loja&quot;)){</span>
-                try{
-<span class="nc bnc" id="L277" title="All 2 branches missed.">                    if(tipo==1){</span>
-<span class="nc" id="L278">                    Loja l = readLojaLOG(s[1]);</span>
-<span class="nc" id="L279">                    b.addLoja(l);}else{Loja l = readLoja(s[1]);b.addLoja(l); }</span>
-                }
-<span class="nc" id="L281">                catch(NullPointerException e){</span>
-<span class="nc" id="L282">                    }</span>
-            }
-          
-<span class="nc bnc" id="L285" title="All 2 branches missed.">            if(s[0].equals(&quot;traz_aqui.Voluntario&quot;)){</span>
-                 try{
-<span class="nc bnc" id="L287" title="All 2 branches missed.">                     if(tipo==1){</span>
-<span class="nc" id="L288">                     Voluntario v = readVoluntarioLOG(s[1]);</span>
-                     
-<span class="nc" id="L290">                     b.addVol(v);}</span>
-<span class="nc" id="L291">                     else{Voluntario v = readVoluntario(s[1]);b.addVol(v);}</span>
-                 }
-<span class="nc" id="L293">                 catch(NullPointerException e){</span>
-<span class="nc" id="L294">                    }</span>
-            }
-          
-<span class="nc bnc" id="L297" title="All 2 branches missed.">            if(s[0].equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc bnc" id="L298" title="All 2 branches missed.">                 try{if(tipo==1){</span>
-<span class="nc" id="L299">                     Transportadora t = readTransporteLOG(s[1]);</span>
-                     
-<span class="nc" id="L301">                     b.addTrans(t);}</span>
-                     else{
-<span class="nc" id="L303">                         Transportadora t = readTransporte(s[1]);</span>
-<span class="nc" id="L304">                         b.addTrans(t);</span>
-                        }
-                    }
-<span class="nc" id="L307">                 catch(NullPointerException e){</span>
-<span class="nc" id="L308">                    }</span>
-            }
-          
-<span class="nc bnc" id="L311" title="All 2 branches missed.">            if(s[0].equals(&quot;traz_aqui.Encomenda&quot;)){</span>
-<span class="nc bnc" id="L312" title="All 2 branches missed.">                try{if(tipo==1){</span>
-<span class="nc" id="L313">                    Encomenda e = readEncomendaLOG(s[1]);</span>
-                    
-<span class="nc" id="L315">                    b.addEnc(e);}</span>
-                    else{
-<span class="nc" id="L317">                        Encomenda e = readEncomenda(s[1]);</span>
-<span class="nc" id="L318">                        b.addEnc(e);</span>
-                    }
-                }
-<span class="nc" id="L321">                catch(NullPointerException e){</span>
-<span class="nc" id="L322">                }</span>
-            }
-            
-<span class="nc bnc" id="L325" title="All 2 branches missed.">            if(s[0].equals(&quot;Aceite&quot;)){</span>
-            try{
-<span class="nc" id="L327">                    String a = s[1];</span>
-<span class="nc" id="L328">                    b.mudaEstado(a);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (String line : lines) {</span>
+<span class="nc" id="L113">            s = line.split(&quot;:&quot;, 2);</span>
+            //System.out.println(i);
+            //i+=1;
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if (s[0].equals(&quot;Utilizador&quot;)) {</span>
+                try {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                    if (tipo == 1) {</span>
+<span class="nc" id="L119">                        Buyer u = readBuyerLOG(s[1]);</span>
 
-                }
-<span class="nc" id="L331">                catch(NullPointerException e){</span>
-<span class="nc" id="L332">                }</span>
-            }
-          
-<span class="nc" id="L335">        }</span>
-    
-<span class="nc" id="L337">        return b;</span>
-    
-    }
-    //muda estado de encomenda dps de ler aceite para pronta para ser recolhida por um voluntario
-    public void mudaEstado(String u){
-        
-<span class="nc bnc" id="L343" title="All 2 branches missed.">        if(this.Encomendas.containsKey(u)){</span>
-<span class="nc" id="L344">        Encomenda e = Encomendas.get(u);</span>
-<span class="nc" id="L345">        mudaestadoENC(u,3);</span>
-        }
-<span class="nc" id="L347">        return ; </span>
-    
-    }
-        
-    
-    
-    //String username , String codigo , String password , double locationX, double locationY, ArrayList encomenda){
+<span class="nc" id="L121">                        b.addBuy(u);</span>
+<span class="nc" id="L122">                    } else {</span>
+<span class="nc" id="L123">                        Buyer u = readBuyer(s[1]);</span>
+<span class="nc" id="L124">                        b.addBuy(u);</span>
 
-    private static Buyer readBuyer(String read){
-<span class="nc" id="L356">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L357">        String codigo = b[0];</span>
-<span class="nc" id="L358">        String password = b[1];</span>
-<span class="nc" id="L359">        String username = b[2];</span>
-<span class="nc" id="L360">        double lx = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L361">        double ly = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L362">        String email =b[5];</span>
-<span class="nc" id="L363">        Buyer B = new Buyer (username,codigo,password,lx,ly,email);</span>
-<span class="nc" id="L364">        return B;</span>
+                    }
+
+
+<span class="nc" id="L129">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L130">                    e.printStackTrace();</span>
+<span class="nc" id="L131">                }</span>
+            }
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (s[0].equals(&quot;traz_aqui.Loja&quot;)) {</span>
+                try {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">                    if (tipo == 1) {</span>
+<span class="nc" id="L137">                        Loja l = readLojaLOG(s[1]);</span>
+<span class="nc" id="L138">                        b.addLoja(l);</span>
+<span class="nc" id="L139">                    } else {</span>
+<span class="nc" id="L140">                        Loja l = readLoja(s[1]);</span>
+<span class="nc" id="L141">                        b.addLoja(l);</span>
+                    }
+<span class="nc" id="L143">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L144">                    e.printStackTrace();</span>
+<span class="nc" id="L145">                }</span>
+            }
+
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            if (s[0].equals(TRAZ_AQUI_VOLUNTARIO)) {</span>
+                try {
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                    if (tipo == 1) {</span>
+<span class="nc" id="L151">                        Voluntario v = readVoluntarioLOG(s[1]);</span>
+
+<span class="nc" id="L153">                        b.addVol(v);</span>
+<span class="nc" id="L154">                    } else {</span>
+<span class="nc" id="L155">                        Voluntario v = readVoluntario(s[1]);</span>
+<span class="nc" id="L156">                        b.addVol(v);</span>
+                    }
+<span class="nc" id="L158">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L159">                    e.printStackTrace();</span>
+<span class="nc" id="L160">                }</span>
+            }
+
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            if (s[0].equals(TRAZ_AQUI_TRANSPORTADORA)) {</span>
+                try {
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                    if (tipo == 1) {</span>
+<span class="nc" id="L166">                        Transportadora t = readTransporteLOG(s[1]);</span>
+
+<span class="nc" id="L168">                        b.addTrans(t);</span>
+<span class="nc" id="L169">                    } else {</span>
+<span class="nc" id="L170">                        Transportadora t = readTransporte(s[1]);</span>
+<span class="nc" id="L171">                        b.addTrans(t);</span>
+                    }
+<span class="nc" id="L173">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L174">                    e.printStackTrace();</span>
+<span class="nc" id="L175">                }</span>
+            }
+
+<span class="nc bnc" id="L178" title="All 2 branches missed.">            if (s[0].equals(&quot;traz_aqui.Encomenda&quot;)) {</span>
+                try {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">                    if (tipo == 1) {</span>
+<span class="nc" id="L181">                        Encomenda e = readEncomendaLOG(s[1]);</span>
+
+<span class="nc" id="L183">                        b.addEnc(e);</span>
+<span class="nc" id="L184">                    } else {</span>
+<span class="nc" id="L185">                        Encomenda e = readEncomenda(s[1]);</span>
+<span class="nc" id="L186">                        b.addEnc(e);</span>
+                    }
+<span class="nc" id="L188">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L189">                    e.printStackTrace();</span>
+<span class="nc" id="L190">                }</span>
+            }
+
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            if (s[0].equals(&quot;Aceite&quot;)) {</span>
+                try {
+<span class="nc" id="L195">                    String a = s[1];</span>
+<span class="nc" id="L196">                    b.mudaEstado(a);</span>
+
+<span class="nc" id="L198">                } catch (NullPointerException e) {</span>
+<span class="nc" id="L199">                    e.printStackTrace();</span>
+<span class="nc" id="L200">                }</span>
+            }
+
+<span class="nc" id="L203">        }</span>
+
+<span class="nc" id="L205">        return b;</span>
+
     }
-        
+
+    private static Buyer readBuyer(String read) {
+<span class="nc" id="L210">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L211">        String codigo = b[0];</span>
+<span class="nc" id="L212">        String password = b[1];</span>
+<span class="nc" id="L213">        String username = b[2];</span>
+<span class="nc" id="L214">        double lx = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L215">        double ly = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L216">        String email = b[5];</span>
+<span class="nc" id="L217">        return new Buyer(username, codigo, password, lx, ly, email);</span>
+
+    }
+
     //String username , String codigo , String password , double locationX, double locationY,boolean filadeEspera,ArrayList &lt;traz_aqui.Encomenda&gt; queue
     //falta ver queue lembrar --------------------------------
-    private static Loja readLoja(String read){
-<span class="nc" id="L370">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L371">        String codigo = b[0];</span>
-<span class="nc" id="L372">        String password = b[1];</span>
-<span class="nc" id="L373">        String username = b[2];</span>
-<span class="nc" id="L374">        double lx = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L375">        double ly = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L376">        String email = b[5];</span>
+    private static Loja readLoja(String read) {
+<span class="nc" id="L224">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L225">        String codigo = b[0];</span>
+<span class="nc" id="L226">        String password = b[1];</span>
+<span class="nc" id="L227">        String username = b[2];</span>
+<span class="nc" id="L228">        double lx = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L229">        double ly = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L230">        String email = b[5];</span>
         //ArrayList queue = new ArrayList&lt;&gt;();
-<span class="nc" id="L378">        Loja loja = new Loja(username,codigo,password,lx,ly,email);</span>
-<span class="nc" id="L379">        return loja;</span>
+<span class="nc" id="L232">        return new Loja(username, codigo, password, lx, ly, email);</span>
     }
-        
-    //String username , String codigo , String password , double locationX, 
-    //double locationY, double raio , boolean livre, double numr , double aval)
-    private static Voluntario readVoluntario(String read){
-<span class="nc" id="L385">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L386">        String codigo = b[0];</span>
-<span class="nc" id="L387">        String password = b[1];</span>
-<span class="nc" id="L388">        String username = b[2];</span>
-<span class="nc" id="L389">        double lx = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L390">        double ly = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L391">        String email = b[5];</span>
-<span class="nc" id="L392">        double raio = Double.parseDouble(b[6]);</span>
-<span class="nc" id="L393">        boolean livre = Boolean.parseBoolean(b[7]);</span>
-<span class="nc" id="L394">        double numreviews = Double.parseDouble(b[8]);</span>
-<span class="nc" id="L395">        double avaliacao = Double.parseDouble(b[9]);</span>
-<span class="nc" id="L396">        Voluntario v = new Voluntario(username,codigo,password,lx,ly,email, raio,livre,numreviews,avaliacao);</span>
-<span class="nc" id="L397">        return v;</span>
-    }
-        
+
     //String username , String codigo , String password , double locationX,
-   // double locationY, double custoKM, double raio , int nif , double aval , double numrev
-    private static Transportadora readTransporte(String read){
-<span class="nc" id="L403">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L404">        String codigo = b[0];</span>
-<span class="nc" id="L405">        String password = b[1];</span>
-<span class="nc" id="L406">        String username = b[2];</span>
-<span class="nc" id="L407">        double lx = Double.parseDouble(b[3]);</span>
-<span class="nc" id="L408">        double ly = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L409">        String email = b[5];</span>
-<span class="nc" id="L410">        double raio = Double.parseDouble(b[6]);</span>
-<span class="nc" id="L411">        double custokm = Double.parseDouble(b[7]);</span>
-<span class="nc" id="L412">        double numrev = Double.parseDouble(b[8]);</span>
-<span class="nc" id="L413">        double aval = Double.parseDouble(b[9]);</span>
-<span class="nc" id="L414">        int nif = Integer.parseInt(b[10]);</span>
-<span class="nc" id="L415">        Transportadora  e = new Transportadora(username,codigo,password,lx,ly,email, custokm , raio ,nif , aval, numrev);</span>
-<span class="nc" id="L416">        return e;</span>
+    //double locationY, double raio , boolean livre, double numr , double aval)
+    private static Voluntario readVoluntario(String read) {
+<span class="nc" id="L238">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L239">        String codigo = b[0];</span>
+<span class="nc" id="L240">        String password = b[1];</span>
+<span class="nc" id="L241">        String username = b[2];</span>
+<span class="nc" id="L242">        double lx = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L243">        double ly = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L244">        String email = b[5];</span>
+<span class="nc" id="L245">        double raio = Double.parseDouble(b[6]);</span>
+<span class="nc" id="L246">        boolean livre = Boolean.parseBoolean(b[7]);</span>
+<span class="nc" id="L247">        double numreviews = Double.parseDouble(b[8]);</span>
+<span class="nc" id="L248">        double avaliacao = Double.parseDouble(b[9]);</span>
+<span class="nc" id="L249">        return new Voluntario(username, codigo, password, lx, ly, email, raio, livre, numreviews, avaliacao);</span>
     }
-        
+
+    //String username , String codigo , String password , double locationX,
+    // double locationY, double custoKM, double raio , int nif , double aval , double numrev
+    private static Transportadora readTransporte(String read) {
+<span class="nc" id="L255">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L256">        String codigo = b[0];</span>
+<span class="nc" id="L257">        String password = b[1];</span>
+<span class="nc" id="L258">        String username = b[2];</span>
+<span class="nc" id="L259">        double lx = Double.parseDouble(b[3]);</span>
+<span class="nc" id="L260">        double ly = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L261">        String email = b[5];</span>
+<span class="nc" id="L262">        double raio = Double.parseDouble(b[6]);</span>
+<span class="nc" id="L263">        double custokm = Double.parseDouble(b[7]);</span>
+<span class="nc" id="L264">        double numrev = Double.parseDouble(b[8]);</span>
+<span class="nc" id="L265">        double aval = Double.parseDouble(b[9]);</span>
+<span class="nc" id="L266">        int nif = Integer.parseInt(b[10]);</span>
+<span class="nc" id="L267">        return new Transportadora(username, codigo, password, lx, ly, email, custokm, raio, nif, aval, numrev);</span>
+
+    }
+
     //Cria uma encomenda com os dados do ficheiro
-    //String codEncomenda, String buyer ,String loja,String transport,double peso, 
+    //String codEncomenda, String buyer ,String loja,String transport,double peso,
     //LocalDate data, int estado,ArrayList&lt;traz_aqui.LinhaEncomenda&gt; produto
-    private static Encomenda readEncomenda(String read){
-<span class="nc" id="L423">        int i=7;</span>
-<span class="nc" id="L424">        String[] b = read.split(&quot;,&quot;);</span>
-<span class="nc" id="L425">        String codenc = b[0];</span>
-<span class="nc" id="L426">        String codbuyer = b[1];</span>
-<span class="nc" id="L427">        String codloja = b[2];</span>
-<span class="nc" id="L428">        String coddeliever = b[3];</span>
-<span class="nc" id="L429">        double peso = Double.parseDouble(b[4]);</span>
-<span class="nc" id="L430">        LocalDate data = parseData(b[5]);</span>
-<span class="nc" id="L431">        int state = Integer.parseInt(b[6]);</span>
-<span class="nc" id="L432">        ArrayList&lt;LinhaEncomenda&gt; produto = new ArrayList&lt;&gt;();</span>
-        
+    private static Encomenda readEncomenda(String read) {
+<span class="nc" id="L275">        int i = 7;</span>
+<span class="nc" id="L276">        String[] b = read.split(&quot;,&quot;);</span>
+<span class="nc" id="L277">        String codenc = b[0];</span>
+<span class="nc" id="L278">        String codbuyer = b[1];</span>
+<span class="nc" id="L279">        String codloja = b[2];</span>
+<span class="nc" id="L280">        String coddeliever = b[3];</span>
+<span class="nc" id="L281">        double peso = Double.parseDouble(b[4]);</span>
+<span class="nc" id="L282">        LocalDate data = parseData(b[5]);</span>
+<span class="nc" id="L283">        int state = Integer.parseInt(b[6]);</span>
+<span class="nc" id="L284">        ArrayList&lt;LinhaEncomenda&gt; produto = new ArrayList&lt;&gt;();</span>
+
         //String codLinha, String descricao, double preco, double quantidade)
-<span class="nc bnc" id="L435" title="All 2 branches missed.">        while(i&lt;(b.length)){</span>
-            
-<span class="nc" id="L437">            String codlinha = b[i];</span>
-<span class="nc" id="L438">            String descricao = b[i+1];</span>
-<span class="nc" id="L439">            double preco = Double.parseDouble(b[i+2]);</span>
-<span class="nc" id="L440">            double quantidade = Double.parseDouble(b[i+3]);</span>
-<span class="nc" id="L441">            LinhaEncomenda l = new LinhaEncomenda(codlinha,descricao,preco,quantidade);</span>
-            
-<span class="nc" id="L443">            produto.add(l);</span>
-<span class="nc" id="L444">            i+=4;</span>
-<span class="nc" id="L445">        }</span>
-<span class="nc" id="L446">        Encomenda  e = new Encomenda(codenc,codbuyer,codloja,coddeliever, peso , data ,state , produto);</span>
-<span class="nc" id="L447">        return e;</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">        while (i &lt; (b.length)) {</span>
+
+<span class="nc" id="L289">            String codlinha = b[i];</span>
+<span class="nc" id="L290">            String descricao = b[i + 1];</span>
+<span class="nc" id="L291">            double preco = Double.parseDouble(b[i + 2]);</span>
+<span class="nc" id="L292">            double quantidade = Double.parseDouble(b[i + 3]);</span>
+<span class="nc" id="L293">            LinhaEncomenda l = new LinhaEncomenda(codlinha, descricao, preco, quantidade);</span>
+
+<span class="nc" id="L295">            produto.add(l);</span>
+<span class="nc" id="L296">            i += 4;</span>
+<span class="nc" id="L297">        }</span>
+<span class="nc" id="L298">        return new Encomenda(codenc, codbuyer, codloja, coddeliever, peso, data, state, produto);</span>
     }
-    //da parse a data de uma encomenda 
-    private static LocalDate parseData(String s){
-<span class="nc" id="L451">        LocalDate x = null ;</span>
-        try{
-<span class="nc bnc" id="L453" title="All 2 branches missed.">        if(s.equals(&quot;null&quot;)){return x;}</span>
-<span class="nc" id="L454">        else{x=LocalDate.parse(s);}}</span>
-<span class="nc" id="L455">        catch(DateTimeException e ){</span>
-<span class="nc" id="L456">                System.out.println(&quot;data incorreta&quot;);</span>
-<span class="nc" id="L457">                return null;</span>
-<span class="nc" id="L458">            }</span>
-<span class="nc" id="L459">        return x ;</span>
+
+    //da parse a data de uma encomenda
+    private static LocalDate parseData(String s) {
+<span class="nc" id="L303">        LocalDate x = null;</span>
+        try {
+<span class="nc bnc" id="L305" title="All 2 branches missed.">            if (s.equals(&quot;null&quot;)) {</span>
+<span class="nc" id="L306">                return x;</span>
+            } else {
+<span class="nc" id="L308">                x = LocalDate.parse(s);</span>
+            }
+<span class="nc" id="L310">        } catch (DateTimeException e) {</span>
+<span class="nc" id="L311">            System.out.println(DATA_INCORRETA);</span>
+<span class="nc" id="L312">            return null;</span>
+<span class="nc" id="L313">        }</span>
+<span class="nc" id="L314">        return x;</span>
     }
-    //da quantos km percuridos dado uma transportadora funciona para todas as encomendas entregues ate o momento 
-    public double KmsPercurridos(Transportadora e){
-<span class="nc" id="L463">        double totalKms =0;</span>
-<span class="nc bnc" id="L464" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L465" title="All 6 branches missed.">            if( (e.getCodigo().equals(a.getcodDeliver()))    &amp;&amp;  (a.getestado() == 7 || a.getestado() == 1)){</span>
-<span class="nc" id="L466">            Buyer b= (Buyer) users.get(a.getBuyer());</span>
-<span class="nc" id="L467">            Loja l= (Loja) users.get(a.getLoja()); </span>
-            
-<span class="nc" id="L469">            double transtoloja = Math.sqrt(Math.pow(e.locationX - l.getLocationX(), 2) +</span>
-<span class="nc" id="L470">                     Math.pow(e.locationY - l.getLocationY(), 2));</span>
-<span class="nc" id="L471">            double lojatoBuyer = Math.sqrt(Math.pow(l.getLocationX() - b.getLocationX(), 2) +</span>
-<span class="nc" id="L472">                     Math.pow(l.getLocationY() - b.getLocationY(), 2));</span>
-<span class="nc" id="L473">            totalKms= totalKms + lojatoBuyer+transtoloja;</span>
+
+    public void writeFile2(String nomeFicheiro) throws IOException {
+<span class="nc" id="L318">        PrintWriter pw = new PrintWriter(nomeFicheiro);</span>
+
+<span class="nc bnc" id="L320" title="All 2 branches missed.">        for (User u : this.users.values()) {</span>
+<span class="nc" id="L321">            String s = u.stringtoFile();</span>
+<span class="nc" id="L322">            pw.println(s);</span>
+<span class="nc" id="L323">        }</span>
+
+<span class="nc bnc" id="L325" title="All 2 branches missed.">        for (Encomenda e : this.Encomendas.values()) {</span>
+<span class="nc" id="L326">            String s = e.stringtoFile();</span>
+<span class="nc" id="L327">            pw.println(s);</span>
+<span class="nc" id="L328">        }</span>
+
+<span class="nc" id="L330">        pw.flush();</span>
+<span class="nc" id="L331">        pw.close();</span>
+<span class="nc" id="L332">    }</span>
+
+    public User getUserByEmail(String email) {
+<span class="nc bnc" id="L335" title="All 2 branches missed.">        for (User a : users.values()) {</span>
+<span class="nc bnc" id="L336" title="All 2 branches missed.">            if (a.getEmail().equals(email)) {</span>
+<span class="nc" id="L337">                return a.clone();</span>
+            }
+
+<span class="nc" id="L340">        }</span>
+<span class="nc" id="L341">        return null;</span>
+    }
+
+    public ArrayList&lt;Encomenda&gt; getEncomendasbyCodigoUser(String codigo) {
+<span class="nc" id="L345">        ArrayList&lt;Encomenda&gt; lista = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L347" title="All 2 branches missed.">        for (Encomenda e : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L348" title="All 2 branches missed.">            if (e.getBuyer().equals(codigo)) {</span>
+<span class="nc" id="L349">                lista.add(e.clone());</span>
+            }
+<span class="nc" id="L351">        }</span>
+<span class="nc" id="L352">        return lista;</span>
+    }
+
+    //retorna lista com todas as lojas
+    public ArrayList&lt;Loja&gt; Tlojas() {
+<span class="nc" id="L357">        ArrayList&lt;Loja&gt; r = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L359" title="All 2 branches missed.">        for (User u : this.users.values()) {</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">            if (u instanceof Loja) {</span>
+<span class="nc" id="L361">                r.add((Loja) u.clone());</span>
+            }
+<span class="nc" id="L363">        }</span>
+<span class="nc" id="L364">        return r;</span>
+    }
+
+    //retorna lista com todas as Transportadoras
+    public ArrayList&lt;Transportadora&gt; Ttransportadoras() {
+<span class="nc" id="L369">        ArrayList&lt;Transportadora&gt; r = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L371" title="All 2 branches missed.">        for (User u : this.users.values()) {</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">            if (u instanceof Transportadora) {</span>
+<span class="nc" id="L373">                r.add((Transportadora) u.clone());</span>
+            }
+<span class="nc" id="L375">        }</span>
+<span class="nc" id="L376">        return r;</span>
+    }
+
+    //retorna lista com todas os voluntarios
+    public ArrayList&lt;Voluntario&gt; Tvoluntarios() {
+<span class="nc" id="L381">        ArrayList&lt;Voluntario&gt; r = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L383" title="All 2 branches missed.">        for (User u : this.users.values()) {</span>
+<span class="nc bnc" id="L384" title="All 2 branches missed.">            if (u instanceof Voluntario) {</span>
+<span class="nc" id="L385">                r.add((Voluntario) u.clone());</span>
+            }
+<span class="nc" id="L387">        }</span>
+<span class="nc" id="L388">        return r;</span>
+    }
+
+    //vai buscar o user pelo codigo
+    public User getUserByCodigo(String codigo) {
+<span class="nc" id="L393">        User a = null;</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L395">            a = users.get(codigo).clone();</span>
         }
-<span class="nc" id="L475">        }</span>
-<span class="nc" id="L476">        return totalKms; </span>
+<span class="nc" id="L397">        return a;</span>
     }
-    
-    
-    public ArrayList&lt;Encomenda&gt; EncomendasParaVoluntarioDentroRaio(String codVol){
-<span class="nc" id="L481">        ArrayList&lt;Encomenda&gt; r =new ArrayList&lt;Encomenda&gt;(); </span>
-<span class="nc" id="L482">        User v1 = users.get(codVol);</span>
-<span class="nc" id="L483">        Voluntario v =(Voluntario) v1;</span>
-<span class="nc bnc" id="L484" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L485" title="All 2 branches missed.">        if(a.getestado()==3){</span>
-<span class="nc" id="L486">        String codBuyer= a.getBuyer();</span>
-<span class="nc" id="L487">        String codLoja = a.getLoja();</span>
-<span class="nc" id="L488">        User b = users.get(codBuyer);</span>
-<span class="nc" id="L489">        User l = users.get(codLoja);</span>
-<span class="nc" id="L490">        Buyer b1 = (Buyer) b;</span>
-<span class="nc" id="L491">        Loja l1 = (Loja) l;</span>
-<span class="nc" id="L492">        double transtoloja = Math.sqrt(Math.pow(v.locationX - l1.getLocationX(), 2) +</span>
-<span class="nc" id="L493">                     Math.pow(v.locationY - l1.getLocationY(), 2));</span>
-<span class="nc" id="L494">        double transtobuyer =Math.sqrt(Math.pow(v.locationX - b1.getLocationX(), 2) +</span>
-<span class="nc" id="L495">                     Math.pow(v.locationY - b1.getLocationY(), 2));</span>
-<span class="nc bnc" id="L496" title="All 4 branches missed.">        if(transtoloja&lt;= v.getraio() &amp;&amp; transtobuyer&lt;= v.getraio()){r.add(a);}}</span>
-<span class="nc" id="L497">        }</span>
-<span class="nc" id="L498">        return r ;</span>
+
+    public void mudaestadoVoluntario(User a) {
+<span class="nc" id="L401">        Voluntario b = (Voluntario) a;</span>
+<span class="nc bnc" id="L402" title="All 2 branches missed.">        if (b.getlivre()) {</span>
+<span class="nc" id="L403">            b.setlivre(false);</span>
+<span class="nc" id="L404">            System.out.println(&quot;traz_aqui.Voluntario está agora Ocupado&quot;);</span>
+        } else {
+<span class="nc" id="L406">            b.setlivre(true);</span>
+<span class="nc" id="L407">            System.out.println(&quot;traz_aqui.Voluntario está agora Livre&quot;);</span>
+        }
+
+
+<span class="nc" id="L411">    }</span>
+
+    //verificar se codigo existe
+    public boolean checkCodigo(String codigo) {
+<span class="nc" id="L415">        boolean a = true;</span>
+<span class="nc bnc" id="L416" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L417">            return false;</span>
+        }
+<span class="nc" id="L419">        return a;</span>
     }
-    
+
+
+    //String username , String codigo , String password , double locationX, double locationY, ArrayList encomenda){
+
+    //adiciona buyer
+    public int addBuy(Buyer u) {
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        if (this.users.containsValue(u)) return -1;</span>
+        else {
+<span class="nc" id="L429">            this.users.put(u.getCodigo(), u.clone());</span>
+<span class="nc" id="L430">            return 1;</span>
+        }
+    }
+
+    //adiciona voluntario
+    public int addVol(Voluntario u) {
+<span class="nc bnc" id="L436" title="All 2 branches missed.">        if (this.users.containsValue(u)) return -1;</span>
+        else {
+<span class="nc" id="L438">            this.users.put(u.getCodigo(), u.clone());</span>
+<span class="nc" id="L439">            return 1;</span>
+        }
+    }
+
+    public int addLoja(Loja u) {
+<span class="nc bnc" id="L444" title="All 2 branches missed.">        if (this.users.containsValue(u)) return -1;</span>
+        else {
+<span class="nc" id="L446">            this.users.put(u.getCodigo(), u.clone());</span>
+<span class="nc" id="L447">            return 1;</span>
+        }
+    }
+
+    public int addTrans(Transportadora u) {
+<span class="nc bnc" id="L452" title="All 2 branches missed.">        if (this.users.containsValue(u)) return -1;</span>
+        else {
+<span class="nc" id="L454">            this.users.put(u.getCodigo(), u.clone());</span>
+<span class="nc" id="L455">            return 1;</span>
+        }
+    }
+
+    public int addEnc(Encomenda e) {
+<span class="nc bnc" id="L460" title="All 2 branches missed.">        if (this.Encomendas.containsValue(e)) return -1;</span>
+        else {
+<span class="nc" id="L462">            Encomenda enc = e.clone();</span>
+<span class="nc" id="L463">            this.Encomendas.put(enc.getcodEncomenda(), enc);</span>
+<span class="nc" id="L464">            return 1;</span>
+        }
+    }
+
+    //muda estado de encomenda dps de ler aceite para pronta para ser recolhida por um voluntario
+    public void mudaEstado(String u) {
+
+<span class="nc bnc" id="L471" title="All 2 branches missed.">        if (this.Encomendas.containsKey(u)) {</span>
+<span class="nc" id="L472">            Encomenda e = Encomendas.get(u);</span>
+<span class="nc" id="L473">            mudaestadoENC(u, 3);</span>
+        }
+
+<span class="nc" id="L476">    }</span>
+
+    //da quantos km percuridos dado uma transportadora funciona para todas as encomendas entregues ate o momento
+    public double KmsPercurridos(Transportadora e) {
+<span class="nc" id="L480">        double totalKms = 0;</span>
+<span class="nc bnc" id="L481" title="All 2 branches missed.">        for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L482" title="All 6 branches missed.">            if ((e.getCodigo().equals(a.getcodDeliver())) &amp;&amp; (a.getestado() == 7 || a.getestado() == 1)) {</span>
+<span class="nc" id="L483">                Buyer b = (Buyer) users.get(a.getBuyer());</span>
+<span class="nc" id="L484">                Loja l = (Loja) users.get(a.getLoja());</span>
+
+<span class="nc" id="L486">                double transtoloja = Math.sqrt(Math.pow(e.locationX - l.getLocationX(), 2) +</span>
+<span class="nc" id="L487">                        Math.pow(e.locationY - l.getLocationY(), 2));</span>
+<span class="nc" id="L488">                double lojatoBuyer = Math.sqrt(Math.pow(l.getLocationX() - b.getLocationX(), 2) +</span>
+<span class="nc" id="L489">                        Math.pow(l.getLocationY() - b.getLocationY(), 2));</span>
+<span class="nc" id="L490">                totalKms = totalKms + lojatoBuyer + transtoloja;</span>
+            }
+<span class="nc" id="L492">        }</span>
+<span class="nc" id="L493">        return totalKms;</span>
+    }
+
+
+    public ArrayList&lt;Encomenda&gt; EncomendasParaVoluntarioDentroRaio(String codVol) {
+<span class="nc" id="L498">        ArrayList&lt;Encomenda&gt; r = new ArrayList&lt;Encomenda&gt;();</span>
+<span class="nc" id="L499">        User v1 = users.get(codVol);</span>
+<span class="nc" id="L500">        Voluntario v = (Voluntario) v1;</span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">        for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L502" title="All 2 branches missed.">            if (a.getestado() == 3) {</span>
+<span class="nc" id="L503">                String codBuyer = a.getBuyer();</span>
+<span class="nc" id="L504">                String codLoja = a.getLoja();</span>
+<span class="nc" id="L505">                User b = users.get(codBuyer);</span>
+<span class="nc" id="L506">                User l = users.get(codLoja);</span>
+<span class="nc" id="L507">                Buyer b1 = (Buyer) b;</span>
+<span class="nc" id="L508">                Loja l1 = (Loja) l;</span>
+<span class="nc" id="L509">                double transtoloja = Math.sqrt(Math.pow(v.locationX - l1.getLocationX(), 2) +</span>
+<span class="nc" id="L510">                        Math.pow(v.locationY - l1.getLocationY(), 2));</span>
+<span class="nc" id="L511">                double transtobuyer = Math.sqrt(Math.pow(v.locationX - b1.getLocationX(), 2) +</span>
+<span class="nc" id="L512">                        Math.pow(v.locationY - b1.getLocationY(), 2));</span>
+<span class="nc bnc" id="L513" title="All 4 branches missed.">                if (transtoloja &lt;= v.getraio() &amp;&amp; transtobuyer &lt;= v.getraio()) {</span>
+<span class="nc" id="L514">                    r.add(a);</span>
+                }
+            }
+<span class="nc" id="L517">        }</span>
+<span class="nc" id="L518">        return r;</span>
+    }
+
     //retorna 1 se transportadora 2 se voluntario 0 se nenhum dos dois 
-    public int TransportadoraOuVoluntario(String codigoenc){
-<span class="nc" id="L503">        int i=0;</span>
-<span class="nc bnc" id="L504" title="All 2 branches missed.">        if(Encomendas.containsKey(codigoenc)){</span>
-<span class="nc" id="L505">        Encomenda t = Encomendas.get(codigoenc);</span>
-        
-<span class="nc" id="L507">        String a=t.getcodDeliver();</span>
-<span class="nc" id="L508">        User u = users.get(a);</span>
-<span class="nc bnc" id="L509" title="All 2 branches missed.">        if (u.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){return 1;}</span>
-<span class="nc bnc" id="L510" title="All 2 branches missed.">        else if(u.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){return 2;}</span>
+    public int TransportadoraOuVoluntario(String codigoenc) {
+<span class="nc" id="L523">        int i = 0;</span>
+<span class="nc bnc" id="L524" title="All 2 branches missed.">        if (Encomendas.containsKey(codigoenc)) {</span>
+<span class="nc" id="L525">            Encomenda t = Encomendas.get(codigoenc);</span>
+
+<span class="nc" id="L527">            String a = t.getcodDeliver();</span>
+<span class="nc" id="L528">            User u = users.get(a);</span>
+<span class="nc bnc" id="L529" title="All 2 branches missed.">            if (u.getClass().getName().equals(TRAZ_AQUI_TRANSPORTADORA)) {</span>
+<span class="nc" id="L530">                return 1;</span>
+<span class="nc bnc" id="L531" title="All 2 branches missed.">            } else if (u.getClass().getName().equals(TRAZ_AQUI_VOLUNTARIO)) {</span>
+<span class="nc" id="L532">                return 2;</span>
             }
-    
-<span class="nc" id="L513">        return i ;</span>
+        }
+
+<span class="nc" id="L536">        return i;</span>
     }
+
     //retorna o codigo da transportadaora mais barata para uma certa distancia e peso
-    public String TransportadoraMaisBarata(String codBuyer,String codLoja, double peso){
-<span class="nc" id="L517">        String codigo = &quot;n&quot;;</span>
-<span class="nc" id="L518">        User b = users.get(codBuyer);</span>
-<span class="nc" id="L519">        User l = users.get(codLoja);</span>
-<span class="nc" id="L520">        Buyer b1 = (Buyer) b;</span>
-<span class="nc" id="L521">        Loja l1 = (Loja) l;</span>
-<span class="nc" id="L522">        double precoF=99999999;</span>
-<span class="nc" id="L523">        double precoi=99999999;</span>
-<span class="nc" id="L524">        ArrayList&lt;Transportadora&gt; r =Ttransportadoras();</span>
-<span class="nc bnc" id="L525" title="All 2 branches missed.">        for(Transportadora t1 : r){ </span>
-<span class="nc" id="L526">        double transtoloja = Math.sqrt(Math.pow(t1.locationX - l1.getLocationX(), 2) +</span>
-<span class="nc" id="L527">                     Math.pow(t1.locationY - l1.getLocationY(), 2));</span>
-<span class="nc" id="L528">        double transtobuyer =Math.sqrt(Math.pow(t1.locationX - b1.getLocationX(), 2) +</span>
-<span class="nc" id="L529">                     Math.pow(t1.locationY - b1.getLocationY(), 2));</span>
-<span class="nc bnc" id="L530" title="All 4 branches missed.">        if(transtoloja&lt;= t1.getraio() &amp;&amp; transtobuyer&lt;= t1.getraio()){</span>
-<span class="nc" id="L531">            precoi = custoTransporte1(codBuyer, t1.getCodigo(),codLoja,peso );</span>
-        }
-        
-<span class="nc bnc" id="L534" title="All 2 branches missed.">        if(precoi&lt;precoF){codigo =t1.getCodigo();precoF=precoi;  }</span>
-        
-<span class="nc" id="L536">        }</span>
-        
-<span class="nc" id="L538">        return codigo;</span>
-    
+    public String TransportadoraMaisBarata(String codBuyer, String codLoja, double peso) {
+<span class="nc" id="L541">        String codigo = &quot;n&quot;;</span>
+<span class="nc" id="L542">        User b = users.get(codBuyer);</span>
+<span class="nc" id="L543">        User l = users.get(codLoja);</span>
+<span class="nc" id="L544">        Buyer b1 = (Buyer) b;</span>
+<span class="nc" id="L545">        Loja l1 = (Loja) l;</span>
+<span class="nc" id="L546">        double precoF = 99999999;</span>
+<span class="nc" id="L547">        double precoi = 99999999;</span>
+<span class="nc" id="L548">        ArrayList&lt;Transportadora&gt; r = Ttransportadoras();</span>
+<span class="nc bnc" id="L549" title="All 2 branches missed.">        for (Transportadora t1 : r) {</span>
+<span class="nc" id="L550">            double transtoloja = Math.sqrt(Math.pow(t1.locationX - l1.getLocationX(), 2) +</span>
+<span class="nc" id="L551">                    Math.pow(t1.locationY - l1.getLocationY(), 2));</span>
+<span class="nc" id="L552">            double transtobuyer = Math.sqrt(Math.pow(t1.locationX - b1.getLocationX(), 2) +</span>
+<span class="nc" id="L553">                    Math.pow(t1.locationY - b1.getLocationY(), 2));</span>
+<span class="nc bnc" id="L554" title="All 4 branches missed.">            if (transtoloja &lt;= t1.getraio() &amp;&amp; transtobuyer &lt;= t1.getraio()) {</span>
+<span class="nc" id="L555">                precoi = custoTransporte1(codBuyer, t1.getCodigo(), codLoja, peso);</span>
+            }
+
+<span class="nc bnc" id="L558" title="All 2 branches missed.">            if (precoi &lt; precoF) {</span>
+<span class="nc" id="L559">                codigo = t1.getCodigo();</span>
+<span class="nc" id="L560">                precoF = precoi;</span>
+            }
+
+<span class="nc" id="L563">        }</span>
+
+<span class="nc" id="L565">        return codigo;</span>
+
 
     }
-    
-    
-    public  double custoTransporte1 (String codBuyer , String codTransp,String codLoja, double peso ){
-<span class="nc" id="L545">        User t = users.get(codTransp);</span>
-<span class="nc" id="L546">        User b = users.get(codBuyer);</span>
-<span class="nc" id="L547">        User l = users.get(codLoja);</span>
-<span class="nc" id="L548">        Buyer b1 = (Buyer) b;</span>
-<span class="nc" id="L549">        Loja l1 = (Loja) l;</span>
-<span class="nc" id="L550">        Transportadora t1 = (Transportadora) t;</span>
-<span class="nc" id="L551">        double preco=0;</span>
-<span class="nc" id="L552">        double transtoloja = Math.sqrt(Math.pow(t1.locationX - l1.getLocationX(), 2) +</span>
-<span class="nc" id="L553">                     Math.pow(t1.locationY - l1.getLocationY(), 2));</span>
-<span class="nc" id="L554">           double lojatoBuyer = Math.sqrt(Math.pow(l1.getLocationX() - b1.getLocationX(), 2) +</span>
-<span class="nc" id="L555">                     Math.pow(l1.getLocationY() - b1.getLocationY(), 2));</span>
-<span class="nc" id="L556">           preco=peso*t1.gettaxapeso()+(transtoloja+lojatoBuyer)*t1.getcustoKM();</span>
-        
-<span class="nc" id="L558">        return preco; </span>
+
+
+    public double custoTransporte1(String codBuyer, String codTransp, String codLoja, double peso) {
+<span class="nc" id="L572">        User t = users.get(codTransp);</span>
+<span class="nc" id="L573">        User b = users.get(codBuyer);</span>
+<span class="nc" id="L574">        User l = users.get(codLoja);</span>
+<span class="nc" id="L575">        Buyer b1 = (Buyer) b;</span>
+<span class="nc" id="L576">        Loja l1 = (Loja) l;</span>
+<span class="nc" id="L577">        Transportadora t1 = (Transportadora) t;</span>
+<span class="nc" id="L578">        double preco = 0;</span>
+<span class="nc" id="L579">        double transtoloja = Math.sqrt(Math.pow(t1.locationX - l1.getLocationX(), 2) +</span>
+<span class="nc" id="L580">                Math.pow(t1.locationY - l1.getLocationY(), 2));</span>
+<span class="nc" id="L581">        double lojatoBuyer = Math.sqrt(Math.pow(l1.getLocationX() - b1.getLocationX(), 2) +</span>
+<span class="nc" id="L582">                Math.pow(l1.getLocationY() - b1.getLocationY(), 2));</span>
+<span class="nc" id="L583">        preco = peso * t1.gettaxapeso() + (transtoloja + lojatoBuyer) * t1.getcustoKM();</span>
+
+<span class="nc" id="L585">        return preco;</span>
     }
-    
+
     //custo do transporte de uma dada encomenda por uma transportadora
-    public  double custoTransporte(String codEncomenda , String codTransp){
-<span class="nc" id="L563">       double preco=0;</span>
-<span class="nc bnc" id="L564" title="All 2 branches missed.">       if(this.Encomendas.containsKey(codEncomenda) ){</span>
-<span class="nc" id="L565">           User u = users.get(codTransp);</span>
-<span class="nc" id="L566">           Transportadora e = (Transportadora) u;</span>
-<span class="nc" id="L567">           Encomenda a = Encomendas.get(codEncomenda);</span>
-           
-<span class="nc" id="L569">           Buyer b = (Buyer) users.get(a.getBuyer());</span>
-<span class="nc" id="L570">           Loja l = (Loja) users.get(a.getLoja());</span>
-           
-<span class="nc" id="L572">           double transtoloja = Math.sqrt(Math.pow(e.locationX - l.getLocationX(), 2) +</span>
-<span class="nc" id="L573">                     Math.pow(e.locationY - l.getLocationY(), 2));</span>
-<span class="nc" id="L574">           double lojatoBuyer = Math.sqrt(Math.pow(l.getLocationX() - b.getLocationX(), 2) +</span>
-<span class="nc" id="L575">                     Math.pow(l.getLocationY() - b.getLocationY(), 2));</span>
-<span class="nc" id="L576">           preco=a.getpeso()*e.gettaxapeso()+(transtoloja+lojatoBuyer)*e.getcustoKM();</span>
-        
+    public double custoTransporte(String codEncomenda, String codTransp) {
+<span class="nc" id="L590">        double preco = 0;</span>
+<span class="nc bnc" id="L591" title="All 2 branches missed.">        if (this.Encomendas.containsKey(codEncomenda)) {</span>
+<span class="nc" id="L592">            User u = users.get(codTransp);</span>
+<span class="nc" id="L593">            Transportadora e = (Transportadora) u;</span>
+<span class="nc" id="L594">            Encomenda a = Encomendas.get(codEncomenda);</span>
+
+<span class="nc" id="L596">            Buyer b = (Buyer) users.get(a.getBuyer());</span>
+<span class="nc" id="L597">            Loja l = (Loja) users.get(a.getLoja());</span>
+
+<span class="nc" id="L599">            double transtoloja = Math.sqrt(Math.pow(e.locationX - l.getLocationX(), 2) +</span>
+<span class="nc" id="L600">                    Math.pow(e.locationY - l.getLocationY(), 2));</span>
+<span class="nc" id="L601">            double lojatoBuyer = Math.sqrt(Math.pow(l.getLocationX() - b.getLocationX(), 2) +</span>
+<span class="nc" id="L602">                    Math.pow(l.getLocationY() - b.getLocationY(), 2));</span>
+<span class="nc" id="L603">            preco = a.getpeso() * e.gettaxapeso() + (transtoloja + lojatoBuyer) * e.getcustoKM();</span>
+
         }
-  
-<span class="nc" id="L580">       return preco;</span>
+
+<span class="nc" id="L607">        return preco;</span>
     }
+
     // devolve top 10 empresas com mais km feitos
-    public void top10Empresas (){
-<span class="nc" id="L584">        List&lt;Transportadora&gt; top = new ArrayList&lt;Transportadora&gt;();</span>
-<span class="nc" id="L585">        Comparator&lt;Transportadora&gt; bykm = (Transportadora emp1, Transportadora emp2) -&gt;{</span>
-<span class="nc" id="L586">        return Double.compare(KmsPercurridos(emp1), KmsPercurridos(emp2)); };</span>
-        
-<span class="nc bnc" id="L588" title="All 2 branches missed.">        for ( User a : users.values()){</span>
-<span class="nc bnc" id="L589" title="All 2 branches missed.">            if (a.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc" id="L590">                Transportadora b =(Transportadora) a; </span>
-<span class="nc" id="L591">                top.add(b.clone());</span>
-            } 
-<span class="nc" id="L593">        }</span>
-<span class="nc" id="L594">        Collections.sort(top,bykm); </span>
-<span class="nc" id="L595">        System.out.println(&quot;Top 10 Companies:&quot;); </span>
-<span class="nc" id="L596">        int n = top.size();</span>
-<span class="nc" id="L597">        int i=1;</span>
-<span class="nc bnc" id="L598" title="All 2 branches missed.">        if(n&gt;10){n=10;}</span>
-<span class="nc bnc" id="L599" title="All 2 branches missed.">        for(Transportadora a : top){</span>
-<span class="nc bnc" id="L600" title="All 2 branches missed.">            if(i&lt;=n){ System.out.println(i+&quot;º:&quot;+ a.getUserName());i++;</span>
+    public void top10Empresas() {
+<span class="nc" id="L612">        List&lt;Transportadora&gt; top = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L613">        Comparator&lt;Transportadora&gt; bykm = (Transportadora emp1, Transportadora emp2) -&gt; {</span>
+<span class="nc" id="L614">            return Double.compare(KmsPercurridos(emp1), KmsPercurridos(emp2));</span>
+        };
+
+<span class="nc bnc" id="L617" title="All 2 branches missed.">        for (User a : users.values()) {</span>
+<span class="nc bnc" id="L618" title="All 2 branches missed.">            if (a.getClass().getName().equals(TRAZ_AQUI_TRANSPORTADORA)) {</span>
+<span class="nc" id="L619">                Transportadora b = (Transportadora) a;</span>
+<span class="nc" id="L620">                top.add(b.clone());</span>
             }
-            else{break;}
-  
-<span class="nc" id="L604">        }</span>
-<span class="nc" id="L605">    }</span>
-   
+<span class="nc" id="L622">        }</span>
+<span class="nc" id="L623">        Collections.sort(top, bykm);</span>
+<span class="nc" id="L624">        System.out.println(&quot;Top 10 Companies:&quot;);</span>
+<span class="nc" id="L625">        int n = top.size();</span>
+<span class="nc" id="L626">        int i = 1;</span>
+<span class="nc bnc" id="L627" title="All 2 branches missed.">        if (n &gt; 10) {</span>
+<span class="nc" id="L628">            n = 10;</span>
+        }
+<span class="nc bnc" id="L630" title="All 2 branches missed.">        for (Transportadora a : top) {</span>
+<span class="nc bnc" id="L631" title="All 2 branches missed.">            if (i &lt;= n) {</span>
+<span class="nc" id="L632">                System.out.println(i + &quot;º:&quot; + a.getUserName());</span>
+<span class="nc" id="L633">                i++;</span>
+            } else {
+                break;
+            }
+
+<span class="nc" id="L638">        }</span>
+<span class="nc" id="L639">    }</span>
+
     //numero de encomendas que um buyer fez 
-    public int getNumencomendas(Buyer b){
-<span class="nc" id="L609">        int i =0;</span>
-<span class="nc bnc" id="L610" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L611" title="All 2 branches missed.">           if(b.equals(a.getBuyer())){</span>
-<span class="nc" id="L612">           i=i+1;</span>
-        }
-<span class="nc" id="L614">      }</span>
-<span class="nc" id="L615">       return i ; </span>
+    public int getNumencomendas(Buyer b) {
+<span class="nc" id="L643">        int i = 0;</span>
+<span class="nc bnc" id="L644" title="All 2 branches missed.">        for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L645" title="All 2 branches missed.">            if (b.equals(a.getBuyer())) {</span>
+<span class="nc" id="L646">                i = i + 1;</span>
+            }
+<span class="nc" id="L648">        }</span>
+<span class="nc" id="L649">        return i;</span>
     }
 
-   //top 10 users que mais encomendas fizeram 
-    public void top10Users(){
-<span class="nc" id="L620">        List&lt;Buyer&gt; top = new ArrayList&lt;Buyer&gt;();</span>
-<span class="nc" id="L621">        Comparator&lt;Buyer&gt; byEnc = (Buyer emp1, Buyer emp2) -&gt;{</span>
-<span class="nc" id="L622">        return Double.compare(getNumencomendas(emp1), getNumencomendas(emp2)); };</span>
-<span class="nc bnc" id="L623" title="All 2 branches missed.">        for ( User a : users.values()){</span>
-<span class="nc bnc" id="L624" title="All 2 branches missed.">            if (a.getClass().getName().equals(&quot;traz_aqui.Buyer&quot;)){</span>
-<span class="nc" id="L625">                Buyer b =(Buyer) a; </span>
-<span class="nc" id="L626">                top.add(b.clone());</span>
-            } 
-<span class="nc" id="L628">        }</span>
-<span class="nc" id="L629">        Collections.sort(top,byEnc); </span>
-<span class="nc" id="L630">        System.out.println(&quot;Top 10 Users:&quot;); </span>
-<span class="nc" id="L631">        int n = top.size();</span>
-<span class="nc" id="L632">        int i=1;</span>
-<span class="nc bnc" id="L633" title="All 2 branches missed.">        if(n&gt;10){n=10;}</span>
-<span class="nc bnc" id="L634" title="All 2 branches missed.">        for(Buyer a : top){</span>
-<span class="nc bnc" id="L635" title="All 2 branches missed.">            if(i&lt;=n){ System.out.println(i+&quot;º:&quot;+ a.getUserName());i++;</span>
+    //top 10 users que mais encomendas fizeram
+    public void top10Users() {
+<span class="nc" id="L654">        List&lt;Buyer&gt; top = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L655">        Comparator&lt;Buyer&gt; byEnc = (Buyer emp1, Buyer emp2) -&gt; {</span>
+<span class="nc" id="L656">            return Double.compare(getNumencomendas(emp1), getNumencomendas(emp2));</span>
+        };
+<span class="nc bnc" id="L658" title="All 2 branches missed.">        for (User a : users.values()) {</span>
+<span class="nc bnc" id="L659" title="All 2 branches missed.">            if (a instanceof Buyer) {</span>
+<span class="nc" id="L660">                Buyer b = (Buyer) a;</span>
+<span class="nc" id="L661">                top.add(b.clone());</span>
             }
-            else{break;}
-  
-<span class="nc" id="L639">        }</span>
-<span class="nc" id="L640">    }</span>
-    //quanto uma empresa fez num dado periodo de tempo menu 
-    public void faturadoEmp(){
-<span class="nc" id="L643">        double total =0 ;</span>
-<span class="nc" id="L644">        LocalDate d1= null;</span>
-<span class="nc" id="L645">        LocalDate d2= null ;</span>
-<span class="nc" id="L646">        int nif = 0;</span>
-<span class="nc" id="L647">        System.out.println(&quot;Insert companie's NIF:&quot;);</span>
-<span class="nc" id="L648">        Scanner n = new Scanner(System.in);</span>
-<span class="nc" id="L649">        nif = n.nextInt();</span>
-<span class="nc" id="L650">        System.out.println(&quot;Insira a data de incio, irá ter de insirir da forma ano-mes-dia&quot;);</span>
-<span class="nc" id="L651">        Scanner day1 = new Scanner(System.in);</span>
-<span class="nc" id="L652">        String dayI = day1.nextLine();</span>
-        
-<span class="nc" id="L654">        try{d1=LocalDate.parse(dayI);</span>
-<span class="nc" id="L655">        }catch (DateTimeException e){</span>
-<span class="nc" id="L656">            System.out.println(&quot;data incorreta&quot;);</span>
-<span class="nc" id="L657">            return; </span>
-<span class="nc" id="L658">        }</span>
-<span class="nc" id="L659">        System.out.println(&quot;Insira a data de incio, irá ter de insirir da forma ano-mes-dia&quot;);</span>
-<span class="nc" id="L660">        Scanner day2 = new Scanner(System.in);</span>
-<span class="nc" id="L661">        String dayF = day1.nextLine();</span>
-        
-        
-<span class="nc" id="L664">        try{d2=LocalDate.parse(dayF);</span>
-<span class="nc" id="L665">        }catch (DateTimeException e){</span>
-<span class="nc" id="L666">            System.out.println(&quot;data incorreta&quot;);</span>
-<span class="nc" id="L667">            return ; </span>
-<span class="nc" id="L668">        }</span>
-        
-<span class="nc bnc" id="L670" title="All 2 branches missed.">        for( User a : users.values()){</span>
-<span class="nc bnc" id="L671" title="All 2 branches missed.">            if(a.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc" id="L672">            Transportadora b =(Transportadora) a; </span>
-<span class="nc bnc" id="L673" title="All 2 branches missed.">            if(b.getnif()==nif){</span>
-<span class="nc" id="L674">                total = fatura(b,d1,d2);</span>
-<span class="nc" id="L675">                System.out.println(&quot;A empresa faturou:&quot;+total);</span>
-            }
+<span class="nc" id="L663">        }</span>
+<span class="nc" id="L664">        Collections.sort(top, byEnc);</span>
+<span class="nc" id="L665">        System.out.println(&quot;Top 10 Users:&quot;);</span>
+<span class="nc" id="L666">        int n = top.size();</span>
+<span class="nc" id="L667">        int i = 1;</span>
+<span class="nc bnc" id="L668" title="All 2 branches missed.">        if (n &gt; 10) {</span>
+<span class="nc" id="L669">            n = 10;</span>
         }
-<span class="nc" id="L678">        }</span>
-        
-        
-<span class="nc" id="L681">    }</span>
+<span class="nc bnc" id="L671" title="All 2 branches missed.">        for (Buyer a : top) {</span>
+<span class="nc bnc" id="L672" title="All 2 branches missed.">            if (i &lt;= n) {</span>
+<span class="nc" id="L673">                System.out.println(i + &quot;º:&quot; + a.getUserName());</span>
+<span class="nc" id="L674">                i++;</span>
+            } else {
+                break;
+            }
+
+<span class="nc" id="L679">        }</span>
+<span class="nc" id="L680">    }</span>
+
+    //quanto uma empresa fez num dado periodo de tempo menu
+    public void faturadoEmp() {
+<span class="nc" id="L684">        double total = 0;</span>
+<span class="nc" id="L685">        LocalDate d1 = null;</span>
+<span class="nc" id="L686">        LocalDate d2 = null;</span>
+<span class="nc" id="L687">        int nif = 0;</span>
+<span class="nc" id="L688">        System.out.println(&quot;Insert companie's NIF:&quot;);</span>
+<span class="nc" id="L689">        Scanner n = new Scanner(System.in);</span>
+<span class="nc" id="L690">        nif = n.nextInt();</span>
+<span class="nc" id="L691">        System.out.println(&quot;Insira a data de incio, irá ter de insirir da forma ano-mes-dia&quot;);</span>
+<span class="nc" id="L692">        Scanner day1 = new Scanner(System.in);</span>
+<span class="nc" id="L693">        String dayI = day1.nextLine();</span>
+
+        try {
+<span class="nc" id="L696">            d1 = LocalDate.parse(dayI);</span>
+<span class="nc" id="L697">        } catch (DateTimeException e) {</span>
+<span class="nc" id="L698">            System.out.println(DATA_INCORRETA);</span>
+<span class="nc" id="L699">            return;</span>
+<span class="nc" id="L700">        }</span>
+<span class="nc" id="L701">        System.out.println(&quot;Insira a data de incio, irá ter de insirir da forma ano-mes-dia&quot;);</span>
+<span class="nc" id="L702">        Scanner day2 = new Scanner(System.in);</span>
+<span class="nc" id="L703">        String dayF = day1.nextLine();</span>
+
+
+        try {
+<span class="nc" id="L707">            d2 = LocalDate.parse(dayF);</span>
+<span class="nc" id="L708">        } catch (DateTimeException e) {</span>
+<span class="nc" id="L709">            System.out.println(DATA_INCORRETA);</span>
+<span class="nc" id="L710">            return;</span>
+<span class="nc" id="L711">        }</span>
+
+<span class="nc bnc" id="L713" title="All 2 branches missed.">        for (User a : users.values()) {</span>
+<span class="nc bnc" id="L714" title="All 2 branches missed.">            if (a instanceof Transportadora) {</span>
+<span class="nc" id="L715">                Transportadora b = (Transportadora) a;</span>
+<span class="nc bnc" id="L716" title="All 2 branches missed.">                if (b.getnif() == nif) {</span>
+<span class="nc" id="L717">                    total = fatura(b, d1, d2);</span>
+<span class="nc" id="L718">                    System.out.println(&quot;A empresa faturou:&quot; + total);</span>
+                }
+            }
+<span class="nc" id="L721">        }</span>
+
+
+<span class="nc" id="L724">    }</span>
+
     //quanto uma empresa faturou num dado periodo de tempo.
-    public double fatura (Transportadora e ,LocalDate d1, LocalDate d2){
-<span class="nc" id="L684">    double total =0; </span>
-<span class="nc bnc" id="L685" title="All 2 branches missed.">    for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L686" title="All 6 branches missed.">        if(e.getCodigo().equals(a.getcodDeliver()) &amp;&amp; a.getData().isAfter(d1) &amp;&amp; a.getData().isBefore(d2)  ){</span>
-<span class="nc" id="L687">        total = total + custoTransporte(a.getcodEncomenda(),e.getCodigo());</span>
-        
-        }  
-    
-<span class="nc" id="L691">    }</span>
-<span class="nc" id="L692">    return total; </span>
+    public double fatura(Transportadora e, LocalDate d1, LocalDate d2) {
+<span class="nc" id="L728">        double total = 0;</span>
+<span class="nc bnc" id="L729" title="All 2 branches missed.">        for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L730" title="All 6 branches missed.">            if (e.getCodigo().equals(a.getcodDeliver()) &amp;&amp; a.getData().isAfter(d1) &amp;&amp; a.getData().isBefore(d2)) {</span>
+<span class="nc" id="L731">                total = total + custoTransporte(a.getcodEncomenda(), e.getCodigo());</span>
+
+            }
+
+<span class="nc" id="L735">        }</span>
+<span class="nc" id="L736">        return total;</span>
     }
-    
-    
+
+
     //da print ao historico de encomendas do transportador 
-    public void PrintHistT(String codigo){ 
-<span class="nc bnc" id="L698" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L699">             User e = users.get(codigo);</span>
-<span class="nc bnc" id="L700" title="All 2 branches missed.">            if (e.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc bnc" id="L701" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L702" title="All 2 branches missed.">           if(e.getCodigo().equals(a.getcodDeliver())){</span>
-<span class="nc" id="L703">            String buyer= users.get(a.getBuyer()).getUserName();</span>
-<span class="nc" id="L704">            String store= users.get(a.getLoja()).getUserName();</span>
-<span class="nc" id="L705">            System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer +&quot;,Store: &quot; + store );</span>
-<span class="nc" id="L706">        }}}}</span>
-<span class="nc" id="L707">    }</span>
+    public void PrintHistT(String codigo) {
+<span class="nc bnc" id="L742" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L743">            User e = users.get(codigo);</span>
+<span class="nc bnc" id="L744" title="All 2 branches missed.">            if (e instanceof Transportadora) {</span>
+<span class="nc bnc" id="L745" title="All 2 branches missed.">                for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L746" title="All 2 branches missed.">                    if (e.getCodigo().equals(a.getcodDeliver())) {</span>
+<span class="nc" id="L747">                        String buyer = users.get(a.getBuyer()).getUserName();</span>
+<span class="nc" id="L748">                        String store = users.get(a.getLoja()).getUserName();</span>
+<span class="nc" id="L749">                        System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer + &quot;,Store: &quot; + store);</span>
+                    }
+<span class="nc" id="L751">                }</span>
+            }
+        }
+<span class="nc" id="L754">    }</span>
+
     //da print ao historico de encomendas do voluntario
-    public void PrintHistV(String codigo){
-<span class="nc bnc" id="L710" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L711">             User e = users.get(codigo);</span>
-<span class="nc bnc" id="L712" title="All 2 branches missed.">            if (e.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){</span>
-<span class="nc bnc" id="L713" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L714" title="All 2 branches missed.">            if(e.getCodigo().equals(a.getcodDeliver())){</span>
-<span class="nc" id="L715">            String buyer= users.get(a.getBuyer()).getUserName();</span>
-<span class="nc" id="L716">            String store= users.get(a.getLoja()).getUserName();</span>
-<span class="nc" id="L717">            System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer +&quot;,Store: &quot; + store );}</span>
-<span class="nc" id="L718">        } }}</span>
-<span class="nc" id="L719">    }</span>
-    // confirma se o email e a pass estao no sistema 
-    public boolean LoginInfo(String email ,String pass){
-<span class="nc bnc" id="L722" title="All 2 branches missed.">        for ( User a : users.values()){</span>
-<span class="nc bnc" id="L723" title="All 2 branches missed.">           if(a.getEmail().equals(email)){return a.getPassword().equals(pass);}</span>
-<span class="nc" id="L724">        }</span>
-<span class="nc" id="L725">        return false;</span>
+    public void PrintHistV(String codigo) {
+<span class="nc bnc" id="L758" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L759">            User e = users.get(codigo);</span>
+<span class="nc bnc" id="L760" title="All 2 branches missed.">            if (e instanceof Voluntario) {</span>
+<span class="nc bnc" id="L761" title="All 2 branches missed.">                for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L762" title="All 2 branches missed.">                    if (e.getCodigo().equals(a.getcodDeliver())) {</span>
+<span class="nc" id="L763">                        String buyer = users.get(a.getBuyer()).getUserName();</span>
+<span class="nc" id="L764">                        String store = users.get(a.getLoja()).getUserName();</span>
+<span class="nc" id="L765">                        System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer + &quot;,Store: &quot; + store);</span>
+                    }
+<span class="nc" id="L767">                }</span>
+            }
+        }
+<span class="nc" id="L770">    }</span>
+
+    // confirma se o email e a pass estao no sistema
+    public boolean LoginInfo(String email, String pass) {
+<span class="nc bnc" id="L774" title="All 2 branches missed.">        for (User a : users.values()) {</span>
+<span class="nc bnc" id="L775" title="All 2 branches missed.">            if (a.getEmail().equals(email)) {</span>
+<span class="nc" id="L776">                return a.getPassword().equals(pass);</span>
+            }
+<span class="nc" id="L778">        }</span>
+<span class="nc" id="L779">        return false;</span>
     }
-    //retorna lista com todas encomendas entregues a um user sem review 
-    public ArrayList EncomendasEntreguesSemReviews(String e){
-<span class="nc" id="L729">         ArrayList&lt;Encomenda&gt; lista = getEncomendasbyCodigoUser(e);</span>
-<span class="nc" id="L730">         ArrayList&lt;Encomenda&gt; listaf= new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L731" title="All 2 branches missed.">         for(Encomenda a : lista){</span>
-<span class="nc bnc" id="L732" title="All 2 branches missed.">             if(a.getestado() == 1){</span>
-<span class="nc" id="L733">                listaf.add(a);}</span>
-<span class="nc" id="L734">            }</span>
-<span class="nc" id="L735">            return listaf; </span>
+
+    //retorna lista com todas encomendas entregues a um user sem review
+    public ArrayList EncomendasEntreguesSemReviews(String e) {
+<span class="nc" id="L784">        ArrayList&lt;Encomenda&gt; lista = getEncomendasbyCodigoUser(e);</span>
+<span class="nc" id="L785">        ArrayList&lt;Encomenda&gt; listaf = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L786" title="All 2 branches missed.">        for (Encomenda a : lista) {</span>
+<span class="nc bnc" id="L787" title="All 2 branches missed.">            if (a.getestado() == 1) {</span>
+<span class="nc" id="L788">                listaf.add(a);</span>
+            }
+<span class="nc" id="L790">        }</span>
+<span class="nc" id="L791">        return listaf;</span>
 
     }
+
     // dado uma encomenda entregue  sem review avaliar a transportadora ou voluntario
-    public boolean reviews(String codigoEnc,double review){
-<span class="nc" id="L740">        boolean works =false ; </span>
-<span class="nc bnc" id="L741" title="All 2 branches missed.">        if(this.Encomendas.containsKey(codigoEnc)){</span>
-<span class="nc" id="L742">        Encomenda a= Encomendas.get(codigoEnc); </span>
-<span class="nc" id="L743">        String cod = a.getcodDeliver();</span>
-<span class="nc" id="L744">        User u = users.get(cod);</span>
-<span class="nc bnc" id="L745" title="All 2 branches missed.">        if (u.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){ReviewTransportadora(cod,review);works =true;}</span>
-<span class="nc bnc" id="L746" title="All 2 branches missed.">        else if(a.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){ ReviewVoluntario(cod,review);works =true;}</span>
+    public boolean reviews(String codigoEnc, double review) {
+<span class="nc" id="L797">        boolean works = false;</span>
+<span class="nc bnc" id="L798" title="All 2 branches missed.">        if (this.Encomendas.containsKey(codigoEnc)) {</span>
+<span class="nc" id="L799">            Encomenda a = Encomendas.get(codigoEnc);</span>
+<span class="nc" id="L800">            String cod = a.getcodDeliver();</span>
+<span class="nc" id="L801">            User u = users.get(cod);</span>
+<span class="nc bnc" id="L802" title="All 2 branches missed.">            if (u instanceof Transportadora) {</span>
+<span class="nc" id="L803">                ReviewTransportadora(cod, review);</span>
+<span class="nc" id="L804">                works = true;</span>
+<span class="nc bnc" id="L805" title="All 2 branches missed.">            } else if (a.getClass().getName().equals(TRAZ_AQUI_VOLUNTARIO)) {</span>
+<span class="nc" id="L806">                ReviewVoluntario(cod, review);</span>
+<span class="nc" id="L807">                works = true;</span>
+            }
         }
-<span class="nc" id="L748">        return works;</span>
+<span class="nc" id="L810">        return works;</span>
     }
-    
-    
-    
-    public void ReviewTransportadora(String codigo , double review){
-<span class="nc bnc" id="L754" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L755">             User a = users.get(codigo);</span>
-<span class="nc bnc" id="L756" title="All 2 branches missed.">            if (a.getClass().getName().equals(&quot;traz_aqui.Transportadora&quot;)){</span>
-<span class="nc" id="L757">                Transportadora e = (Transportadora) a;</span>
-<span class="nc" id="L758">                double aval= e.getavaliacao();</span>
-<span class="nc" id="L759">                double numrev = e.getnumreviews();</span>
-<span class="nc" id="L760">                double nreview = (aval*numrev+review)/(numrev+1);</span>
-<span class="nc" id="L761">                e.setavaliacao(nreview);</span>
-<span class="nc" id="L762">                e.setnumreviews(numrev+1);</span>
-                
+
+
+    public void ReviewTransportadora(String codigo, double review) {
+<span class="nc bnc" id="L815" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L816">            User a = users.get(codigo);</span>
+<span class="nc bnc" id="L817" title="All 2 branches missed.">            if (a instanceof Transportadora) {</span>
+<span class="nc" id="L818">                Transportadora e = (Transportadora) a;</span>
+<span class="nc" id="L819">                double aval = e.getavaliacao();</span>
+<span class="nc" id="L820">                double numrev = e.getnumreviews();</span>
+<span class="nc" id="L821">                double nreview = (aval * numrev + review) / (numrev + 1);</span>
+<span class="nc" id="L822">                e.setavaliacao(nreview);</span>
+<span class="nc" id="L823">                e.setnumreviews(numrev + 1);</span>
+
             }
         }
-<span class="nc" id="L766">    }</span>
-        
-    public void ReviewVoluntario( String codigo , double review){
-<span class="nc bnc" id="L769" title="All 2 branches missed.">        if(this.users.containsKey(codigo)){</span>
-<span class="nc" id="L770">             User a = users.get(codigo);</span>
-<span class="nc bnc" id="L771" title="All 2 branches missed.">            if (a.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){</span>
-<span class="nc" id="L772">                Voluntario e = (Voluntario) a;</span>
-<span class="nc" id="L773">                double aval= e.getavaliacao();</span>
-<span class="nc" id="L774">                double numrev = e.getnumreviews();</span>
-<span class="nc" id="L775">                double nreview = (aval*numrev+review)/(numrev+1);</span>
-<span class="nc" id="L776">                e.setavaliacao(nreview);</span>
-<span class="nc" id="L777">                e.setnumreviews(numrev+1);}</span>
+<span class="nc" id="L827">    }</span>
+
+    public void ReviewVoluntario(String codigo, double review) {
+<span class="nc bnc" id="L830" title="All 2 branches missed.">        if (this.users.containsKey(codigo)) {</span>
+<span class="nc" id="L831">            User a = users.get(codigo);</span>
+<span class="nc bnc" id="L832" title="All 2 branches missed.">            if (a instanceof Voluntario) {</span>
+<span class="nc" id="L833">                Voluntario e = (Voluntario) a;</span>
+<span class="nc" id="L834">                double aval = e.getavaliacao();</span>
+<span class="nc" id="L835">                double numrev = e.getnumreviews();</span>
+<span class="nc" id="L836">                double nreview = (aval * numrev + review) / (numrev + 1);</span>
+<span class="nc" id="L837">                e.setavaliacao(nreview);</span>
+<span class="nc" id="L838">                e.setnumreviews(numrev + 1);</span>
+            }
         }
-<span class="nc" id="L779">    }</span>
-    //retorna se tiver o codigo de uma encomenda atual 
-    public String EncomendaAtualV( String codvol ){
-<span class="nc" id="L782">        User u = users.get(codvol);</span>
-<span class="nc" id="L783">        Voluntario e = (Voluntario) u ;</span>
-<span class="nc" id="L784">        String resultado = &quot;free&quot;;</span>
-<span class="nc bnc" id="L785" title="All 2 branches missed.">        for(Encomenda a : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L786" title="All 2 branches missed.">            if(e.getCodigo().equals(a.getcodDeliver())){</span>
-<span class="nc bnc" id="L787" title="All 2 branches missed.">            if(a.getestado()==6){resultado =a.getcodEncomenda();}</span>
-            
+<span class="nc" id="L841">    }</span>
+
+    //retorna se tiver o codigo de uma encomenda atual
+    public String EncomendaAtualV(String codvol) {
+<span class="nc" id="L845">        User u = users.get(codvol);</span>
+<span class="nc" id="L846">        Voluntario e = (Voluntario) u;</span>
+<span class="nc" id="L847">        String resultado = &quot;free&quot;;</span>
+<span class="nc bnc" id="L848" title="All 2 branches missed.">        for (Encomenda a : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L849" title="All 2 branches missed.">            if (e.getCodigo().equals(a.getcodDeliver())) {</span>
+<span class="nc bnc" id="L850" title="All 2 branches missed.">                if (a.getestado() == 6) {</span>
+<span class="nc" id="L851">                    resultado = a.getcodEncomenda();</span>
+                }
+
             }
 
-<span class="nc" id="L791">        }</span>
-    
-    
-<span class="nc" id="L794">        return resultado ; </span>
-   }
-   //muda o estado de uma encomenda 
-   public void mudaestadoENC(String codigoenc, int estado ){
-<span class="nc bnc" id="L798" title="All 2 branches missed.">       if(this.Encomendas.containsKey(codigoenc) ){</span>
-<span class="nc" id="L799">           Encomenda e = Encomendas.get(codigoenc);</span>
-<span class="nc" id="L800">           e.setestado(estado);</span>
+<span class="nc" id="L856">        }</span>
 
-       }
 
-<span class="nc" id="L804">    }</span>
-    
-   //voluntario escolhe se aceita ou nao encomenda 
-   public void recebeEnc(String codigoenc , String codvol ){
-        
-<span class="nc bnc" id="L809" title="All 4 branches missed.">        if(this.Encomendas.containsKey(codigoenc) &amp;&amp; this.users.containsKey(codvol)){</span>
-<span class="nc" id="L810">            User a = users.get(codvol);</span>
-<span class="nc bnc" id="L811" title="All 2 branches missed.">            if (a.getClass().getName().equals(&quot;traz_aqui.Voluntario&quot;)){</span>
-<span class="nc" id="L812">            Encomenda e = Encomendas.get(codigoenc);</span>
-<span class="nc" id="L813">            Voluntario v = (Voluntario) a;</span>
-<span class="nc" id="L814">            System.out.println(&quot;Do you accept the order (yes, no):&quot;);</span>
-<span class="nc" id="L815">            a.toString();</span>
-<span class="nc" id="L816">            int breakp=0;</span>
-<span class="nc" id="L817">            Scanner myObj = new Scanner(System.in);</span>
-        
-<span class="nc bnc" id="L819" title="All 2 branches missed.">        while( breakp ==0){ </span>
-<span class="nc" id="L820">         String res = myObj.nextLine().toLowerCase();</span>
-<span class="nc bnc" id="L821" title="All 2 branches missed.">         if (res.equals(&quot;yes&quot;)){v.setlivre(false);e.setestado(6); </span>
-              }
-<span class="nc bnc" id="L823" title="All 2 branches missed.">         else if(res.equals(&quot;no&quot;)){breakp =1;}</span>
-<span class="nc" id="L824">         else {System.out.println(&quot;Invalid Input, answer yes or no : &quot;);}</span>
-<span class="nc" id="L825">        }</span>
-<span class="nc" id="L826">        return ; </span>
-<span class="nc" id="L827">        }}}</span>
-   
+<span class="nc" id="L859">        return resultado;</span>
+    }
 
-   //Voluntarios livres
-   
-   public ArrayList&lt;Voluntario&gt; Vlivre(){
-<span class="nc" id="L833">       ArrayList&lt;Voluntario&gt; x = new ArrayList&lt;Voluntario&gt;();</span>
-       
-<span class="nc" id="L835">       ArrayList&lt;Voluntario&gt; r = Tvoluntarios();</span>
-       
-<span class="nc bnc" id="L837" title="All 2 branches missed.">       for(Voluntario a : r){</span>
-<span class="nc bnc" id="L838" title="All 2 branches missed.">           if(a.getlivre()){</span>
-               
-<span class="nc" id="L840">               x.add(a);</span>
-            
-            }
-        
-<span class="nc" id="L844">        }</span>
-    
-<span class="nc" id="L846">       return x ;</span>
-   }
-   
-  public String getVolLivre(String codEnc){
-<span class="nc" id="L850">       ArrayList&lt;Voluntario&gt; x = Vlivre();</span>
-<span class="nc" id="L851">       Encomenda e = Encomendas.get(codEnc);</span>
-<span class="nc" id="L852">       String codBuyer = e.getBuyer();</span>
-<span class="nc" id="L853">       String codLoja = e.getLoja();</span>
-<span class="nc" id="L854">       User b = users.get(codBuyer);</span>
-<span class="nc" id="L855">       User l = users.get(codLoja);</span>
-<span class="nc" id="L856">       String bla = &quot;n&quot;;</span>
-<span class="nc bnc" id="L857" title="All 2 branches missed.">       for(Voluntario vl : x){</span>
-<span class="nc" id="L858">        double transtoloja = Math.sqrt(Math.pow(vl.locationX - l.getLocationX(), 2) +</span>
-<span class="nc" id="L859">                     Math.pow(vl.locationY - vl.getLocationY(), 2));</span>
-<span class="nc" id="L860">        double transtobuyer =Math.sqrt(Math.pow(vl.locationX - b.getLocationX(), 2) +</span>
-<span class="nc" id="L861">                     Math.pow(vl.locationY - b.getLocationY(), 2));</span>
-<span class="nc bnc" id="L862" title="All 4 branches missed.">        if(transtoloja&lt;= vl.getraio() &amp;&amp; transtobuyer&lt;= vl.getraio()){</span>
-<span class="nc" id="L863">            bla=vl.getCodigo();</span>
-<span class="nc" id="L864">            break;</span>
+    //muda o estado de uma encomenda
+    public void mudaestadoENC(String codigoenc, int estado) {
+<span class="nc bnc" id="L864" title="All 2 branches missed.">        if (this.Encomendas.containsKey(codigoenc)) {</span>
+<span class="nc" id="L865">            Encomenda e = Encomendas.get(codigoenc);</span>
+<span class="nc" id="L866">            e.setestado(estado);</span>
+
         }
-           
-        
-<span class="nc" id="L868">      }</span>
-<span class="nc" id="L869">      return bla;</span>
-   
-   
-   
-   }
-   
-  public String EncPedidas ( String codv){
-<span class="nc bnc" id="L876" title="All 2 branches missed.">       for(Encomenda e : this.Encomendas.values()){</span>
-<span class="nc bnc" id="L877" title="All 4 branches missed.">           if(e.getestado()==8 &amp;&amp; e.getcodDeliver().equals(codv)){</span>
-<span class="nc" id="L878">               return e.getcodEncomenda();</span>
+
+<span class="nc" id="L870">    }</span>
+
+    //voluntario escolhe se aceita ou nao encomenda
+    public void recebeEnc(String codigoenc, String codvol) {
+
+<span class="nc bnc" id="L875" title="All 4 branches missed.">        if (this.Encomendas.containsKey(codigoenc) &amp;&amp; this.users.containsKey(codvol)) {</span>
+<span class="nc" id="L876">            User a = users.get(codvol);</span>
+<span class="nc bnc" id="L877" title="All 2 branches missed.">            if (a instanceof Voluntario) {</span>
+<span class="nc" id="L878">                Encomenda e = Encomendas.get(codigoenc);</span>
+<span class="nc" id="L879">                Voluntario v = (Voluntario) a;</span>
+<span class="nc" id="L880">                System.out.println(&quot;Do you accept the order (yes, no):&quot;);</span>
+<span class="nc" id="L881">                a.toString();</span>
+<span class="nc" id="L882">                int breakp = 0;</span>
+<span class="nc" id="L883">                Scanner myObj = new Scanner(System.in);</span>
+
+<span class="nc bnc" id="L885" title="All 2 branches missed.">                while (breakp == 0) {</span>
+<span class="nc" id="L886">                    String res = myObj.nextLine().toLowerCase();</span>
+<span class="nc bnc" id="L887" title="All 2 branches missed.">                    if (res.equals(&quot;yes&quot;)) {</span>
+<span class="nc" id="L888">                        v.setlivre(false);</span>
+<span class="nc" id="L889">                        e.setestado(6);</span>
+<span class="nc bnc" id="L890" title="All 2 branches missed.">                    } else if (res.equals(&quot;no&quot;)) {</span>
+<span class="nc" id="L891">                        breakp = 1;</span>
+                    } else {
+<span class="nc" id="L893">                        System.out.println(&quot;Invalid Input, answer yes or no : &quot;);</span>
+                    }
+<span class="nc" id="L895">                }</span>
             }
-           
-<span class="nc" id="L881">    }</span>
-<span class="nc" id="L882">    return &quot;n&quot;;</span>
-  }
-  public void setDelieverV ( String codv, String codenc ){
-      
-<span class="nc" id="L886">      Encomenda e = Encomendas.get(codenc);</span>
-<span class="nc" id="L887">      e.setcodDeliver(codv);</span>
-      
-  
-<span class="nc" id="L890">    }</span>
+        }
+<span class="nc" id="L898">    }</span>
+
+
+    //Voluntarios livres
+
+    public ArrayList&lt;Voluntario&gt; Vlivre() {
+<span class="nc" id="L904">        ArrayList&lt;Voluntario&gt; x = new ArrayList&lt;Voluntario&gt;();</span>
+
+<span class="nc" id="L906">        ArrayList&lt;Voluntario&gt; r = Tvoluntarios();</span>
+
+<span class="nc bnc" id="L908" title="All 2 branches missed.">        for (Voluntario a : r) {</span>
+<span class="nc bnc" id="L909" title="All 2 branches missed.">            if (a.getlivre()) {</span>
+
+<span class="nc" id="L911">                x.add(a);</span>
+
+            }
+
+<span class="nc" id="L915">        }</span>
+
+<span class="nc" id="L917">        return x;</span>
+    }
+
+    public String getVolLivre(String codEnc) {
+<span class="nc" id="L921">        ArrayList&lt;Voluntario&gt; x = Vlivre();</span>
+<span class="nc" id="L922">        Encomenda e = Encomendas.get(codEnc);</span>
+<span class="nc" id="L923">        String codBuyer = e.getBuyer();</span>
+<span class="nc" id="L924">        String codLoja = e.getLoja();</span>
+<span class="nc" id="L925">        User b = users.get(codBuyer);</span>
+<span class="nc" id="L926">        User l = users.get(codLoja);</span>
+<span class="nc" id="L927">        String bla = &quot;n&quot;;</span>
+<span class="nc bnc" id="L928" title="All 2 branches missed.">        for (Voluntario vl : x) {</span>
+<span class="nc" id="L929">            double transtoloja = Math.sqrt(Math.pow(vl.locationX - l.getLocationX(), 2) +</span>
+<span class="nc" id="L930">                    Math.pow(vl.locationY - vl.getLocationY(), 2));</span>
+<span class="nc" id="L931">            double transtobuyer = Math.sqrt(Math.pow(vl.locationX - b.getLocationX(), 2) +</span>
+<span class="nc" id="L932">                    Math.pow(vl.locationY - b.getLocationY(), 2));</span>
+<span class="nc bnc" id="L933" title="All 4 branches missed.">            if (transtoloja &lt;= vl.getraio() &amp;&amp; transtobuyer &lt;= vl.getraio()) {</span>
+<span class="nc" id="L934">                bla = vl.getCodigo();</span>
+<span class="nc" id="L935">                break;</span>
+            }
+
+
+<span class="nc" id="L939">        }</span>
+<span class="nc" id="L940">        return bla;</span>
+
+
+    }
+
+    public String EncPedidas(String codv) {
+<span class="nc bnc" id="L946" title="All 2 branches missed.">        for (Encomenda e : this.Encomendas.values()) {</span>
+<span class="nc bnc" id="L947" title="All 4 branches missed.">            if (e.getestado() == 8 &amp;&amp; e.getcodDeliver().equals(codv)) {</span>
+<span class="nc" id="L948">                return e.getcodEncomenda();</span>
+            }
+
+<span class="nc" id="L951">        }</span>
+<span class="nc" id="L952">        return &quot;n&quot;;</span>
+    }
+
+    public void setDelieverV(String codv, String codenc) {
+
+<span class="nc" id="L957">        Encomenda e = Encomendas.get(codenc);</span>
+<span class="nc" id="L958">        e.setcodDeliver(codv);</span>
+
+
+<span class="nc" id="L961">    }</span>
 }
    
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

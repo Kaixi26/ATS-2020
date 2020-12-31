@@ -1,12 +1,12 @@
 package traz_aqui;
 
 public abstract class User {
-    protected String username;
-    protected String password;
-    protected Double locationX;
-    protected Double locationY;
-    protected String codigo;
-    protected String email;
+    public String username;
+    public String password;
+    public Double locationX;
+    public Double locationY;
+    public String codigo;
+    public String email;
 
 
     /**

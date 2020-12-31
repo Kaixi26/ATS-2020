@@ -1,109 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Voluntario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$traz_aqui_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Voluntario.java</span></div><h1>Voluntario.java</h1><pre class="source lang-java linenums">package traz_aqui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Voluntario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_07_refractored$All_in_ats_07_refractored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Voluntario.java</span></div><h1>Voluntario.java</h1><pre class="source lang-java linenums">package traz_aqui;
 
-public class Voluntario extends User
-{
+public class Voluntario extends User {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private boolean livre;
-    private double raio ;
+    private double raio;
     private double avaliacao;
     private double numreviews;
 
- 
+
     //private ArrayList&lt;traz_aqui.Encomenda&gt; historico;
-    
+
     /**
-    * COnstrutor para objetos da classe traz_aqui.Voluntario
+     * COnstrutor para objetos da classe traz_aqui.Voluntario
      */
-    public Voluntario()
-    {
-<span class="nc" id="L19">        super();</span>
-<span class="nc" id="L20">        this.livre = true ;</span>
-<span class="nc" id="L21">        this.raio=0;</span>
-<span class="nc" id="L22">        this.avaliacao = 0;</span>
-<span class="nc" id="L23">        this.numreviews = 0;</span>
- 
+    public Voluntario() {
+<span class="nc" id="L17">        super();</span>
+<span class="nc" id="L18">        this.livre = true;</span>
+<span class="nc" id="L19">        this.raio = 0;</span>
+<span class="nc" id="L20">        this.avaliacao = 0;</span>
+<span class="nc" id="L21">        this.numreviews = 0;</span>
+
         //this.historico = new ArrayList&lt;&gt;() ;
-<span class="nc" id="L26">    }</span>
-    
-    public Voluntario( String username , String codigo , String password , double locationX, 
-    double locationY, String email,double raio , boolean livre, double numr , double aval){
-<span class="nc" id="L30">            super(username,codigo,password,locationX,locationY,email);</span>
-<span class="nc" id="L31">            this.livre = livre ;</span>
-<span class="nc" id="L32">            this.raio=raio;</span>
-<span class="nc" id="L33">            this.numreviews = numr ;</span>
-<span class="nc" id="L34">            this.avaliacao = aval ; </span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L24">    }</span>
 
-    public Voluntario(Voluntario p){
-<span class="nc" id="L38">            super(p.getUserName(),p.getPassword(),p.getCodigo(),p.getLocationX(),p.getLocationY(),p.getEmail());</span>
-<span class="nc" id="L39">            this.numreviews= p.getnumreviews();</span>
-<span class="nc" id="L40">            this.avaliacao=p.getavaliacao();</span>
-<span class="nc" id="L41">            this.raio = p.getraio();</span>
-<span class="nc" id="L42">            this.livre = p.getlivre();</span>
-            
-            
-           
-<span class="nc" id="L46">    }</span>
-    
-           
-    public void setnumreviews (double  x){
-<span class="nc" id="L50">        this.numreviews = x;</span>
-<span class="nc" id="L51">    }</span>
-    
-    public double getnumreviews(){
-<span class="nc" id="L54">           return this.numreviews;</span>
-    }
-    
-    public void setavaliacao(double x){
-<span class="nc" id="L58">           this.avaliacao=x;</span>
-<span class="nc" id="L59">    }</span>
-    
-    public double getavaliacao(){
-<span class="nc" id="L62">           return this.numreviews;</span>
+    public Voluntario(String username, String codigo, String password, double locationX,
+                      double locationY, String email, double raio, boolean livre, double numr, double aval) {
+<span class="nc" id="L28">        super(username, codigo, password, locationX, locationY, email);</span>
+<span class="nc" id="L29">        this.livre = livre;</span>
+<span class="nc" id="L30">        this.raio = raio;</span>
+<span class="nc" id="L31">        this.numreviews = numr;</span>
+<span class="nc" id="L32">        this.avaliacao = aval;</span>
+<span class="nc" id="L33">    }</span>
+
+    public Voluntario(Voluntario p) {
+<span class="nc" id="L36">        super(p.getUserName(), p.getPassword(), p.getCodigo(), p.getLocationX(), p.getLocationY(), p.getEmail());</span>
+<span class="nc" id="L37">        this.numreviews = p.getnumreviews();</span>
+<span class="nc" id="L38">        this.avaliacao = p.getavaliacao();</span>
+<span class="nc" id="L39">        this.raio = p.getraio();</span>
+<span class="nc" id="L40">        this.livre = p.getlivre();</span>
+
+
+<span class="nc" id="L43">    }</span>
+
+
+    public void setnumreviews(double x) {
+<span class="nc" id="L47">        this.numreviews = x;</span>
+<span class="nc" id="L48">    }</span>
+
+    public double getnumreviews() {
+<span class="nc" id="L51">        return this.numreviews;</span>
     }
 
-    public double getraio(){
-<span class="nc" id="L66">           return this.raio;</span>
+    public void setavaliacao(double x) {
+<span class="nc" id="L55">        this.avaliacao = x;</span>
+<span class="nc" id="L56">    }</span>
+
+    public double getavaliacao() {
+<span class="nc" id="L59">        return this.avaliacao;</span>
     }
-    
-    public void setraio(double raio){
-<span class="nc" id="L70">           this.raio=raio;</span>
-<span class="nc" id="L71">    }</span>
-    
-    public boolean getlivre(){
-<span class="nc" id="L74">           return this.livre;</span>
+
+    public double getraio() {
+<span class="nc" id="L63">        return this.raio;</span>
     }
-    
-    public void setlivre(boolean livre){
-<span class="nc" id="L78">           this.livre=livre;</span>
-<span class="nc" id="L79">    }</span>
-    
-    public boolean equals(Object o){
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        if(o==this) return true;</span>
-<span class="nc bnc" id="L83" title="All 4 branches missed.">        if(o== null || o.getClass()!=this.getClass()) return false;</span>
-<span class="nc" id="L84">        Voluntario c= (Voluntario) o;</span>
-<span class="nc" id="L85">        return super.equals(c);</span>
+
+    public void setraio(double raio) {
+<span class="nc" id="L67">        this.raio = raio;</span>
+<span class="nc" id="L68">    }</span>
+
+    public boolean getlivre() {
+<span class="nc" id="L71">        return this.livre;</span>
     }
-        
-    public String toString(){
-<span class="nc" id="L89">        StringBuilder res = new StringBuilder();</span>
-<span class="nc" id="L90">        res.append(super.toString());</span>
-<span class="nc" id="L91">        res.append(this.raio);</span>
-<span class="nc" id="L92">        res.append(this.livre);</span>
-<span class="nc" id="L93">        res.append(this.numreviews);</span>
-<span class="nc" id="L94">        res.append(this.avaliacao);</span>
-<span class="nc" id="L95">        return res.toString();</span>
+
+    public void setlivre(boolean livre) {
+<span class="nc" id="L75">        this.livre = livre;</span>
+<span class="nc" id="L76">    }</span>
+
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (o == this) return true;</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">        if (o == null || o.getClass() != this.getClass()) return false;</span>
+        Voluntario c;
+<span class="nc" id="L82">        c = (Voluntario) o;</span>
+<span class="nc" id="L83">        return super.equals(c);</span>
     }
-    
-    public Voluntario clone(){
-<span class="nc" id="L99">        return new Voluntario(this);</span>
+
+    public String toString() {
+<span class="nc" id="L87">        return super.toString() +</span>
+                this.raio +
+                this.livre +
+                this.numreviews +
+                this.avaliacao;
     }
-    
-    public void menu(){
-<span class="nc" id="L103">        System.out.println(&quot;Test traz_aqui.Voluntario menu:&quot;);</span>
-<span class="nc" id="L104">    }</span>
-    
-    
+
+    public Voluntario clone() {
+<span class="nc" id="L95">        return new Voluntario(this);</span>
+    }
+
+    public void menu() {
+<span class="nc" id="L99">        System.out.println(&quot;Test traz_aqui.Voluntario menu:&quot;);</span>
+<span class="nc" id="L100">    }</span>
+
+
     //  NOT THE DEFAULT FUNCTIONS
     // Voluntariado escolhe se aceita encomenda ou não
     /*
@@ -131,28 +127,21 @@ public class Voluntario extends User
             System.out.println(&quot;traz_aqui.Buyer: &quot; + buyer +&quot;,Store: &quot; + store );
         }            
     }*/
-    
 
-    public String stringtoFile(){
-<span class="nc" id="L137">        StringBuilder sb = new StringBuilder();</span>
-        
-<span class="nc" id="L139">        sb.append(&quot;traz_aqui.Voluntario:&quot;+this.getCodigo());</span>
-<span class="nc" id="L140">        sb.append(&quot;,&quot;+this.getPassword());</span>
-<span class="nc" id="L141">        sb.append(&quot;,&quot;+this.getUserName());</span>
-<span class="nc" id="L142">        sb.append(&quot;,&quot;+this.getLocationX());</span>
-<span class="nc" id="L143">        sb.append(&quot;,&quot;+this.getLocationY());</span>
-<span class="nc" id="L144">        sb.append(&quot;,&quot;+this.getEmail());</span>
-<span class="nc" id="L145">        sb.append(&quot;,&quot;+this.getraio());</span>
-<span class="nc" id="L146">        sb.append(&quot;,&quot;+this.getlivre());</span>
-<span class="nc" id="L147">        sb.append(&quot;,&quot;+this.getnumreviews());</span>
-<span class="nc" id="L148">        sb.append(&quot;,&quot;+this.getavaliacao());</span>
-        
-        
-<span class="nc" id="L151">        return(sb.toString());</span>
+
+    public String stringtoFile() {
+<span class="nc" id="L133">        return (&quot;traz_aqui.Voluntario:&quot; + this.getCodigo() +</span>
+<span class="nc" id="L134">                &quot;,&quot; + this.getPassword() +</span>
+<span class="nc" id="L135">                &quot;,&quot; + this.getUserName() +</span>
+<span class="nc" id="L136">                &quot;,&quot; + this.getLocationX() +</span>
+<span class="nc" id="L137">                &quot;,&quot; + this.getLocationY() +</span>
+<span class="nc" id="L138">                &quot;,&quot; + this.getEmail() +</span>
+<span class="nc" id="L139">                &quot;,&quot; + this.getraio() +</span>
+<span class="nc" id="L140">                &quot;,&quot; + this.getlivre() +</span>
+<span class="nc" id="L141">                &quot;,&quot; + this.getnumreviews() +</span>
+<span class="nc" id="L142">                &quot;,&quot; + this.getavaliacao());</span>
     }
-    
 
-    
-    
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

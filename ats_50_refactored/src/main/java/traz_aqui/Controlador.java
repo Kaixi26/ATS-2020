@@ -53,6 +53,8 @@ public class Controlador {
             else if (op == 7) lerGuardar();
         } while (op != 0);
         Viewer.prints("Goodbye");
+
+        System.exit(0);
     }
 
     /**

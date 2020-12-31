@@ -38,12 +38,11 @@ public class Input {
      * Método que obtêm o valor de um int do user com safeguard
      */
     public static int lerInt() {
-        String line = null;
         boolean ok = false;
         int i = 0;
         while (!ok) {
             try {
-                i = input.nextInt();
+                i = Integer.parseInt(input.nextLine());
                 ok = true;
             } catch (Exception e) {
                 out.println("Inteiro Invalido");

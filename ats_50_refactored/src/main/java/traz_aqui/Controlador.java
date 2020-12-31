@@ -54,7 +54,6 @@ public class Controlador {
         } while (op != 0);
         Viewer.prints("Goodbye");
 
-        System.exit(0);
     }
 
     /**
@@ -139,7 +138,6 @@ public class Controlador {
                 default:
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -162,7 +160,6 @@ public class Controlador {
                 default:
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -185,7 +182,6 @@ public class Controlador {
                 default:
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -208,7 +204,6 @@ public class Controlador {
                 default:
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -555,7 +550,6 @@ public class Controlador {
                     break;
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -642,7 +636,6 @@ public class Controlador {
                     break;
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -672,7 +665,6 @@ public class Controlador {
                     break;
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -699,7 +691,6 @@ public class Controlador {
                     break;
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -735,7 +726,6 @@ public class Controlador {
                     break;
             }
         } while (op != 0);
-        menu();
     }
 
     /**
@@ -773,7 +763,6 @@ public class Controlador {
         do {
             i = Input.lerInt();
         } while (i != 0);
-        menu();
     }
 
     /**
@@ -790,7 +779,6 @@ public class Controlador {
         do {
             i = Input.lerInt();
         } while (i != 0);
-        menu();
     }
 
     /**

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Input.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Input.java</span></div><h1>Input.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import static java.lang.System.in;
+import static java.lang.System.out;
+
+public class Input {
+
+    private static final String TEXT_NEWVALUE = &quot;Novo valor: &quot;;
+
+<span class="nc" id="L13">    public static Scanner input = new Scanner(in);</span>
+
+    private Input() {
+    }
+
+    /**
+     * Método que obtêm o valor de uma string do user com safeguard
+     */
+    public static String lerString() {
+<span class="nc" id="L22">        boolean ok = false;</span>
+<span class="nc" id="L23">        String txt = &quot;&quot;;</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        while (!ok) {</span>
+            try {
+<span class="nc" id="L26">                txt = input.nextLine();</span>
+<span class="nc" id="L27">                ok = true;</span>
+<span class="nc" id="L28">            } catch (InputMismatchException e) {</span>
+<span class="nc" id="L29">                out.println(&quot;Texto Invalido&quot;);</span>
+<span class="nc" id="L30">                out.print(TEXT_NEWVALUE);</span>
+<span class="nc" id="L31">                input.nextLine();</span>
+<span class="nc" id="L32">            }</span>
+        }
+<span class="nc" id="L34">        return txt;</span>
+    }
+
+    /**
+     * Método que obtêm o valor de um int do user com safeguard
+     */
+    public static int lerInt() {
+<span class="nc" id="L41">        boolean ok = false;</span>
+<span class="nc" id="L42">        int i = 0;</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        while (!ok) {</span>
+            try {
+<span class="nc" id="L45">                i = Integer.parseInt(input.nextLine());</span>
+<span class="nc" id="L46">                ok = true;</span>
+<span class="nc" id="L47">            } catch (Exception e) {</span>
+<span class="nc" id="L48">                out.println(&quot;Inteiro Invalido&quot;);</span>
+<span class="nc" id="L49">                out.print(TEXT_NEWVALUE);</span>
+<span class="nc" id="L50">                input.nextLine();</span>
+<span class="nc" id="L51">            }</span>
+        }
+<span class="nc" id="L53">        return i;</span>
+    }
+
+    /**
+     * Método que obtêm o valor de um double do user com safeguard
+     */
+    public static double lerDouble() {
+<span class="nc" id="L60">        boolean ok = false;</span>
+<span class="nc" id="L61">        double d = 0.0;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        while (!ok) {</span>
+            try {
+<span class="nc" id="L64">                d = Double.parseDouble(input.nextLine());</span>
+<span class="nc" id="L65">                ok = true;</span>
+<span class="nc" id="L66">            } catch (Exception e) {</span>
+<span class="nc" id="L67">                out.println(&quot;Valor real Invalido&quot;);</span>
+<span class="nc" id="L68">                out.print(TEXT_NEWVALUE);</span>
+<span class="nc" id="L69">                input.nextLine();</span>
+<span class="nc" id="L70">            }</span>
+        }
+<span class="nc" id="L72">        return d;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

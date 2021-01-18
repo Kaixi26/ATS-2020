@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Menu</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Menu (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Menu</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.List;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import static java.lang.System.out;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class Menu {
+<i>8</i>&nbsp;    private final List&lt;String&gt; options;
+<i>9</i>&nbsp;    private int o;
+<i>10</i>&nbsp;
+<b class="nc"><i>11</i>&nbsp;    public Menu(List&lt;String&gt; options) {</b>
+<b class="nc"><i>12</i>&nbsp;        this.options = options;</b>
+<b class="nc"><i>13</i>&nbsp;        this.o = 0;</b>
+<i>14</i>&nbsp;    }
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * Método que faz a execução básica de um menu
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    public void executa() {
+<i>20</i>&nbsp;        do {
+<b class="nc"><i>21</i>&nbsp;            showMenu();</b>
+<b class="nc"><i>22</i>&nbsp;            this.o = Input.lerInt();</b>
+<b class="nc"><i>23</i>&nbsp;        } while (this.o == -1);</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * Método que mostra o menu
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    private void showMenu() {
+<b class="nc"><i>30</i>&nbsp;        for (int i = 0; i &lt; this.options.size(); i++) {</b>
+<b class="nc"><i>31</i>&nbsp;            out.print(i + 1);</b>
+<b class="nc"><i>32</i>&nbsp;            out.print(&quot; - &quot;);</b>
+<b class="nc"><i>33</i>&nbsp;            out.println(this.options.get(i));</b>
+<i>34</i>&nbsp;        }
+<b class="nc"><i>35</i>&nbsp;        out.println(&quot;0) Sair\n&quot;);</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public int opcao() {
+<b class="nc"><i>39</i>&nbsp;        return this.o;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:58</div>
+</div>
+</body>
+</html>

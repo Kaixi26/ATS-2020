@@ -1,0 +1,750 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Menu</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Menu (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Menu</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21.4%
+  </span>
+  <span class="absValue">
+    (3/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.9%
+  </span>
+  <span class="absValue">
+    (22/ 450)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.IOException;
+<i>4</i>&nbsp;import java.io.Serializable;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Random;
+<i>8</i>&nbsp;import java.util.Scanner;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class Menu implements Serializable {
+<i>12</i>&nbsp;    public static final String LOGS_2_TXT = &quot;logs2.txt&quot;;
+<i>13</i>&nbsp;    public static final String INSIRA_EMAIL = &quot;insira email:&quot;;
+<i>14</i>&nbsp;    public static final String INSIRA_UMA_PASS = &quot;insira uma password: &quot;;
+<i>15</i>&nbsp;    public static final String INSIRA_AS_SUAS_COORDENADAS = &quot;insira as suas coordenadas:&quot;;
+<i>16</i>&nbsp;    public static final String COORDENADA_X = &quot;Coordenada X&quot;;
+<i>17</i>&nbsp;    public static final String COORDENADA_Y = &quot;Coordenada Y&quot;;
+<i>18</i>&nbsp;    public static final String ERRO_NO_PREENCHIMENTO = &quot;Erro no preenchimento!&quot;;
+<i>19</i>&nbsp;    public static final String REGISTO_FEITO_COM_SUCESSO_ = &quot;registo feito com sucesso &quot;;
+<i>20</i>&nbsp;    public static final String SAIR = &quot;0: Sair&quot;;
+<i>21</i>&nbsp;    public static final String SIM = &quot;1: Sim&quot;;
+<i>22</i>&nbsp;    public static final String NAO = &quot;2: Nao&quot;;
+<b class="fc"><i>23</i>&nbsp;    Random rnd = new Random();</b>
+<i>24</i>&nbsp;    private main t;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;    private Menu() {</b>
+<b class="fc"><i>28</i>&nbsp;        Scanner escolha = new Scanner(System.in);</b>
+<b class="fc"><i>29</i>&nbsp;        System.out.println(&quot;Escolha 1 para logs do stor, escolha 2 para logs do sistema:&quot;);</b>
+<b class="fc"><i>30</i>&nbsp;        int es = escolha.nextInt();</b>
+<b class="fc"><i>31</i>&nbsp;        if (es == 1) {</b>
+<b class="fc"><i>32</i>&nbsp;            this.t = main.parse(&quot;logs.txt&quot;, 1);</b>
+<b class="fc"><i>33</i>&nbsp;        } else if (es == 2) {</b>
+<b class="fc"><i>34</i>&nbsp;            this.t = main.parse(LOGS_2_TXT, 2);</b>
+<i>35</i>&nbsp;        }
+<b class="fc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public static void main(String[] args) {
+<b class="fc"><i>39</i>&nbsp;        new Menu().menuInicial();</b>
+<b class="nc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    private void save() {
+<i>43</i>&nbsp;        try {
+<b class="nc"><i>44</i>&nbsp;            this.t.writeFile2(LOGS_2_TXT);</b>
+<b class="nc"><i>45</i>&nbsp;        } catch (IOException f) {</b>
+<b class="nc"><i>46</i>&nbsp;            System.out.print(&quot;Erro na gravação!&quot;);</b>
+<b class="nc"><i>47</i>&nbsp;        }</b>
+<b class="nc"><i>48</i>&nbsp;    }</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    //Corre a aplicação
+<i>51</i>&nbsp;    public void menuInicial() {
+<b class="fc"><i>52</i>&nbsp;        int flag = 0;</b>
+<b class="fc"><i>53</i>&nbsp;        while (flag == 0) {</b>
+<b class="fc"><i>54</i>&nbsp;            Scanner escolha = new Scanner(System.in);</b>
+<b class="fc"><i>55</i>&nbsp;            System.out.println(&quot;1: Login&quot;);</b>
+<b class="fc"><i>56</i>&nbsp;            System.out.println(&quot;2: Register&quot;);</b>
+<b class="fc"><i>57</i>&nbsp;            System.out.println(&quot;3: Top10 Transportadoras &quot;);</b>
+<b class="fc"><i>58</i>&nbsp;            System.out.println(&quot;4: Top10 Users &quot;);</b>
+<b class="fc"><i>59</i>&nbsp;            System.out.println(&quot;5: Historico de um traz_aqui.Voluntario ou traz_aqui.Transportadora&quot;);</b>
+<b class="fc"><i>60</i>&nbsp;            System.out.println(&quot;6: Total Faturado Por uma empresa num determinado periodo&quot;);</b>
+<b class="fc"><i>61</i>&nbsp;            System.out.println(&quot;0: Close&quot;);</b>
+<b class="fc"><i>62</i>&nbsp;            int es = escolha.nextInt();</b>
+<b class="nc"><i>63</i>&nbsp;            if (es == 1) {</b>
+<b class="nc"><i>64</i>&nbsp;                Scanner e = new Scanner(System.in);</b>
+<b class="nc"><i>65</i>&nbsp;                System.out.println(&quot;Introduza o seu e-mail:&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;                String email = e.nextLine();</b>
+<b class="nc"><i>67</i>&nbsp;                Scanner password = new Scanner(System.in);</b>
+<b class="nc"><i>68</i>&nbsp;                System.out.println(&quot;Introduza a sua password:&quot;);</b>
+<b class="nc"><i>69</i>&nbsp;                String p = password.nextLine();</b>
+<b class="nc"><i>70</i>&nbsp;                if (t.LoginInfo(email, p)) {</b>
+<b class="nc"><i>71</i>&nbsp;                    User x = null;</b>
+<b class="nc"><i>72</i>&nbsp;                    if (t.getUserByEmail(email).equals(x)) {</b>
+<b class="nc"><i>73</i>&nbsp;                        System.out.println(&quot;Email não existe&quot;);</b>
+<b class="nc"><i>74</i>&nbsp;                        this.save();</b>
+<b class="nc"><i>75</i>&nbsp;                        return;</b>
+<i>76</i>&nbsp;                    }
+<b class="nc"><i>77</i>&nbsp;                    x = t.getUserByEmail(email);</b>
+<b class="nc"><i>78</i>&nbsp;                    String cod = t.getUserByEmail(email).getCodigo();</b>
+<b class="nc"><i>79</i>&nbsp;                    if (x instanceof Buyer) {</b>
+<b class="nc"><i>80</i>&nbsp;                        this.menuB(cod);</b>
+<b class="nc"><i>81</i>&nbsp;                    } else if (x instanceof Voluntario) {</b>
+<b class="nc"><i>82</i>&nbsp;                        this.menuV(cod);</b>
+<b class="nc"><i>83</i>&nbsp;                    } else if (x instanceof Loja) {</b>
+<b class="nc"><i>84</i>&nbsp;                        this.menuL(cod);</b>
+<b class="nc"><i>85</i>&nbsp;                    } else if (x instanceof Transportadora) {</b>
+<i>86</i>&nbsp;                    }
+<i>87</i>&nbsp;
+<b class="nc"><i>88</i>&nbsp;                } else {</b>
+<b class="nc"><i>89</i>&nbsp;                    System.out.println(&quot;Email ou pw nao existem&quot;);</b>
+<b class="nc"><i>90</i>&nbsp;                    this.save();</b>
+<b class="nc"><i>91</i>&nbsp;                    this.t = main.parse(LOGS_2_TXT, 2);</b>
+<i>92</i>&nbsp;                }
+<b class="nc"><i>93</i>&nbsp;            } else if (es == 2) {</b>
+<b class="nc"><i>94</i>&nbsp;                this.register();</b>
+<b class="nc"><i>95</i>&nbsp;            } else if (es == 3) {</b>
+<b class="nc"><i>96</i>&nbsp;                t.top10Empresas();</b>
+<b class="nc"><i>97</i>&nbsp;            } else if (es == 4) {</b>
+<b class="nc"><i>98</i>&nbsp;                t.top10Users();</b>
+<b class="nc"><i>99</i>&nbsp;            } else if (es == 5) {</b>
+<b class="nc"><i>100</i>&nbsp;                t.faturadoEmp();</b>
+<b class="nc"><i>101</i>&nbsp;            } else if (es == 6) {</b>
+<b class="nc"><i>102</i>&nbsp;                t.faturadoEmp();</b>
+<i>103</i>&nbsp;            } else {
+<b class="nc"><i>104</i>&nbsp;                save();</b>
+<b class="nc"><i>105</i>&nbsp;                break;</b>
+<i>106</i>&nbsp;            }
+<i>107</i>&nbsp;
+<b class="nc"><i>108</i>&nbsp;        }</b>
+<b class="nc"><i>109</i>&nbsp;    }</b>
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public void register() {
+<b class="nc"><i>112</i>&nbsp;        System.out.println(&quot;Quer se registar como?&quot;);</b>
+<b class="nc"><i>113</i>&nbsp;        System.out.println(&quot;1: traz_aqui.Buyer&quot;);</b>
+<b class="nc"><i>114</i>&nbsp;        System.out.println(&quot;2: traz_aqui.Voluntario &quot;);</b>
+<b class="nc"><i>115</i>&nbsp;        System.out.println(&quot;3: traz_aqui.Transportadora &quot;);</b>
+<b class="nc"><i>116</i>&nbsp;        System.out.println(&quot;4: loja&quot;);</b>
+<b class="nc"><i>117</i>&nbsp;        System.out.println(&quot;0: Close&quot;);</b>
+<b class="nc"><i>118</i>&nbsp;        Scanner escolha = new Scanner(System.in);</b>
+<b class="nc"><i>119</i>&nbsp;        int es = escolha.nextInt();</b>
+<b class="nc"><i>120</i>&nbsp;        if (es == 1) {</b>
+<b class="nc"><i>121</i>&nbsp;            String codbuyerF = registerbuyer();</b>
+<b class="nc"><i>122</i>&nbsp;            if (codbuyerF.equals(&quot;0&quot;)) {</b>
+<i>123</i>&nbsp;            } else {
+<b class="nc"><i>124</i>&nbsp;                this.menuB(codbuyerF);</b>
+<i>125</i>&nbsp;            }
+<b class="nc"><i>126</i>&nbsp;        } else if (es == 2) {</b>
+<b class="nc"><i>127</i>&nbsp;            String codvolF = registerVoluntario();</b>
+<b class="nc"><i>128</i>&nbsp;            if (codvolF.equals(&quot;0&quot;)) {</b>
+<i>129</i>&nbsp;            } else {
+<b class="nc"><i>130</i>&nbsp;                this.menuV(codvolF);</b>
+<i>131</i>&nbsp;            }
+<b class="nc"><i>132</i>&nbsp;        } else if (es == 3) {</b>
+<b class="nc"><i>133</i>&nbsp;            String codtransF = registerTransportadora();</b>
+<b class="nc"><i>134</i>&nbsp;            if (codtransF.equals(&quot;0&quot;)) {</b>
+<i>135</i>&nbsp;            } else {
+<b class="nc"><i>136</i>&nbsp;                this.menuT(codtransF);</b>
+<i>137</i>&nbsp;            }
+<b class="nc"><i>138</i>&nbsp;        } else if (es == 4) {</b>
+<b class="nc"><i>139</i>&nbsp;            String codLojF = registerLoja();</b>
+<b class="nc"><i>140</i>&nbsp;            if (codLojF.equals(&quot;0&quot;)) {</b>
+<i>141</i>&nbsp;            } else {
+<b class="nc"><i>142</i>&nbsp;                this.menuL(codLojF);</b>
+<i>143</i>&nbsp;            }
+<b class="nc"><i>144</i>&nbsp;        } else {</b>
+<b class="nc"><i>145</i>&nbsp;            save();</b>
+<b class="nc"><i>146</i>&nbsp;            this.t = main.parse(LOGS_2_TXT, 2);</b>
+<i>147</i>&nbsp;        }
+<i>148</i>&nbsp;
+<b class="nc"><i>149</i>&nbsp;    }</b>
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;    // username,codigo,password,lx,ly,email, custokm , raio ,nif , aval, numrev
+<i>152</i>&nbsp;    public String registerTransportadora() {
+<b class="nc"><i>153</i>&nbsp;        Transportadora b = null;</b>
+<b class="nc"><i>154</i>&nbsp;        String result = &quot;0&quot;;</b>
+<b class="nc"><i>155</i>&nbsp;        Scanner e = new Scanner(System.in);</b>
+<b class="nc"><i>156</i>&nbsp;        System.out.println(INSIRA_EMAIL);</b>
+<b class="nc"><i>157</i>&nbsp;        String email = e.nextLine();</b>
+<i>158</i>&nbsp;
+<b class="nc"><i>159</i>&nbsp;        Scanner p = new Scanner(System.in);</b>
+<b class="nc"><i>160</i>&nbsp;        System.out.println(INSIRA_UMA_PASS);</b>
+<b class="nc"><i>161</i>&nbsp;        String password = p.nextLine();</b>
+<i>162</i>&nbsp;
+<b class="nc"><i>163</i>&nbsp;        Scanner n = new Scanner(System.in);</b>
+<b class="nc"><i>164</i>&nbsp;        System.out.println(&quot;insira o nome da empresa: &quot;);</b>
+<b class="nc"><i>165</i>&nbsp;        String name = n.nextLine();</b>
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;
+<b class="nc"><i>168</i>&nbsp;        Scanner x1 = new Scanner(System.in);</b>
+<b class="nc"><i>169</i>&nbsp;        System.out.println(INSIRA_AS_SUAS_COORDENADAS);</b>
+<b class="nc"><i>170</i>&nbsp;        System.out.println(COORDENADA_X);</b>
+<b class="nc"><i>171</i>&nbsp;        String x = x1.nextLine();</b>
+<b class="nc"><i>172</i>&nbsp;        Scanner y1 = new Scanner(System.in);</b>
+<b class="nc"><i>173</i>&nbsp;        System.out.println(COORDENADA_Y);</b>
+<b class="nc"><i>174</i>&nbsp;        String y = y1.nextLine();</b>
+<i>175</i>&nbsp;
+<b class="nc"><i>176</i>&nbsp;        Scanner custo1 = new Scanner(System.in);</b>
+<b class="nc"><i>177</i>&nbsp;        System.out.println(&quot;insira o custo por km:&quot;);</b>
+<b class="nc"><i>178</i>&nbsp;        String custo = custo1.nextLine();</b>
+<i>179</i>&nbsp;
+<b class="nc"><i>180</i>&nbsp;        Scanner r1 = new Scanner(System.in);</b>
+<b class="nc"><i>181</i>&nbsp;        System.out.println(&quot;insira o raio em que pode fazer entregas:&quot;);</b>
+<b class="nc"><i>182</i>&nbsp;        String r = r1.nextLine();</b>
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;        Scanner nif1 = new Scanner(System.in);</b>
+<b class="nc"><i>185</i>&nbsp;        System.out.println(&quot;insira o nif da empresa:&quot;);</b>
+<b class="nc"><i>186</i>&nbsp;        String nif = nif1.nextLine();</b>
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;        String codigo = &quot;t&quot; + this.getRandomNumberString();</b>
+<b class="nc"><i>189</i>&nbsp;        while (!t.checkCodigo(codigo)) {</b>
+<b class="nc"><i>190</i>&nbsp;            codigo = &quot;l&quot; + this.getRandomNumberString();</b>
+<i>191</i>&nbsp;        }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;        try {
+<b class="nc"><i>194</i>&nbsp;            b = new Transportadora(name, codigo, password, Double.parseDouble(x), Double.parseDouble(y), email,</b>
+<b class="nc"><i>195</i>&nbsp;                    Double.parseDouble(custo), Double.parseDouble(r), Integer.parseInt(nif), 0, 0);</b>
+<b class="nc"><i>196</i>&nbsp;        } catch (NullPointerException erro) {</b>
+<b class="nc"><i>197</i>&nbsp;            System.out.println(ERRO_NO_PREENCHIMENTO);</b>
+<i>198</i>&nbsp;
+<b class="nc"><i>199</i>&nbsp;            return result;</b>
+<b class="nc"><i>200</i>&nbsp;        }</b>
+<i>201</i>&nbsp;
+<b class="nc"><i>202</i>&nbsp;        if (this.t.addTrans(b) == 1) {</b>
+<b class="nc"><i>203</i>&nbsp;            System.out.println(REGISTO_FEITO_COM_SUCESSO_);</b>
+<b class="nc"><i>204</i>&nbsp;            save();</b>
+<b class="nc"><i>205</i>&nbsp;            return codigo;</b>
+<i>206</i>&nbsp;        }
+<b class="nc"><i>207</i>&nbsp;        return result;</b>
+<i>208</i>&nbsp;    }
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;    //username,codigo,password,lx,ly,email, raio,livre,numreviews,avaliacao
+<i>211</i>&nbsp;    public String registerVoluntario() {
+<b class="nc"><i>212</i>&nbsp;        Voluntario b = null;</b>
+<b class="nc"><i>213</i>&nbsp;        String result = &quot;0&quot;;</b>
+<b class="nc"><i>214</i>&nbsp;        Scanner e = new Scanner(System.in);</b>
+<b class="nc"><i>215</i>&nbsp;        System.out.println(INSIRA_EMAIL);</b>
+<b class="nc"><i>216</i>&nbsp;        String email = e.nextLine();</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;        Scanner p = new Scanner(System.in);</b>
+<b class="nc"><i>219</i>&nbsp;        System.out.println(INSIRA_UMA_PASS);</b>
+<b class="nc"><i>220</i>&nbsp;        String password = p.nextLine();</b>
+<i>221</i>&nbsp;
+<b class="nc"><i>222</i>&nbsp;        Scanner n = new Scanner(System.in);</b>
+<b class="nc"><i>223</i>&nbsp;        System.out.println(&quot;insira o seu nome: &quot;);</b>
+<b class="nc"><i>224</i>&nbsp;        String name = n.nextLine();</b>
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;
+<b class="nc"><i>227</i>&nbsp;        Scanner x1 = new Scanner(System.in);</b>
+<b class="nc"><i>228</i>&nbsp;        System.out.println(INSIRA_AS_SUAS_COORDENADAS);</b>
+<b class="nc"><i>229</i>&nbsp;        System.out.println(COORDENADA_X);</b>
+<b class="nc"><i>230</i>&nbsp;        String x = x1.nextLine();</b>
+<b class="nc"><i>231</i>&nbsp;        Scanner y1 = new Scanner(System.in);</b>
+<b class="nc"><i>232</i>&nbsp;        System.out.println(COORDENADA_Y);</b>
+<b class="nc"><i>233</i>&nbsp;        String y = y1.nextLine();</b>
+<i>234</i>&nbsp;
+<b class="nc"><i>235</i>&nbsp;        Scanner r1 = new Scanner(System.in);</b>
+<b class="nc"><i>236</i>&nbsp;        System.out.println(&quot;insira o raio em que pode fazer entregas:&quot;);</b>
+<b class="nc"><i>237</i>&nbsp;        String r = r1.nextLine();</b>
+<i>238</i>&nbsp;
+<b class="nc"><i>239</i>&nbsp;        String codigo = &quot;v&quot; + this.getRandomNumberString();</b>
+<b class="nc"><i>240</i>&nbsp;        while (!t.checkCodigo(codigo)) {</b>
+<b class="nc"><i>241</i>&nbsp;            codigo = &quot;l&quot; + this.getRandomNumberString();</b>
+<i>242</i>&nbsp;        }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;        try {
+<b class="nc"><i>245</i>&nbsp;            b = new Voluntario(name, codigo, password, Double.parseDouble(x), Double.parseDouble(y), email,</b>
+<b class="nc"><i>246</i>&nbsp;                    Double.parseDouble(r), true, 0, 0);</b>
+<b class="nc"><i>247</i>&nbsp;        } catch (NullPointerException erro) {</b>
+<b class="nc"><i>248</i>&nbsp;            System.out.println(ERRO_NO_PREENCHIMENTO);</b>
+<b class="nc"><i>249</i>&nbsp;            return result;</b>
+<b class="nc"><i>250</i>&nbsp;        }</b>
+<i>251</i>&nbsp;
+<b class="nc"><i>252</i>&nbsp;        if (this.t.addVol(b) == 1) {</b>
+<b class="nc"><i>253</i>&nbsp;            System.out.println(REGISTO_FEITO_COM_SUCESSO_);</b>
+<b class="nc"><i>254</i>&nbsp;            save();</b>
+<b class="nc"><i>255</i>&nbsp;            return codigo;</b>
+<i>256</i>&nbsp;        }
+<i>257</i>&nbsp;
+<b class="nc"><i>258</i>&nbsp;        return result;</b>
+<i>259</i>&nbsp;    }
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;    //username,codigo,password,lx,ly,email
+<i>262</i>&nbsp;    public String registerLoja() {
+<b class="nc"><i>263</i>&nbsp;        Loja b = null;</b>
+<b class="nc"><i>264</i>&nbsp;        String result = &quot;0&quot;;</b>
+<b class="nc"><i>265</i>&nbsp;        Scanner e = new Scanner(System.in);</b>
+<b class="nc"><i>266</i>&nbsp;        System.out.println(INSIRA_EMAIL);</b>
+<b class="nc"><i>267</i>&nbsp;        String email = e.nextLine();</b>
+<i>268</i>&nbsp;
+<b class="nc"><i>269</i>&nbsp;        Scanner p = new Scanner(System.in);</b>
+<b class="nc"><i>270</i>&nbsp;        System.out.println(INSIRA_UMA_PASS);</b>
+<b class="nc"><i>271</i>&nbsp;        String password = p.nextLine();</b>
+<i>272</i>&nbsp;
+<b class="nc"><i>273</i>&nbsp;        Scanner n = new Scanner(System.in);</b>
+<b class="nc"><i>274</i>&nbsp;        System.out.println(&quot;insira o nome da loja: &quot;);</b>
+<b class="nc"><i>275</i>&nbsp;        String name = n.nextLine();</b>
+<i>276</i>&nbsp;
+<i>277</i>&nbsp;
+<b class="nc"><i>278</i>&nbsp;        Scanner x1 = new Scanner(System.in);</b>
+<b class="nc"><i>279</i>&nbsp;        System.out.println(INSIRA_AS_SUAS_COORDENADAS);</b>
+<b class="nc"><i>280</i>&nbsp;        System.out.println(COORDENADA_X);</b>
+<b class="nc"><i>281</i>&nbsp;        String x = x1.nextLine();</b>
+<b class="nc"><i>282</i>&nbsp;        Scanner y1 = new Scanner(System.in);</b>
+<b class="nc"><i>283</i>&nbsp;        System.out.println(COORDENADA_Y);</b>
+<b class="nc"><i>284</i>&nbsp;        String y = y1.nextLine();</b>
+<i>285</i>&nbsp;
+<b class="nc"><i>286</i>&nbsp;        String codigo = &quot;l&quot; + this.getRandomNumberString();</b>
+<b class="nc"><i>287</i>&nbsp;        while (!t.checkCodigo(codigo)) {</b>
+<b class="nc"><i>288</i>&nbsp;            codigo = &quot;l&quot; + this.getRandomNumberString();</b>
+<i>289</i>&nbsp;        }
+<i>290</i>&nbsp;
+<i>291</i>&nbsp;        try {
+<b class="nc"><i>292</i>&nbsp;            b = new Loja(name, codigo, password, Double.parseDouble(x), Double.parseDouble(y), email);</b>
+<b class="nc"><i>293</i>&nbsp;        } catch (NullPointerException erro) {</b>
+<b class="nc"><i>294</i>&nbsp;            System.out.println(ERRO_NO_PREENCHIMENTO);</b>
+<b class="nc"><i>295</i>&nbsp;            return result;</b>
+<b class="nc"><i>296</i>&nbsp;        }</b>
+<i>297</i>&nbsp;
+<b class="nc"><i>298</i>&nbsp;        if (this.t.addLoja(b) == 1) {</b>
+<b class="nc"><i>299</i>&nbsp;            System.out.println(REGISTO_FEITO_COM_SUCESSO_);</b>
+<b class="nc"><i>300</i>&nbsp;            save();</b>
+<b class="nc"><i>301</i>&nbsp;            return codigo;</b>
+<i>302</i>&nbsp;        }
+<b class="nc"><i>303</i>&nbsp;        return result;</b>
+<i>304</i>&nbsp;    }
+<i>305</i>&nbsp;
+<i>306</i>&nbsp;    //username,codigo,password,lx,ly,email
+<i>307</i>&nbsp;    public String registerbuyer() {
+<b class="nc"><i>308</i>&nbsp;        Buyer b = null;</b>
+<b class="nc"><i>309</i>&nbsp;        String result = &quot;0&quot;;</b>
+<b class="nc"><i>310</i>&nbsp;        Scanner e = new Scanner(System.in);</b>
+<b class="nc"><i>311</i>&nbsp;        System.out.println(INSIRA_EMAIL);</b>
+<b class="nc"><i>312</i>&nbsp;        String email = e.nextLine();</b>
+<i>313</i>&nbsp;
+<b class="nc"><i>314</i>&nbsp;        Scanner p = new Scanner(System.in);</b>
+<b class="nc"><i>315</i>&nbsp;        System.out.println(INSIRA_UMA_PASS);</b>
+<b class="nc"><i>316</i>&nbsp;        String password = p.nextLine();</b>
+<i>317</i>&nbsp;
+<b class="nc"><i>318</i>&nbsp;        Scanner n = new Scanner(System.in);</b>
+<b class="nc"><i>319</i>&nbsp;        System.out.println(&quot;insira o seu nome: &quot;);</b>
+<b class="nc"><i>320</i>&nbsp;        String name = n.nextLine();</b>
+<i>321</i>&nbsp;
+<i>322</i>&nbsp;
+<b class="nc"><i>323</i>&nbsp;        Scanner x1 = new Scanner(System.in);</b>
+<b class="nc"><i>324</i>&nbsp;        System.out.println(INSIRA_AS_SUAS_COORDENADAS);</b>
+<b class="nc"><i>325</i>&nbsp;        System.out.println(COORDENADA_X);</b>
+<b class="nc"><i>326</i>&nbsp;        String x = x1.nextLine();</b>
+<b class="nc"><i>327</i>&nbsp;        Scanner y1 = new Scanner(System.in);</b>
+<b class="nc"><i>328</i>&nbsp;        System.out.println(COORDENADA_Y);</b>
+<b class="nc"><i>329</i>&nbsp;        String y = y1.nextLine();</b>
+<i>330</i>&nbsp;
+<b class="nc"><i>331</i>&nbsp;        String codigo = &quot;u&quot; + this.getRandomNumberString();</b>
+<b class="nc"><i>332</i>&nbsp;        while (!t.checkCodigo(codigo)) {</b>
+<b class="nc"><i>333</i>&nbsp;            codigo = &quot;u&quot; + this.getRandomNumberString();</b>
+<i>334</i>&nbsp;        }
+<i>335</i>&nbsp;
+<i>336</i>&nbsp;        try {
+<b class="nc"><i>337</i>&nbsp;            b = new Buyer(name, codigo, password, Double.parseDouble(x), Double.parseDouble(y), email);</b>
+<b class="nc"><i>338</i>&nbsp;        } catch (NullPointerException erro) {</b>
+<b class="nc"><i>339</i>&nbsp;            System.out.println(ERRO_NO_PREENCHIMENTO);</b>
+<b class="nc"><i>340</i>&nbsp;            return result;</b>
+<b class="nc"><i>341</i>&nbsp;        }</b>
+<i>342</i>&nbsp;
+<b class="nc"><i>343</i>&nbsp;        if (this.t.addBuy(b) == 1) {</b>
+<b class="nc"><i>344</i>&nbsp;            System.out.println(REGISTO_FEITO_COM_SUCESSO_);</b>
+<b class="nc"><i>345</i>&nbsp;            save();</b>
+<b class="nc"><i>346</i>&nbsp;            return codigo;</b>
+<i>347</i>&nbsp;        }
+<b class="nc"><i>348</i>&nbsp;        return result;</b>
+<i>349</i>&nbsp;    }
+<i>350</i>&nbsp;
+<i>351</i>&nbsp;
+<i>352</i>&nbsp;    public String getRandomNumberString() {
+<i>353</i>&nbsp;        // It will generate 6 digit random Number.
+<i>354</i>&nbsp;        // from 0 to 999999
+<b class="nc"><i>355</i>&nbsp;        int number = rnd.nextInt(999999);</b>
+<i>356</i>&nbsp;
+<i>357</i>&nbsp;        // this will convert any number sequence into 6 character.
+<b class="nc"><i>358</i>&nbsp;        return String.format(&quot;%06d&quot;, number);</b>
+<i>359</i>&nbsp;    }
+<i>360</i>&nbsp;
+<i>361</i>&nbsp;    public void menuT(String codigo) {
+<b class="nc"><i>362</i>&nbsp;        int i = 0;</b>
+<b class="nc"><i>363</i>&nbsp;        User volun = t.getUserByCodigo(codigo);</b>
+<i>364</i>&nbsp;
+<b class="nc"><i>365</i>&nbsp;        while (i == 0) {</b>
+<b class="nc"><i>366</i>&nbsp;            Scanner optn = new Scanner(System.in);</b>
+<b class="nc"><i>367</i>&nbsp;            System.out.println(&quot;1: Levantar traz_aqui.Encomenda&quot;); // pronto para fazer encomendas ou nao</b>
+<b class="nc"><i>368</i>&nbsp;            System.out.println(&quot;2: Marcar encomenda entregue&quot;);</b>
+<b class="nc"><i>369</i>&nbsp;            System.out.println(&quot;3: Historico&quot;);</b>
+<i>370</i>&nbsp;            //System.out.println(&quot;4: Encomendas durante uma certa data&quot;); // se tiver tempo----------- fazer tb voluntariado nao esquecer 
+<b class="nc"><i>371</i>&nbsp;            System.out.println(SAIR);</b>
+<b class="nc"><i>372</i>&nbsp;            int op = optn.nextInt();</b>
+<i>373</i>&nbsp;
+<b class="nc"><i>374</i>&nbsp;            if (op == 1) {</b>
+<b class="nc"><i>375</i>&nbsp;                System.out.println(&quot;Insira codigo de encomenda para ser levantada&quot;);</b>
+<b class="nc"><i>376</i>&nbsp;                Scanner codEncMenuT1 = new Scanner(System.in);</b>
+<b class="nc"><i>377</i>&nbsp;                String codEncMenuT = codEncMenuT1.nextLine();</b>
+<i>378</i>&nbsp;
+<b class="nc"><i>379</i>&nbsp;                t.mudaestadoENC(codEncMenuT, 6);</b>
+<i>380</i>&nbsp;
+<i>381</i>&nbsp;
+<b class="nc"><i>382</i>&nbsp;            } else if (op == 2) {</b>
+<b class="nc"><i>383</i>&nbsp;                System.out.println(&quot;Insira codigo de encomenda que foi entregue&quot;);</b>
+<b class="nc"><i>384</i>&nbsp;                Scanner codEncMenuT1 = new Scanner(System.in);</b>
+<b class="nc"><i>385</i>&nbsp;                String codEncMenuT = codEncMenuT1.nextLine();</b>
+<i>386</i>&nbsp;
+<b class="nc"><i>387</i>&nbsp;                t.mudaestadoENC(codEncMenuT, 6);</b>
+<i>388</i>&nbsp;
+<i>389</i>&nbsp;
+<b class="nc"><i>390</i>&nbsp;            } else if (op == 3) {</b>
+<b class="nc"><i>391</i>&nbsp;                t.PrintHistT(codigo);</b>
+<i>392</i>&nbsp;            } else {
+<b class="nc"><i>393</i>&nbsp;                this.save();</b>
+<b class="nc"><i>394</i>&nbsp;                break;</b>
+<i>395</i>&nbsp;            }
+<b class="nc"><i>396</i>&nbsp;        }</b>
+<b class="nc"><i>397</i>&nbsp;    }</b>
+<i>398</i>&nbsp;
+<i>399</i>&nbsp;    public void menuL(String codigo) {
+<b class="nc"><i>400</i>&nbsp;        int i = 0;</b>
+<b class="nc"><i>401</i>&nbsp;        User cloja = t.getUserByCodigo(codigo);</b>
+<i>402</i>&nbsp;
+<b class="nc"><i>403</i>&nbsp;        while (i == 0) {</b>
+<b class="nc"><i>404</i>&nbsp;            Scanner optn = new Scanner(System.in);</b>
+<b class="nc"><i>405</i>&nbsp;            System.out.println(&quot;1: traz_aqui.Encomenda pronta&quot;); // pronto para fazer encomendas ou nao</b>
+<b class="nc"><i>406</i>&nbsp;            System.out.println(&quot;2: Pedir random voluntario&quot;);</b>
+<b class="nc"><i>407</i>&nbsp;            System.out.println(SAIR);</b>
+<b class="nc"><i>408</i>&nbsp;            int op = optn.nextInt();</b>
+<i>409</i>&nbsp;
+<b class="nc"><i>410</i>&nbsp;            if (op == 1) {</b>
+<b class="nc"><i>411</i>&nbsp;                System.out.println(&quot;Insira codigo de encomenda para ser levantada&quot;);</b>
+<b class="nc"><i>412</i>&nbsp;                Scanner codEncMenuL1 = new Scanner(System.in);</b>
+<b class="nc"><i>413</i>&nbsp;                String codEncMenu = codEncMenuL1.nextLine();</b>
+<b class="nc"><i>414</i>&nbsp;                if (t.TransportadoraOuVoluntario(codEncMenu) == 1) {</b>
+<b class="nc"><i>415</i>&nbsp;                    t.mudaestadoENC(codEncMenu, 4);</b>
+<b class="nc"><i>416</i>&nbsp;                } else if (t.TransportadoraOuVoluntario(codEncMenu) == 2) {</b>
+<b class="nc"><i>417</i>&nbsp;                    t.mudaestadoENC(codEncMenu, 3);</b>
+<b class="nc"><i>418</i>&nbsp;                } else if (t.TransportadoraOuVoluntario(codEncMenu) == 0) {</b>
+<b class="nc"><i>419</i>&nbsp;                    System.out.println(&quot; codigo de encomenda errado &quot;);</b>
+<i>420</i>&nbsp;                }
+<i>421</i>&nbsp;
+<i>422</i>&nbsp;
+<b class="nc"><i>423</i>&nbsp;            } else if (op == 2) {</b>
+<b class="nc"><i>424</i>&nbsp;                System.out.println(&quot;Insira codigo de encomenda para pedir a um voluntario&quot;);</b>
+<b class="nc"><i>425</i>&nbsp;                Scanner codEncMenuL2 = new Scanner(System.in);</b>
+<b class="nc"><i>426</i>&nbsp;                String codEncMenu1 = codEncMenuL2.nextLine();</b>
+<i>427</i>&nbsp;
+<i>428</i>&nbsp;
+<b class="nc"><i>429</i>&nbsp;                if (t.TransportadoraOuVoluntario(codEncMenu1) == 0) {</b>
+<b class="nc"><i>430</i>&nbsp;                    String codV = t.getVolLivre(codEncMenu1);</b>
+<b class="nc"><i>431</i>&nbsp;                    t.setDelieverV(codV, codEncMenu1);</b>
+<b class="nc"><i>432</i>&nbsp;                    t.mudaestadoENC(codEncMenu1, 8);</b>
+<i>433</i>&nbsp;                }
+<i>434</i>&nbsp;
+<i>435</i>&nbsp;
+<b class="nc"><i>436</i>&nbsp;            } else {</b>
+<b class="nc"><i>437</i>&nbsp;                this.save();</b>
+<b class="nc"><i>438</i>&nbsp;                break;</b>
+<i>439</i>&nbsp;            }
+<i>440</i>&nbsp;
+<i>441</i>&nbsp;
+<b class="nc"><i>442</i>&nbsp;        }</b>
+<b class="nc"><i>443</i>&nbsp;    }</b>
+<i>444</i>&nbsp;
+<i>445</i>&nbsp;
+<i>446</i>&nbsp;    public void menuV(String codigo) {
+<b class="nc"><i>447</i>&nbsp;        int i = 0;</b>
+<b class="nc"><i>448</i>&nbsp;        User volun = t.getUserByCodigo(codigo);</b>
+<i>449</i>&nbsp;
+<b class="nc"><i>450</i>&nbsp;        while (i == 0) {</b>
+<b class="nc"><i>451</i>&nbsp;            Scanner optn = new Scanner(System.in);</b>
+<b class="nc"><i>452</i>&nbsp;            System.out.println(&quot;1: Mudar Estado&quot;); // pronto para fazer encomendas ou nao </b>
+<b class="nc"><i>453</i>&nbsp;            System.out.println(&quot;2: Escolher encomendas disponiveis dentro de raio: &quot;);</b>
+<b class="nc"><i>454</i>&nbsp;            System.out.println(&quot;3: Marcar encomenda entregue&quot;);</b>
+<b class="nc"><i>455</i>&nbsp;            System.out.println(&quot;4: Historico&quot;);</b>
+<b class="nc"><i>456</i>&nbsp;            System.out.println(&quot;5: Ver Encomendas para aceitar&quot;);</b>
+<b class="nc"><i>457</i>&nbsp;            System.out.println(SAIR);</b>
+<b class="nc"><i>458</i>&nbsp;            int op = optn.nextInt();</b>
+<i>459</i>&nbsp;
+<b class="nc"><i>460</i>&nbsp;            if (op == 1) {</b>
+<b class="nc"><i>461</i>&nbsp;                if (t.EncomendaAtualV(codigo).equals(&quot;free&quot;)) {</b>
+<b class="nc"><i>462</i>&nbsp;                    t.mudaestadoVoluntario(volun);</b>
+<i>463</i>&nbsp;                } else {
+<b class="nc"><i>464</i>&nbsp;                    System.out.println(&quot;Tem de entregar a encomenda atual&quot;);</b>
+<i>465</i>&nbsp;                }
+<i>466</i>&nbsp;
+<b class="nc"><i>467</i>&nbsp;            } else if (op == 2) {</b>
+<b class="nc"><i>468</i>&nbsp;                if (t.EncomendaAtualV(codigo).equals(&quot;free&quot;)) {</b>
+<b class="nc"><i>469</i>&nbsp;                    List&lt;Encomenda&gt; encomendas = this.t.EncomendasParaVoluntarioDentroRaio(codigo);</b>
+<b class="nc"><i>470</i>&nbsp;                    Scanner l = new Scanner(System.in);</b>
+<b class="nc"><i>471</i>&nbsp;                    int i1 = 0;</b>
+<i>472</i>&nbsp;
+<b class="nc"><i>473</i>&nbsp;                    System.out.println(&quot;Escolha uma traz_aqui.Encomenda: &quot;);</b>
+<i>474</i>&nbsp;
+<b class="nc"><i>475</i>&nbsp;                    for (Encomenda b : encomendas) {</b>
+<b class="nc"><i>476</i>&nbsp;                        System.out.println(i1 + &quot; - &quot; + b.getcodEncomenda());</b>
+<b class="nc"><i>477</i>&nbsp;                        i1++;</b>
+<b class="nc"><i>478</i>&nbsp;                    }</b>
+<b class="nc"><i>479</i>&nbsp;                    int input = l.nextInt();</b>
+<b class="nc"><i>480</i>&nbsp;                    if (0 &lt;= input &amp;&amp; input &lt; i1) {</b>
+<b class="nc"><i>481</i>&nbsp;                        Encomenda encf = encomendas.get(input);</b>
+<b class="nc"><i>482</i>&nbsp;                        String codigoenc = encf.getcodEncomenda();</b>
+<b class="nc"><i>483</i>&nbsp;                        t.mudaestadoENC(codigoenc, 6);</b>
+<b class="nc"><i>484</i>&nbsp;                        t.mudaestadoVoluntario(volun);</b>
+<b class="nc"><i>485</i>&nbsp;                        t.setDelieverV(codigo, codigoenc);</b>
+<i>486</i>&nbsp;
+<b class="nc"><i>487</i>&nbsp;                    } else {</b>
+<b class="nc"><i>488</i>&nbsp;                        System.out.println(&quot;Tem de entregar a encomenda atual&quot;);</b>
+<i>489</i>&nbsp;                    }
+<b class="nc"><i>490</i>&nbsp;                }</b>
+<i>491</i>&nbsp;
+<i>492</i>&nbsp;
+<b class="nc"><i>493</i>&nbsp;            } else if (op == 3) {</b>
+<b class="nc"><i>494</i>&nbsp;                if (t.EncomendaAtualV(codigo).equals(&quot;free&quot;)) {</b>
+<b class="nc"><i>495</i>&nbsp;                    System.out.println(&quot;Não tem encomendas para marcar como entregues&quot;);</b>
+<i>496</i>&nbsp;                } else {
+<b class="nc"><i>497</i>&nbsp;                    String codigoenc = t.EncomendaAtualV(codigo);</b>
+<b class="nc"><i>498</i>&nbsp;                    t.mudaestadoENC(codigoenc, 1);</b>
+<i>499</i>&nbsp;
+<b class="nc"><i>500</i>&nbsp;                }</b>
+<i>501</i>&nbsp;
+<i>502</i>&nbsp;
+<b class="nc"><i>503</i>&nbsp;            } else if (op == 4) {</b>
+<b class="nc"><i>504</i>&nbsp;                t.PrintHistV(codigo);</b>
+<b class="nc"><i>505</i>&nbsp;            } else if (op == 5) {</b>
+<b class="nc"><i>506</i>&nbsp;                if (!t.EncPedidas(codigo).equals(&quot;n&quot;)) {</b>
+<b class="nc"><i>507</i>&nbsp;                    String s = t.EncPedidas(codigo);</b>
+<b class="nc"><i>508</i>&nbsp;                    Scanner optn1 = new Scanner(System.in);</b>
+<b class="nc"><i>509</i>&nbsp;                    System.out.println(&quot;Aceita a encomenda&quot; + s + &quot;?&quot;);</b>
+<b class="nc"><i>510</i>&nbsp;                    System.out.println(&quot;1.sim 2.nao:&quot;);</b>
+<b class="nc"><i>511</i>&nbsp;                    int op1 = optn1.nextInt();</b>
+<b class="nc"><i>512</i>&nbsp;                    if (op == 1) {</b>
+<b class="nc"><i>513</i>&nbsp;                        t.mudaestadoENC(s, 6);</b>
+<b class="nc"><i>514</i>&nbsp;                        t.mudaestadoVoluntario(volun);</b>
+<b class="nc"><i>515</i>&nbsp;                        t.setDelieverV(codigo, s);</b>
+<i>516</i>&nbsp;                    }
+<b class="nc"><i>517</i>&nbsp;                }</b>
+<i>518</i>&nbsp;            } else {
+<b class="nc"><i>519</i>&nbsp;                this.save();</b>
+<b class="nc"><i>520</i>&nbsp;                break;</b>
+<i>521</i>&nbsp;            }
+<b class="nc"><i>522</i>&nbsp;        }</b>
+<b class="nc"><i>523</i>&nbsp;    }</b>
+<i>524</i>&nbsp;
+<i>525</i>&nbsp;
+<i>526</i>&nbsp;    public void menuB(String codigo) {
+<b class="nc"><i>527</i>&nbsp;        int i = 0;</b>
+<i>528</i>&nbsp;
+<b class="nc"><i>529</i>&nbsp;        while (i == 0) {</b>
+<b class="nc"><i>530</i>&nbsp;            Scanner optn = new Scanner(System.in);</b>
+<b class="nc"><i>531</i>&nbsp;            System.out.println(&quot;1: Fazer uma encomenda&quot;);</b>
+<b class="nc"><i>532</i>&nbsp;            System.out.println(&quot;2: Classificar Entregas&quot;);</b>
+<b class="nc"><i>533</i>&nbsp;            System.out.println(&quot;4: Historico&quot;);</b>
+<b class="nc"><i>534</i>&nbsp;            System.out.println(SAIR);</b>
+<b class="nc"><i>535</i>&nbsp;            int op = optn.nextInt();</b>
+<i>536</i>&nbsp;
+<b class="nc"><i>537</i>&nbsp;            if (op == 1) {</b>
+<b class="nc"><i>538</i>&nbsp;                List&lt;Loja&gt; lojas = this.t.Tlojas();</b>
+<b class="nc"><i>539</i>&nbsp;                Scanner l = new Scanner(System.in);</b>
+<b class="nc"><i>540</i>&nbsp;                int i1 = 0;</b>
+<i>541</i>&nbsp;
+<b class="nc"><i>542</i>&nbsp;                System.out.println(&quot;Escolha uma loja: &quot;);</b>
+<i>543</i>&nbsp;
+<b class="nc"><i>544</i>&nbsp;                for (Loja loja : lojas) {</b>
+<b class="nc"><i>545</i>&nbsp;                    System.out.println(i1 + &quot; - &quot; + loja.getUserName());</b>
+<b class="nc"><i>546</i>&nbsp;                    i1++;</b>
+<b class="nc"><i>547</i>&nbsp;                }</b>
+<b class="nc"><i>548</i>&nbsp;                int input = l.nextInt();</b>
+<b class="nc"><i>549</i>&nbsp;                if (0 &lt;= input &amp;&amp; input &lt; i1) {</b>
+<b class="nc"><i>550</i>&nbsp;                    Loja lojaf = lojas.get(input);</b>
+<b class="nc"><i>551</i>&nbsp;                    Encomenda e = new Encomenda();</b>
+<b class="nc"><i>552</i>&nbsp;                    String codenc = &quot;e&quot; + this.getRandomNumberString();</b>
+<b class="nc"><i>553</i>&nbsp;                    String codu = codigo;</b>
+<b class="nc"><i>554</i>&nbsp;                    String codlo = lojaf.getEmail();</b>
+<b class="nc"><i>555</i>&nbsp;                    String codT = &quot;&quot;;</b>
+<b class="nc"><i>556</i>&nbsp;                    int estado = 2;</b>
+<i>557</i>&nbsp;
+<b class="nc"><i>558</i>&nbsp;                    ArrayList&lt;LinhaEncomenda&gt; produto = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>559</i>&nbsp;                    int flag = 0;</b>
+<b class="nc"><i>560</i>&nbsp;                    double peso2 = 0;</b>
+<b class="nc"><i>561</i>&nbsp;                    while (flag == 0) {</b>
+<b class="nc"><i>562</i>&nbsp;                        int escolha2 = 0;</b>
+<b class="nc"><i>563</i>&nbsp;                        System.out.println(&quot;insira codigo do produto &quot;);</b>
+<b class="nc"><i>564</i>&nbsp;                        Scanner cp = new Scanner(System.in);</b>
+<b class="nc"><i>565</i>&nbsp;                        String codp = cp.nextLine();</b>
+<i>566</i>&nbsp;
+<b class="nc"><i>567</i>&nbsp;                        System.out.println(&quot;insira a quantidade&quot;);</b>
+<b class="nc"><i>568</i>&nbsp;                        Scanner qp = new Scanner(System.in);</b>
+<b class="nc"><i>569</i>&nbsp;                        Double quantp = qp.nextDouble();</b>
+<i>570</i>&nbsp;
+<b class="nc"><i>571</i>&nbsp;                        double preco2 = 3.0 * quantp;</b>
+<b class="nc"><i>572</i>&nbsp;                        peso2 = peso2 + 1 * quantp;</b>
+<i>573</i>&nbsp;
+<b class="nc"><i>574</i>&nbsp;                        LinhaEncomenda linha = new LinhaEncomenda(codp, &quot;&quot;, preco2, quantp);</b>
+<b class="nc"><i>575</i>&nbsp;                        produto.add(linha);</b>
+<i>576</i>&nbsp;
+<b class="nc"><i>577</i>&nbsp;                        System.out.println(&quot;quer continuar a comprar?&quot;);</b>
+<b class="nc"><i>578</i>&nbsp;                        System.out.println(SIM);</b>
+<b class="nc"><i>579</i>&nbsp;                        System.out.println(NAO);</b>
+<b class="nc"><i>580</i>&nbsp;                        Scanner oplinhaenc = new Scanner(System.in);</b>
+<b class="nc"><i>581</i>&nbsp;                        escolha2 = oplinhaenc.nextInt();</b>
+<b class="nc"><i>582</i>&nbsp;                        if (escolha2 == 2) {</b>
+<b class="nc"><i>583</i>&nbsp;                            flag = 1;</b>
+<i>584</i>&nbsp;                        }
+<i>585</i>&nbsp;
+<i>586</i>&nbsp;
+<b class="nc"><i>587</i>&nbsp;                    }</b>
+<i>588</i>&nbsp;
+<b class="nc"><i>589</i>&nbsp;                    System.out.println(&quot;quer Transporte?&quot;);</b>
+<b class="nc"><i>590</i>&nbsp;                    System.out.println(SIM);</b>
+<b class="nc"><i>591</i>&nbsp;                    System.out.println(NAO);</b>
+<b class="nc"><i>592</i>&nbsp;                    Scanner querTrans1 = new Scanner(System.in);</b>
+<b class="nc"><i>593</i>&nbsp;                    int querTrans = querTrans1.nextInt();</b>
+<b class="nc"><i>594</i>&nbsp;                    if (querTrans == 1) {</b>
+<i>595</i>&nbsp;                        //TransportadoraMaisBarata(String codBuyer,String codLoja, double peso)
+<b class="nc"><i>596</i>&nbsp;                        String trasnporte = t.TransportadoraMaisBarata(codu, codlo, peso2);</b>
+<b class="nc"><i>597</i>&nbsp;                        if (trasnporte.equals(&quot;n&quot;)) {</b>
+<i>598</i>&nbsp;                        } else {
+<i>599</i>&nbsp;                            //custoTransporte1 (String codBuyer , String codTransp,String codLoja, double peso )
+<b class="nc"><i>600</i>&nbsp;                            double custoTrans = t.custoTransporte1(codu, trasnporte, codlo, peso2);</b>
+<b class="nc"><i>601</i>&nbsp;                            System.out.println(&quot;Pela traz_aqui.Transportadora mais barata o preco fica:&quot; + custoTrans);</b>
+<b class="nc"><i>602</i>&nbsp;                            System.out.println(&quot;Aceita?&quot;);</b>
+<b class="nc"><i>603</i>&nbsp;                            System.out.println(SIM);</b>
+<b class="nc"><i>604</i>&nbsp;                            System.out.println(NAO);</b>
+<b class="nc"><i>605</i>&nbsp;                            Scanner aceitaTrans1 = new Scanner(System.in);</b>
+<b class="nc"><i>606</i>&nbsp;                            int aceitaTrans = querTrans1.nextInt();</b>
+<b class="nc"><i>607</i>&nbsp;                            if (aceitaTrans == 1) {</b>
+<b class="nc"><i>608</i>&nbsp;                                codT = trasnporte;</b>
+<b class="nc"><i>609</i>&nbsp;                                estado = 5;</b>
+<i>610</i>&nbsp;                            }
+<i>611</i>&nbsp;                        }
+<i>612</i>&nbsp;                    }
+<i>613</i>&nbsp;
+<b class="nc"><i>614</i>&nbsp;                    Encomenda novaenc = new Encomenda(codenc, codu, codlo, codT, peso2, null, estado, produto);</b>
+<b class="nc"><i>615</i>&nbsp;                    System.out.println(&quot;traz_aqui.Encomenda feita com sucesso&quot;);</b>
+<b class="nc"><i>616</i>&nbsp;                    this.t.addEnc(novaenc);</b>
+<i>617</i>&nbsp;
+<b class="nc"><i>618</i>&nbsp;                } else {</b>
+<b class="nc"><i>619</i>&nbsp;                    System.out.println(&quot;Tente outra opcao&quot;);</b>
+<i>620</i>&nbsp;                }
+<i>621</i>&nbsp;
+<b class="nc"><i>622</i>&nbsp;            } else if (op == 2) {</b>
+<i>623</i>&nbsp;
+<b class="nc"><i>624</i>&nbsp;                List&lt;Encomenda&gt; enc = this.t.EncomendasEntreguesSemReviews(codigo);</b>
+<i>625</i>&nbsp;
+<b class="nc"><i>626</i>&nbsp;                System.out.println(&quot;As suas encomendas:&quot;);</b>
+<b class="nc"><i>627</i>&nbsp;                for (Encomenda e : enc) {</b>
+<b class="nc"><i>628</i>&nbsp;                    System.out.println(&quot;traz_aqui.Encomenda :&quot; + e.getcodEncomenda() + &quot;; Entregue por: &quot; + e.getcodDeliver() + t.getUserByCodigo(e.getcodDeliver()).getUserName());</b>
+<i>629</i>&nbsp;
+<b class="nc"><i>630</i>&nbsp;                }</b>
+<b class="nc"><i>631</i>&nbsp;                System.out.println(&quot;Escreva um codigo de encomenda para avaliar&quot;);</b>
+<b class="nc"><i>632</i>&nbsp;                Scanner codencaval1 = new Scanner(System.in);</b>
+<b class="nc"><i>633</i>&nbsp;                String codencaval = codencaval1.nextLine();</b>
+<i>634</i>&nbsp;
+<b class="nc"><i>635</i>&nbsp;                int flagcod = 1;</b>
+<b class="nc"><i>636</i>&nbsp;                for (Encomenda e : enc) {</b>
+<b class="nc"><i>637</i>&nbsp;                    if (e.getcodEncomenda().equals(codencaval1)) {</b>
+<b class="nc"><i>638</i>&nbsp;                        flagcod = 0;</b>
+<b class="nc"><i>639</i>&nbsp;                        break;</b>
+<i>640</i>&nbsp;                    }
+<i>641</i>&nbsp;
+<b class="nc"><i>642</i>&nbsp;                }</b>
+<i>643</i>&nbsp;
+<b class="nc"><i>644</i>&nbsp;                if (flagcod == 0) {</b>
+<b class="nc"><i>645</i>&nbsp;                    System.out.println(&quot;a sua review entre 0 e 10&quot;);</b>
+<b class="nc"><i>646</i>&nbsp;                    Scanner reviewenc1 = new Scanner(System.in);</b>
+<b class="nc"><i>647</i>&nbsp;                    double reviewenc = reviewenc1.nextDouble();</b>
+<b class="nc"><i>648</i>&nbsp;                    if (0 &lt;= reviewenc &amp;&amp; reviewenc &lt;= 10) {</b>
+<b class="nc"><i>649</i>&nbsp;                        if (t.reviews(codencaval, reviewenc)) {</b>
+<b class="nc"><i>650</i>&nbsp;                            System.out.println(&quot;review feita com sucesso&quot;);</b>
+<i>651</i>&nbsp;                        }
+<i>652</i>&nbsp;                    }
+<i>653</i>&nbsp;                }
+<i>654</i>&nbsp;
+<i>655</i>&nbsp;
+<b class="nc"><i>656</i>&nbsp;            } else {</b>
+<b class="nc"><i>657</i>&nbsp;                this.save();</b>
+<b class="nc"><i>658</i>&nbsp;                break;</b>
+<i>659</i>&nbsp;            }
+<b class="nc"><i>660</i>&nbsp;        }</b>
+<b class="nc"><i>661</i>&nbsp;    }</b>
+<i>662</i>&nbsp;}
+<i>663</i>&nbsp;        
+<i>664</i>&nbsp;
+<i>665</i>&nbsp;    
+<i>666</i>&nbsp;    
+<i>667</i>&nbsp;    
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:51</div>
+</div>
+</body>
+</html>

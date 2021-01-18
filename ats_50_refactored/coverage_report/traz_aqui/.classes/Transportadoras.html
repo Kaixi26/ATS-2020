@@ -1,0 +1,307 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Transportadoras</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Transportadoras (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Transportadoras</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class Transportadoras implements Serializable {
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    private String cod;
+<i>8</i>&nbsp;    private String nome;
+<i>9</i>&nbsp;    private String email;
+<i>10</i>&nbsp;    private double nif;
+<i>11</i>&nbsp;    private Coordenadas cord;
+<i>12</i>&nbsp;    private double range;
+<i>13</i>&nbsp;    private boolean med;
+<i>14</i>&nbsp;    private double prkm;
+<i>15</i>&nbsp;    private double clas;
+<i>16</i>&nbsp;    private String pass;
+<i>17</i>&nbsp;    private double vkm;
+<i>18</i>&nbsp;    private double kmp;
+<i>19</i>&nbsp;    private int cap;
+<i>20</i>&nbsp;
+<b class="nc"><i>21</i>&nbsp;    public Transportadoras(String cod, String nome, Coordenadas cord, double range, double prkm, double nif, double clas, boolean med, double vkm, String email, String pass, double kmp, int cap) {</b>
+<b class="nc"><i>22</i>&nbsp;        this.cod = cod;</b>
+<b class="nc"><i>23</i>&nbsp;        this.nome = nome;</b>
+<b class="nc"><i>24</i>&nbsp;        this.cord = cord;</b>
+<b class="nc"><i>25</i>&nbsp;        this.range = range;</b>
+<b class="nc"><i>26</i>&nbsp;        this.prkm = prkm;</b>
+<b class="nc"><i>27</i>&nbsp;        this.nif = nif;</b>
+<b class="nc"><i>28</i>&nbsp;        this.clas = clas;</b>
+<b class="nc"><i>29</i>&nbsp;        this.med = med;</b>
+<b class="nc"><i>30</i>&nbsp;        this.vkm = vkm;</b>
+<b class="nc"><i>31</i>&nbsp;        this.email = email;</b>
+<b class="nc"><i>32</i>&nbsp;        this.pass = pass;</b>
+<b class="nc"><i>33</i>&nbsp;        this.kmp = kmp;</b>
+<b class="nc"><i>34</i>&nbsp;        this.cap = cap;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;    public Transportadoras(Transportadoras a) {</b>
+<b class="nc"><i>38</i>&nbsp;        this.cod = a.getCod();</b>
+<b class="nc"><i>39</i>&nbsp;        this.nome = a.getNome();</b>
+<b class="nc"><i>40</i>&nbsp;        this.cord = a.getCord();</b>
+<b class="nc"><i>41</i>&nbsp;        this.range = a.getRange();</b>
+<b class="nc"><i>42</i>&nbsp;        this.prkm = a.getPrkm();</b>
+<b class="nc"><i>43</i>&nbsp;        this.nif = a.getNif();</b>
+<b class="nc"><i>44</i>&nbsp;        this.med = a.isMed();</b>
+<b class="nc"><i>45</i>&nbsp;        this.vkm = a.getVkm();</b>
+<b class="nc"><i>46</i>&nbsp;        this.pass = a.getPass();</b>
+<b class="nc"><i>47</i>&nbsp;        this.email = a.getEmail();</b>
+<b class="nc"><i>48</i>&nbsp;        this.kmp = a.getKmp();</b>
+<b class="nc"><i>49</i>&nbsp;        this.cap = a.getCap();</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public String getCod() {
+<b class="nc"><i>53</i>&nbsp;        return cod;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public void setCod(String cod) {
+<b class="nc"><i>57</i>&nbsp;        this.cod = cod;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public String getNome() {
+<b class="nc"><i>61</i>&nbsp;        return nome;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public void setNome(String nome) {
+<b class="nc"><i>65</i>&nbsp;        this.nome = nome;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public Coordenadas getCord() {
+<b class="nc"><i>69</i>&nbsp;        return cord;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public void setCord(Coordenadas cord) {
+<b class="nc"><i>73</i>&nbsp;        this.cord = cord;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public double getRange() {
+<b class="nc"><i>77</i>&nbsp;        return range;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    public void setRange(double range) {
+<b class="nc"><i>81</i>&nbsp;        this.range = range;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public double getPrkm() {
+<b class="nc"><i>85</i>&nbsp;        return prkm;</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public void setPrkm(double prkm) {
+<b class="nc"><i>89</i>&nbsp;        this.prkm = prkm;</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    public double getNif() {
+<b class="nc"><i>93</i>&nbsp;        return nif;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    public void setNif(double nif) {
+<b class="nc"><i>97</i>&nbsp;        this.nif = nif;</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public double getClas() {
+<b class="nc"><i>101</i>&nbsp;        return clas;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public void setClas(double clas) {
+<b class="nc"><i>105</i>&nbsp;        this.clas = clas;</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public boolean isMed() {
+<b class="nc"><i>109</i>&nbsp;        return med;</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public void setMed(boolean med) {
+<b class="nc"><i>113</i>&nbsp;        this.med = med;</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    public String getEmail() {
+<b class="nc"><i>117</i>&nbsp;        return email;</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    public void setEmail(String email) {
+<b class="nc"><i>121</i>&nbsp;        this.email = email;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    public String getPass() {
+<b class="nc"><i>125</i>&nbsp;        return pass;</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    public void setPass(String pass) {
+<b class="nc"><i>129</i>&nbsp;        this.pass = pass;</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    public double getVkm() {
+<b class="nc"><i>133</i>&nbsp;        return vkm;</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    public void setVkm(double vkm) {
+<b class="nc"><i>137</i>&nbsp;        this.vkm = vkm;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    public double getKmp() {
+<b class="nc"><i>141</i>&nbsp;        return this.kmp;</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    public void setKmp(double kmp) {
+<b class="nc"><i>145</i>&nbsp;        this.kmp += kmp;</b>
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    public int getCap() {
+<b class="nc"><i>149</i>&nbsp;        return cap;</b>
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    public void setCap(int cap) {
+<b class="nc"><i>153</i>&nbsp;        this.cap = cap;</b>
+<i>154</i>&nbsp;    }
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    public Transportadoras clone() {
+<b class="nc"><i>157</i>&nbsp;        return new Transportadoras(this);</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    /**
+<i>161</i>&nbsp;     * Método que verifica se uma transportadora esta no range
+<i>162</i>&nbsp;     *
+<i>163</i>&nbsp;     * @param a     Coordenada
+<i>164</i>&nbsp;     * @param range Range
+<i>165</i>&nbsp;     */
+<i>166</i>&nbsp;    public boolean isRangeT(Coordenadas a, Double range) {
+<b class="nc"><i>167</i>&nbsp;        return this.cord.isRange(a, range);</b>
+<i>168</i>&nbsp;    }
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    /**
+<i>171</i>&nbsp;     * Método que calcula a distância transportadora
+<i>172</i>&nbsp;     *
+<i>173</i>&nbsp;     * @param a Coordenada
+<i>174</i>&nbsp;     */
+<i>175</i>&nbsp;    public double distanceT(Coordenadas a) {
+<b class="nc"><i>176</i>&nbsp;        return this.cord.distancia(a);</b>
+<i>177</i>&nbsp;    }
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;    /**
+<i>180</i>&nbsp;     * Método que cálcula o tempo de entrega
+<i>181</i>&nbsp;     *
+<i>182</i>&nbsp;     * @param l  Coordenadas loja
+<i>183</i>&nbsp;     * @param u  Coordenadas utilizador
+<i>184</i>&nbsp;     * @param cl Tempo
+<i>185</i>&nbsp;     */
+<i>186</i>&nbsp;    public double calcTemp(Coordenadas l, Coordenadas u, Double cl) {
+<b class="nc"><i>187</i>&nbsp;        return (this.cord.distancia(l) + u.distancia(l)) / this.vkm + cl;</b>
+<i>188</i>&nbsp;    }
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    /**
+<i>191</i>&nbsp;     * Método que cálcula o custo de entrega
+<i>192</i>&nbsp;     *
+<i>193</i>&nbsp;     * @param l    Coordenadas loja
+<i>194</i>&nbsp;     * @param peso Peso
+<i>195</i>&nbsp;     * @param u    Coordenadas utilizador
+<i>196</i>&nbsp;     */
+<i>197</i>&nbsp;    public double calcCost(Coordenadas l, double peso, Coordenadas u) {
+<b class="nc"><i>198</i>&nbsp;        return (this.cord.distancia(l) + u.distancia(l)) / this.prkm + peso * 0.5;</b>
+<i>199</i>&nbsp;    }
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;    /**
+<i>202</i>&nbsp;     * Método que altera um rating
+<i>203</i>&nbsp;     *
+<i>204</i>&nbsp;     * @param rating Rating
+<i>205</i>&nbsp;     */
+<i>206</i>&nbsp;    public void changeR(double rating) {
+<b class="nc"><i>207</i>&nbsp;        if (this.clas == -1) this.clas = rating;</b>
+<b class="nc"><i>208</i>&nbsp;        else this.clas += rating;</b>
+<i>209</i>&nbsp;    }
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;    /**
+<i>212</i>&nbsp;     * Método que diminui a capacidade de uma transportadora
+<i>213</i>&nbsp;     */
+<i>214</i>&nbsp;    public void dimCap() {
+<b class="nc"><i>215</i>&nbsp;        if (this.cap != 0) this.cap--;</b>
+<i>216</i>&nbsp;    }
+<i>217</i>&nbsp;
+<i>218</i>&nbsp;    /**
+<i>219</i>&nbsp;     * Método que aumenta a capacidade de uma transportadora
+<i>220</i>&nbsp;     */
+<i>221</i>&nbsp;    public void aumCap() {
+<b class="nc"><i>222</i>&nbsp;        this.cap++;</b>
+<i>223</i>&nbsp;    }
+<i>224</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:58</div>
+</div>
+</body>
+</html>

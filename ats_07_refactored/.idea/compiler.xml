@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ats_07_refractored" />
+        <module name="ats_07_refactored" />
       </profile>
     </annotationProcessing>
   </component>

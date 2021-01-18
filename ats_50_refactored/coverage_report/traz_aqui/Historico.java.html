@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Historico.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Historico.java</span></div><h1>Historico.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Historico implements Serializable {
+    private final Map&lt;String, Registos&gt; accepted;
+    private final Map&lt;String, Registos&gt; pending;
+    private final Map&lt;String, Registos&gt; finalized;
+    private final Map&lt;String, Registos&gt; delivered;
+    private final Map&lt;String, Registos&gt; terminated;
+    private final Map&lt;String, List&lt;StringDistAux&gt;&gt; fila;
+
+<span class="nc" id="L19">    public Historico() {</span>
+<span class="nc" id="L20">        this.accepted = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L21">        this.pending = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L22">        this.finalized = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L23">        this.delivered = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L24">        this.terminated = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L25">        this.fila = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L26">    }</span>
+
+    /**
+     * Método que adiciona um novo registo à respectiva fila
+     *
+     * @param i indíce de modo
+     * @param a Registo
+     */
+    public void adicionaReg(int i, Registos a) {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (i == 1) {</span>
+<span class="nc" id="L36">            this.accepted.replace(a.getEnc().getCod(), a);</span>
+<span class="nc" id="L37">            this.accepted.putIfAbsent(a.getEnc().getCod(), a);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        } else if (i == 2) {</span>
+<span class="nc" id="L39">            this.finalized.replace(a.getEnc().getCod(), a);</span>
+<span class="nc" id="L40">            this.finalized.putIfAbsent(a.getEnc().getCod(), a);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        } else if (i == 3) {</span>
+<span class="nc" id="L42">            this.pending.replace(a.getEnc().getCod(), a);</span>
+<span class="nc" id="L43">            this.pending.putIfAbsent(a.getEnc().getCod(), a);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        } else if (i == 4) {</span>
+<span class="nc" id="L45">            this.terminated.replace(a.getEnc().getCod(), a);</span>
+<span class="nc" id="L46">            this.terminated.putIfAbsent(a.getEnc().getCod(), a);</span>
+        } else {
+<span class="nc" id="L48">            this.delivered.replace(a.getEnc().getCod(), a);</span>
+<span class="nc" id="L49">            this.delivered.putIfAbsent(a.getEnc().getCod(), a);</span>
+        }
+<span class="nc" id="L51">    }</span>
+
+    /**
+     * Método que remove um registo da respectiva fila
+     *
+     * @param i indíce de modo
+     * @param a Registo
+     */
+    public Registos removeReg(int i, Registos a) {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (i == 1) return this.accepted.remove(a.getEnc().getCod());</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        else if (i == 2) return this.finalized.remove(a.getEnc().getCod());</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        else if (i == 3) return this.pending.remove(a.getEnc().getCod());</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        else if (i == 4) return this.terminated.remove(a.getEnc().getCod());</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        else if (i == 5) return this.delivered.remove(a.getEnc().getCod());</span>
+<span class="nc" id="L65">        else return null;</span>
+    }
+
+    /**
+     * Método que adiciona um par cod , List&lt;StringDistAux&gt; ao map fila
+     *
+     * @param cod Código
+     * @param a   Lista StringDistAux
+     */
+    public void adicionaFila(String cod, List&lt;StringDistAux&gt; a) {
+<span class="nc" id="L75">        this.fila.replace(cod, a);</span>
+<span class="nc" id="L76">        this.fila.putIfAbsent(cod, a);</span>
+<span class="nc" id="L77">    }</span>
+
+    /**
+     * Método que remove um par cod , List&lt;StringDistAux&gt; do map fila
+     *
+     * @param cod Código
+     */
+    public void removeFila(String cod) {
+<span class="nc" id="L85">        this.fila.remove(cod);</span>
+<span class="nc" id="L86">    }</span>
+
+    /**
+     * Método que retorna uma List&lt;registos&gt; dos voluntários dependendo do modo de fila desejado
+     *
+     * @param codVol Código voluntário
+     * @param modo   Modo
+     */
+    public List&lt;Registos&gt; volHist(String codVol, int modo) {
+        List&lt;Registos&gt; regV;
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (modo == 1)</span>
+<span class="nc" id="L97">            regV = this.accepted.values().stream().filter(x -&gt; (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        else if (modo == 2)</span>
+<span class="nc" id="L99">            regV = this.terminated.values().stream().filter(x -&gt; (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        else if (modo == 3)</span>
+<span class="nc" id="L101">            regV = this.delivered.values().stream().filter(x -&gt; (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        else if (modo == 4)</span>
+<span class="nc" id="L103">            regV = this.pending.values().stream().filter(x -&gt; (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());</span>
+        else
+<span class="nc" id="L105">            regV = this.finalized.values().stream().filter(x -&gt; (x.getDriver().equals(codVol))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc" id="L106">        return regV;</span>
+    }
+
+    /**
+     * Método que retorna uma List&lt;registos&gt; das empresas dependendo do modo de fila desejado
+     *
+     * @param codEmp Código Empresa
+     * @param modo   Modo
+     */
+    public List&lt;Registos&gt; empHist(String codEmp, int modo) {
+        List&lt;Registos&gt; regE;
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (modo == 1)</span>
+<span class="nc" id="L118">            regE = this.accepted.values().stream().filter(x -&gt; (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        else if (modo == 2)</span>
+<span class="nc" id="L120">            regE = this.terminated.values().stream().filter(x -&gt; (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        else if (modo == 3)</span>
+<span class="nc" id="L122">            regE = this.delivered.values().stream().filter(x -&gt; (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        else if (modo == 4)</span>
+<span class="nc" id="L124">            regE = this.pending.values().stream().filter(x -&gt; (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());</span>
+        else
+<span class="nc" id="L126">            regE = this.finalized.values().stream().filter(x -&gt; (x.getDriver().equals(codEmp))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc" id="L127">        return regE;</span>
+    }
+
+    /**
+     * Método que retorna uma List&lt;registos&gt; dos utilizadores dependendo do modo de fila desejado
+     *
+     * @param codUser Código utilizador
+     * @param modo    Modo
+     */
+    public List&lt;Registos&gt; userHist(String codUser, int modo) {
+        List&lt;Registos&gt; regU;
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (modo == 1)</span>
+<span class="nc" id="L139">            regU = this.accepted.values().stream().filter(x -&gt; (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        else if (modo == 2)</span>
+<span class="nc" id="L141">            regU = this.terminated.values().stream().filter(x -&gt; (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        else if (modo == 3)</span>
+<span class="nc" id="L143">            regU = this.delivered.values().stream().filter(x -&gt; (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        else if (modo == 4)</span>
+<span class="nc" id="L145">            regU = this.pending.values().stream().filter(x -&gt; (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());</span>
+        else
+<span class="nc" id="L147">            regU = this.finalized.values().stream().filter(x -&gt; (x.getUser().equals(codUser))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc" id="L148">        return regU;</span>
+    }
+
+    /**
+     * Método que retorna uma List&lt;registos&gt; das lojas dependendo do modo de fila desejado
+     *
+     * @param codLoja Código Loja
+     * @param modo    Modo
+     */
+    public List&lt;Registos&gt; lojaHist(String codLoja, int modo) {
+        List&lt;Registos&gt; regU;
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if (modo == 1)</span>
+<span class="nc" id="L160">            regU = this.accepted.values().stream().filter(x -&gt; (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        else if (modo == 2)</span>
+<span class="nc" id="L162">            regU = this.terminated.values().stream().filter(x -&gt; (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        else if (modo == 3)</span>
+<span class="nc" id="L164">            regU = this.delivered.values().stream().filter(x -&gt; (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        else if (modo == 4)</span>
+<span class="nc" id="L166">            regU = this.pending.values().stream().filter(x -&gt; (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());</span>
+        else
+<span class="nc" id="L168">            regU = this.finalized.values().stream().filter(x -&gt; (x.getLoja().equals(codLoja))).map(Registos::clone).collect(Collectors.toList());</span>
+<span class="nc" id="L169">        return regU;</span>
+    }
+
+    /**
+     * Método que faz a gestaoEncomenda para os registos declined
+     *
+     * @param a Registo
+     */
+    public void declinedT(Registos a) {
+<span class="nc" id="L178">        gestaoEncomenda(a.getEnc().clone(), a.getUser(), this.fila.get(a.getEnc().getCod()));</span>
+<span class="nc" id="L179">    }</span>
+
+    /**
+     * Método que adiciona um novo registo à fila de terminated se a List&lt;StringDistAux&gt; estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+     *
+     * @param enc Encomenda
+     * @param cod Código
+     * @param a   List StringDistAux
+     */
+    public int gestaoEncomenda(Encomenda enc, String cod, List&lt;StringDistAux&gt; a) {
+<span class="nc" id="L189">        int res = 1;</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (a.isEmpty()) {</span>
+<span class="nc" id="L191">            adicionaReg(4, new Registos(enc, LocalDateTime.now(), cod, &quot;N/A&quot;, -1.0, -1.0, -1.0));</span>
+<span class="nc" id="L192">            res = 0;</span>
+        } else {
+<span class="nc" id="L194">            adicionaReg(3, new Registos(enc, LocalDateTime.now(), cod, a.remove(0).getCod(), enc.custo(), 0.0, 0.0));</span>
+<span class="nc" id="L195">            adicionaFila(enc.getCod(), a);</span>
+        }
+<span class="nc" id="L197">        return res;</span>
+    }
+
+    /**
+     * Método que remove um registo da fila accepted e finaliza o seu tempo retornando o registo
+     *
+     * @param enc  Encomenda
+     * @param temp Tempo
+     */
+    public Registos done(String enc, double temp) {
+<span class="nc" id="L207">        Registos f = this.accepted.remove(enc);</span>
+<span class="nc" id="L208">        f.setTmp(temp);</span>
+<span class="nc" id="L209">        return f.clone();</span>
+    }
+
+    /**
+     * Método que retorna uma Lista&lt;topUsers&gt; com o top dez de utilizadores que mais usaram o sistema
+     */
+    public List&lt;TopUsers&gt; topUser() {
+<span class="nc" id="L216">        Map&lt;String, TopUsers&gt; a = new HashMap();</span>
+
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        for (Registos reg : this.finalized.values()) {</span>
+<span class="nc" id="L219">            a.putIfAbsent(reg.getUser(), new TopUsers(reg.getUser()));</span>
+<span class="nc" id="L220">            a.get(reg.getUser()).addQnt();</span>
+<span class="nc" id="L221">        }</span>
+
+<span class="nc" id="L223">        return a.values().stream().sorted(Comparator.comparing(TopUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Método que retorna uma List&lt;Registos&gt; respectiva às transportadoras na fila finalized
+     */
+    public List&lt;Registos&gt; finList() {
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        return this.finalized.values().stream().filter(x -&gt; (x.getDriver().charAt(0) == 't')).map(Registos::clone).collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

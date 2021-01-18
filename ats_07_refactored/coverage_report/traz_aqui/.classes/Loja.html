@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Loja</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Loja (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Loja</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/ 25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class Loja extends User {
+<i>6</i>&nbsp;    private static final double tempoAtendimento = 5; //em minutos se tiver teempo acabar
+<i>7</i>&nbsp;    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
+<i>8</i>&nbsp;    private boolean filadeEspera;
+<i>9</i>&nbsp;    private ArrayList&lt;Encomenda&gt; queue;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    public Loja() {
+<b class="fc"><i>13</i>&nbsp;        super();</b>
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public Loja(String username, String codigo, String password, double locationX,
+<i>19</i>&nbsp;                double locationY, String email) {
+<b class="fc"><i>20</i>&nbsp;        super(username, codigo, password, locationX, locationY, email);</b>
+<i>21</i>&nbsp;        //this.filadeEspera=filadeEspera;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;        //this.queue= new ArrayList&lt;&gt;();
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public Loja(Loja p) {
+<b class="fc"><i>28</i>&nbsp;        super(p.getUserName(), p.getPassword(), p.getCodigo(), p.getLocationX(), p.getLocationY(), p.getEmail());</b>
+<i>29</i>&nbsp;        //this.filadeEspera= p.getfiladeEspera();
+<i>30</i>&nbsp;        //this.queue = p.getqueue();
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public ArrayList&lt;Encomenda&gt; getqueue() {
+<b class="fc"><i>34</i>&nbsp;        return this.queue;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public void setProdutos(ArrayList&lt;Encomenda&gt; queue) {
+<b class="fc"><i>38</i>&nbsp;        this.queue = queue;</b>
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public boolean getfiladeEspera() {
+<b class="fc"><i>42</i>&nbsp;        return this.filadeEspera;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public void setfiladeEspera(boolean filadeEspera) {
+<b class="fc"><i>46</i>&nbsp;        this.filadeEspera = filadeEspera;</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>50</i>&nbsp;        if (o == this) return true;</b>
+<b class="fc"><i>51</i>&nbsp;        if (o == null || o.getClass() != this.getClass()) return false;</b>
+<b class="fc"><i>52</i>&nbsp;        Loja c = (Loja) o;</b>
+<b class="fc"><i>53</i>&nbsp;        return super.equals(c);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public String toString() {
+<b class="fc"><i>57</i>&nbsp;        return super.toString() +</b>
+<i>58</i>&nbsp;                this.filadeEspera +
+<i>59</i>&nbsp;                tempoAtendimento;
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    @Override
+<i>63</i>&nbsp;    public int hashCode() {
+<b class="fc"><i>64</i>&nbsp;        return super.hashCode();</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public Loja clone() {
+<b class="fc"><i>68</i>&nbsp;        return new Loja(this);</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public String stringtoFile() {
+<b class="fc"><i>72</i>&nbsp;        return (&quot;Utilizador:&quot; + this.getCodigo() +</b>
+<b class="fc"><i>73</i>&nbsp;                &quot;,&quot; + this.getPassword() +</b>
+<b class="fc"><i>74</i>&nbsp;                &quot;,&quot; + this.getUserName() +</b>
+<b class="fc"><i>75</i>&nbsp;                &quot;,&quot; + this.getLocationX() +</b>
+<b class="fc"><i>76</i>&nbsp;                &quot;,&quot; + this.getLocationY() +</b>
+<b class="fc"><i>77</i>&nbsp;                &quot;,&quot; + this.getEmail());</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;}
+<i>81</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:51</div>
+</div>
+</body>
+</html>

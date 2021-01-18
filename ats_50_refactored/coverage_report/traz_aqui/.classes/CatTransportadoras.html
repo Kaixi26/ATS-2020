@@ -1,0 +1,292 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CatTransportadoras</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CatTransportadoras (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CatTransportadoras</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;import java.util.HashMap;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;import java.util.Map;
+<i>7</i>&nbsp;import java.util.concurrent.ThreadLocalRandom;
+<i>8</i>&nbsp;import java.util.stream.Collectors;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class CatTransportadoras implements Serializable {
+<i>11</i>&nbsp;    /**
+<i>12</i>&nbsp;     * Map que representa o catálogo de transportadoras sendo as keys os seus codigos e os values as respectivas Transportadoras
+<i>13</i>&nbsp;     */
+<i>14</i>&nbsp;    private final Map&lt;String, Transportadoras&gt; trans;
+<i>15</i>&nbsp;
+<b class="nc"><i>16</i>&nbsp;    public CatTransportadoras() {</b>
+<b class="nc"><i>17</i>&nbsp;        this.trans = new HashMap&lt;&gt;();</b>
+<i>18</i>&nbsp;    }
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Método que adiciona uma nova transportadora ao catálogo de transportadoras
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public void adicionaTrans(Transportadoras a) {
+<b class="nc"><i>24</i>&nbsp;        this.trans.put(a.getCod(), a.clone());</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux respectiva às Transportadoras com melhores condições para a encomenda
+<i>29</i>&nbsp;     *
+<i>30</i>&nbsp;     * @param cl  Coordenadas Loja
+<i>31</i>&nbsp;     * @param cu  Coordenadas Utilizador
+<i>32</i>&nbsp;     * @param pri Boolean prioridade
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public List&lt;StringDistAux&gt; melhorTransporteT(Coordenadas cl, Coordenadas cu, boolean pri) {
+<b class="nc"><i>35</i>&nbsp;        return this.trans.values().stream().filter(x -&gt; x.isRangeT(cl, x.getRange())).filter(x -&gt; !(!x.isMed() &amp;&amp; pri))</b>
+<b class="nc"><i>36</i>&nbsp;                .filter(x -&gt; x.isRangeT(cu, x.getRange())).filter(x -&gt; x.getCap() &gt; 0)</b>
+<b class="nc"><i>37</i>&nbsp;                .map(x -&gt; new StringDistAux(x.distanceT(cl), x.getCod())).collect(Collectors.toList());</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * Método que retorna o codigo de uma transportadora caso o username e password derem match com uma das transportadoras registadas
+<i>42</i>&nbsp;     *
+<i>43</i>&nbsp;     * @param e Email
+<i>44</i>&nbsp;     * @param p Password
+<i>45</i>&nbsp;     */
+<i>46</i>&nbsp;    public String loginT(String e, String p) {
+<b class="nc"><i>47</i>&nbsp;        for (Transportadoras a : this.trans.values()) {</b>
+<b class="nc"><i>48</i>&nbsp;            if (a.getEmail().equals(e) &amp;&amp; a.getPass().equals(p)) return a.getCod();</b>
+<b class="nc"><i>49</i>&nbsp;        }</b>
+<b class="nc"><i>50</i>&nbsp;        return null;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Método que gera um código único de transportadora
+<i>55</i>&nbsp;     */
+<i>56</i>&nbsp;    public String codUnicoT() {
+<b class="nc"><i>57</i>&nbsp;        String a = null;</b>
+<b class="nc"><i>58</i>&nbsp;        while (this.trans.containsKey(a) || a == null) {</b>
+<b class="nc"><i>59</i>&nbsp;            StringBuilder sb = new StringBuilder();</b>
+<b class="nc"><i>60</i>&nbsp;            sb.append(&quot;t&quot;).append(ThreadLocalRandom.current().nextInt(10, 99));</b>
+<b class="nc"><i>61</i>&nbsp;            a = sb.toString();</b>
+<b class="nc"><i>62</i>&nbsp;        }</b>
+<b class="nc"><i>63</i>&nbsp;        return a;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * Método que regista uma nova transportadora no sistema (sign up)
+<i>68</i>&nbsp;     *
+<i>69</i>&nbsp;     * @param cod   Código
+<i>70</i>&nbsp;     * @param nome  Nome
+<i>71</i>&nbsp;     * @param cord  Coordenadas
+<i>72</i>&nbsp;     * @param range Range
+<i>73</i>&nbsp;     * @param prkm  Preço kilómetro
+<i>74</i>&nbsp;     * @param nif   NIF
+<i>75</i>&nbsp;     * @param clas  Classificação
+<i>76</i>&nbsp;     * @param med   Medicamentos
+<i>77</i>&nbsp;     * @param vkm   Velocidade
+<i>78</i>&nbsp;     * @param email Email
+<i>79</i>&nbsp;     * @param pass  Password
+<i>80</i>&nbsp;     * @param kmp   Kilómetros percorridos
+<i>81</i>&nbsp;     * @param cap   Capacidade
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    public void signupT(String cod, String nome, Coordenadas cord, double range, double prkm, double nif, double clas, boolean med, double vkm, String email, String pass, double kmp, int cap) {
+<b class="nc"><i>84</i>&nbsp;        this.trans.put(cod, new Transportadoras(cod, nome, cord, range, prkm, nif, clas, med, vkm, email, pass, kmp, cap));</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    /**
+<i>88</i>&nbsp;     * Método que retorna o tempo de transporte de uma determinada transportadora
+<i>89</i>&nbsp;     *
+<i>90</i>&nbsp;     * @param l      Coordenadas loja
+<i>91</i>&nbsp;     * @param u      Coordenadas utilizador
+<i>92</i>&nbsp;     * @param cl     Distância
+<i>93</i>&nbsp;     * @param driver Código condutor
+<i>94</i>&nbsp;     */
+<i>95</i>&nbsp;    public double calcTmp(Coordenadas l, Coordenadas u, Double cl, String driver) {
+<b class="nc"><i>96</i>&nbsp;        return this.trans.get(driver).calcTemp(l, u, cl);</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    /**
+<i>100</i>&nbsp;     * Método que retorna o custo de viajem de uma determinada Transportadora
+<i>101</i>&nbsp;     *
+<i>102</i>&nbsp;     * @param l      Coordenadas loja
+<i>103</i>&nbsp;     * @param u      Coordenadas utilizador
+<i>104</i>&nbsp;     * @param peso   Peso
+<i>105</i>&nbsp;     * @param driver Código condutor
+<i>106</i>&nbsp;     */
+<i>107</i>&nbsp;    public double calcCost(Coordenadas l, Coordenadas u, double peso, String driver) {
+<b class="nc"><i>108</i>&nbsp;        return this.trans.get(driver).calcCost(l, peso, u);</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    /**
+<i>112</i>&nbsp;     * Método que retorna true se o email da Transportadora estiver registado no catálogo
+<i>113</i>&nbsp;     *
+<i>114</i>&nbsp;     * @param email Email
+<i>115</i>&nbsp;     */
+<i>116</i>&nbsp;    public boolean verMail(String email) {
+<b class="nc"><i>117</i>&nbsp;        return this.trans.values().stream().anyMatch(x -&gt; x.getEmail().equals(email));</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    /**
+<i>121</i>&nbsp;     * Método que adiciona uma classificação a uma determinada Transportadora
+<i>122</i>&nbsp;     *
+<i>123</i>&nbsp;     * @param driver Código condutor
+<i>124</i>&nbsp;     * @param rating Rating
+<i>125</i>&nbsp;     */
+<i>126</i>&nbsp;    public void adicionaCla(String driver, double rating) {
+<b class="nc"><i>127</i>&nbsp;        this.trans.get(driver).changeR(rating);</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    /**
+<i>131</i>&nbsp;     * Método que retorna uma classificação de uma determinada Transportadora
+<i>132</i>&nbsp;     *
+<i>133</i>&nbsp;     * @param driver Código condutor
+<i>134</i>&nbsp;     */
+<i>135</i>&nbsp;    public double getClas(String driver) {
+<b class="nc"><i>136</i>&nbsp;        return this.trans.get(driver).getClas();</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    /**
+<i>140</i>&nbsp;     * Método que retorna as Coordenadas de uma determinada Transportadora
+<i>141</i>&nbsp;     *
+<i>142</i>&nbsp;     * @param user Código
+<i>143</i>&nbsp;     */
+<i>144</i>&nbsp;    public Coordenadas getCord(String user) {
+<b class="nc"><i>145</i>&nbsp;        return this.trans.get(user).getCord().clone();</b>
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    /**
+<i>149</i>&nbsp;     * Método que altera as Coordenadas de uma determinada Transportadora
+<i>150</i>&nbsp;     *
+<i>151</i>&nbsp;     * @param driver Código condutor
+<i>152</i>&nbsp;     * @param a      Coordenadas
+<i>153</i>&nbsp;     */
+<i>154</i>&nbsp;    public void setCoords(String driver, Coordenadas a) {
+<b class="nc"><i>155</i>&nbsp;        this.trans.get(driver).setCord(a);</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    /**
+<i>159</i>&nbsp;     * Método que retorna os kilometros percorridos por uma determinada Transportadora
+<i>160</i>&nbsp;     *
+<i>161</i>&nbsp;     * @param cod Código condutor
+<i>162</i>&nbsp;     */
+<i>163</i>&nbsp;    public double getKmp(String cod) {
+<b class="nc"><i>164</i>&nbsp;        return this.trans.get(cod).getKmp();</b>
+<i>165</i>&nbsp;    }
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;    /**
+<i>168</i>&nbsp;     * Método que faz set dos kilometros percorridos de uma determinada Transportadora dependendo da sua distância à loja e utilizador
+<i>169</i>&nbsp;     *
+<i>170</i>&nbsp;     * @param cod Código condutor
+<i>171</i>&nbsp;     * @param l   Coordenadas
+<i>172</i>&nbsp;     * @param u   Coordenadas
+<i>173</i>&nbsp;     */
+<i>174</i>&nbsp;    public void addKmps(String cod, Coordenadas l, Coordenadas u) {
+<b class="nc"><i>175</i>&nbsp;        this.trans.get(cod).setKmp(this.trans.get(cod).getCord().distancia(l) + l.distancia(u));</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    /**
+<i>179</i>&nbsp;     * Método que diminui a capacidade de uma determinada Transportadora
+<i>180</i>&nbsp;     *
+<i>181</i>&nbsp;     * @param cod Código condutor
+<i>182</i>&nbsp;     */
+<i>183</i>&nbsp;    public void dimCap(String cod) {
+<b class="nc"><i>184</i>&nbsp;        this.trans.get(cod).dimCap();</b>
+<i>185</i>&nbsp;    }
+<i>186</i>&nbsp;
+<i>187</i>&nbsp;    /**
+<i>188</i>&nbsp;     * Método que aumenta a capacidade de uma determinada Transportadora
+<i>189</i>&nbsp;     *
+<i>190</i>&nbsp;     * @param cod Código condutor
+<i>191</i>&nbsp;     */
+<i>192</i>&nbsp;    public void aumCap(String cod) {
+<b class="nc"><i>193</i>&nbsp;        this.trans.get(cod).aumCap();</b>
+<i>194</i>&nbsp;    }
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    /**
+<i>197</i>&nbsp;     * Método que retorna a capacidade de uma determinada Transportadora
+<i>198</i>&nbsp;     *
+<i>199</i>&nbsp;     * @param cod Código condutor
+<i>200</i>&nbsp;     */
+<i>201</i>&nbsp;    public int getCap(String cod) {
+<b class="nc"><i>202</i>&nbsp;        return this.trans.get(cod).getCap();</b>
+<i>203</i>&nbsp;    }
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    public int size() {
+<b class="nc"><i>206</i>&nbsp;        return trans.size();</b>
+<i>207</i>&nbsp;    }
+<i>208</i>&nbsp;}
+<i>209</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:58</div>
+</div>
+</body>
+</html>

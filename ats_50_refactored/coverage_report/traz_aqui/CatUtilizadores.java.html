@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CatUtilizadores.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">CatUtilizadores.java</span></div><h1>CatUtilizadores.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class CatUtilizadores implements Serializable {
+    /**
+     * Map que representa o catálogo de users sendo as keys os seus codigos e os values os respectivos users
+     */
+    private final Map&lt;String, Utilizador&gt; users;
+
+<span class="nc" id="L14">    public CatUtilizadores() {</span>
+<span class="nc" id="L15">        this.users = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L16">    }</span>
+
+    /**
+     * Método que adiciona um novo Utilizador ao catálogo de users
+     *
+     * @param a Utilizador
+     */
+    public void adicionaUser(Utilizador a) {
+<span class="nc" id="L24">        this.users.put(a.getCod(), a.clone());</span>
+<span class="nc" id="L25">    }</span>
+
+    /**
+     * Método que retorna o codigo de um Utilizador caso o username e password derem match com um dos utilizadores registados
+     *
+     * @param e Email
+     * @param p Password
+     */
+    public String loginU(String e, String p) {
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (Utilizador a : this.users.values()) {</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">            if (a.getEmail().equals(e) &amp;&amp; a.getPass().equals(p)) return a.getCod();</span>
+<span class="nc" id="L36">        }</span>
+<span class="nc" id="L37">        return null;</span>
+    }
+
+    /**
+     * Método que regista um novo Utilizador no sistema (sign up)
+     *
+     * @param cod   Código Utilizador
+     * @param nome  Nome Utilizador
+     * @param cord  Coordenadas
+     * @param pass  Password
+     * @param email Email
+     */
+    public void signupU(String cod, String nome, Coordenadas cord, String pass, String email) {
+<span class="nc" id="L50">        this.users.put(cod, new Utilizador(cod, nome, cord, pass, email));</span>
+<span class="nc" id="L51">    }</span>
+
+    /**
+     * Método que gera um código único de Utilizador
+     */
+    public String codUnicoU() {
+<span class="nc" id="L57">        String a = null;</span>
+<span class="nc bnc" id="L58" title="All 4 branches missed.">        while (this.users.containsKey(a) || a == null) {</span>
+<span class="nc" id="L59">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L60">            sb.append(&quot;u&quot;).append(ThreadLocalRandom.current().nextInt(10, 99));</span>
+<span class="nc" id="L61">            a = sb.toString();</span>
+<span class="nc" id="L62">        }</span>
+<span class="nc" id="L63">        return a;</span>
+    }
+
+    /**
+     * Método que retorna um Utilizador do catálogo procurando pelo seu código
+     *
+     * @param codigo Código Utilizador
+     */
+    public Utilizador procUser(String codigo) {
+<span class="nc" id="L72">        return this.users.get(codigo).clone();</span>
+    }
+
+    /**
+     * Método que retorna as Coordenadas de um determinado Utilizador
+     *
+     * @param user Código Utilizador
+     */
+    public Coordenadas getCord(String user) {
+<span class="nc" id="L81">        return this.users.get(user).getCord().clone();</span>
+    }
+
+    /**
+     * Método que retorna true se o email do Utilizador estiver registado no catálogo
+     *
+     * @param email Email
+     */
+    public boolean verMail(String email) {
+<span class="nc" id="L90">        return this.users.values().stream().anyMatch(x -&gt; x.getEmail().equals(email));</span>
+    }
+
+    public int size() {
+<span class="nc" id="L94">        return users.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

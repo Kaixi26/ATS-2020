@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Loja.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Loja.java</span></div><h1>Loja.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Loja implements Serializable {
+    private String cod;
+    private String nome;
+    private Coordenadas cord;
+    private int fila;
+    private String email;
+    private String pass;
+
+<span class="nc" id="L14">    public Loja(String cod, String nome, Coordenadas cord, int fila, String email, String pass) {</span>
+<span class="nc" id="L15">        this.cod = cod;</span>
+<span class="nc" id="L16">        this.nome = nome;</span>
+<span class="nc" id="L17">        this.cord = cord;</span>
+<span class="nc" id="L18">        this.fila = fila;</span>
+<span class="nc" id="L19">        this.email = email;</span>
+<span class="nc" id="L20">        this.pass = pass;</span>
+<span class="nc" id="L21">    }</span>
+
+<span class="nc" id="L23">    public Loja(Loja a) {</span>
+<span class="nc" id="L24">        this.cod = a.getCod();</span>
+<span class="nc" id="L25">        this.nome = a.getNome();</span>
+<span class="nc" id="L26">        this.cord = a.getCord();</span>
+<span class="nc" id="L27">        this.fila = a.getFila();</span>
+<span class="nc" id="L28">        this.email = a.getEmail();</span>
+<span class="nc" id="L29">        this.pass = a.getPass();</span>
+<span class="nc" id="L30">    }</span>
+
+    public String getCod() {
+<span class="nc" id="L33">        return cod;</span>
+    }
+
+    public void setCod(String cod) {
+<span class="nc" id="L37">        this.cod = cod;</span>
+<span class="nc" id="L38">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L41">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L45">        this.nome = nome;</span>
+<span class="nc" id="L46">    }</span>
+
+    public Coordenadas getCord() {
+<span class="nc" id="L49">        return cord;</span>
+    }
+
+    public void setCord(Coordenadas cord) {
+<span class="nc" id="L53">        this.cord = cord;</span>
+<span class="nc" id="L54">    }</span>
+
+    public int getFila() {
+<span class="nc" id="L57">        return fila;</span>
+    }
+
+    public void setFila(int fila) {
+<span class="nc" id="L61">        this.fila = fila;</span>
+<span class="nc" id="L62">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L65">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L69">        this.email = email;</span>
+<span class="nc" id="L70">    }</span>
+
+    public String getPass() {
+<span class="nc" id="L73">        return pass;</span>
+    }
+
+    public void setPass(String pass) {
+<span class="nc" id="L77">        this.pass = pass;</span>
+<span class="nc" id="L78">    }</span>
+
+    public Loja clone() {
+<span class="nc" id="L81">        return new Loja(this);</span>
+    }
+
+    /**
+     * Método que indica se uma loja esta no range
+     *
+     * @param a Coordenadas
+     * @param b Distância
+     */
+    public boolean rangeLoja(Coordenadas a, double b) {
+<span class="nc" id="L91">        return this.getCord().isRange(a, b);</span>
+    }
+
+    /**
+     * Método que cálcula o tempo de fila
+     */
+    public double calcTmp() {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (this.fila == -1) return ThreadLocalRandom.current().nextDouble(1, 120);</span>
+<span class="nc" id="L99">        else return (double) this.fila * 4;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

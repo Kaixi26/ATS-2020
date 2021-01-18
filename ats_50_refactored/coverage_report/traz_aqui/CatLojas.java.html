@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CatLojas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">CatLojas.java</span></div><h1>CatLojas.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+
+public class CatLojas implements Serializable {
+    /**
+     * Map que representa o catálogo de lojas sendo as keys os seus codigos e os values as respectivas Lojas
+     */
+    private final Map&lt;String, Loja&gt; lojas;
+
+<span class="nc" id="L16">    public CatLojas() {</span>
+<span class="nc" id="L17">        this.lojas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L18">    }</span>
+
+    public Map&lt;String, Loja&gt; getLojas() {
+<span class="nc" id="L21">        Map&lt;String, Loja&gt; a = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (Map.Entry&lt;String, Loja&gt; b : this.lojas.entrySet()) {</span>
+<span class="nc" id="L23">            a.put(b.getKey(), b.getValue());</span>
+<span class="nc" id="L24">        }</span>
+<span class="nc" id="L25">        return a;</span>
+    }
+
+    /**
+     * Método que adiciona uma nova loja ao catálogo de lojas
+     *
+     * @param a Loja
+     */
+    public void adicionaLoja(Loja a) {
+<span class="nc" id="L34">        this.lojas.put(a.getCod(), a.clone());</span>
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Método que retorna uma lista das lojas que estão num determinado range
+     *
+     * @param a Coordenadas
+     * @param b Distância
+     */
+    public List&lt;Loja&gt; lojasinRange(Coordenadas a, double b) {
+<span class="nc" id="L44">        return this.lojas.values().stream().filter(x -&gt; x.rangeLoja(a, b)).map(Loja::clone).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Método que retorna o tempo de fila de uma determinada loja no catálogo
+     *
+     * @param loja Código loja
+     */
+    public double getTmpF(String loja) {
+<span class="nc" id="L53">        return this.lojas.get(loja).calcTmp();</span>
+    }
+
+    /**
+     * Método que retorna as coordenas de uma determinada loja no catálogo
+     *
+     * @param loja Código loja
+     */
+    public Coordenadas getCord(String loja) {
+<span class="nc" id="L62">        return this.lojas.get(loja).getCord().clone();</span>
+    }
+
+    /**
+     * Método que retorna o codigo de uma loja caso o username e password derem match com uma das lojas registadas
+     *
+     * @param e email
+     * @param p password
+     */
+    public String loginL(String e, String p) {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for (Loja a : this.lojas.values()) {</span>
+<span class="nc bnc" id="L73" title="All 4 branches missed.">            if (a.getEmail().equals(e) &amp;&amp; a.getPass().equals(p)) return a.getCod();</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">        return null;</span>
+    }
+
+    /**
+     * Método que regista uma nova loja no sistema (sign up)
+     *
+     * @param cod   Código loja
+     * @param nome  Nome Loja
+     * @param cord  Coordenadas Loja
+     * @param fila  Fila Loja
+     * @param email Email Loja
+     * @param pass  Password Loja
+     */
+    public void signupL(String cod, String nome, Coordenadas cord, int fila, String email, String pass) {
+<span class="nc" id="L89">        this.lojas.put(cod, new Loja(cod, nome, cord, fila, email, pass));</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Método que retorna true se o email da loja estiver registado no catálogo
+     *
+     * @param email Email loja
+     */
+    public boolean verMail(String email) {
+<span class="nc" id="L98">        return this.lojas.values().stream().anyMatch(x -&gt; x.getEmail().equals(email));</span>
+    }
+
+    /**
+     * Método que gera um código único de loja
+     */
+    public String codUnicoL() {
+<span class="nc" id="L105">        String a = null;</span>
+<span class="nc bnc" id="L106" title="All 4 branches missed.">        while (this.lojas.containsKey(a) || a == null) {</span>
+<span class="nc" id="L107">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L108">            sb.append(&quot;l&quot;).append(ThreadLocalRandom.current().nextInt(1, 999));</span>
+<span class="nc" id="L109">            a = sb.toString();</span>
+<span class="nc" id="L110">        }</span>
+<span class="nc" id="L111">        return a;</span>
+    }
+
+    public int size() {
+<span class="nc" id="L115">        return lojas.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

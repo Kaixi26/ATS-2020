@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Voluntario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Voluntario.java</span></div><h1>Voluntario.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+
+public class Voluntario implements Serializable {
+    private String cod;
+    private String nome;
+    private boolean med;
+    private double range;
+    private Coordenadas cord;
+    private double clas;
+    private double vkm;
+    private String email;
+    private String pass;
+    private int cap;
+
+<span class="nc" id="L17">    public Voluntario(String cod, String nome, double range, Coordenadas cord, double clas, boolean med, double vkm, String email, String pass, int cap) {</span>
+<span class="nc" id="L18">        this.cod = cod;</span>
+<span class="nc" id="L19">        this.nome = nome;</span>
+<span class="nc" id="L20">        this.range = range;</span>
+<span class="nc" id="L21">        this.cord = cord;</span>
+<span class="nc" id="L22">        this.clas = clas;</span>
+<span class="nc" id="L23">        this.med = med;</span>
+<span class="nc" id="L24">        this.vkm = vkm;</span>
+<span class="nc" id="L25">        this.email = email;</span>
+<span class="nc" id="L26">        this.pass = pass;</span>
+<span class="nc" id="L27">        this.cap = cap;</span>
+<span class="nc" id="L28">    }</span>
+
+<span class="nc" id="L30">    public Voluntario(Voluntario a) {</span>
+<span class="nc" id="L31">        this.cod = a.getCod();</span>
+<span class="nc" id="L32">        this.nome = a.getNome();</span>
+<span class="nc" id="L33">        this.range = a.getRange();</span>
+<span class="nc" id="L34">        this.cord = a.getCord();</span>
+<span class="nc" id="L35">        this.clas = a.getClas();</span>
+<span class="nc" id="L36">        this.med = a.isMed();</span>
+<span class="nc" id="L37">        this.vkm = a.getVkm();</span>
+<span class="nc" id="L38">        this.email = a.getEmail();</span>
+<span class="nc" id="L39">        this.pass = a.getPass();</span>
+<span class="nc" id="L40">        this.cap = a.getCap();</span>
+<span class="nc" id="L41">    }</span>
+
+    public String getCod() {
+<span class="nc" id="L44">        return cod;</span>
+    }
+
+    public void setCod(String cod) {
+<span class="nc" id="L48">        this.cod = cod;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L52">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L56">        this.nome = nome;</span>
+<span class="nc" id="L57">    }</span>
+
+    public double getRange() {
+<span class="nc" id="L60">        return range;</span>
+    }
+
+    public void setRange(double range) {
+<span class="nc" id="L64">        this.range = range;</span>
+<span class="nc" id="L65">    }</span>
+
+    public Coordenadas getCord() {
+<span class="nc" id="L68">        return cord;</span>
+    }
+
+    public void setCord(Coordenadas cord) {
+<span class="nc" id="L72">        this.cord = cord;</span>
+<span class="nc" id="L73">    }</span>
+
+    public boolean isMed() {
+<span class="nc" id="L76">        return med;</span>
+    }
+
+    public void setMed(boolean med) {
+<span class="nc" id="L80">        this.med = med;</span>
+<span class="nc" id="L81">    }</span>
+
+    public double getClas() {
+<span class="nc" id="L84">        return clas;</span>
+    }
+
+    public void setClas(double clas) {
+<span class="nc" id="L88">        this.clas = clas;</span>
+<span class="nc" id="L89">    }</span>
+
+    public double getVkm() {
+<span class="nc" id="L92">        return vkm;</span>
+    }
+
+    public void setVkm(double vkm) {
+<span class="nc" id="L96">        this.vkm = vkm;</span>
+<span class="nc" id="L97">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L100">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L104">        this.email = email;</span>
+<span class="nc" id="L105">    }</span>
+
+    public String getPass() {
+<span class="nc" id="L108">        return pass;</span>
+    }
+
+    public void setPass(String pass) {
+<span class="nc" id="L112">        this.pass = pass;</span>
+<span class="nc" id="L113">    }</span>
+
+    public int getCap() {
+<span class="nc" id="L116">        return cap;</span>
+    }
+
+    public void setCap(int cap) {
+<span class="nc" id="L120">        this.cap = cap;</span>
+<span class="nc" id="L121">    }</span>
+
+    public Voluntario clone() {
+<span class="nc" id="L124">        return new Voluntario(this);</span>
+    }
+
+    /**
+     * Método que verifica se um voluntário esta no range
+     *
+     * @param a     Coordenadas
+     * @param range Range
+     */
+    public boolean isRangeV(Coordenadas a, Double range) {
+<span class="nc" id="L134">        return this.cord.isRange(a, range);</span>
+    }
+
+    /**
+     * Método que calcula a distância voluntário
+     *
+     * @param a Coordenadas
+     */
+    public double distanceV(Coordenadas a) {
+<span class="nc" id="L143">        return this.cord.distancia(a);</span>
+    }
+
+    /**
+     * Método que cálcula o tempo de entrega
+     *
+     * @param l  Coordenadas loja
+     * @param u  Coordenadas utilizador
+     * @param cl Tempo
+     */
+    public double calcTemp(Coordenadas l, Coordenadas u, Double cl) {
+<span class="nc" id="L154">        return (this.cord.distancia(l) + u.distancia(l)) / this.vkm + cl;</span>
+    }
+
+    /**
+     * Método que altera um rating
+     *
+     * @param rating Rating
+     */
+    public void changeR(double rating) {
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (this.clas == -1) this.clas = rating;</span>
+<span class="nc" id="L164">        else this.clas += rating;</span>
+<span class="nc" id="L165">    }</span>
+
+    /**
+     * Método que diminui a capacidade de um voluntário
+     */
+    public void dimCap() {
+<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (this.cap != 0) this.cap--;</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Método que aumenta a capacidade de um voluntário
+     */
+    public void aumCap() {
+<span class="nc" id="L178">        this.cap++;</span>
+<span class="nc" id="L179">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

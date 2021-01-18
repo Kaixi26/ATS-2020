@@ -1,0 +1,493 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Gestor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">traz_aqui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Gestor (traz_aqui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Gestor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 113)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package traz_aqui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;import java.time.LocalDateTime;
+<i>5</i>&nbsp;import java.util.*;
+<i>6</i>&nbsp;import java.util.stream.Collectors;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class Gestor implements Serializable {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    private final CatEncomenda ce;
+<i>11</i>&nbsp;    private final CatVoluntarios cv;
+<i>12</i>&nbsp;    private final CatTransportadoras ct;
+<i>13</i>&nbsp;    private final CatLojas cl;
+<i>14</i>&nbsp;    private final CatUtilizadores cu;
+<i>15</i>&nbsp;    private final Aceite a;
+<i>16</i>&nbsp;    private final Historico h;
+<i>17</i>&nbsp;    private final RandomEvents r;
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;    public Gestor() {</b>
+<b class="nc"><i>20</i>&nbsp;        this.ce = new CatEncomenda();</b>
+<b class="nc"><i>21</i>&nbsp;        this.cv = new CatVoluntarios();</b>
+<b class="nc"><i>22</i>&nbsp;        this.ct = new CatTransportadoras();</b>
+<b class="nc"><i>23</i>&nbsp;        this.cl = new CatLojas();</b>
+<b class="nc"><i>24</i>&nbsp;        this.cu = new CatUtilizadores();</b>
+<b class="nc"><i>25</i>&nbsp;        this.a = new Aceite();</b>
+<b class="nc"><i>26</i>&nbsp;        this.h = new Historico();</b>
+<b class="nc"><i>27</i>&nbsp;        this.r = new RandomEvents();</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Método que faz load de todos os catálogos
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    public void loadCat() {
+<b class="nc"><i>34</i>&nbsp;        Parse.parse(this.cu, this.cl, this.cv, this.ct, this.ce, this.a);</b>
+<b class="nc"><i>35</i>&nbsp;        System.out.println(&quot;Loaded:&quot;);</b>
+<b class="nc"><i>36</i>&nbsp;        System.out.println(cu.size() + &quot;\tusers&quot;);</b>
+<b class="nc"><i>37</i>&nbsp;        System.out.println(cl.size() + &quot;\tlojas&quot;);</b>
+<b class="nc"><i>38</i>&nbsp;        System.out.println(cv.size() + &quot;\tvoluntarios&quot;);</b>
+<b class="nc"><i>39</i>&nbsp;        System.out.println(ct.size() + &quot;\ttransportes&quot;);</b>
+<b class="nc"><i>40</i>&nbsp;        System.out.println(ce.size() + &quot;\tencomendas&quot;);</b>
+<b class="nc"><i>41</i>&nbsp;        System.out.println(a.size() + &quot;\taceites\n&quot;);</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * Método que regista um utilizador no seu catálogo
+<i>46</i>&nbsp;     *
+<i>47</i>&nbsp;     * @param cod  Código user
+<i>48</i>&nbsp;     * @param nome Nome user
+<i>49</i>&nbsp;     * @param cord Coordenadas
+<i>50</i>&nbsp;     * @param pass Password
+<i>51</i>&nbsp;     * @param mail Email
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    public void registarUser(String cod, String nome, Coordenadas cord, String pass, String mail) {
+<b class="nc"><i>54</i>&nbsp;        this.cu.signupU(cod, nome, cord, pass, mail);</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * Método que regista uma transportadora no seu catálogo
+<i>59</i>&nbsp;     *
+<i>60</i>&nbsp;     * @param cod   Código Transportadora
+<i>61</i>&nbsp;     * @param nome  Nome Transportadora
+<i>62</i>&nbsp;     * @param cord  Coordenadas
+<i>63</i>&nbsp;     * @param range Range
+<i>64</i>&nbsp;     * @param prkm  Preço
+<i>65</i>&nbsp;     * @param nif   NIF
+<i>66</i>&nbsp;     * @param clas  Classificação
+<i>67</i>&nbsp;     * @param med   Medicamentos
+<i>68</i>&nbsp;     * @param vkm   Velocidade
+<i>69</i>&nbsp;     * @param email Email
+<i>70</i>&nbsp;     * @param pass  Password
+<i>71</i>&nbsp;     * @param kmp   Kilómetros percorridos
+<i>72</i>&nbsp;     * @param cap   Capacidade
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    public void registarEmpresa(String cod, String nome, Coordenadas cord, double range, double prkm, double nif, double clas, boolean med, double vkm, String email, String pass, double kmp, int cap) {
+<b class="nc"><i>75</i>&nbsp;        this.ct.signupT(cod, nome, cord, range, prkm, nif, clas, med, vkm, email, pass, kmp, cap);</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     * Método que regista um voluntário no seu catálogo
+<i>80</i>&nbsp;     *
+<i>81</i>&nbsp;     * @param cod   Código voluntário
+<i>82</i>&nbsp;     * @param nome  Nome voluntário
+<i>83</i>&nbsp;     * @param range Range
+<i>84</i>&nbsp;     * @param cord  Coordenadas
+<i>85</i>&nbsp;     * @param clas  Classificação
+<i>86</i>&nbsp;     * @param med   Medicamentos
+<i>87</i>&nbsp;     * @param vkm   Velocidade
+<i>88</i>&nbsp;     * @param email Email
+<i>89</i>&nbsp;     * @param pass  Password
+<i>90</i>&nbsp;     * @param cap   Capacidade
+<i>91</i>&nbsp;     */
+<i>92</i>&nbsp;    public void registarVoluntario(String cod, String nome, double range, Coordenadas cord, double clas, boolean med, double vkm, String email, String pass, int cap) {
+<b class="nc"><i>93</i>&nbsp;        this.cv.signupV(cod, nome, range, cord, clas, med, vkm, email, pass, cap);</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    /**
+<i>97</i>&nbsp;     * Método que regista uma Loja no seu catálogo
+<i>98</i>&nbsp;     *
+<i>99</i>&nbsp;     * @param cod   Código loja
+<i>100</i>&nbsp;     * @param nome  Nome loja
+<i>101</i>&nbsp;     * @param cord  Coordenadas
+<i>102</i>&nbsp;     * @param fila  Fila
+<i>103</i>&nbsp;     * @param email Email
+<i>104</i>&nbsp;     * @param pass  Password
+<i>105</i>&nbsp;     */
+<i>106</i>&nbsp;    public void registarLoja(String cod, String nome, Coordenadas cord, int fila, String email, String pass) {
+<b class="nc"><i>107</i>&nbsp;        this.cl.signupL(cod, nome, cord, fila, email, pass);</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    /**
+<i>111</i>&nbsp;     * Método que regista uma encomenda no seu catálogo
+<i>112</i>&nbsp;     *
+<i>113</i>&nbsp;     * @param a Encomenda
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    public void registarEnc(Encomenda a) {
+<b class="nc"><i>116</i>&nbsp;        this.ce.adicionaEnc(a);</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    /**
+<i>120</i>&nbsp;     * Método que dependendo do modo introduzido faz o login de um utilizador, transportadora, voluntário ou loja
+<i>121</i>&nbsp;     *
+<i>122</i>&nbsp;     * @param modo Modo
+<i>123</i>&nbsp;     * @param e    Email
+<i>124</i>&nbsp;     * @param p    Password
+<i>125</i>&nbsp;     */
+<i>126</i>&nbsp;    public String login(int modo, String e, String p) {
+<b class="nc"><i>127</i>&nbsp;        if (modo == 1) return this.cu.loginU(e, p);</b>
+<b class="nc"><i>128</i>&nbsp;        else if (modo == 2) return this.ct.loginT(e, p);</b>
+<b class="nc"><i>129</i>&nbsp;        else if (modo == 3) return this.cv.loginV(e, p);</b>
+<b class="nc"><i>130</i>&nbsp;        else return this.cl.loginL(e, p);</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    /**
+<i>134</i>&nbsp;     * Método que dependendo do modo introduzido faz o sign up de um utilizador, transportadora, voluntário ou loja
+<i>135</i>&nbsp;     *
+<i>136</i>&nbsp;     * @param modo  Modo
+<i>137</i>&nbsp;     * @param email Email
+<i>138</i>&nbsp;     */
+<i>139</i>&nbsp;    public boolean verificaMail(int modo, String email) {
+<b class="nc"><i>140</i>&nbsp;        if (modo == 1) return this.cu.verMail(email);</b>
+<b class="nc"><i>141</i>&nbsp;        else if (modo == 2) return this.ct.verMail(email);</b>
+<b class="nc"><i>142</i>&nbsp;        else if (modo == 3) return this.cv.verMail(email);</b>
+<b class="nc"><i>143</i>&nbsp;        else return this.cl.verMail(email);</b>
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    /**
+<i>147</i>&nbsp;     * Método que gera códigos únicos de empresa, tranportadora, utilizador ou voluntário
+<i>148</i>&nbsp;     *
+<i>149</i>&nbsp;     * @param i indíce catálogo
+<i>150</i>&nbsp;     */
+<i>151</i>&nbsp;    public String geraCods(int i) {
+<b class="nc"><i>152</i>&nbsp;        if (i == 0) return this.ce.codUnicoE();</b>
+<b class="nc"><i>153</i>&nbsp;        else if (i == 1) return this.ct.codUnicoT();</b>
+<b class="nc"><i>154</i>&nbsp;        else if (i == 2) return this.cu.codUnicoU();</b>
+<b class="nc"><i>155</i>&nbsp;        else if (i == 3) return this.cv.codUnicoV();</b>
+<b class="nc"><i>156</i>&nbsp;        else return this.cl.codUnicoL();</b>
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    /**
+<i>160</i>&nbsp;     * Método que retorna uma lista de lojas num determinado range
+<i>161</i>&nbsp;     *
+<i>162</i>&nbsp;     * @param a Coordenadas
+<i>163</i>&nbsp;     * @param b Distância
+<i>164</i>&nbsp;     */
+<i>165</i>&nbsp;    public List&lt;Loja&gt; getLojasinRange(Coordenadas a, double b) {
+<b class="nc"><i>166</i>&nbsp;        return this.cl.lojasinRange(a, b);</b>
+<i>167</i>&nbsp;    }
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    /**
+<i>170</i>&nbsp;     * Método que dando um código de utilizador retorna o utilizador com esse código do respectivo catálogo
+<i>171</i>&nbsp;     *
+<i>172</i>&nbsp;     * @param cod código de utilizador
+<i>173</i>&nbsp;     */
+<i>174</i>&nbsp;    public Utilizador procUtil(String cod) {
+<b class="nc"><i>175</i>&nbsp;        return this.cu.procUser(cod);</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    /**
+<i>179</i>&nbsp;     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux ordenada por distâncias  respectiva às Lojas com melhores condições
+<i>180</i>&nbsp;     *
+<i>181</i>&nbsp;     * @param cu  Coordenadas utilizador
+<i>182</i>&nbsp;     * @param cl  Coordenadas loja
+<i>183</i>&nbsp;     * @param pri prioridade
+<i>184</i>&nbsp;     */
+<i>185</i>&nbsp;    public List&lt;StringDistAux&gt; getBestLoja(Coordenadas cu, Coordenadas cl, boolean pri) {
+<b class="nc"><i>186</i>&nbsp;        List&lt;StringDistAux&gt; s = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>187</i>&nbsp;        s.addAll(this.ct.melhorTransporteT(cl, cu, pri));</b>
+<b class="nc"><i>188</i>&nbsp;        s.addAll(this.cv.melhorTransporteV(cl, cu, pri));</b>
+<b class="nc"><i>189</i>&nbsp;        s.sort(Comparator.comparing(StringDistAux::getDist));</b>
+<b class="nc"><i>190</i>&nbsp;        return s;</b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    /**
+<i>194</i>&nbsp;     * Método que remove um registo do modo pending e adiciona o mesmo ao modo accepted
+<i>195</i>&nbsp;     *
+<i>196</i>&nbsp;     * @param a Registo
+<i>197</i>&nbsp;     */
+<i>198</i>&nbsp;    public void avanca(Registos a) {
+<b class="nc"><i>199</i>&nbsp;        double codigoLoja = this.cl.getTmpF(a.getLoja());</b>
+<b class="nc"><i>200</i>&nbsp;        Coordenadas l = this.cl.getCord(a.getLoja());</b>
+<b class="nc"><i>201</i>&nbsp;        Coordenadas u = this.cu.getCord(a.getUser());</b>
+<b class="nc"><i>202</i>&nbsp;        Registos f = this.h.removeReg(3, a);</b>
+<b class="nc"><i>203</i>&nbsp;        if (a.getDriver().charAt(0) == &#39;v&#39;) {</b>
+<b class="nc"><i>204</i>&nbsp;            f.setTmp(this.cv.calcTmp(l, u, codigoLoja, a.getDriver()));</b>
+<b class="nc"><i>205</i>&nbsp;            f.setCustoT(0.0);</b>
+<i>206</i>&nbsp;        } else {
+<b class="nc"><i>207</i>&nbsp;            double custoT = this.ct.calcCost(l, u, a.getPeso(), a.getDriver());</b>
+<b class="nc"><i>208</i>&nbsp;            f.setTmp(this.ct.calcTmp(l, u, codigoLoja, a.getDriver()));</b>
+<b class="nc"><i>209</i>&nbsp;            f.setCustoT(custoT);</b>
+<i>210</i>&nbsp;        }
+<b class="nc"><i>211</i>&nbsp;        this.h.adicionaReg(1, f.clone());</b>
+<i>212</i>&nbsp;    }
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    /**
+<i>215</i>&nbsp;     * Método que retorna uma lista de Registos de utilizador,empresa,voluntário ou loja no modo que for desejado
+<i>216</i>&nbsp;     *
+<i>217</i>&nbsp;     * @param cod  Código
+<i>218</i>&nbsp;     * @param modo Modo
+<i>219</i>&nbsp;     */
+<i>220</i>&nbsp;    public List&lt;Registos&gt; histReg(String cod, int modo) {
+<i>221</i>&nbsp;        List&lt;Registos&gt; reg;
+<b class="nc"><i>222</i>&nbsp;        if (cod.charAt(0) == &#39;u&#39;)</b>
+<b class="nc"><i>223</i>&nbsp;            reg = this.h.userHist(cod, modo);</b>
+<b class="nc"><i>224</i>&nbsp;        else if (cod.charAt(0) == &#39;v&#39;)</b>
+<b class="nc"><i>225</i>&nbsp;            reg = this.h.volHist(cod, modo);</b>
+<b class="nc"><i>226</i>&nbsp;        else if (cod.charAt(0) == &#39;t&#39;)</b>
+<b class="nc"><i>227</i>&nbsp;            reg = this.h.empHist(cod, modo);</b>
+<b class="nc"><i>228</i>&nbsp;        else reg = this.h.lojaHist(cod, modo);</b>
+<i>229</i>&nbsp;
+<b class="nc"><i>230</i>&nbsp;        reg.sort(new ComparatorData());</b>
+<b class="nc"><i>231</i>&nbsp;        return reg;</b>
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    /**
+<i>235</i>&nbsp;     * Método que retorna o total facturado num periodo de tempo
+<i>236</i>&nbsp;     *
+<i>237</i>&nbsp;     * @param cod Código transportadora
+<i>238</i>&nbsp;     * @param in  Data inicial
+<i>239</i>&nbsp;     * @param fin Data final
+<i>240</i>&nbsp;     */
+<i>241</i>&nbsp;    public double totalFact(String cod, LocalDateTime in, LocalDateTime fin) {
+<b class="nc"><i>242</i>&nbsp;        return this.h.empHist(cod, 5).stream().filter(x -&gt; x.getData().compareTo(in) &gt;= 0 &amp;&amp; x.getData().compareTo(fin) &lt;= 0).mapToDouble(Registos::getCustoT).sum();</b>
+<i>243</i>&nbsp;    }
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;    /**
+<i>246</i>&nbsp;     * Método que retorna a Lista de topUsers
+<i>247</i>&nbsp;     */
+<i>248</i>&nbsp;    public List&lt;TopUsers&gt; topUsers() {
+<b class="nc"><i>249</i>&nbsp;        return this.h.topUser();</b>
+<i>250</i>&nbsp;    }
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;    /**
+<i>253</i>&nbsp;     * Método que adiciona um novo registo à fila de terminated se a List&lt;StringDistAux&gt; estiver vazia e pending se não. Retorna 0 se for para a terminated e 1 se for para pending
+<i>254</i>&nbsp;     *
+<i>255</i>&nbsp;     * @param enc Encomenda
+<i>256</i>&nbsp;     * @param cod Código
+<i>257</i>&nbsp;     * @param a   List StringDistAux
+<i>258</i>&nbsp;     */
+<i>259</i>&nbsp;    public int gestaoEncomenda(Encomenda enc, String cod, List&lt;StringDistAux&gt; a) {
+<b class="nc"><i>260</i>&nbsp;        return this.h.gestaoEncomenda(enc, cod, a);</b>
+<i>261</i>&nbsp;    }
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;    /**
+<i>264</i>&nbsp;     * Método que faz a gestaoEncomenda para os registos declined
+<i>265</i>&nbsp;     *
+<i>266</i>&nbsp;     * @param a Registo
+<i>267</i>&nbsp;     */
+<i>268</i>&nbsp;    public void declinedT(Registos a) {
+<b class="nc"><i>269</i>&nbsp;        this.h.declinedT(a);</b>
+<i>270</i>&nbsp;    }
+<i>271</i>&nbsp;
+<i>272</i>&nbsp;    /**
+<i>273</i>&nbsp;     * Método que finaliza a confirmação de encomenda caso seja completamente aceite, adicionando o registo a fila de delivered
+<i>274</i>&nbsp;     *
+<i>275</i>&nbsp;     * @param enc    Código Encomenda
+<i>276</i>&nbsp;     * @param loja   Código Loja
+<i>277</i>&nbsp;     * @param user   Código Utilizador
+<i>278</i>&nbsp;     * @param driver Código Driver
+<i>279</i>&nbsp;     * @param tmp    Tempo
+<i>280</i>&nbsp;     */
+<i>281</i>&nbsp;    public void getItDone(String enc, String loja, String user, String driver, double tmp) {
+<i>282</i>&nbsp;        double b;
+<b class="nc"><i>283</i>&nbsp;        Coordenadas l = this.cl.getCord(loja);</b>
+<b class="nc"><i>284</i>&nbsp;        Coordenadas u = this.cu.getCord(user);</b>
+<i>285</i>&nbsp;
+<b class="nc"><i>286</i>&nbsp;        if (driver.charAt(0) == &#39;v&#39;) {</b>
+<b class="nc"><i>287</i>&nbsp;            Coordenadas v = this.cv.getCord(driver);</b>
+<b class="nc"><i>288</i>&nbsp;            b = getB(tmp, l, u, v);</b>
+<b class="nc"><i>289</i>&nbsp;            this.cv.setCoords(driver, u);</b>
+<b class="nc"><i>290</i>&nbsp;        } else {</b>
+<b class="nc"><i>291</i>&nbsp;            Coordenadas v = this.ct.getCord(driver);</b>
+<b class="nc"><i>292</i>&nbsp;            b = getB(tmp, l, u, v);</b>
+<b class="nc"><i>293</i>&nbsp;            this.ct.addKmps(driver, l, u);</b>
+<b class="nc"><i>294</i>&nbsp;            this.ct.setCoords(driver, u);</b>
+<i>295</i>&nbsp;        }
+<b class="nc"><i>296</i>&nbsp;        this.h.adicionaReg(5, this.h.done(enc, b));</b>
+<b class="nc"><i>297</i>&nbsp;        this.h.removeFila(enc);</b>
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    private double getB(double tmp, Coordenadas l, Coordenadas u, Coordenadas v) {
+<i>301</i>&nbsp;        double b;
+<b class="nc"><i>302</i>&nbsp;        b = tmp + 10 / this.r.getSeedT(l) * 5 + 10 / this.r.getSeedC(l) * 5</b>
+<b class="nc"><i>303</i>&nbsp;                + 10 / this.r.getSeedT(u) * 5 + 10 / this.r.getSeedC(u) * 5</b>
+<b class="nc"><i>304</i>&nbsp;                + 10 / this.r.getSeedT(v) * 5 + 10 / this.r.getSeedC(v) * 5;</b>
+<b class="nc"><i>305</i>&nbsp;        return b;</b>
+<i>306</i>&nbsp;    }
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;    /**
+<i>309</i>&nbsp;     * Método que classifica uma encomenda e adiciona o registo a fila de finalized
+<i>310</i>&nbsp;     *
+<i>311</i>&nbsp;     * @param a      Registo
+<i>312</i>&nbsp;     * @param rating Rating
+<i>313</i>&nbsp;     */
+<i>314</i>&nbsp;    public void classifica(Registos a, double rating) {
+<b class="nc"><i>315</i>&nbsp;        Registos f = this.h.removeReg(5, a);</b>
+<b class="nc"><i>316</i>&nbsp;        if (f.getDriver().charAt(0) == &#39;v&#39;) {</b>
+<b class="nc"><i>317</i>&nbsp;            this.cv.adicionaCla(f.getDriver(), rating);</b>
+<b class="nc"><i>318</i>&nbsp;        } else this.ct.adicionaCla(f.getDriver(), rating);</b>
+<b class="nc"><i>319</i>&nbsp;        this.h.adicionaReg(2, f);</b>
+<i>320</i>&nbsp;    }
+<i>321</i>&nbsp;
+<i>322</i>&nbsp;    /**
+<i>323</i>&nbsp;     * Método que retorna a classificacao
+<i>324</i>&nbsp;     *
+<i>325</i>&nbsp;     * @param cod Código Driver
+<i>326</i>&nbsp;     */
+<i>327</i>&nbsp;    public double getClas(String cod) {
+<b class="nc"><i>328</i>&nbsp;        if (cod.charAt(0) == &#39;v&#39;) return this.cv.getClas(cod);</b>
+<b class="nc"><i>329</i>&nbsp;        else return this.ct.getClas(cod);</b>
+<i>330</i>&nbsp;    }
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;    /**
+<i>333</i>&nbsp;     * Método que retorna uma seed random
+<i>334</i>&nbsp;     *
+<i>335</i>&nbsp;     * @param a    Coordenadas
+<i>336</i>&nbsp;     * @param modo Modo
+<i>337</i>&nbsp;     */
+<i>338</i>&nbsp;    public double getRando(Coordenadas a, int modo) {
+<b class="nc"><i>339</i>&nbsp;        if (modo == 0) return this.r.getSeedC(a);</b>
+<b class="nc"><i>340</i>&nbsp;        else return this.r.getSeedT(a);</b>
+<i>341</i>&nbsp;    }
+<i>342</i>&nbsp;
+<i>343</i>&nbsp;    /**
+<i>344</i>&nbsp;     * Método que retorna a coordenada de um voluntário ou empresa ou loja
+<i>345</i>&nbsp;     *
+<i>346</i>&nbsp;     * @param cod Código
+<i>347</i>&nbsp;     */
+<i>348</i>&nbsp;    public Coordenadas getCoord(String cod) {
+<b class="nc"><i>349</i>&nbsp;        if (cod.charAt(0) == &#39;v&#39;)</b>
+<b class="nc"><i>350</i>&nbsp;            return this.cv.getCord(cod);</b>
+<b class="nc"><i>351</i>&nbsp;        else if (cod.charAt(0) == &#39;t&#39;)</b>
+<b class="nc"><i>352</i>&nbsp;            return this.ct.getCord(cod);</b>
+<i>353</i>&nbsp;        else
+<b class="nc"><i>354</i>&nbsp;            return this.cl.getCord(cod);</b>
+<i>355</i>&nbsp;    }
+<i>356</i>&nbsp;
+<i>357</i>&nbsp;    /**
+<i>358</i>&nbsp;     * Método que adiciona os dados default aos registos
+<i>359</i>&nbsp;     */
+<i>360</i>&nbsp;    public void adicionaDef() {
+<b class="nc"><i>361</i>&nbsp;        this.ce.adicionaReg(this.a.encDef()).forEach(x -&gt; this.h.adicionaReg(2, x));</b>
+<i>362</i>&nbsp;    }
+<i>363</i>&nbsp;
+<i>364</i>&nbsp;    /**
+<i>365</i>&nbsp;     * Método que retorna uma lista dos topUsers (as dez transportadoras que mais usaram o sistema)
+<i>366</i>&nbsp;     */
+<i>367</i>&nbsp;    public List&lt;TopUsers&gt; topTransp() {
+<b class="nc"><i>368</i>&nbsp;        Map&lt;String, TopUsers&gt; ret = new HashMap();</b>
+<i>369</i>&nbsp;
+<b class="nc"><i>370</i>&nbsp;        for (Registos reg : this.h.finList()) {</b>
+<b class="nc"><i>371</i>&nbsp;            ret.putIfAbsent(reg.getDriver(), new TopUsers(reg.getDriver()));</b>
+<b class="nc"><i>372</i>&nbsp;            ret.get(reg.getDriver()).addKm(this.ct.getKmp(reg.getDriver()));</b>
+<b class="nc"><i>373</i>&nbsp;        }</b>
+<i>374</i>&nbsp;
+<b class="nc"><i>375</i>&nbsp;        return ret.values().stream().sorted(Comparator.comparing(TopUsers::getQnt).reversed()).limit(10).collect(Collectors.toList());</b>
+<i>376</i>&nbsp;    }
+<i>377</i>&nbsp;
+<i>378</i>&nbsp;    /**
+<i>379</i>&nbsp;     * Método que diminui a capacidade de um voluntário ou Empresa
+<i>380</i>&nbsp;     *
+<i>381</i>&nbsp;     * @param cod Código Driver
+<i>382</i>&nbsp;     */
+<i>383</i>&nbsp;    public void dimCap(String cod) {
+<b class="nc"><i>384</i>&nbsp;        if (cod.charAt(0) == &#39;v&#39;)</b>
+<b class="nc"><i>385</i>&nbsp;            this.cv.dimCap(cod);</b>
+<b class="nc"><i>386</i>&nbsp;        else this.ct.dimCap(cod);</b>
+<i>387</i>&nbsp;    }
+<i>388</i>&nbsp;
+<i>389</i>&nbsp;    /**
+<i>390</i>&nbsp;     * Método que aumenta a capacidade de um voluntário ou Empresa
+<i>391</i>&nbsp;     *
+<i>392</i>&nbsp;     * @param cod Código Driver
+<i>393</i>&nbsp;     */
+<i>394</i>&nbsp;    public void aumCap(String cod) {
+<b class="nc"><i>395</i>&nbsp;        if (cod.charAt(0) == &#39;v&#39;)</b>
+<b class="nc"><i>396</i>&nbsp;            this.cv.aumCap(cod);</b>
+<b class="nc"><i>397</i>&nbsp;        else this.ct.aumCap(cod);</b>
+<i>398</i>&nbsp;    }
+<i>399</i>&nbsp;
+<i>400</i>&nbsp;    /**
+<i>401</i>&nbsp;     * Método que retorna a capacidade de um voluntário ou Empresa
+<i>402</i>&nbsp;     *
+<i>403</i>&nbsp;     * @param cod Código Driver
+<i>404</i>&nbsp;     */
+<i>405</i>&nbsp;    public int getCap(String cod) {
+<b class="nc"><i>406</i>&nbsp;        if (cod.charAt(0) == &#39;v&#39;)</b>
+<b class="nc"><i>407</i>&nbsp;            return this.cv.getCap(cod);</b>
+<b class="nc"><i>408</i>&nbsp;        else return this.ct.getCap(cod);</b>
+<i>409</i>&nbsp;    }
+<i>410</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-18 17:58</div>
+</div>
+</body>
+</html>

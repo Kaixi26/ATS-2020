@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CatTransportadoras.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">CatTransportadoras.java</span></div><h1>CatTransportadoras.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+
+public class CatTransportadoras implements Serializable {
+    /**
+     * Map que representa o catálogo de transportadoras sendo as keys os seus codigos e os values as respectivas Transportadoras
+     */
+    private final Map&lt;String, Transportadoras&gt; trans;
+
+<span class="nc" id="L16">    public CatTransportadoras() {</span>
+<span class="nc" id="L17">        this.trans = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L18">    }</span>
+
+    /**
+     * Método que adiciona uma nova transportadora ao catálogo de transportadoras
+     */
+    public void adicionaTrans(Transportadoras a) {
+<span class="nc" id="L24">        this.trans.put(a.getCod(), a.clone());</span>
+<span class="nc" id="L25">    }</span>
+
+    /**
+     * Método que dado as coordenas da loja e do utilizador e um boolean de prioridade retorna uma lista de StringDistAux respectiva às Transportadoras com melhores condições para a encomenda
+     *
+     * @param cl  Coordenadas Loja
+     * @param cu  Coordenadas Utilizador
+     * @param pri Boolean prioridade
+     */
+    public List&lt;StringDistAux&gt; melhorTransporteT(Coordenadas cl, Coordenadas cu, boolean pri) {
+<span class="nc bnc" id="L35" title="All 4 branches missed.">        return this.trans.values().stream().filter(x -&gt; x.isRangeT(cl, x.getRange())).filter(x -&gt; !(!x.isMed() &amp;&amp; pri))</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                .filter(x -&gt; x.isRangeT(cu, x.getRange())).filter(x -&gt; x.getCap() &gt; 0)</span>
+<span class="nc" id="L37">                .map(x -&gt; new StringDistAux(x.distanceT(cl), x.getCod())).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Método que retorna o codigo de uma transportadora caso o username e password derem match com uma das transportadoras registadas
+     *
+     * @param e Email
+     * @param p Password
+     */
+    public String loginT(String e, String p) {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (Transportadoras a : this.trans.values()) {</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">            if (a.getEmail().equals(e) &amp;&amp; a.getPass().equals(p)) return a.getCod();</span>
+<span class="nc" id="L49">        }</span>
+<span class="nc" id="L50">        return null;</span>
+    }
+
+    /**
+     * Método que gera um código único de transportadora
+     */
+    public String codUnicoT() {
+<span class="nc" id="L57">        String a = null;</span>
+<span class="nc bnc" id="L58" title="All 4 branches missed.">        while (this.trans.containsKey(a) || a == null) {</span>
+<span class="nc" id="L59">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L60">            sb.append(&quot;t&quot;).append(ThreadLocalRandom.current().nextInt(10, 99));</span>
+<span class="nc" id="L61">            a = sb.toString();</span>
+<span class="nc" id="L62">        }</span>
+<span class="nc" id="L63">        return a;</span>
+    }
+
+    /**
+     * Método que regista uma nova transportadora no sistema (sign up)
+     *
+     * @param cod   Código
+     * @param nome  Nome
+     * @param cord  Coordenadas
+     * @param range Range
+     * @param prkm  Preço kilómetro
+     * @param nif   NIF
+     * @param clas  Classificação
+     * @param med   Medicamentos
+     * @param vkm   Velocidade
+     * @param email Email
+     * @param pass  Password
+     * @param kmp   Kilómetros percorridos
+     * @param cap   Capacidade
+     */
+    public void signupT(String cod, String nome, Coordenadas cord, double range, double prkm, double nif, double clas, boolean med, double vkm, String email, String pass, double kmp, int cap) {
+<span class="nc" id="L84">        this.trans.put(cod, new Transportadoras(cod, nome, cord, range, prkm, nif, clas, med, vkm, email, pass, kmp, cap));</span>
+<span class="nc" id="L85">    }</span>
+
+    /**
+     * Método que retorna o tempo de transporte de uma determinada transportadora
+     *
+     * @param l      Coordenadas loja
+     * @param u      Coordenadas utilizador
+     * @param cl     Distância
+     * @param driver Código condutor
+     */
+    public double calcTmp(Coordenadas l, Coordenadas u, Double cl, String driver) {
+<span class="nc" id="L96">        return this.trans.get(driver).calcTemp(l, u, cl);</span>
+    }
+
+    /**
+     * Método que retorna o custo de viajem de uma determinada Transportadora
+     *
+     * @param l      Coordenadas loja
+     * @param u      Coordenadas utilizador
+     * @param peso   Peso
+     * @param driver Código condutor
+     */
+    public double calcCost(Coordenadas l, Coordenadas u, double peso, String driver) {
+<span class="nc" id="L108">        return this.trans.get(driver).calcCost(l, peso, u);</span>
+    }
+
+    /**
+     * Método que retorna true se o email da Transportadora estiver registado no catálogo
+     *
+     * @param email Email
+     */
+    public boolean verMail(String email) {
+<span class="nc" id="L117">        return this.trans.values().stream().anyMatch(x -&gt; x.getEmail().equals(email));</span>
+    }
+
+    /**
+     * Método que adiciona uma classificação a uma determinada Transportadora
+     *
+     * @param driver Código condutor
+     * @param rating Rating
+     */
+    public void adicionaCla(String driver, double rating) {
+<span class="nc" id="L127">        this.trans.get(driver).changeR(rating);</span>
+<span class="nc" id="L128">    }</span>
+
+    /**
+     * Método que retorna uma classificação de uma determinada Transportadora
+     *
+     * @param driver Código condutor
+     */
+    public double getClas(String driver) {
+<span class="nc" id="L136">        return this.trans.get(driver).getClas();</span>
+    }
+
+    /**
+     * Método que retorna as Coordenadas de uma determinada Transportadora
+     *
+     * @param user Código
+     */
+    public Coordenadas getCord(String user) {
+<span class="nc" id="L145">        return this.trans.get(user).getCord().clone();</span>
+    }
+
+    /**
+     * Método que altera as Coordenadas de uma determinada Transportadora
+     *
+     * @param driver Código condutor
+     * @param a      Coordenadas
+     */
+    public void setCoords(String driver, Coordenadas a) {
+<span class="nc" id="L155">        this.trans.get(driver).setCord(a);</span>
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * Método que retorna os kilometros percorridos por uma determinada Transportadora
+     *
+     * @param cod Código condutor
+     */
+    public double getKmp(String cod) {
+<span class="nc" id="L164">        return this.trans.get(cod).getKmp();</span>
+    }
+
+    /**
+     * Método que faz set dos kilometros percorridos de uma determinada Transportadora dependendo da sua distância à loja e utilizador
+     *
+     * @param cod Código condutor
+     * @param l   Coordenadas
+     * @param u   Coordenadas
+     */
+    public void addKmps(String cod, Coordenadas l, Coordenadas u) {
+<span class="nc" id="L175">        this.trans.get(cod).setKmp(this.trans.get(cod).getCord().distancia(l) + l.distancia(u));</span>
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Método que diminui a capacidade de uma determinada Transportadora
+     *
+     * @param cod Código condutor
+     */
+    public void dimCap(String cod) {
+<span class="nc" id="L184">        this.trans.get(cod).dimCap();</span>
+<span class="nc" id="L185">    }</span>
+
+    /**
+     * Método que aumenta a capacidade de uma determinada Transportadora
+     *
+     * @param cod Código condutor
+     */
+    public void aumCap(String cod) {
+<span class="nc" id="L193">        this.trans.get(cod).aumCap();</span>
+<span class="nc" id="L194">    }</span>
+
+    /**
+     * Método que retorna a capacidade de uma determinada Transportadora
+     *
+     * @param cod Código condutor
+     */
+    public int getCap(String cod) {
+<span class="nc" id="L202">        return this.trans.get(cod).getCap();</span>
+    }
+
+    public int size() {
+<span class="nc" id="L206">        return trans.size();</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

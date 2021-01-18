@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Coordenadas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ats_50_refactored$All_in_ats_50_refactored.exec</a> &gt; <a href="index.source.html" class="el_package">traz_aqui</a> &gt; <span class="el_source">Coordenadas.java</span></div><h1>Coordenadas.java</h1><pre class="source lang-java linenums">package traz_aqui;
+
+import java.io.Serializable;
+
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Coordenadas implements Serializable, Cloneable {
+    private double x;
+    private double y;
+
+<span class="nc" id="L12">    public Coordenadas(double x, double y) {</span>
+<span class="nc" id="L13">        this.x = x;</span>
+<span class="nc" id="L14">        this.y = y;</span>
+<span class="nc" id="L15">    }</span>
+
+<span class="nc" id="L17">    public Coordenadas(Coordenadas a) {</span>
+<span class="nc" id="L18">        this.x = a.getX();</span>
+<span class="nc" id="L19">        this.y = a.getY();</span>
+<span class="nc" id="L20">    }</span>
+
+    public double getX() {
+<span class="nc" id="L23">        return x;</span>
+    }
+
+    public void setX(double x) {
+<span class="nc" id="L27">        this.x = x;</span>
+<span class="nc" id="L28">    }</span>
+
+    public double getY() {
+<span class="nc" id="L31">        return y;</span>
+    }
+
+    public void setY(double y) {
+<span class="nc" id="L35">        this.y = y;</span>
+<span class="nc" id="L36">    }</span>
+
+    public Coordenadas clone() {
+<span class="nc" id="L39">        return new Coordenadas(this);</span>
+    }
+
+    /**
+     * Método que calcula a distância que a coordenada representa
+     *
+     * @param a Coordenadas
+     */
+    public double distancia(Coordenadas a) {
+<span class="nc" id="L48">        return sqrt(pow((a.getX() - this.x), 2) + pow((a.getY() - this.y), 2));</span>
+    }
+
+    /**
+     * Método que retorna se está no range
+     *
+     * @param a Coordenadas
+     * @param b Distância
+     */
+    public boolean isRange(Coordenadas a, double b) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        return (a.distancia(this) &lt;= b);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L62">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L63">        sb.append(&quot;X: &quot;).append(this.x).append(&quot;- Y:&quot;)</span>
+<span class="nc" id="L64">                .append(this.y);</span>
+<span class="nc" id="L65">        return sb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
